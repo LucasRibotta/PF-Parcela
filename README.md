@@ -11,3 +11,4 @@ Mergear y pushear:
 *Verificarlo => git branch
 *Hacer => git merge main
 *Hacer =>  git push origin
+ver estado = git status
