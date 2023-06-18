@@ -1,31 +1,32 @@
+import Card from "../../components/Card/Card";
+import 'tailwindcss/tailwind.css';
+
 export default function Gallery() {
+  const cardTypes = [
+    { Name: "Tipo 1", Precio: "USD 100", Superficie: '100 km2' },
+    { Name: "Tipo 2", Precio: "USD 200", Superficie: '200 km2' },
+    { Name: "Tipo 3", Precio: "USD 300", Superficie: '300 km2' },
+    { Name: "Tipo 4", Precio: "USD 400", Superficie: '400 km2' },
+    { Name: "Tipo 5", Precio: "USD 500", Superficie: '500 km2' },
+    { Name: "Tipo 6", Precio: "USD 600", Superficie: '600 km2' }
+  ];
+  
   return (
-    <div>
-      <h1>Gallery</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-        tempora inventore ducimus sed, blanditiis omnis numquam excepturi,
-        officia, esse facere voluptatem cum fugiat praesentium odit minima? Ipsa
-        iure cum beatae possimus voluptas dolore quod, impedit dicta ducimus,
-        debitis modi at error cumque natus eos magni, fuga necessitatibus magnam
-        aperiam labore! Commodi et sint soluta suscipit nam facilis, deleniti
-        minima quam. Ea dolore optio repellat aut laudantium itaque architecto
-        facere a, voluptate quam illo suscipit. Odit, temporibus? Magnam dolorem
-        quas veritatis, autem sapiente inventore blanditiis excepturi fugiat
-        consectetur sunt ut ab incidunt, optio quae quis alias omnis illum,
-        facere eos officia perspiciatis repellat modi! Quia debitis et delectus
-        soluta distinctio molestias dolores sint repellendus neque quibusdam
-        tempore natus aliquid, similique, ea officiis voluptas ullam est? Porro
-        ex, tempora corporis provident mollitia consectetur maiores sapiente
-        impedit omnis, est commodi et incidunt, quasi hic sed veniam voluptates
-        architecto illum nam dolore corrupti ut repellendus aliquam dignissimos?
-        Accusamus laboriosam sapiente repellat impedit odio ducimus saepe
-        tenetur, non, modi, doloremque tempore alias nam ea aperiam tempora
-        nulla. Repellat, repellendus tempore enim voluptatum similique quo est
-        nihil vero nisi asperiores voluptas eos saepe delectus expedita eveniet
-        ratione magnam rerum porro natus architecto adipisci assumenda vitae.
-        Totam!
-      </p>
+    <div className="flex flex-row bg-blue-500 h-full">
+      <div className="h-full w-1/1 bg-gray-500 p-4">
+        FILTER
+      </div>
+      <div className="justify-center items-center w-full p-2">
+        {cardTypes.map((card, index) => (
+          <div key={index} className="m-2">
+            <Card
+              name={card.Name}
+              precio={card.Precio}
+              superficie={card.Superficie}
+            />
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
