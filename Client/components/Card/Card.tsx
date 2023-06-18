@@ -27,6 +27,9 @@ function Card({ name, precio, superficie }: CardProps) {
 
   return (
     <div className="flex-1 justify-center max-w-full bg-gray-200 p-4 rounded-md border-solid border-5 border-black-500">
+      <div className="flex-end m-auto relative items-end">
+      <button>Corazon</button>
+      </div>
       <h1>Name: {name}</h1>
       <h2>Precio: {precio}</h2>
       <h5>Superficie: {superficie}</h5>
