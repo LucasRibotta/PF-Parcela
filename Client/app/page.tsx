@@ -1,14 +1,8 @@
-import Footer from '@/components/footer/Footer'
-import ServiceSection from '@/components/services-section/ServiceSection'
-// import Image from 'next/image'
-
+import HomeSection from "@/components/HomeSection/HomeSection"
 export default function Home() {
   return (
-    <main className="">
-
-      <ServiceSection />
-      <Footer />
-
-    </main>
+    <div className="h-screen bg-black opacity-90 brightness-50 contrast-90">
+      <HomeSection />
+    </div>
   )
 }
