@@ -9,7 +9,6 @@ const ServiceSection = () => {
     const [image2, setImage2] = useState("");
     const [image3, setImage3] = useState("");
 
-
     useEffect(() => {
         const fetchImage = async (fn:Function) => {
             try {
@@ -28,7 +27,7 @@ const ServiceSection = () => {
 
     return (
         <section className="flex flex-col items-center h-full w-[300px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px] mx-auto ">
-            <div className="flex items-center flex-col lg:flex-row px-4 animate-aparition">
+            <div className="flex items-center flex-col lg:flex-row px-4 animate-aparition mt-9">
                 <div className="mt-16 w-[95%] h-[600px]">
                     <div className="max-w-[100%] h-[100%] bg-orange-200  rounded-3xl text-center ">
                         Contendor de la imagen 360
