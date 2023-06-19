@@ -1,7 +1,8 @@
 import HomeSection from "@/components/HomeSection/HomeSection"
+import HomeTitle from "@/components/HomeTitle/HomeTitle"
 export default function Home() {
   return (
-    <div className="h-screen bg-black opacity-90 brightness-50 contrast-90">
+    <div>
       <HomeSection />
     </div>
   )
