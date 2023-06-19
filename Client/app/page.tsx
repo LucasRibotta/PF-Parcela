@@ -1,14 +1,12 @@
-import Footer from '@/components/footer/Footer'
-import ServiceSection from '@/components/services-section/ServiceSection'
-// import Image from 'next/image'
-
+import HomeSection from "@/components/HomeSection/HomeSection"
+import Footer from "@/components/footer/Footer"
+import ServiceSection from "@/components/services-section/ServiceSection"
 export default function Home() {
   return (
-    <main className="">
-
+    <div>
+      <HomeSection />
       <ServiceSection />
       <Footer />
-
-    </main>
+    </div>
   )
 }
