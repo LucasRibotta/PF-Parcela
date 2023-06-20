@@ -1,4 +1,5 @@
 import Card from "../../components/Card/Card";
+import SearchBar from "@/components/SearchBar/SearchBar";
 import 'tailwindcss/tailwind.css';
 
 export default function Gallery() {
@@ -10,15 +11,18 @@ export default function Gallery() {
     { Name: "Tipo 5", Precio: "USD 500", Superficie: '500 km2' },
     { Name: "Tipo 6", Precio: "USD 600", Superficie: '600 km2' }
   ];
-  
+
   return (
     <div className="flex flex-row bg-blue-500 h-full">
+      <div>
+        <SearchBar />
+      </div>
       <div className="h-full w-1/1 bg-gray-500 p-4">
         FILTER
       </div>
-      <div className="justify-center items-center w-full p-2">
+      <div className="items-center w-full pl-[10rem] px-2 flex-wrap">
         {cardTypes.map((card, index) => (
-          <div key={index} className="m-2">
+          <div key={index} className="mb-2">
             <Card
               name={card.Name}
               precio={card.Precio}
@@ -28,5 +32,5 @@ export default function Gallery() {
         ))}
       </div>
     </div>
-  );
+  )
 }

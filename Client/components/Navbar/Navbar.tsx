@@ -5,7 +5,7 @@ import Button from "../Button/Button"
 
 export default function Navbar() {
   return (
-    <nav className="flex fixed items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full">
+    <nav className="flex fixed items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full ">
       <div>
         <Image src={logo} alt="#" className="w-[6rem] " />
       </div>
