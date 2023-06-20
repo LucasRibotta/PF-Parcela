@@ -17,10 +17,10 @@ export default function Gallery() {
       <div className="h-full w-1/1 bg-gray-500 p-4">
         FILTER
       </div>
+      <div className="justify-center items-center w-full p-2">
       <div>
         <SearchBar />
       </div>
-      <div className="justify-center items-center w-full p-2">
         {cardTypes.map((card, index) => (
           <div key={index} className="m-2">
             <Card
