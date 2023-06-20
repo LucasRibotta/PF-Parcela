@@ -1,4 +1,5 @@
 'use client'
+import axios from 'axios'
 import 'tailwindcss/tailwind.css';
 import { useEffect, useState } from "react";
 import Link from 'next/link';
@@ -17,11 +18,13 @@ function Card({ name, precio, superficie }: CardProps) {
       try {
         let response = await fetch('https://picsum.photos/350/100');
         const imageUrl = response.url;
+        console.log(imageUrl)
         setImageUrl(imageUrl);
       } catch (error) {
         console.log('Error al obtener imagen', error);
       }
     };
+
     fetchImage();
   }, []);
 
@@ -33,7 +36,7 @@ function Card({ name, precio, superficie }: CardProps) {
       <h1>Name: {name}</h1>
       <h2>Precio: {precio}</h2>
       <h5>Superficie: {superficie}</h5>
-      {imageUrl && <img src={imageUrl} alt='Img Aleatoria' />}
+      {imageUrl && <img  src={imageUrl} alt='Img Aleatoria' />}
       <Link href='/detail'>
         <button>
           Ver más...

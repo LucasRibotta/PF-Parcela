@@ -15,8 +15,8 @@ export default function Gallery() {
   ];
 
   return (
-    <div className="flex flex-row bg-blue-500 h-full">
-      <div>
+    <div className="flex flex-col relative bg-blue-500 w-full pt-[7rem]">
+      <div className="">
         <SearchBar />
       </div>
       <div className="h-full w-1/1 bg-gray-500 p-4">
@@ -35,6 +35,7 @@ export default function Gallery() {
             />
           </div>
         ))}
+      </div>
       </div>
     </div>
   )
