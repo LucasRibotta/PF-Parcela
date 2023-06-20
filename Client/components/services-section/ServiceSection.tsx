@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 // import Image from "next/image";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const ServiceSection = () => {
@@ -30,7 +31,7 @@ const ServiceSection = () => {
             <div className="flex items-center flex-col lg:flex-row px-4 animate-aparition mt-9">
                 <div className="mt-16 w-[95%] h-[600px]">
                     <div className="max-w-[100%] h-[100%] bg-orange-200  rounded-3xl text-center ">
-                        Contendor de la imagen 360
+                   <img src="https://i.pinimg.com/564x/a2/be/34/a2be34e1ab00e613fce4714c85c23386.jpg" alt="img#60" className="w-[100%] h-[100%]" />
                     </div>
                 </div>
                 <div className="mt-16 w-[40%] flex flex-col items-start space-y-4 p-4 text-justify">
