@@ -13,12 +13,12 @@ export default function Gallery() {
   ];
 
   return (
-    <div className="flex flex-col relative bg-blue-500 w-full h-screen pt-[7rem]">
+    <div className="flex flex-col relative bg-blue-500 w-full pt-[7rem]">
       <div className="">
         <SearchBar />
       </div>
       <div className="flex pt-[8rem]">
-      <div className="h-full w-1/1 bg-gray-500 p-4">
+      <div className="w-1/1 bg-gray-500 p-4">
         FILTER
       </div>
       <div className="items-center w-full pl-[10rem] px-2 flex-wrap">
