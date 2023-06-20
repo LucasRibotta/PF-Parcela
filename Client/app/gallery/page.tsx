@@ -13,23 +13,25 @@ export default function Gallery() {
   ];
 
   return (
-    <div className="flex flex-row bg-blue-500 h-full">
-      <div>
+    <div className="flex flex-col bg-blue-500 h-full pt-[7rem]">
+      <div className="">
         <SearchBar />
       </div>
-      <div className="h-full w-1/1 bg-gray-500 p-4">
-        FILTER
-      </div>
-      <div className="items-center w-full pl-[10rem] px-2 flex-wrap">
-        {cardTypes.map((card, index) => (
-          <div key={index} className="mb-2">
-            <Card
-              name={card.Name}
-              precio={card.Precio}
-              superficie={card.Superficie}
-            />
-          </div>
-        ))}
+      <div className="flex pt-[6rem]">
+        <div className="max-w-[200px] min-w-[150px] ml-6 rounded-lg text-center bg-gray-500 p-4 ">
+          FILTER
+        </div>
+        <div className="items-center w-full pl-[2rem] px-2 flex-wrap">
+          {cardTypes.map((card, index) => (
+            <div key={index} className="mb-2">
+              <Card
+                name={card.Name}
+                precio={card.Precio}
+                superficie={card.Superficie}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
