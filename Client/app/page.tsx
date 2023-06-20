@@ -1,8 +1,12 @@
 import HomeSection from "@/components/HomeSection/HomeSection"
+import Footer from "@/components/footer/Footer"
+import ServiceSection from "@/components/services-section/ServiceSection"
 export default function Home() {
   return (
-    <div className="h-[100%] text-white">
+    <div>
       <HomeSection />
+      <ServiceSection />
+      <Footer />
     </div>
   )
 }

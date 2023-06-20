@@ -1,5 +1,3 @@
-
-
 const Footer = () => {
     return (
         <footer className="flex items-center w-[300px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px] mx-auto justify-between min-h-[100px] bg-gray-100 rounded-t-2xl opacity-50 text-black font-bold ">
@@ -23,4 +21,4 @@ const Footer = () => {
     )
 }
 
-export default Footer;
+export default Footer
