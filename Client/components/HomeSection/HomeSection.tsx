@@ -2,7 +2,7 @@ import HomeTitle from "../HomeTitle/HomeTitle"
 
 export default function HomeSection() {
   return (
-    <div className="absolute inset-0 ">
+    <div className="inset-0 ">
       <video
         autoPlay
         loop
