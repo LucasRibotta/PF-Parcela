@@ -1,6 +1,7 @@
 import "dotenv/config"
 import express from "express";
 import router from "./router";
+import connectDB from "./db/connect";
 
 const app = express();
 
