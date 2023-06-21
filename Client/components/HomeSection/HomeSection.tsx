@@ -7,7 +7,7 @@ export default function HomeSection() {
         autoPlay
         loop
         muted
-        className="w-full h-screen object-cover bg-black opacity-90 brightness-50 contrast-90"
+        className="w-full 2xl:h-[650px] h-screen object-cover bg-black opacity-90 brightness-50 contrast-90"
       >
         <source src="/homeVideo.mp4" type="video/mp4" />
       </video>
