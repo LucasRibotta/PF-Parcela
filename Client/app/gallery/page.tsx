@@ -15,26 +15,29 @@ export default function Gallery() {
   ];
 
   return (
-    <div className="flex flex-col relative bg-blue-500 w-full pt-[7rem]">
+    <div className="flex m-auto flex-col relative w-full pt-[5rem] lg:w-[1280px]">
       <div className="">
         <SearchBar />
       </div>
-      <div className="h-full w-1/1 bg-gray-500 p-4">
-        <h1>Filtrar por</h1>
-        <Filter />
-        <h1>Ordenar por</h1>
-        <Order />
-      </div>
-      <div className="items-center w-full pl-[10rem] px-2 flex-wrap">
-        {cardTypes.map((card, index) => (
-          <div key={index} className="mb-2">
-            <Card
-              name={card.Name}
-              precio={card.Precio}
-              superficie={card.Superficie}
-            />
-          </div>
-        ))}
+
+      <div className="flex pt-[4rem]">
+        <div className="w-1/1 bg-gray-500 p-4">
+          <h1>Filtrar por</h1>
+          <Filter />
+          <h1>Ordenar por</h1>
+          <Order />
+        </div>
+        <div className="items-center w-full pl-[10rem] px-2 flex-wrap">
+          {cardTypes.map((card, index) => (
+            <div key={index} className="mb-2">
+              <Card
+                name={card.Name}
+                precio={card.Precio}
+                superficie={card.Superficie}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

@@ -22,6 +22,9 @@ module.exports = {
       animation: {
         aparition: 'aparition 1s ease-in-out',
       },
+      boxShadow: {
+        'custom': '2px 2px #888888',
+      },
     },
   },
   plugins: []

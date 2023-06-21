@@ -25,3 +25,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+
+body{
+  background:rgb(148, 148, 148);
+}
