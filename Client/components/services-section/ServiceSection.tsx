@@ -29,8 +29,8 @@ const ServiceSection = () => {
     return (
         <section className="flex flex-col items-center w-[300px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px] mx-auto ">
             <div className="flex items-center flex-col lg:flex-row px-4 animate-aparition mt-9">
-                <div className="mt-16 w-[95%] h-[600px]">
-                    <div className="max-w-[100%] h-[100%] bg-orange-200  rounded-3xl text-center ">
+                <div className="mt-16 w-[95%] h-[650px]">
+                    <div className="max-w-[100%] h-[100%] bg-orange-200  rounded-3xl text-center overflow-hidden ">
                    <img src="https://i.pinimg.com/564x/a2/be/34/a2be34e1ab00e613fce4714c85c23386.jpg" alt="img#60" className="w-[100%] h-[100%]" />
                     </div>
                 </div>
