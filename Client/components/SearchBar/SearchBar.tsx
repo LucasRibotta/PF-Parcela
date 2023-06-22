@@ -14,7 +14,7 @@ export default function SearchBar() {
 // const handleSubmit = async (e) => {}
 
   return (
-    <div className="flex justify-center w-[300px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px] h-10 fixed z-50">
+    <div className="flex justify-center w-full h-10">
       <input
       type='text'
       placeholder="Buscar..."
