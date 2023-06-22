@@ -2,41 +2,48 @@ import React, { useState, ChangeEvent } from 'react';
 import Axios from 'axios';
 
 export default function UploadImage() {
-  const [imageSelected, setImageSelected] = useState<string | File>('');
+  const [imagesSelected, setImagesSelected] = useState<File[]>([]);
+
 
   const uploadImg = () => {
-    if (typeof imageSelected === 'string') {
-      console.log('No se ha seleccionado ninguna imagen');
+    if (imagesSelected.length === 0) {
+      console.log('No image has been selected');
       return;
     }
-
-    const formData = new FormData();
-    formData.append('file', imageSelected);
-    formData.append('upload_preset', 'parcelasImg');
-    formData.append('folder', 'Parcelas');
-
-    Axios.post('https://api.cloudinary.com/v1_1/parcelas/image/upload', formData)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log('Error uploading image to Cloudinary', error);
+  
+    const uploadPromises = imagesSelected.map((image) => {
+      const formData = new FormData();
+      formData.append('file', image);
+      formData.append('upload_preset', 'parcelasImg');
+      formData.append('folder', 'Parcelas');
+  
+      return Axios.post('https://api.cloudinary.com/v1_1/parcelas/image/upload', formData);
     });
   
+    Promise.all(uploadPromises)
+      .then((responses) => {
+        console.log(responses);
+      })
+      .catch((error) => {
+        console.log('Error uploading images to Cloudinary', error);
+      });
   };
+  
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]!;
-    if (file) {
-      setImageSelected(file);
+    const files = event.target.files;
+    if (files) {
+      const selectedImages = Array.from(files);
+      setImagesSelected(selectedImages);
     }
   };
+  
 
   return (
-    <div>
-      <input type="file" onChange={handleImageChange} />
+    <div className='flex flex-col text-current text-white'>
+      <input type="file" onChange={handleImageChange} multiple />
 
-      <button onClick={uploadImg}>Upload Image</button>
+      <button className='border-black rounded-lg cursor-pointer bg-white w-[30%] h-[50%] m-auto ' onClick={uploadImg}>Upload Images</button>
 
 
     </div>

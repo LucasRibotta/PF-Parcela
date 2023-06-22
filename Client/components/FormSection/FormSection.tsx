@@ -5,7 +5,7 @@ import Button from '../Button/Button'
 
 export default function FormSection() {
   return (
-    <div className='text-white bg-slate-900 m-auto h-[100%] w-[50%] border-black relative'>
+    <div className='text-current text-white bg-slate-900 m-auto h-[100%] w-[50%] border-black relative'>
        
         <h1>New Files</h1>
         <div className='flex flex-col mr-[2rem] mt-[2rem]'>
