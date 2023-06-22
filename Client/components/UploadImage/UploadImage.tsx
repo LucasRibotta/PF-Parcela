@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
 import Axios from 'axios';
 
-
 export default function UploadImage() {
   const [imageSelected, setImageSelected] = useState<string | File>('');
 
@@ -14,6 +13,7 @@ export default function UploadImage() {
     const formData = new FormData();
     formData.append('file', imageSelected);
     formData.append('upload_preset', 'parcelasImg');
+    formData.append('folder', 'Parcelas');
 
     Axios.post('https://api.cloudinary.com/v1_1/parcelas/image/upload', formData)
     .then((response) => {
@@ -37,6 +37,8 @@ export default function UploadImage() {
       <input type="file" onChange={handleImageChange} />
 
       <button onClick={uploadImg}>Upload Image</button>
+
+
     </div>
   );
 }
