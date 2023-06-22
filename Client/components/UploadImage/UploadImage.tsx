@@ -13,7 +13,7 @@ export default function UploadImage() {
 
     const formData = new FormData();
     formData.append('file', imageSelected);
-    formData.append('upload:present', 'parcelas');
+    formData.append('upload_preset', 'parcelasImg');
 
     Axios.post('https://api.cloudinary.com/v1_1/parcelas/image/upload', formData)
     .then((response) => {
