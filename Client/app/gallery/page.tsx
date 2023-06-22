@@ -12,8 +12,11 @@ export default function Gallery() {
   ]
 
   return (
-    <div className="flex flex-row bg-blue-500 min-h-screen pt-[6rem]">
-      <div className="fixed h-full w-[9rem] bg-gray-500 p-4 rounded-lg">
+    <div className="flex flex-row min-h-screen pt-[6rem]">
+      <div
+        className="fixed h-full w-[9rem] bg-gray-500 p-4 rounded-lg "
+        style={{ height: "calc(100vh - 6rem - 0.5rem)" }}
+      >
         FILTER
       </div>
       <div className="items-center w-full pl-[10rem] px-2 flex-wrap">
