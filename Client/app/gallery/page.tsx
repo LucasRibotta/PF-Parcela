@@ -21,7 +21,10 @@ export default function Gallery() {
       </div>
 
       <div className="flex pt-[4rem]">
-        <div className="w-1/1 bg-gray-500 p-4">
+        <div
+          className="fixed h-full w-[9rem] bg-gray-500 p-4 rounded-lg "
+          style={{ height: "calc(100vh - 6rem - 0.5rem)" }}
+        >
           <h1>Filtrar por</h1>
           <Filter />
           <h1>Ordenar por</h1>
