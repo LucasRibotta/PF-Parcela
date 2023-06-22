@@ -1,10 +1,9 @@
 'use client'
-import axios from 'axios'
 import 'tailwindcss/tailwind.css';
 import { useEffect, useState } from "react";
 import Link from 'next/link';
-import style from "./card.module.css"
 import Button from '../Button/Button';
+import style from "./card.module.css"
 
 interface CardProps {
   name: string;
@@ -14,31 +13,23 @@ interface CardProps {
 
 function Card({ name, precio, superficie }: CardProps) {
   const [imageUrl, setImageUrl] = useState('');
-  const [click, setClick] = useState(false);
 
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        let response = await fetch('https://picsum.photos/1000/300');
+        let response = await fetch('https://picsum.photos/350/100');
         const imageUrl = response.url;
         setImageUrl(imageUrl);
       } catch (error) {
         console.log('Error al obtener imagen', error);
       }
     };
-
     fetchImage();
   }, []);
 
-  const onClick = () => {
-    setClick(!click);
-  }
-
-
-
   return (
     <div className="flex-1 justify-center max-w-full text-white overflow-hidden shadow  rounded-md border-solid border-5 border-black-500 transform hover:scale-105 transition duration-300 ease-in-out relative">
-      <div className="flex-end m-auto absolute right-6 items-end text-red-600" onClick={onClick}>
+      <div className="flex-end m-auto absolute right-6 items-end text-red-600" /* onClick={onClick} */>
         {/* {click ?
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-heart-fill" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
@@ -58,6 +49,15 @@ function Card({ name, precio, superficie }: CardProps) {
           </Link>
         </div>
       </div>
+      <h1>Name: {name}</h1>
+      <h2>Precio: {precio}</h2>
+      <h5>Superficie: {superficie}</h5>
+      {imageUrl && <img src={imageUrl} alt='Img Aleatoria' />}
+      <Link href='/detail'>
+        <button>
+          Ver más...
+        </button>
+      </Link>
     </div>
   );
 }
