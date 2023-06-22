@@ -11,7 +11,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isTop = window.scrollY < 10
+      const isTop = window.scrollY < 20
       if (isTop !== navbarBackground) {
         setNavbarBackground(isTop)
       }
