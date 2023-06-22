@@ -1,11 +1,34 @@
+"use client"
 import Link from "next/link"
 import Image from "next/image"
 import logo from "../../img/logoIcon.png"
 import Button from "../Button/Button"
 
+import React, { useEffect, useState } from "react"
+
 export default function Navbar() {
+  const [navbarBackground, setNavbarBackground] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isTop = window.scrollY < 10
+      if (isTop !== navbarBackground) {
+        setNavbarBackground(isTop)
+      }
+    }
+
+    document.addEventListener("scroll", handleScroll)
+    return () => {
+      document.removeEventListener("scroll", handleScroll)
+    }
+  }, [navbarBackground])
+
   return (
-    <nav className="flex fixed items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full ">
+    <nav
+      className={`flex fixed items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full ${
+        navbarBackground ? "" : "bg-black opacity-50 ease-in-out duration-300"
+      }`}
+    >
       <div>
         <Image src={logo} alt="#" className="w-[6rem] " />
       </div>
@@ -44,7 +67,11 @@ export default function Navbar() {
         </li>
       </ul>
       <div className="flex gap-2 ">
-        <Button text="Sing in" />
+        <Button
+          text="Sign
+        
+        in"
+        />
       </div>
     </nav>
   )
