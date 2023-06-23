@@ -1,4 +1,5 @@
 # PF-Parcela
+<<<<<<< HEAD
 
 
 Hello Dear!!
@@ -12,3 +13,8 @@ Mergear y pushear:
 *Hacer => git merge main
 *Hacer =>  git push origin
 ver estado = git status
+=======
+New Cambio
+PARCELA
+Hello Dear!!
+>>>>>>> 3daa66da5abd1a4ca45b5ded4e3aa6c7937adb3d
