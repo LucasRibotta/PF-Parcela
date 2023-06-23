@@ -53,7 +53,7 @@ function Card({ name, precio, superficie }: CardProps) {
           <h1 className={`${style.textShadow} font-bold opacity-100 `}>Nombre: {name}</h1>
           <h2 className={`${style.textShadow} font-bold opacity-100 `}>Precio: {precio}</h2>
           <h5 className={`${style.textShadow} font-bold opacity-100 `}>Superficie: {superficie}</h5>
-          <Link href='/detail' className=' [&>button]:mt-5 ' >
+          <Link href='/detail' className=' [&>button]:my-5 ' >
             <Button text={"Ver más..."} />
           </Link>
         </div>
