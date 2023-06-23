@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 
-export const parcelas = (req: Request, res: Response) => {
-    res.send("parcelas")
+export const condominio = (req: Request, res: Response) => {
+    res.send("condominio")
 } 
 
 export const parcela  = (req: Request, res: Response) => {
