@@ -1,20 +1,26 @@
-import 'tailwindcss/tailwind.css';
+import "tailwindcss/tailwind.css"
+import Order from "@/components/Filters/Order"
+import SearchBar from "@/components/SearchBar/SearchBar"
 
 export default function Filter() {
   return (
-    <div className=''>
-      <div>
-        <label>Ubicación:</label>
-        <select>
+    <div
+      className="fixed h-full w-[16rem] bg-gray-500 p-4 rounded-lg "
+      style={{ height: "calc(100vh - 7rem - 0.5rem)" }}
+    >
+      <SearchBar />
+      <div className="mb-4">
+        <label className="block mb-2">Ubicación:</label>
+        <select className="block w-full p-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] ">
           <option>Selecciona una ubicación</option>
           <option>ubicación1</option>
           <option>ubicación2</option>
           <option>ubicación3</option>
         </select>
       </div>
-      <div>
-        <label>Superficie:</label>
-        <select>
+      <div className="mb-4">
+        <label className="block mb-2">Superficie:</label>
+        <select className="block w-full p-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1]">
           <option>Selecciona una superficie</option>
           <option>5.000 m² totales o menos</option>
           <option>5.000 a 5.500 m² totales</option>
@@ -22,9 +28,7 @@ export default function Filter() {
           <option>10.000 m² totales o más</option>
         </select>
       </div>
-      <div>
-        <label>Precio:</label>
-      </div>
+      <Order />
     </div>
   )
-};
+}
