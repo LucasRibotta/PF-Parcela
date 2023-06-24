@@ -5,7 +5,7 @@ import SearchBar from "@/components/SearchBar/SearchBar"
 export default function Filter() {
   return (
     <div
-      className="fixed h-full w-[16rem] bg-gray-500 p-4 rounded-lg "
+      className="fixed h-full w-[16rem] bg-gray-500 p-4 rounded-lg"
       style={{ height: "calc(100vh - 7rem - 0.5rem)" }}
     >
       <SearchBar />
