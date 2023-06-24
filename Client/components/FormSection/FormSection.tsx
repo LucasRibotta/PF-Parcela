@@ -14,20 +14,40 @@ export default function FormSection() {
 
   return (
     <form className='flex flex-col m-auto text-white bg-black min-h-[100%] w-[80%]'>
-       <div className='flex flex-col p-auto text-black'>
-        <label htmlFor='location'>Ubicación</label>
-        <input type='text' id='location' value={location} onChange={handleLocationChange} />
-        <div className='h-[40%] w-[50%] m-auto'> 
+       <div className='flex flex-col p-auto text-white'>
+
+        <div className='flex flex-col m-auto '>
+        <label className='mr-[1rem]'  htmlFor='location'>Ubicación:
+        <input className='text-black ml-[1rem]' type='text' id='location' value={location} onChange={handleLocationChange} />
+        </label>
+        </div>
+
+        <div className='h-[40%] w-[50%] m-auto pt-[2rem]'> 
         <LocationMaps location={location} />
+        </div>
+
       </div>
+
+      <div className='flex flex-col m-auto p-[2rem] h-[70%] w-[70%] '>
+
+      Name: <input type="text" placeholder="Name" id="Name" />
+      Area: <input type="Number" placeholder='Area' />
+      Price: <input type="Number" placeholder='Price'/>
+      Description: <textarea name="description" id="description" />
+
+      <div className='mt-[2rem]'>
+      <label htmlFor="services">Servicios:
+        <input className='ml-[2rem]' type="text" id="services" />
+      </label>
+      </div>
+      
       </div>
 
 
 
-      <div>
-        <label htmlFor="services">Servicios</label>
-        <input type="text" id="services" />
-      </div>
+      
+        
+     
       
        
 
