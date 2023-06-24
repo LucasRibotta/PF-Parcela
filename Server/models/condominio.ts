@@ -7,27 +7,27 @@ const condominioschema = new Schema({
     surroundings:{
         hospital:{
             name:String,
-            distance:Number
+            travelTime:Number
         },
         police:{
             name:String,
-            distance:Number
+            travelTime:Number
         },
         supermarket:{
             name:String,
-            distance:Number
+            travelTime:Number
         },
         schools:{
             name:String,
-            distance:Number
+            travelTime:Number
         },
         firefighters:{
             name:String,
-            distance:Number
+            travelTime:Number
         },
     },//cercanias
-    access:{type:String, require:true},
-    
+    access:{type:String, require:true},//convertir a array
+    description: {type:String, require:true}
 })
 
 export default  model("Condominio",condominioschema,"condominio");
