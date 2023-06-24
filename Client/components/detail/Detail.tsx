@@ -198,7 +198,7 @@ const DetailSection = () => {
 
         {/* <Button text={"Agregar a carro"}></Button> */}
         <div className="fixed flex justify-end bottom-6 w-[300px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px]">
-          <Link href="/" className="mr-8  ">
+          <Link href="/" className="mr-8 shadow-lg">
             <Button text={"Comprar Ahora"}></Button>
           </Link>
         </div>
