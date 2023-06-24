@@ -48,9 +48,9 @@ export default function UploadImage() {
 
 
   return (
-    <div className='flex flex-col text-current text-white'>
-      <button className='border-black rounded-lg cursor-pointer bg-white w-[30%] h-[50%] m-auto' onClick={handleButtonClick}>oprime esto y te mueres</button>
-      {imagesSelected.length > 0 && <p>{imagesSelected.length} imágenes seleccionadas</p>}
+    <div className='flex flex-col text-current text-black'>
+      <button className='border-black rounded-lg cursor-pointer  bg-white w-[30%] h-[50%] m-auto' onClick={handleButtonClick}>Select Image</button>
+      {imagesSelected.length > 0 && <p>{imagesSelected.length} Image</p>}
 
       <button className='border-black rounded-lg cursor-pointer bg-white w-[30%] h-[50%] m-auto ' onClick={uploadImg}>Upload Images</button>
 
