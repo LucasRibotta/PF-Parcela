@@ -48,7 +48,7 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
   };
 
   return (
-    <div style={{ height: '400px', width: '100%' }}>
+    <div style={{ height: '500px', width: '100%' }}>
       <LoadScript googleMapsApiKey={mapApiKey}>
         <GoogleMap
           mapContainerStyle={{ height: '100%', width: '100%' }}
