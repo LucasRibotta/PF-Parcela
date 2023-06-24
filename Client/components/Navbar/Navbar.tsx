@@ -3,15 +3,19 @@ import Link from "next/link"
 import Image from "next/image"
 import logo from "../../img/logoIcon.png"
 import Button from "../Button/Button"
+import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai"
+import { BiSolidUserCircle } from "react-icons/bi"
 
 import React, { useEffect, useState } from "react"
 
 export default function Navbar() {
   const [navbarBackground, setNavbarBackground] = useState(false)
+  const [userLoggedIn, setUserLoggedIn] = useState(false)
+  const [userAdmin, setUserAdmin] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      const isTop = window.scrollY < 20
+      const isTop = window.scrollY < 200
       if (isTop !== navbarBackground) {
         setNavbarBackground(isTop)
       }
@@ -26,24 +30,24 @@ export default function Navbar() {
   return (
     <nav
       className={`flex fixed items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full ${
-        navbarBackground ? "" : "bg-black opacity-50 ease-in-out duration-300"
+        navbarBackground ? "" : "bg-[#2222229c] ease-in-out duration-300"
       }`}
     >
-      <div>
+      <div className="w-3/12">
         <Image src={logo} alt="#" className="w-[6rem] " />
       </div>
       <ul className="flex justify-end gap-[2rem] items-center text-white">
         <li className=" px-[22px] py-[20px]">
           <Link
             href="/"
-            className=" text-[#51a8a1] font-semibold ease-in-out duration-300 "
+            className="border-b-2  border-[#51a8a1] border-opacity-0 hover:border-opacity-100 hover:text-[#51a8a1] duration-200 cursor-pointer"
           >
             Home
           </Link>
         </li>
         <li className="px-[22px] py-[20px]">
           <Link
-            className="text-[#51a8a1] font-semibold ease-in-out duration-300"
+            className="border-b-2  border-[#51a8a1] border-opacity-0 hover:border-opacity-100 hover:text-[#51a8a1] duration-200 cursor-pointer"
             href="/gallery"
           >
             Gallery
@@ -51,7 +55,7 @@ export default function Navbar() {
         </li>
         <li className="px-[22px] py-[20px]">
           <Link
-            className="text-[#51a8a1] font-semibold ease-in-out duration-300"
+            className="border-b-2  border-[#51a8a1] border-opacity-0 hover:border-opacity-100 hover:text-[#51a8a1] duration-200 cursor-pointer"
             href="/about"
           >
             About
@@ -59,20 +63,51 @@ export default function Navbar() {
         </li>
         <li className="px-[22px] py-[20px]">
           <Link
-            className="text-[#51a8a1] font-semibold ease-in-out duration-300"
+            className="border-b-2  border-[#51a8a1] border-opacity-0 hover:border-opacity-100 hover:text-[#51a8a1] duration-200 cursor-pointer"
             href="/contact"
           >
             Contact
           </Link>
         </li>
+        {userAdmin ? (
+          <li className="px-[22px] py-[20px]">
+            <Link
+              className="border-b-2  border-[#51a8a1] border-opacity-0 hover:border-opacity-100 hover:text-[#51a8a1] duration-200 cursor-pointer"
+              href="/admin"
+            >
+              Admin
+            </Link>
+          </li>
+        ) : null}
       </ul>
-      <div className="flex gap-2 ">
-        <Button
-          text="Sign
-        
-        in"
-        />
-      </div>
+
+      {!userAdmin ? (
+        <>
+          {userLoggedIn ? (
+            <div className="w-3/12 flex items-center justify-end gap-4">
+              <a href="">
+                <AiOutlineSearch className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
+              </a>
+
+              <a href="">
+                <AiOutlineShoppingCart className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
+              </a>
+              <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" />
+            </div>
+          ) : (
+            <div className="w-3/12 flex items-center justify-end">
+              <button className=" text-[#51a8a1] font-semibold hover:text-[#126e67]  ease-in-out duration-300 px-4 py-[6px]">
+                Sign in
+              </button>
+              <Button text="Sign up" />
+            </div>
+          )}
+        </>
+      ) : (
+        <div className="w-3/12 flex items-center justify-end gap-4">
+          <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" />
+        </div>
+      )}
     </nav>
   )
 }
