@@ -1,7 +1,5 @@
 import Card from "../../components/Card/Card";
-import SearchBar from "@/components/SearchBar/SearchBar";
 import Filter from "@/components/Filters/Filter";
-import Order from "@/components/Filters/Order"
 import 'tailwindcss/tailwind.css';
 import CustomPagination from '@/components/CustomPagination/CustomPagination';
 
@@ -17,33 +15,29 @@ export default function Gallery() {
 
   return (
     <div className="flex m-auto flex-col relative w-full pt-[5rem] lg:w-[1280px]">
-      <div className="">
-        <SearchBar />
+      <div className="flex pt-[2rem]">
+        <Filter />
+        <div className="flex-grow pl-[20rem] px-2">
+          {
+            cardTypes.map
+              ((card, index) => (
+                <div key={index} className="mb-2">
+                  <Card
+                    name={
+                      card.Name
+                    }
+                    precio={card.Precio}
+                    superficie={card.Superficie}
+                  />
+                </div>
+              ))}
+          <CustomPagination
+            resPerPage={2}
+            productsCount={5}
+          />
+        </div>
       </div>
 
-      <div className="flex pt-[4rem]">
-        <div className="w-1/1 bg-gray-500 p-4 rounded-md">
-          <h1 className="text-white py-5">Filtrar por</h1>
-          <Filter />
-          <h1 className="text-white pt-5">Ordenar por</h1>
-          <Order />
-        </div>
-        <div className="items-center w-full pl-[10rem] px-2 flex-wrap">
-          {cardTypes.map((card, index) => (
-            <div key={index} className="mb-2">
-              <Card
-                name={card.Name}
-                precio={card.Precio}
-                superficie={card.Superficie}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-      <CustomPagination
-        resPerPage={2}
-        productsCount={5}
-      />
     </div>
   )
 }

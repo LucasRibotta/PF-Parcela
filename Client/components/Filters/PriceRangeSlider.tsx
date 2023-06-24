@@ -59,7 +59,7 @@ export default function PriceRangeSlider({
   }, [minValue, maxValue, max, step])
 
   return (
-    <div className="flex flex-col w-96 px-6 py-2">
+    <div className="flex flex-col w-full">
       <div className="flex justify-between items-center my-6 ">
         <div className="rounded-md">
           <span className="p-2  text-white"> Min</span>

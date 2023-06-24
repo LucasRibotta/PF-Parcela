@@ -45,9 +45,9 @@ export default function CustomPagination({ resPerPage, productsCount }: Paginati
       prevPageText={"< Anterior"}
       firstPageText={"Inicio"}
       lastPageText={"Final"}
-      itemClass="relative inline-flex items-center border-[1px] border-white bg-transparent px-4 py-2 text-white rounded hover:bg-[#51a8a1] ease-in-out duration-300 px-4 py-[6px] focus:z-20"
-      activeLinkClass="z-10 inline-flex items-center border-[1px] border-none bg-transparent text-white focus:z-20 ease-in-out duration-300 px-2 py-[5px]"
-      activeClass="z-10 inline-flex items-center border-[1px] border-white bg-transparent  text-white focus:z-20"
+      itemClass="relative inline-flex items-center border-[1px] border-[#51a8a1] bg-transparent px-4 py-2 text-[#51a8a1] rounded hover:bg-[#51a8a1] hover:text-white ease-in-out duration-300 px-4 py-[6px] focus:z-20 mx-1"
+      activeLinkClass="z-10 inline-flex items-center border-[1px] border-none bg-[#51a8a1] text-white focus:z-20 ease-in-out duration-300 px-2 py-[5px]"
+      activeClass="z-10 inline-flex items-center border-[1px] border-[#51a8a1] bg-[#51a8a1] text-white focus:z-20"
     />
   </div>
   );
