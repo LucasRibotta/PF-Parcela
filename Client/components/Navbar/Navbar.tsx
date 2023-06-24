@@ -36,14 +36,14 @@ export default function Navbar() {
         <li className=" px-[22px] py-[20px]">
           <Link
             href="/"
-            className=" hover:text-[#51a8a1]  ease-in-out duration-300 "
+            className=" text-[#51a8a1] font-semibold ease-in-out duration-300 "
           >
             Home
           </Link>
         </li>
         <li className="px-[22px] py-[20px]">
           <Link
-            className="hover:text-[#51a8a1]  ease-in-out duration-300"
+            className="text-[#51a8a1] font-semibold ease-in-out duration-300"
             href="/gallery"
           >
             Gallery
@@ -51,7 +51,7 @@ export default function Navbar() {
         </li>
         <li className="px-[22px] py-[20px]">
           <Link
-            className="hover:text-[#51a8a1]  ease-in-out duration-300"
+            className="text-[#51a8a1] font-semibold ease-in-out duration-300"
             href="/about"
           >
             About
@@ -59,7 +59,7 @@ export default function Navbar() {
         </li>
         <li className="px-[22px] py-[20px]">
           <Link
-            className="hover:text-[#51a8a1]  ease-in-out duration-300"
+            className="text-[#51a8a1] font-semibold ease-in-out duration-300"
             href="/contact"
           >
             Contact
