@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import condominioModel from "../models/condominio";
 // import parcelaModel from "../models/parcela";
 
+import 'dotenv/config'
 
 async function connectDB() {  
     if (!process.env.MONGODB_URL) {
