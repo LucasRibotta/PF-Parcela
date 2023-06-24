@@ -35,7 +35,7 @@ function Card({ name, precio, superficie }: CardProps) {
   }
 
   return (
-    <div className="flex-1 justify-center max-w-full text-white overflow-hidden shadow  rounded-md border-solid border-5 border-black-500 transform hover:scale-[102%] transition duration-300 ease-in-out relative">
+    <div className="flex-1 justify-center max-w-full text-white overflow-hidden shadow  rounded-md border-solid border-5 border-black-500 transform hover:scale-[101%] transition duration-300 ease-in-out relative">
       <div
         className="flex-end m-auto absolute right-6 items-end text-red-600"
         onClick={onClick}

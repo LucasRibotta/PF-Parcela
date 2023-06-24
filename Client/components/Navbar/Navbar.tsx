@@ -29,8 +29,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`flex fixed items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full ${
-        navbarBackground ? "" : "bg-[#2222229c] ease-in-out duration-300"
+      className={`flex fixed  items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full shadow-md ${
+        navbarBackground
+          ? "bg-[#22222263]"
+          : "bg-[#2222229c] ease-in-out duration-300"
       }`}
     >
       <div className="w-3/12">
@@ -85,18 +87,13 @@ export default function Navbar() {
         <>
           {userLoggedIn ? (
             <div className="w-3/12 flex items-center justify-end gap-4">
-              <a href="">
-                <AiOutlineSearch className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
-              </a>
-
-              <a href="">
-                <AiOutlineShoppingCart className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
-              </a>
+              <AiOutlineSearch className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
+              <AiOutlineShoppingCart className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
               <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" />
             </div>
           ) : (
             <div className="w-3/12 flex items-center justify-end">
-              <button className=" text-[#51a8a1] font-semibold hover:text-[#126e67]  ease-in-out duration-300 px-4 py-[6px]">
+              <button className="text-white  font-semibold hover:text-[#51a8a1]  ease-in-out duration-300 px-4 py-[6px]">
                 Sign in
               </button>
               <Button text="Sign up" />
