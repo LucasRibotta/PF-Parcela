@@ -26,6 +26,7 @@ const condominioschema = new Schema({
             travelTime:Number
         },
     },//cercanias
+    image:String,
     access:{type:String, require:true},//convertir a array
     description: {type:String, require:true}
 })
