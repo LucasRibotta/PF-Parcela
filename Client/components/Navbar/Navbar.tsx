@@ -93,10 +93,17 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="w-3/12 flex items-center justify-end">
-              <button className="text-white  font-semibold hover:text-[#51a8a1]  ease-in-out duration-300 px-4 py-[6px]">
-                Sign in
-              </button>
-              <Button text="Sign up" />
+              <Link href={"/login"}>
+                <button className="text-white  font-semibold hover:text-[#51a8a1]  ease-in-out duration-300 px-4 py-[6px]">
+                  Sign in
+                </button>
+              </Link>
+
+              <div>
+                <Link href={"/register"}>
+                  <Button text="Sign up" />
+                </Link>
+              </div>
             </div>
           )}
         </>

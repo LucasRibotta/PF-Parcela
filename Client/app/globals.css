@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* h1 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+}
+
+p {
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+} */
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -25,3 +38,6 @@ body {
     )
     rgb(var(--background-start-rgb));
 }  */
+body {
+  font-family: "Noto Serif Ottoman Siyaq", serif;
+}
