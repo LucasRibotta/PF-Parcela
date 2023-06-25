@@ -5,13 +5,19 @@ import logo from "../../img/logoIcon.png"
 import Button from "../Button/Button"
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai"
 import { BiSolidUserCircle } from "react-icons/bi"
-
 import React, { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 
 export default function Navbar() {
   const [navbarBackground, setNavbarBackground] = useState(false)
   const [userLoggedIn, setUserLoggedIn] = useState(false)
   const [userAdmin, setUserAdmin] = useState(false)
+
+  const activeLink =
+    "border-b-2  border-[#51a8a1] text-[#51a8a1] duration-200 cursor-pointer"
+  const inactiveLink =
+    "border-b-2  border-[#51a8a1] border-opacity-0 hover:border-opacity-100 hover:text-[#51a8a1] duration-200 cursor-pointer"
+  const pathName = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,14 +48,14 @@ export default function Navbar() {
         <li className=" px-[22px] py-[20px]">
           <Link
             href="/"
-            className="border-b-2  border-[#51a8a1] border-opacity-0 hover:border-opacity-100 hover:text-[#51a8a1] duration-200 cursor-pointer"
+            className={pathName === "/" ? activeLink : inactiveLink}
           >
             Home
           </Link>
         </li>
         <li className="px-[22px] py-[20px]">
           <Link
-            className="border-b-2  border-[#51a8a1] border-opacity-0 hover:border-opacity-100 hover:text-[#51a8a1] duration-200 cursor-pointer"
+            className={pathName === "/gallery" ? activeLink : inactiveLink}
             href="/gallery"
           >
             Gallery
@@ -57,7 +63,7 @@ export default function Navbar() {
         </li>
         <li className="px-[22px] py-[20px]">
           <Link
-            className="border-b-2  border-[#51a8a1] border-opacity-0 hover:border-opacity-100 hover:text-[#51a8a1] duration-200 cursor-pointer"
+            className={pathName === "/about" ? activeLink : inactiveLink}
             href="/about"
           >
             About
@@ -65,7 +71,7 @@ export default function Navbar() {
         </li>
         <li className="px-[22px] py-[20px]">
           <Link
-            className="border-b-2  border-[#51a8a1] border-opacity-0 hover:border-opacity-100 hover:text-[#51a8a1] duration-200 cursor-pointer"
+            className={pathName === "/contact" ? activeLink : inactiveLink}
             href="/contact"
           >
             Contact
@@ -74,7 +80,7 @@ export default function Navbar() {
         {userAdmin ? (
           <li className="px-[22px] py-[20px]">
             <Link
-              className="border-b-2  border-[#51a8a1] border-opacity-0 hover:border-opacity-100 hover:text-[#51a8a1] duration-200 cursor-pointer"
+              className={pathName === "/admin" ? activeLink : inactiveLink}
               href="/admin"
             >
               Admin

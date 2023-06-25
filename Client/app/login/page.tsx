@@ -11,9 +11,6 @@ export default function Login() {
           <h2 className="text-3xl font-black mb-6 ">Iniciar sesión</h2>
           <div className="flex pb-4">
             <div className="border-[1px] text[#ddd] rounded-[50%] inline-flex justify-center items-center mx-[5px] h-[40px] w-[40px]">
-              <BiLogoFacebook className="h-5 w-5 text-[#51a8a1]" />
-            </div>
-            <div className="border-[1px] text[#ddd] rounded-[50%] inline-flex justify-center items-center mx-[5px] h-[40px] w-[40px]">
               <BiLogoGmail className="h-4 w-4 text-[#51a8a1]" />
             </div>
           </div>
