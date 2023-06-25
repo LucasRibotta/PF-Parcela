@@ -2,6 +2,12 @@
 import Link from "next/link"
 import Button from "../Button/Button"
 import style from "./detail.module.css"
+import Paisaje from "../../img/svgs/Paisaje"
+import Pago from "@/img/svgs/Pago"
+import Camino from "@/img/svgs/Camino"
+import Vegetation from "@/img/svgs/Vegetacion"
+import Connection from "@/img/svgs/Connection"
+import Energy from "@/img/svgs/Energy"
 
 const DetailSection = () => {
   return (
@@ -22,7 +28,7 @@ const DetailSection = () => {
             <h3 className="font-medium">En venta</h3>
             <p>$7.990.000</p>
           </div>
-          <div className="absolute bottom-0 right-[6%] translate-y-[50%] w-[70%] sm:w-[45%] bg-[#6db4d2] p-8 mt-3 rounded-2xl text-white">
+          <div className="absolute bottom-0 right-[6%] translate-y-[50%] w-[70%] sm:w-[45%] bg-[#f8f8f8] p-8 mt-3 rounded-2xl text-black">
             <h3 className="font-bold m-10">Tomeco, Región del Biobío.</h3>
             <span className="m-10 font-bold">98% Vendido</span>
             <p className="m-10 text-justify">
@@ -93,60 +99,62 @@ const DetailSection = () => {
           </div>
         </div>
 
-        <div className="w-[70%] sm:w-[45%]  bg-[#75d194] p-8  rounded-br-2xl text-white mb-20">
-          <h3 className="font-bold">Caracteristicas:</h3>
-          <ul className="grid grid-cols-2 [&>li]:w-[95%] text-gray-950 ">
-            <li className="bg-slate-200 rounded-2xl m-1 border-solid border-transparent border-spacing-2 text-justify p-2">
-              <h4 className="font-medium mb-1 text-[18px]">Proyecto Diverso</h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laboriosam, quae!
-              </p>
-            </li>
-            <li className="bg-slate-200 rounded-2xl m-1 border-solid border-transparent border-spacing-2 text-justify p-2">
-              <h4 className="font-medium mb-1 text-[18px]">
-                Superficie y Vegetación Mixta
-              </h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laboriosam, quae!
-              </p>
-            </li>
-            <li className="bg-slate-200 rounded-2xl m-1 border-solid border-transparent border-spacing-2 text-justify p-2">
-              <h4 className="font-medium mb-1 text-[18px]">
-                Facilidades de Pago
-              </h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laboriosam, quae!
-              </p>
-            </li>
-            <li className="bg-slate-200 rounded-2xl m-1 border-solid border-transparent border-spacing-2 text-justify p-2">
-              <h4 className="font-medium mb-1 text-[18px]">
-                Conectividad digital
-              </h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laboriosam, quae!
-              </p>
-            </li>
-            <li className="bg-slate-200 rounded-2xl m-1 border-solid border-transparent border-spacing-2 text-justify p-2">
-              <h4 className="font-medium mb-1 text-[18px]">Acceso Optimo</h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laboriosam, quae!
-              </p>
-            </li>
-            <li className="bg-slate-200 rounded-2xl m-1 border-solid border-transparent border-spacing-2 text-justify p-2">
-              <h4 className="font-medium mb-1 text-[18px]">
-                Factibilidad de Energía Eléctrica.
-              </h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laboriosam, quae!
-              </p>
-            </li>
-          </ul>
+        <div className="w-[70%] sm:w-[45%] p-8  rounded-br-2xl text-white mb-20">
+          <h3 className="font-bold text-black">Caracteristicas:</h3>
+
+
+
+
+          <div className="grid grid-cols-2 [&>div]:w-[98%] text-gray-950 ">
+
+            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#fff4dd] text-[#ffb41c] rounded-2xl ">
+              <div className="flex items-center mb-4">
+                <Paisaje/>
+                <h2 className="pl-2 font-bold">Proyecto Diverso</h2>
+              </div>
+              <p className="text-justify font-medium">Perfecto para invertir, segunda vivienda o residencia principal.</p>
+            </div>
+            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#ffe7dc] text-[#ff5f10] rounded-2xl ">
+              <div className="flex items-center mb-4">
+                <Pago />
+                <h2 className=" pl-2">Facilidades de Pago</h2>
+              </div>
+              <p className="text-justify ">Credito directo, pago en cuotas y descuentos en efectivo.</p>
+            </div>
+
+            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f3ec] text-[#00b39c] rounded-2xl ">
+              <div className="flex items-center mb-4">
+                <Camino/>
+                <h2 className=" pl-2">Acceso Optimo</h2>
+              </div>
+              <p className="text-justify ">Camino de acceso apto para cualquier vehiculo.</p>
+            </div>
+            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#fed3d3] text-[#fb5252] rounded-2xl ">
+              <div className="flex items-center mb-4">
+                <Vegetation/>
+                <h2 className=" pl-2">Superficie y Vegetación Mixta</h2>
+              </div>
+              <p className="text-justify ">Planicies, pendientes, estero, arboles frutales y vegetación variada.</p>
+            </div>
+
+            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f7f7] text-[#1fcfcd] rounded-2xl ">
+              <div className="flex items-center mb-4 ">
+                <Connection/>
+                <h2 className=" mb-2 pl-2">Conectividad digital</h2>
+              </div>
+              <p className="text-justify ">Excelente señal telefonica y conectividad 4G en el sector.</p>
+            </div>
+            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#dbe4f8] text-[#00143f] rounded-2xl ">
+              <div className="flex items-center mb-4">
+                <Energy/>
+                <h2 className=" pl-2">Factibilidad de Energía Eléctrica.</h2>
+              </div>
+              <p className="text-justify ">Tendido eléctrico de fácil desarrollo comunitario.</p>
+            </div>
+
+
+
+          </div>
         </div>
 
         <div className="w-[90%] sm:w-[80%] lg:w-[100%] mx-auto mt-[30px] mb-16 ">
