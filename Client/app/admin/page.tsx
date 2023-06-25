@@ -1,7 +1,10 @@
 export default function Admin() {
   return (
-    <div className="pt-[6.8rem] h-screen flex bg-gray-800">
-      <div className="flex flex-col items-center w-40 h-full overflow-hidden text-gray-400 bg-gray-900 rounded">
+<div className="pt-[6.8rem] h-screen flex bg-gray-800">
+      <div
+        className="flex flex-col fixed items-center w-40 h-screen overflow-hidden text-gray-400 bg-gray-900 rounded"
+        style={{ height: "calc(100vh - 7rem - 1.9rem)" }}
+      >
         <a className="flex items-center w-full px-3 mt-3" href="#">
           <svg
             className="w-8 h-8 fill-current"
@@ -13,7 +16,7 @@ export default function Admin() {
           </svg>
           <span className="ml-2 text-sm font-bold">The App</span>
         </a>
-        <div className="w-full px-2">
+        <div className="w-full  px-2">
           <div className="flex flex-col items-center w-full mt-3 border-t border-gray-700">
             <a
               className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
@@ -161,7 +164,7 @@ export default function Admin() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col flex-1 p-4  bg-gray-800">
+      <div className="flex flex-col flex-1 p-4 ml-[11rem] bg-gray-800">
         <h1 className="text-2xl font-bold text-white">Dashboard</h1>
         <div className="flex flex-wrap mt-6 ">
           <div className="w-full px-2 lg:w-1/2 xl:w-1/3 mb-2">
@@ -184,6 +187,6 @@ export default function Admin() {
           </div>
         </div>
       </div>
-    </div>
+    </div>
   )
 }
