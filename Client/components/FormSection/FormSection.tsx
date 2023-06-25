@@ -13,10 +13,10 @@ export default function FormSection() {
   };
 
   return (
-    <form className='flex flex-col m-auto text-white bg-black min-h-[100%] w-[80%]'>
+    <form className='flex flex-col m-auto text-white bg-slate-700 min-h-[100%] w-[80%]'>
        <div className='flex flex-col p-auto text-white'>
 
-        <div className='flex flex-col m-auto '>
+        <div className='flex flex-col m-auto pt-[1rem] border-black'>
         <label className='mr-[1rem]'  htmlFor='location'>Ubicación:
         <input className='text-black ml-[1rem]' type='text' id='location' value={location} onChange={handleLocationChange} />
         </label>
@@ -28,7 +28,7 @@ export default function FormSection() {
 
       </div>
 
-      <div className='flex flex-col m-auto p-[2rem] h-[70%] w-[70%] '>
+      <div className='flex flex-col m-auto p-[2rem] h-[70%] w-[70%] border-black '>
 
       Name: <input type="text" placeholder="Name" id="Name" />
       Area: <input type="Number" placeholder='Area' />
@@ -43,20 +43,12 @@ export default function FormSection() {
       
       </div>
 
-
-
-      
-        
-     
-      
-       
-
         
     <div className='text-black bg-green pt-[1rem]'>
         <UploadImage />
     </div>
 
-    <div className=' pt-[2rem] flex justify-center  m-auto'>
+    <div className=' pt-[3rem] flex justify-center  m-auto'>
     <Button text='Create'/>
     </div>
   </form>
