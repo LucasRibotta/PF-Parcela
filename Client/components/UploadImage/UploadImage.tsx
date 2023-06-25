@@ -4,7 +4,7 @@ import { Image, Video, Transformation } from 'cloudinary-react';
 
 export default function UploadImage() {
   const [imagesSelected, setImagesSelected] = useState<File[]>([]);
-
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
 
   const uploadImg = () => {
     if (imagesSelected.length === 0) {
@@ -23,12 +23,13 @@ export default function UploadImage() {
 
     Promise.all(uploadPromises)
       .then((responses) => {
-        console.log(responses);
+        const uploadedImageUrls = responses.map((response) => response.data.secure_url);
+        setUploadedImages(uploadedImageUrls);
       })
       .catch((error) => {
         console.log('Error uploading images to Cloudinary', error);
       });
-  };
+    };
 
 
   const handleButtonClick = () => {
@@ -48,17 +49,24 @@ export default function UploadImage() {
 
 
   return (
-    <div className='flex flex-col text-current text-white'>
-      <button className='border-black rounded-lg cursor-pointer bg-white w-[30%] h-[50%] m-auto' onClick={handleButtonClick}>oprime esto y te mueres</button>
-      {imagesSelected.length > 0 && <p>{imagesSelected.length} imágenes seleccionadas</p>}
+    <div className='flex flex-col text-current text-black m-auto' >
 
-      <button className='border-black rounded-lg cursor-pointer bg-white w-[30%] h-[50%] m-auto ' onClick={uploadImg}>Upload Images</button>
+      <div className='border-black rounded-lg cursor-pointer bg-white w-[25%] h-[50%] m-auto mb-[1rem] ' >
+      <button type='button' onClick={handleButtonClick}>Añadir Archivo</button>
+      {imagesSelected.length > 0 && <p>{imagesSelected.length} Image</p>}
+      </div>
 
-      <Image cloudName="demo" publicId="sample">
+      <div className='border-black rounded-lg cursor-pointer bg-white w-[25%] h-[50%] m-auto '>
+      <button type='button' onClick={uploadImg}>Cargar Imagen</button>
+      </div>
+
+      <div className='flex flex-row w-[15%] h-[15%] ml-[3rem] mt-[2rem] '>
+      <Image cloudName="parcelas" publicId="https://res.cloudinary.com/parcelas/image/upload/v1687573942/0d66c79d-ad42-4bad-b8e1-43b1228b2e37_d3uzal.jpg" alt='Carga Imagen'>
         <Transformation angle="-45" />
         <Transformation effect="trim" angle="45" crop="scale" width="600" />
         <Transformation overlay="text:Arial_100:Hello" />
       </Image>
+      </div>
 
     </div>
   );
