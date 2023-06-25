@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+"use client"
 import Link from "next/link"
 import Button from "../Button/Button"
 import style from "./detail.module.css"
@@ -8,8 +9,11 @@ import Camino from "@/img/svgs/Camino"
 import Vegetation from "@/img/svgs/Vegetacion"
 import Connection from "@/img/svgs/Connection"
 import Energy from "@/img/svgs/Energy"
+import LocationMaps from "../Maps/Maps"
 
 const DetailSection = () => {
+
+
   return (
     <>
       <img
@@ -195,9 +199,8 @@ const DetailSection = () => {
           </div>
         </div>
 
-        <div className="w-[70%] h-[500px] rounded-xl m-5 mx-auto bg-gray-600 mb-28">
-          <h1>ubicacion</h1>
-          <h1>MAPA</h1>
+        <div className="w-[70%] h-[500px] rounded-3xl overflow-hidden m-5 mx-auto bg-gray-600 mb-28">
+          <LocationMaps location="Argentina" />
         </div>
 
         <div className="w-[70%] h-[100px] bg-slate-500 mx-auto">
