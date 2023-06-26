@@ -13,7 +13,7 @@ export default function FormSection() {
   };
 
   return (
-    <form className='flex flex-col m-auto text-white bg-slate-700 min-h-[100%] w-[80%]'>
+    <form className='flex flex-col m-auto text-white bg-slate-700 min-w-full min-h-screen'>
        <div className='flex flex-col p-auto text-white'>
 
         <div className='flex flex-col m-auto pt-[1rem] border-black'>
