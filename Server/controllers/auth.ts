@@ -32,7 +32,8 @@ export const condominio = async (req: Request, res: Response) => {
 export const parcela  = (req: Request, res: Response) => {
    const id = req.params.id
     res.send(`parcela con el id: ${id}`)
-} 
+}
+
 export const createParcela = async (req: Request, res: Response) => {
     try {
         const { id, lote, area, price, services, image } = req.body;
@@ -89,4 +90,50 @@ export const createCondominio = async (req: Request, res: Response) => {
         console.error(error);
         res.status(500).send('Error al crear el condominio en la base de datos.');
       }
+  };
+
+export const updateParcela = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const { area, price, services, image } = req.body;  
+  
+      if (!id) {
+        throw new Error('El campo id es requerido.');
+      }
+  
+      const parcelaActualizado = await ParcelaModel.findByIdAndUpdate(id, {
+        area,
+        price,
+        services,
+        image
+      }, { new: true })
+  
+      if (!parcelaActualizado) {
+        return res.status(404).json({ error: 'El documento no existe.' });
+      }
+  
+      return res.status(200).json(parcelaActualizado);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Error al actualizar la parcela en la base de datos.' });
+    }
+  };
+
+  
+
+  export const deleteParcela = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+  
+      const parcela = await ParcelaModel.findByIdAndUpdate(id, { deleted: true }, { new: true });
+  
+      if (!parcela) {
+        return res.status(404).json({ error: 'Parcela no encontrada.' });
+      }
+  
+      return res.status(200).json(parcela);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Error al eliminar la parcela de la base de datos.' });
+    }
   };
