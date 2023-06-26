@@ -19,14 +19,14 @@ const ContactSection = () => {
                         </div>
                         <div className="grid grid-cols-3 mb-4 [&>input]:rounded-md">
                             <label className="text-white font-semibold mr-2" htmlFor="">Correo Electronico:</label>
-                            <input className="col-span-2 w-[100%]" type="text" />
+                            <input className="col-span-2 w-[100%] placeholder:text-center " placeholder="correo@ejemplo.com" type="text" />
                         </div>
                         <div className="grid  grid-cols-3 mb-4">
                             <label className="text-white font-semibold mr-2" htmlFor="">Telefono:</label>
                             <div className="col-span-2 flex justify-between [&>input]:rounded-md">
-                                <input className="w-[30%]" type="text" />
-                                <input className="w-[30%]" type="text" />
-                                <input className="w-[30%]" type="text" />
+                                <input className="w-[30%] placeholder:text-center" placeholder="Telefono 1" type="text" />
+                                <input className="w-[30%] placeholder:text-center" placeholder="Telefono 2" type="text" />
+                                <input className="w-[30%] placeholder:text-center" placeholder="Telefono 3" type="text" />
                             </div>
                         </div>
                         <div className="grid grid-cols-3 mb-4">
@@ -40,7 +40,7 @@ const ContactSection = () => {
                         </div>
                         <div className="grid grid-cols-3 mb-4">
                             <label className="text-white font-semibold mr-2" htmlFor="">Mensaje:</label>
-                            <textarea className="col-span-2 rounded-md" name="" id="" cols={30} rows={5}></textarea>
+                            <textarea className="col-span-2 rounded-md placeholder:text-center" placeholder="escribenos en que podemos ayudarte" name="" id="" cols={30} rows={5}></textarea>
                         </div>
                         <div className="">
                             <Button text="Enviar" />
