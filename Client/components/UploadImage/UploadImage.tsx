@@ -1,54 +1,66 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
-import { Image, Video, Transformation } from 'cloudinary-react';
+import { Image, Transformation } from 'cloudinary-react';
 
 export default function UploadImage() {
   const [imagesSelected, setImagesSelected] = useState<File[]>([]);
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
 
-  const uploadImg = () => {
+  const uploadImg = async () => {
     if (imagesSelected.length === 0) {
       console.log('No image has been selected');
       return;
     }
 
-    const uploadPromises = imagesSelected.map((image) => {
-      const formData = new FormData();
-      formData.append('file', image);
-      formData.append('upload_preset', 'parcelasImg');
-      formData.append('folder', 'Parcelas');
+    try {
+      const uploadPromises = imagesSelected.map(async (image) => {
+        try {
+          const formData = new FormData();
+          formData.append('file', image);
+          formData.append('upload_preset', 'parcelasImg');
+          formData.append('folder', 'Parcelas');
 
-      return Axios.post('https://api.cloudinary.com/v1_1/parcelas/image/upload', formData);
-    });
-
-    Promise.all(uploadPromises)
-      .then((responses) => {
-        const uploadedImageUrls = responses.map((response) => response.data.secure_url);
-        setUploadedImages(uploadedImageUrls);
-      })
-      .catch((error) => {
-        console.log('Error uploading images to Cloudinary', error);
+          const response = await Axios.post(
+            'https://api.cloudinary.com/v1_1/parcelas/image/upload',
+            formData
+          );
+          return response.data.secure_url;
+        } catch (error) {
+          console.log('Error uploading image to Cloudinary', error);
+          throw error; // Propagate the error to the outer catch block
+        }
       });
   };
 
+      const uploadedImageUrls = await Promise.all(uploadPromises);
+      setUploadedImages(uploadedImageUrls);
+      setUploadSuccess(true);
+    } catch (error) {
+      console.log('Error uploading images to Cloudinary', error);
+    }
+  };
 
   const handleButtonClick = () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.multiple = true;
     input.accept = 'image/*';
-    input.onchange = (event) => {
-      const files = (event.target as HTMLInputElement)?.files;
-      if (files) {
+  
+    input.onchange = (event: any) => {
+      const files = (event.target as HTMLInputElement).files;
+      if (files && files.length > 0) {
         const selectedImages = Array.from(files);
         setImagesSelected(selectedImages);
       }
     };
+  
     input.click();
   };
-
+  
 
   return (
+
     <div className='flex flex-col justify-center items-start text-black' >
 
       <div className=' flex justify-center rounded-lg cursor-pointer w-[100%] mb-[1rem] ' >
@@ -64,7 +76,6 @@ export default function UploadImage() {
           <Transformation overlay="text:Arial_100:Hello" />
         </Image>
       </div> */}
-
     </div>
   );
 }
