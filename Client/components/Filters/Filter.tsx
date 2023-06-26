@@ -2,6 +2,7 @@ import "tailwindcss/tailwind.css"
 import Order from "@/components/Filters/Order"
 import SearchBar from "@/components/SearchBar/SearchBar"
 import PriceRangeSlider from "./PriceRangeSlider"
+import { RangeSlider } from "../RangeSlider/RangeSlider"
 
 export default function Filter() {
   return (
@@ -30,16 +31,16 @@ export default function Filter() {
         </select>
       </div>
       <div>
-        <label className="text-white py-5">Precio:</label>
-        <PriceRangeSlider
-          initialMin={2500}
-          initialMax={7500}
-          min={0}
-          max={10000}
-          step={100}
-          priceGap={1000}
-        />
+        <label>Precio:</label>
       </div>
+      <RangeSlider
+        initialMin={1000000}
+        initialMax={25000000}
+        min={0}
+        max={26000000}
+        step={100}
+        priceCap={1000}
+      />
       <Order />
     </div>
   )
