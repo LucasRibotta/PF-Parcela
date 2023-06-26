@@ -14,7 +14,6 @@ export default function FormSection() {
 
   return (
     <form className='flex flex-col md:flex-row w-[100%] sm:w-[640px] md:w-[768px] lg:w-[1024px]  mx-auto bg-[#f3f4f6] shadow-2xl text-white rounded-3xl overflow-hidden'>
-      {/* map section */}
       <div className='relative flex flex-col w-[100%] h-[500px] md:h-auto md:w-[50%] lg:w-[50%]  text-white'>
 
         <div className='h-[100%] w-[100%]'>
