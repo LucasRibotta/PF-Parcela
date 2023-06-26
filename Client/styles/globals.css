@@ -3,21 +3,21 @@
 @tailwind utilities; */
 
 input[type="range"]::-moz-range-thumb {
-    pointer-events: auto;
-    width: 24px;
-    height: 24px;
-    border: none;
-    border-radius: 50%;
-    /* -webkit-appearance: none;
+  pointer-events: auto;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  /* -webkit-appearance: none;
     @apply bg-green-500; */
 }
 
 input[type="range"]::-webkit-slider-thumb {
-    pointer-events: auto;
-    width: 24px;
-    height: 24px;
-    border: none;
-    border-radius: 50%;
-    -webkit-appearance: none;
-    /* @apply bg-green-500; */
+  pointer-events: auto;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  /* @apply bg-green-500; */
 }

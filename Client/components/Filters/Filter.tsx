@@ -4,7 +4,7 @@ import { useState } from 'react'
 import "tailwindcss/tailwind.css"
 import Order from "@/components/Filters/Order"
 import SearchBar from "@/components/SearchBar/SearchBar"
-import PriceRangeSlider from './PriceRangeSlider'
+import PriceRangeSlider from "./PriceRangeSlider"
 
 export default function Filter() {
   const cardTypes = [
@@ -41,7 +41,7 @@ export default function Filter() {
   return (
     <div
       className="fixed h-full w-[16rem] bg-gray-500 p-4 rounded-lg"
-      style={{ height: "calc(100vh - 7rem - 0.5rem)" }}
+      style={{ height: "calc(100vh - 7rem - 1.9rem)" }}
     >
       <SearchBar />
       <div className="mb-4">
