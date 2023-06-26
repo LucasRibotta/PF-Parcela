@@ -31,7 +31,13 @@ const ServiceSection = () => {
             <div className="flex items-center flex-col lg:flex-row px-4 animate-aparition mt-9">
                 <div className="mt-16 w-[95%] h-[650px]">
                     <div className="max-w-[100%] h-[100%] bg-orange-200  rounded-3xl text-center overflow-hidden ">
-                   <img src="https://i.pinimg.com/564x/a2/be/34/a2be34e1ab00e613fce4714c85c23386.jpg" alt="img#60" className="w-[100%] h-[100%]" />
+                    <iframe
+                    title="Imagen 360"
+                    width="100%"
+                    height="500px"
+                    src="https://momento360.com/e/u/412de8e5e53843419bca4bb7e11d8630?utm_campaign=embed&utm_source=other&heading=-13.2&pitch=0&field-of-view=81&size=medium&display-plan=true"
+                    allowFullScreen
+                ></iframe>
                     </div>
                 </div>
                 <div className="mt-16 w-[40%] flex flex-col items-start space-y-4 p-4 text-justify">
