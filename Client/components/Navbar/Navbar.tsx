@@ -50,7 +50,7 @@ export default function Navbar() {
             href="/"
             className={pathName === "/" ? activeLink : inactiveLink}
           >
-            Home
+            Inicio
           </Link>
         </li>
         <li className="px-[22px] py-[20px]">
@@ -58,7 +58,7 @@ export default function Navbar() {
             className={pathName === "/gallery" ? activeLink : inactiveLink}
             href="/gallery"
           >
-            Gallery
+            Galeria
           </Link>
         </li>
         <li className="px-[22px] py-[20px]">
@@ -66,7 +66,7 @@ export default function Navbar() {
             className={pathName === "/about" ? activeLink : inactiveLink}
             href="/about"
           >
-            About
+            Nosotros
           </Link>
         </li>
         <li className="px-[22px] py-[20px]">
@@ -74,7 +74,7 @@ export default function Navbar() {
             className={pathName === "/contact" ? activeLink : inactiveLink}
             href="/contact"
           >
-            Contact
+            Contacto
           </Link>
         </li>
         {userAdmin ? (
@@ -83,7 +83,7 @@ export default function Navbar() {
               className={pathName === "/admin" ? activeLink : inactiveLink}
               href="/admin"
             >
-              Admin
+              Administrador
             </Link>
           </li>
         ) : null}
@@ -101,13 +101,13 @@ export default function Navbar() {
             <div className="w-3/12 flex items-center justify-end">
               <Link href={"/login"}>
                 <button className="text-white  font-semibold hover:text-[#51a8a1]  ease-in-out duration-300 px-4 py-[6px]">
-                  Sign in
+                  Iniciar sesión
                 </button>
               </Link>
 
               <div>
                 <Link href={"/register"}>
-                  <Button text="Sign up" />
+                  <Button text="Inscribirse" />
                 </Link>
               </div>
             </div>

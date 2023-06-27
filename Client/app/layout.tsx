@@ -1,6 +1,7 @@
 import "./globals.css"
 import { Montserrat } from "next/font/google"
 import Navbar from "@/components/Navbar/Navbar"
+import Providers from "@/redux/provider"
 
 const inter = Montserrat({ subsets: ["latin"] })
 
@@ -19,9 +20,10 @@ export default function RootLayout({
       <title>{metadata.title}</title>
       <meta name="description" content={metadata.description} />
       <body className={inter.className}>
-        <Navbar />
-
-        {children}
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
       </body>
     </html>
   )
