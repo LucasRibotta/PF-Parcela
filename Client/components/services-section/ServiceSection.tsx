@@ -31,13 +31,13 @@ const ServiceSection = () => {
             <div className="flex items-center flex-col lg:flex-row px-4 animate-aparition mt-9">
                 <div className="mt-16 w-[95%] h-[500px]">
                     <div className="max-w-[100%] h-[100%] bg-orange-200  rounded-3xl text-center overflow-hidden ">
-                    <iframe
-                    title="Imagen 360"
-                    width="100%"
-                    height="500px"
-                    src="https://momento360.com/e/u/412de8e5e53843419bca4bb7e11d8630?utm_campaign=embed&utm_source=other&heading=-13.2&pitch=0&field-of-view=81&size=medium&display-plan=true"
-                    allowFullScreen
-                ></iframe>
+                        <iframe
+                            title="Imagen 360"
+                            width="100%"
+                            height="500px"
+                            src="https://momento360.com/e/u/412de8e5e53843419bca4bb7e11d8630?utm_campaign=embed&utm_source=other&heading=-13.2&pitch=0&field-of-view=81&size=medium&display-plan=true"
+                            allowFullScreen
+                        ></iframe>
                     </div>
                 </div>
                 <div className="mt-16 w-[40%] flex flex-col items-start space-y-4 p-4 text-justify">
@@ -54,25 +54,36 @@ const ServiceSection = () => {
 
                 <div className="flex p-4 rounded-lg transition-transform animate-aparition">
 
+                    
+
                     <div className="flex flex-col mx-1 items-center [&>p]:text-justify [&>p]:m-4 [&>img]:rounded-xl border-2 border-teal-400 p-3 rounded-lg">
-                        {image1 && <img src={image1} alt="data images" />
-                        }
-                        <h3 className="text-[1.5rem] font-bold mt-3">Title</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit cum autem laboriosam sapiente in nisi quas placeat beatae provident? Necessitatibus?</p>
+                        <img
+                            src="https://i.pinimg.com/564x/de/de/20/dede20ff2553c7e8927ceefddc2c77ab.jpg"
+                            alt="motorgrader-fencing service"
+                            className="w-screen h-48 object-cover"
+                        />
+                        <h3 className="text-[1.5rem] font-bold mt-3">Motoniveladora y Cercado</h3>
+                        <p>Brindamos soluciones profesionales de nivelación de terrenos y construcción de cercas, asegurando resultados precisos y duraderos.</p>
                     </div>
 
                     <div className="flex flex-col mx-1 items-center [&>p]:text-justify [&>p]:m-4 [&>img]:rounded-xl border-2 border-teal-400 p-3 rounded-lg">
-                        {image2 && <img src={image2} alt="data images" />
-                        }
-                        <h3 className="text-[1.5rem] font-bold mt-3">Title</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit cum autem laboriosam sapiente in nisi quas placeat beatae provident? Necessitatibus?</p>
+                        <img
+                            src="https://i.pinimg.com/564x/08/e7/29/08e72918350dad7595c7495ea4411ebf.jpg"
+                            alt="legal service"
+                            className="w-screen h-48 object-cover"
+                        />
+                        <h3 className="text-[1.5rem] font-bold mt-3">Legales</h3>
+                        <p>Ofrecemos asesoramiento experto en notarías y registros de bienes raíces para garantizar transacciones seguras y cumplimiento legal.</p>
                     </div>
 
                     <div className="flex flex-col mx-1 items-center [&>p]:text-justify [&>p]:m-4 [&>img]:rounded-xl border-2 border-teal-400 p-3 rounded-lg">
-                        {image3 && <img src={image3} alt="data images" />
-                        }
-                        <h3 className="text-[1.5rem] font-bold mt-3">Title</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit cum autem laboriosam sapiente in nisi quas placeat beatae provident? Necessitatibus?</p>
+                        <img
+                            src="https://i.pinimg.com/564x/72/e0/bc/72e0bc52a1ee76e5ef07e75cc5775b10.jpg"
+                            alt="gardening-landscaping service"
+                            className="w-screen h-48 object-cover"
+                        />
+                        <h3 className="text-[1.5rem] font-bold mt-3">Jardinería y paisajismo</h3>
+                        <p>Transformamos espacios exteriores, creando diseños personalizados y manteniendo áreas verdes hermosas y saludables.</p>
                     </div>
 
                 </div>
