@@ -1,12 +1,13 @@
 import "tailwindcss/tailwind.css"
 import Order from "@/components/Filters/Order"
 import SearchBar from "@/components/SearchBar/SearchBar"
+import { RangeSlider } from "../RangeSlider/RangeSlider"
 
 export default function Filter() {
   return (
     <div
-      className="fixed h-full w-[16rem] bg-gray-500 p-4 rounded-lg "
-      style={{ height: "calc(100vh - 7rem - 0.5rem)" }}
+      className="fixed h-full w-[16rem] bg-gray-500 p-4 rounded-lg"
+      style={{ height: "calc(100vh - 7rem - 1.9rem)" }}
     >
       <SearchBar />
       <div className="mb-4">
@@ -28,6 +29,17 @@ export default function Filter() {
           <option>10.000 m² totales o más</option>
         </select>
       </div>
+      <div>
+        <label>Precio:</label>
+      </div>
+      <RangeSlider
+        initialMin={1000000}
+        initialMax={25000000}
+        min={0}
+        max={26000000}
+        step={100}
+        priceCap={1000}
+      />
       <Order />
     </div>
   )
