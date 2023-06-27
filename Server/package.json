@@ -4,7 +4,12 @@
     "buildNN": "next build",
     "start": "next start",
     "lint": "next lint",
+<<<<<<< HEAD
     "dev": "nodemon index.ts"
+=======
+    "dev": "nodemon index.ts",
+    "build": "tsc"
+>>>>>>> b267f3406f4ab65e52f73ea43aeb5c1d8e86e58a
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^1.0.0",
@@ -24,8 +29,11 @@
     "morgan": "^1.10.0",
     "next": "^13.4.7",
     "next-auth": "^4.22.1",
+<<<<<<< HEAD
     "node": "^18.16.0",
     "nodemon": "^2.0.22",
+=======
+>>>>>>> b267f3406f4ab65e52f73ea43aeb5c1d8e86e58a
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "postcss": "^8.4.24",
@@ -35,15 +43,22 @@
     "typescript": "^5.1.3"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@types/bcrypt": "^5.0.0",
     "@types/connect-flash": "^0.0.37",
+=======
+>>>>>>> b267f3406f4ab65e52f73ea43aeb5c1d8e86e58a
     "@types/express": "^4.17.17",
     "@types/express-session": "^1.17.7",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.4",
+<<<<<<< HEAD
     "@types/node": "^20.3.1",
     "@types/passport": "^1.0.12",
     "@types/passport-local": "^1.0.35",
+=======
+    "@types/node": "^14.14.37",
+>>>>>>> b267f3406f4ab65e52f73ea43aeb5c1d8e86e58a
     "nodemon": "^2.0.22",
     "ts-node": "^10.9.1"
   }
