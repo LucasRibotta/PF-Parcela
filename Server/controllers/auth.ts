@@ -52,11 +52,11 @@ export const parcela  =async (req: Request, res: Response) => {
 
 export const createParcela = async (req: Request, res: Response) => {
     try {
-        const { id, name, lote, area, price, location, image, condominio } = req.body;
+        const { id, name, lote, area, price, location, image, description } = req.body;
     
        
     
-        if (!id || !name || !lote || !area || !price || !location || !image || !condominio) {
+        if (!id || !name || !lote || !area || !price || !location || !image || !description) {
           throw new Error('El campo name e id son requeridos.');
         }
     
@@ -68,7 +68,7 @@ export const createParcela = async (req: Request, res: Response) => {
           price,
           location,
           image,
-          condominio
+          description
         };
     
         const nuevoParcela = new ParcelaModel(data);
