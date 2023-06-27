@@ -1,9 +1,71 @@
+"use client"
 import Image from "next/image"
 import logo from "../../img/forestImage.jpg"
 import Link from "next/link"
 import { BiLogoFacebook, BiLogoGmail } from "react-icons/bi"
+import { useEffect, useState } from "react"
+import { useAppSelector, useAppDispatch } from "@/redux/hooks"
+import { setUserAdmin } from "@/redux/features/userSlice"
+import { useRouter } from "next/navigation"
+import Swal from "sweetalert2"
+
+type CustomEvent = {
+  target: HTMLInputElement
+}
 
 export default function Login() {
+  const router = useRouter()
+  const [error, setError] = useState("")
+  const [input, setInput] = useState({
+    name: "",
+    password: ""
+  })
+  const adminLoggedIn = useAppSelector((state) => state.user.isAdmin)
+  const dispatch = useAppDispatch()
+
+  const handleInputChange = (event: CustomEvent) => {
+    const { name, value } = event.target
+    if (name === "name") {
+      setInput({
+        ...input,
+        [name]: value
+      })
+    }
+    if (name === "password") {
+      setInput({
+        ...input,
+        password: value
+      })
+    }
+  }
+
+  const handleLogin = () => {
+    // Aquí puedes realizar la validación del usuario en tu backend
+    // por ejemplo, utilizando una llamada a la API
+
+    // Simulación de verificación de usuario
+    if (input.name === "admin" && input.password === "admin123") {
+      // Usuario válido, realizar acción de inicio de sesión exitosa
+      dispatch(setUserAdmin(true))
+      Swal.fire(`¡Bienvenido!`, "Has iniciado sesion", "success")
+      router.push("/admin")
+    } else {
+      // Usuario no válido, mostrar mensaje de error
+      setError("Usuario o contraseña incorrectos")
+    }
+  }
+
+  useEffect(() => {
+    if (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Parece que algo salio mal!",
+        footer: '<a href="">Tienes una cuenta registrada?</a>'
+      })
+    }
+  }, [error])
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="flex w-[768px] h-[496px] mt-[5rem] ">
@@ -18,8 +80,11 @@ export default function Login() {
             <input
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#51a8a1]"
               id="email"
+              name="name"
+              value={input.name}
               type="email"
               placeholder="Email"
+              onChange={handleInputChange}
             />
           </div>
           <div className="mb-4">
@@ -27,6 +92,9 @@ export default function Login() {
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#51a8a1]"
               id="password"
               type="password"
+              name="password"
+              value={input.password}
+              onChange={handleInputChange}
               placeholder="Password"
             />
           </div>
@@ -37,6 +105,7 @@ export default function Login() {
             <button
               className="bg-[#51a8a1] hover:bg-[#126e67] ease-in-out min-w-[9rem] max-w-[9rem] duration-300 text-white font-bold py-2 px-4 rounded-[20px]  focus:outline-none focus:shadow-outline"
               type="button"
+              onClick={handleLogin}
             >
               Iniciar sesión
             </button>
@@ -55,7 +124,7 @@ export default function Login() {
         </div>
         <div className="w-1/2 relative">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white w-[90%]">
-            <h1 className="text-3xl font-black">Bienvenido!</h1>
+            <h1 className="text-3xl font-black">¡Bienvenido!</h1>
             <p className="leading-[20px] tracking-[0.5px] text-[14px] my-[20px]">
               Para mantenerse conectado con nosotros, inicie sesión con su
               información personal
