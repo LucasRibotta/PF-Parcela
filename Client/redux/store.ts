@@ -1,8 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit"
 import { userApi } from "./services/userApi"
 import { setupListeners } from "@reduxjs/toolkit/dist/query"
+import userReducer from "./features/userSlice"
 
 const rootReducer = combineReducers({
+  user: userReducer,
   [userApi.reducerPath]: userApi.reducer
   // Agrega más reducers aquí
 })
