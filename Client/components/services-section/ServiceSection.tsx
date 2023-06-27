@@ -29,7 +29,7 @@ const ServiceSection = () => {
     return (
         <section className="flex flex-col items-center w-[300px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px] mx-auto ">
             <div className="flex items-center flex-col lg:flex-row px-4 animate-aparition mt-9">
-                <div className="mt-16 w-[95%] h-[650px]">
+                <div className="mt-16 w-[95%] h-[500px]">
                     <div className="max-w-[100%] h-[100%] bg-orange-200  rounded-3xl text-center overflow-hidden ">
                     <iframe
                     title="Imagen 360"
@@ -41,8 +41,9 @@ const ServiceSection = () => {
                     </div>
                 </div>
                 <div className="mt-16 w-[40%] flex flex-col items-start space-y-4 p-4 text-justify">
-                    <h1 className="font-bold text-[2rem]">Nosotros</h1>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis sint, dolore quas iusto odio veritatis? Repellendus voluptatem quam, distinctio, cum sint asperiores, animi totam tempore necessitatibus consequatur deserunt obcaecati non blanditiis laborum officia amet ipsum tempora. Nihil quisquam ratione nobis.</p>
+                    <h1 className="font-bold text-[1.5rem]">Somos personas que buscan evidenciar el mejor vivir.</h1>
+                    <h1 className="font-bold text-[1rem]">Conoce mas sobre nosotros</h1>
+                    <p>Somos una E-Commerce encargado de la ventas de parcelas. Tenemos más de 10 condominios en funcionamiento y disponibles para que encuentres el lugar que tanto estás buscando y revises todas las opciones perfectas que tenemos para ti, tus gustos y necesidades. Entregándote una paz, tranquilidad y sobre todo una mejor calidad de vida. Conoce todo sobre nuestra propuesta y la familia Parcelas de Chile. </p>
                 </div>
             </div>
 

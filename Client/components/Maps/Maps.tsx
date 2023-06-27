@@ -7,12 +7,12 @@ interface LocationMapsProps {
 }
 
 const LocationMaps = ({ location }: LocationMapsProps) => {
-  const [mapApiKey, setMapApiKey] = useState('AIzaSyDk9BhwfOM8y2fUxlyWxauYZjNQKyQ1YUU'); 
+  const [mapApiKey, setMapApiKey] = useState('AIzaSyDk9BhwfOM8y2fUxlyWxauYZjNQKyQ1YUU');
   const [center, setCenter] = useState({ lat: 0, lng: 0 });
   const [markerPosition, setMarkerPosition] = useState({ lat: 0, lng: 0 });
   const [showInfoWindow, setShowInfoWindow] = useState(false);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const [locationFound, setLocationFound] = useState(true); 
+  const [locationFound, setLocationFound] = useState(true);
 
   useEffect(() => {
     const getCoordinatesFromLocation = async () => {
@@ -38,7 +38,7 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
             lng = longitude;
           } else {
             console.error('No se encontraron resultados para la ubicación especificada');
-            setLocationFound(false); 
+            setLocationFound(false);
             return;
           }
         }
@@ -72,7 +72,7 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
   };
 
   return (
-    <div style={{ height: '500px', width: '100%' }}>
+    <div style={{ height: '100%', width: '100%' }}>
       <LoadScript googleMapsApiKey={mapApiKey} onLoad={handleMapLoad}>
         {mapLoaded && (
           <GoogleMap

@@ -45,7 +45,7 @@ export default function UploadImage() {
     input.type = 'file';
     input.multiple = true;
     input.accept = 'image/*';
-  
+
     input.onchange = (event: any) => {
       const files = (event.target as HTMLInputElement).files;
       if (files && files.length > 0) {
@@ -53,38 +53,28 @@ export default function UploadImage() {
         setImagesSelected(selectedImages);
       }
     };
-  
+
     input.click();
   };
-  
+
 
   return (
-    <div className='flex flex-col text-current text-black m-auto '>
-      <div className='border-black rounded-lg cursor-pointer bg-white w-[25%] h-[50%] m-auto mb-[1rem] text-center'>
-        <button type='button' onClick={handleButtonClick}>
-          Añadir Archivo
-        </button>
+    <div className='flex flex-col justify-center items-start text-black' >
+
+      <div className=' flex justify-center rounded-lg cursor-pointer w-[100%] mb-[1rem] ' >
+        <button className='py-2 px-4 bg-[#51a8a1] m-2 rounded-md text-white transition-all duration-300 hover:bg-[#126e67] hover:font-semibold' type='button' onClick={handleButtonClick}>Añadir Imagen</button>
+        <button className='py-2 px-4 bg-[#51a8a1] m-2 rounded-md text-white transition-all duration-300 hover:bg-[#126e67] hover:font-semibold' type='button' onClick={uploadImg}>Subir Imagen</button>
         {imagesSelected.length > 0 && <p>{imagesSelected.length} Image</p>}
       </div>
 
-      <div className='border-black rounded-lg cursor-pointer bg-white w-[25%] h-[50%] m-auto text-center'>
-        <button type='button' onClick={uploadImg}>
-          Cargar Imagen
-        </button>
-        {uploadSuccess ? (
-          <p className='text-green-600 font-bold'>Carga exitosa</p>
-        ) : (
-          <p className='text-red-600 font-bold'>Error al cargar</p>
-        )}
-      </div>
-
-      <div className='flex flex-row w-[15%] h-[15%] ml-[3rem] mt-[2rem]'>
-        <Image cloudName='parcelas' alt='Carga Imagen'>
-          <Transformation angle='-45' />
-          <Transformation effect='trim' angle='45' crop='scale' width='600' />
-          <Transformation overlay='text:Arial_100:Hello' />
+      {/* <div className='flex flex-row w-[15%] h-[15%] ml-[3rem] mt-[2rem] '>
+        <Image cloudName="parcelas" publicId="https://res.cloudinary.com/parcelas/image/upload/v1687573942/0d66c79d-ad42-4bad-b8e1-43b1228b2e37_d3uzal.jpg" alt='Carga Imagen'>
+          <Transformation angle="-45" />
+          <Transformation effect="trim" angle="45" crop="scale" width="600" />
+          <Transformation overlay="text:Arial_100:Hello" />
         </Image>
-      </div>
+      </div> */}
+
     </div>
   );
 }
