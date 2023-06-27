@@ -1,6 +1,7 @@
 import passport from "passport";
 import { Strategy as LocalStrategy} from "passport-local";
 import User from '../models/user'
+import { log } from "console";
 
 const localAauth = () => {
 
@@ -44,7 +45,7 @@ passport.use('local-signin', new LocalStrategy({
 }, async (req, email, password, done) => {
 
     try {
-        const usuario = await User.findOne({email: email})
+        const usuario = await User.findOne({email: email})        
         if(!usuario) {
          
             req.flash('signinMessage', 'no user found')
@@ -52,7 +53,7 @@ passport.use('local-signin', new LocalStrategy({
         }
         if(!usuario.comparePassword(password)) {
             req.flash('signinMessage','incorrect password')
-           return done(null, false )
+           return done(null, usuario )
         }
         done(null, usuario)
     } catch (error) {

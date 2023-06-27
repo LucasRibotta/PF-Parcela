@@ -3,13 +3,21 @@ import "dotenv/config"
 import express from "express";
 import router from "./router";
 import connectDB from "./db/connect";
-import path from "path";
-import morgan from "morgan";
+import path from 'path';
+import morgan from 'morgan';
 import passport from 'passport';
 import session from 'express-session'
 import flash from 'connect-flash';
 
 import localAauth from "./passport/local-auth";
+
+import * as bodyParser from 'body-parser';
+
+// const app = express();
+// connectDB()
+// app.use(express.json()); 
+// app.use("/api",router)
+
 
 const PORT = process.env.PORT || 3001
 
