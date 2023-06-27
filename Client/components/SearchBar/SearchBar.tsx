@@ -1,17 +1,27 @@
 "use client"
 
-import { useState } from "react"
-import "tailwindcss/tailwind.css"
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import 'tailwindcss/tailwind.css';
 
 export default function SearchBar() {
-  const [input, setInput] = useState("")
+  const [keyword, setKeyword] = useState('');
 
-  const handleChange = (e: any) => {
-    e.preventDefault()
-    setInput(e.target.value)
+  const router = useRouter();
+
+  const handleSubmit = () => {
+    if (keyword) {
+      router.push(`/?name=${keyword}`)
+    } else {
+      router.push('/')
+    }
   }
 
-  // const handleSubmit = async (e) => {}
+  const handleKeyDown = (e:any) => {
+    if (e.keyCode === 13) {
+      handleSubmit(e);
+    }
+  };
 
   return (
     <div className="w-[100%] h-12 mt-2">
@@ -19,9 +29,10 @@ export default function SearchBar() {
         type="text"
         placeholder="Buscar..."
         className="border-2 border-teal-400 rounded p-[4px] w-[100%]"
-        value={input}
-        onChange={(e) => handleChange(e)}
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
-    </div>
-  )
-}
+    </div> 
+  );
+};
