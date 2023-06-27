@@ -19,7 +19,7 @@ export default function UploadImage() {
           const formData = new FormData()
           formData.append("file", image)
           formData.append("upload_preset", "parcelasImg")
-          formData.append("folder", "Parcelas")
+          formData.append("public_id", "Parcelas/" + image.name)
 
           const response = await Axios.post(
             "https://api.cloudinary.com/v1_1/parcelas/image/upload",
@@ -28,7 +28,7 @@ export default function UploadImage() {
           return response.data.secure_url
         } catch (error) {
           console.log("Error uploading image to Cloudinary", error)
-          throw error // Propagate the error to the outer catch block
+          throw error 
         }
       })
 
@@ -74,8 +74,15 @@ export default function UploadImage() {
         >
           Subir Imagen
         </button>
-        {imagesSelected.length > 0 && <p>{imagesSelected.length} Image</p>}
+        {uploadSuccess ? (
+        <p className="text-green-500">Subida correctamente</p>
+        ) : (
+          imagesSelected.length > 0 && (
+            <p>{imagesSelected.length} Imagen seleccionada</p>
+          )
+        )}
       </div>
+
 
       {/* <div className='flex flex-row w-[15%] h-[15%] ml-[3rem] mt-[2rem] '>
         <Image cloudName="parcelas" publicId="https://res.cloudinary.com/parcelas/image/upload/v1687573942/0d66c79d-ad42-4bad-b8e1-43b1228b2e37_d3uzal.jpg" alt='Carga Imagen'>
