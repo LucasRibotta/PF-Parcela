@@ -29,20 +29,22 @@
 import { Schema, model, Document, Types } from "mongoose";
 import Condominio from "../models/condominio";
 interface IParcela extends Document {
-  lote: string;
+  name: string;
+  lote: number;
   area: number;
   price: number;
-  services: string[];
+  location: string[];
   image: string;
   deleted: boolean;
   condominio: String; // Referencia al Condominio
 }
 
 const parcelaSchema = new Schema<IParcela>({
-  lote: { type: String, required: true },
+  name: { type: String, required: true },
+  lote: { type: Number, required: true },
   area: { type: Number, required: true },
   price: { type: Number, required: true },
-  services: { type: [String], required: true },
+  location: { type: [String], required: true },
   image: { type: String, required: true },
   deleted: { type: Boolean, default: false },
   condominio: { type: Schema.Types.String, ref: "Condominio", required: true }
