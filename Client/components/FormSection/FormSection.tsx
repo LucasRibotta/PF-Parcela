@@ -37,11 +37,18 @@ export default function FormSection() {
         <h2 className="mb-4 text-center font-bold text-[30px]">
           Describenos tu parcela{" "}
         </h2>
+        
         <input
           className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
           type="text"
-          placeholder="Name"
+          placeholder="Nombre"
           id="Name"
+        />
+        <input
+          className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
+          type="text"
+          placeholder="Lote"
+          id="lote"
         />
         <input
           className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
