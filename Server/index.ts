@@ -1,9 +1,8 @@
+
 import "dotenv/config"
 import express from "express";
 import router from "./router";
 import connectDB from "./db/connect";
-
-
 import path from "path";
 import morgan from "morgan";
 import passport from 'passport';
@@ -21,9 +20,12 @@ app.use( (req,res, next) => {
     next()
 })
 
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(express.json())
+app.use(morgan('dev'))
+app.use(express.urlencoded({extended:true}))
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*'); 
@@ -36,10 +38,6 @@ app.use((req, res, next) => {
     res.header('X-Total-Count', '1000');
     next();
 })
-
-app.use(express.json())
-app.use(morgan('dev'))
-app.use(express.urlencoded({extended:true}))
 
 app.use(session ({
     secret: 'parcelas venta mapaches',
