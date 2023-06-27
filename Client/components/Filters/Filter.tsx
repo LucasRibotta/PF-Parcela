@@ -4,7 +4,7 @@ import { useState } from 'react'
 import "tailwindcss/tailwind.css"
 import Order from "@/components/Filters/Order"
 import SearchBar from "@/components/SearchBar/SearchBar"
-import PriceRangeSlider from "./PriceRangeSlider"
+import PriceRangeSlider from './PriceRangeSlider';
 
 export default function Filter() {
   const cardTypes = [
@@ -73,21 +73,21 @@ export default function Filter() {
       </div>
       <div>
         <label className="text-white py-5">Precio:</label>
-        <PriceRangeSlider
-          initialMin={23}
-          initialMax={25}
-          min={22}
-          max={26}
-          step={0.01}
-          priceGap={1}
-        />
+        <PriceRangeSlider 
+          initialMin={2500}
+          initialMax={7500}
+          min={0}
+          max={10000}
+          step={100}
+          priceGap={1000}
+          />
       </div>
       <Order />
-      <ul>
+      {/* <ul>
         {filteredData.map((item) => (
           <li key={item.id}>{item.name}</li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   )
 }
