@@ -5,16 +5,16 @@ export default function HomeTitle() {
   return (
     <div className="absolute top-60 px-[3rem] py-2 space-y-4">
       <h1 className="text-4xl text-white ">
-        <span className="text-[#51a8a1]">Nuestro</span> Título
+        <span className="text-[#51a8a1]">E-Commerce de Parcelas</span>
       </h1>
-      <p className="w-[50%] text-white">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
-        voluptatibus omnis sint quam corporis hic repudiandae magni, quibusdam
-        quidem quia similique numquam aliquid, quo eaque pariatur impedit.
+      <h1 className="text-lg text-white font-bold">Invierte de manera inteligente</h1>
+      <p className="w-[70%] text-white">
+        Ten el futuro que deseas, aprovecha cada minuto e invierte en tierra
       </p>
+      <h5 className="text-base text-white font-bold">Conoce todas las posibilidades</h5>
       <div>
         <Link href="/gallery">
-          <Button text={"Gallery"} />
+          <Button text={"Galería"} />
         </Link>
       </div>
     </div>
