@@ -2,13 +2,14 @@ import { ParsedQs } from 'qs';
 import CondominioModel from '../models/condominio';
 import ParcelaModedel from "../models/parcela"
 
-const searchCondominios = async (name: string | string[] | ParsedQs | ParsedQs[] | undefined) => { 
+const searchParcelas = async (name: string | string[] | ParsedQs | ParsedQs[] | undefined) => { 
      
-    if (!name) {
+    if (!name) { 
+        // todas las parcelas
           const parcelasData = await ParcelaModedel.find() ;     
           return parcelasData
       } else {
-        
+        //por el nombre del comdominio
           const [parcelasData] = await CondominioModel.find({ name: name });
           
           const parcelasIds = parcelasData.parcelas.map(parcela => parcela.toString());
@@ -16,4 +17,4 @@ const searchCondominios = async (name: string | string[] | ParsedQs | ParsedQs[]
       } 
     }   
 
-export default searchCondominios;
+export default searchParcelas;

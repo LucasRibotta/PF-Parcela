@@ -1,14 +1,15 @@
 import { Request, Response } from "express"
 import CondominioModel from '../models/condominio';
 import ParcelaModel from '../models/parcela'; 
-import searchCondominios from "../handlers/searchCondominios";
+import searchParcelas from "../handlers/searchParcelas";
+import idParcela from "../handlers/idParcela"
 
 // esta ruta trae por query( el nombre del condominio) sus parcelas  y sin query trae todas las parcelas existentes 
 export const parcelas = async (req: Request, res: Response) => {
   
   try {
     const {name } = req.query
-      const parcelas= await searchCondominios(name);     
+      const parcelas= await searchParcelas(name);     
       res.status(200).json(parcelas);
     } catch (error) {
       console.error(error);
@@ -24,14 +25,8 @@ export const parcela  =async (req: Request, res: Response) => {
     if (!id ) {
       throw new Error('El campo  id no existe .');
     }
-    console.log(id);
-    
-    const respo = await ParcelaModel.find({_id:id})
-    console.log(respo);
-    
-    
-    res.status(200).json({respo})
-    
+    const parcela = await idParcela(id)
+    res.status(200).json({parcela})      
    } catch (error) {
     console.error(error);
     res.status(500).send('Error al obtener los parcela de la base de datos.');
