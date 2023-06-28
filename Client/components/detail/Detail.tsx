@@ -13,9 +13,8 @@ import LocationMaps from "../Maps/Maps"
 import Slider from "./slider"
 
 
-const DetailSection = ({ property }) => {
-  const {name, lote, area, price, location, image, deleted, condominio,} = property;
-
+const DetailSection = () => {
+ /*  const {name, lote, area, price, location, image, deleted, condominio,} = property; */
 
   return (
     <>
@@ -31,9 +30,9 @@ const DetailSection = ({ property }) => {
           </h1>
 
           <div className="absolute bottom-0 sm:right-[50%] sm:translate-x-[50%] translate-y-[50%] lg:right-[6%] lg:translate-x-0 p-4 w-[100%] sm:w-[100%] lg:w-[45%] bg-[#f8f8f8] lg:p-8 mt-3 rounded-2xl text-black ">
-            <h3 className="font-bold my-10">{location}PUERTO VARAS<br />Región de los Lagos</h3>
-            <span className="my-10 font-bold">{name} {lote}En Venta</span>
-            <p className="my-10 text-justify">{condominio}
+            <h3 className="font-bold my-10">PUERTO VARAS<br />Región de los Lagos</h3>
+            <span className="my-10 font-bold">En Venta</span>
+            <p className="my-10 text-justify">
               Club de Campo Residencial es un proyecto inmobiliario diverso, perfecto para
               inversión, segunda vivienda o residencia principal. Cuenta con arboles nativos,
               parcela totalmente plana, con un gran bosque en el fondo.
@@ -66,7 +65,7 @@ const DetailSection = ({ property }) => {
                 >
                   <path d="M0 0h.969v.5H1v.469H.969V1H.5V.969H0V0zm2.844 1h-.938V0h.938v1zm1.875 0H3.78V0h.938v1zm1.875 0h-.938V0h.938v1zm.937 0V.969H7.5V.5h.031V0h.938v.5H8.5v.469h-.031V1H7.53zm2.813 0h-.938V0h.938v1zm1.875 0h-.938V0h.938v1zm1.875 0h-.938V0h.938v1zM15.5 1h-.469V.969H15V.5h.031V0H16v.969h-.5V1zM1 1.906v.938H0v-.938h1zm6.5.938v-.938h1v.938h-1zm7.5 0v-.938h1v.938h-1zM1 3.78v.938H0V3.78h1zm6.5.938V3.78h1v.938h-1zm7.5 0V3.78h1v.938h-1zM1 5.656v.938H0v-.938h1zm6.5.938v-.938h1v.938h-1zm7.5 0v-.938h1v.938h-1zM.969 8.5H.5v-.031H0V7.53h.5V7.5h.469v.031H1v.938H.969V8.5zm1.875 0h-.938v-1h.938v1zm1.875 0H3.78v-1h.938v1zm1.875 0h-.938v-1h.938v1zm1.875-.031V8.5H7.53v-.031H7.5V7.53h.031V7.5h.938v.031H8.5v.938h-.031zm1.875.031h-.938v-1h.938v1zm1.875 0h-.938v-1h.938v1zm1.875 0h-.938v-1h.938v1zm1.406 0h-.469v-.031H15V7.53h.031V7.5h.469v.031h.5v.938h-.5V8.5zM0 10.344v-.938h1v.938H0zm7.5 0v-.938h1v.938h-1zm8.5-.938v.938h-1v-.938h1zM0 12.22v-.938h1v.938H0zm7.5 0v-.938h1v.938h-1zm8.5-.938v.938h-1v-.938h1zM0 14.094v-.938h1v.938H0zm7.5 0v-.938h1v.938h-1zm8.5-.938v.938h-1v-.938h1zM.969 16H0v-.969h.5V15h.469v.031H1v.469H.969v.5zm1.875 0h-.938v-1h.938v1zm1.875 0H3.78v-1h.938v1zm1.875 0h-.938v-1h.938v1zm.937 0v-.5H7.5v-.469h.031V15h.938v.031H8.5v.469h-.031v.5H7.53zm2.813 0h-.938v-1h.938v1zm1.875 0h-.938v-1h.938v1zm1.875 0h-.938v-1h.938v1zm.937 0v-.5H15v-.469h.031V15h.469v.031h.5V16h-.969z" />
                 </svg>
-                <h3> {area} 5.100 Mts Cuadrados</h3>
+                <h3> 5.100 Mts Cuadrados</h3>
               </div>
               <div className="text-center p-5 flex items-center justify-center ">
                 <svg
@@ -79,7 +78,7 @@ const DetailSection = ({ property }) => {
                 >
                   <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z" />
                 </svg>
-                <h3>{price}$16.990.000 CLP</h3>
+                <h3>$16.990.000 CLP</h3>
               </div>
               <div className="text-center p-5 flex items-center justify-center ">
                 <svg
