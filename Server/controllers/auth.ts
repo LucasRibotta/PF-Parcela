@@ -6,7 +6,6 @@ import idParcela from "../handlers/idParcela"
 
 // esta ruta trae por query( el nombre del condominio) sus parcelas  y sin query trae todas las parcelas existentes 
 export const parcelas = async (req: Request, res: Response) => {
-<<<<<<< HEAD
   
   try {
     const {name } = req.query
@@ -18,33 +17,8 @@ export const parcelas = async (req: Request, res: Response) => {
     }
 
   } 
-=======
-    const {name} = req.query
-   
-    
-    if (!name) {
-      try {
-        const parcelaData = await ParcelaModel.find(); // Ejecuta la consulta a la base de datos para obtener los condominios
-    
-        res.status(200).json(parcelaData); // Envía los datos de los condominios como respuesta
-      } catch (error) {
-        console.error(error);
-        res.status(500).send('Error al obtener los condominios de la base de datos.');
-      }  
-    } else {
-         try { 
-             const parcelaName = await ParcelaModel.findOne({name:name}); // Ejecuta la consulta a la base de datos para obtener los condominios
-        
-             res.status(200).json({parcelaName}); // Envía los datos de los condominios como respuesta
-           } catch (error) {
-             console.error(error);
-             res.status(500).send('Error al obtener los condominios de la base de datos.');
-           } 
-        
-     }
->>>>>>> d5cf57aeb332c9cc160c84173553db73d300828d
 
-
+// parcela por id
 export const parcela  =async (req: Request, res: Response) => {
    const {id} = req.params
    try {
