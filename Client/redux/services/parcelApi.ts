@@ -1,3 +1,4 @@
+"use client"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 interface Parcela {
@@ -47,11 +48,11 @@ export const parcelApi = createApi({
     })
   })
 })
-
+export const useGetParcelasQuery = parcelApi.endpoints.getParcelas.useQuery
 export const {
   useCreateParcelaMutation,
   useDeleteParcelaMutation,
   useGetParcelaByIdQuery,
-  useGetParcelasQuery,
+  //useGetParcelasQuery,
   useUpdateParcelaMutation
 } = parcelApi

@@ -3,11 +3,10 @@ import { userApi } from "./services/userApi"
 import { setupListeners } from "@reduxjs/toolkit/dist/query"
 import userReducer from "./features/userSlice"
 import { parcelApi } from "./services/parcelApi"
-import parcelReducer from "./features/parcelSlice"
 
 const rootReducer = combineReducers({
   user: userReducer,
-  parcel: parcelReducer,
+
   [userApi.reducerPath]: userApi.reducer,
   [parcelApi.reducerPath]: parcelApi.reducer
   // Agrega más reducers aquí

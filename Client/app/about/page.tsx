@@ -1,11 +1,8 @@
 "use client"
 import { useGetUsersQuery } from "@/redux/services/userApi"
-import { useGetParcelasQuery } from "@/redux/services/parcelApi"
 
 export default function About() {
-  // const { data, error, isLoading, isFetching } = useGetUsersQuery(null)
-  const { data, error, isLoading, isFetching } = useGetParcelasQuery(null)
-  console.log(data)
+  const { data, error, isLoading, isFetching } = useGetUsersQuery(null)
 
   return (
     <div className="pt-[6rem]">
@@ -17,11 +14,11 @@ export default function About() {
             <div>Loading...</div>
           ) : (
             <div>
-              {data?.map((parcela) => (
+              {data?.map((user) => (
                 <div>
-                  <div>{parcela.name}</div>
-                  <div>{parcela.image}</div>
-                  <div>{parcela.location}</div>
+                  <div>{user.username}</div>
+                  <div>{user.name}</div>
+                  <div>{user.email}</div>
                 </div>
               ))}
             </div>

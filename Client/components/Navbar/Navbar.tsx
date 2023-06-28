@@ -19,17 +19,19 @@ import { useRouter } from "next/navigation"
 
 export default function Navbar() {
   const [navbarBackground, setNavbarBackground] = useState(false)
-  const [userLoggedIn, setUserLoggedIn] = useState(false)
-  const [userAdmin, setUserAdmin] = useState(true)
+  // const [userLoggedIn, setUserLoggedIn] = useState(false)
+  // const [userAdmin, setUserAdmin] = useState(true)
 
   const router = useRouter()
-  // const userLoggedIn = useAppSelector((state) => state.user.loggedIn)
-  // const userAdmin = useAppSelector((state) => state.user.isAdmin)
-  // const users = useAppSelector((state) => state.user.users)
+  const userLoggedIn = useAppSelector((state) => state.user.loggedIn)
+  const userAdmin = useAppSelector((state) => state.user.isAdmin)
+  const usersData = useAppSelector((state) => state.user.users)
   const dispatch = useAppDispatch()
 
   // const dispatch = useAppDispatch()
+
   // const { data, error, isLoading, isFetching } = useGetUsersQuery(null)
+
   // const otherUsersData = dispatch(setUsersData(data))
   // console.log(otherUsersData)
 
@@ -53,17 +55,17 @@ export default function Navbar() {
     }
   }, [navbarBackground])
 
-  // const handleLogout = () => {
-  //   dispatch(setUserAdmin(false))
-  //   router.push("/")
-  // }
+  const handleLogout = () => {
+    dispatch(setUserAdmin(false))
+    router.push("/")
+  }
 
-  // useEffect(() => {
-  //   if (pathName === "/admin" && !userAdmin) {
-  //     // Redirect the user to another page or show an error message
-  //     router.push("/")
-  //   }
-  // }, [pathName, userAdmin])
+  useEffect(() => {
+    if (pathName === "/admin" && !userAdmin) {
+      // Redirect the user to another page or show an error message
+      router.push("/")
+    }
+  }, [pathName, userAdmin])
 
   // useEffect(() => {
   //   // Realizar consulta a la base de datos para verificar si el usuario es administrador
@@ -170,7 +172,7 @@ export default function Navbar() {
         </>
       ) : (
         <div className="w-3/12 flex items-center justify-end gap-4">
-          <div>
+          <div onClick={handleLogout}>
             <Button text={"cerrar sesión"} />
           </div>
           <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" />
