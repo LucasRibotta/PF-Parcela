@@ -6,14 +6,14 @@ const router = Router();
 
 router.post('/signin', passport.authenticate('local-signin',{
         successRedirect: '/api/profile',
-        failureRedirect: '/api/profile',
+        failureRedirect: '/api/profileFail',
         failureFlash: true,
         passReqToCallback: true 
 }))
 
 router.post('/signup', passport.authenticate('local-signup',{
-    successRedirect: '/api/profileUp',
-    failureRedirect: '/api/profileUp',
+    successRedirect: '/api/profile',
+    failureRedirect: '/api/profileFail',
     failureFlash: true,
     passReqToCallback: true
 })) 
