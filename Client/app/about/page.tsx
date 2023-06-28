@@ -17,7 +17,7 @@ export default function About() {
             <div>Loading...</div>
           ) : (
             <div>
-              {data?.map((parcela) => (
+              {data.map((parcela) => (
                 <div>
                   <div>{parcela.name}</div>
                   <div>{parcela.image}</div>

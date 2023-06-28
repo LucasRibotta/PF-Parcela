@@ -8,6 +8,7 @@ interface Parcela {
   location: string[]
   image: string
   deleted: boolean
+  parcelaData:[]
 }
 
 export const parcelApi = createApi({
