@@ -10,7 +10,7 @@ export const parcelas = async (req: Request, res: Response) => {
       try {
         const parcelaData = await ParcelaModel.find(); // Ejecuta la consulta a la base de datos para obtener los condominios
     
-        res.status(200).json({parcelaData}); // Envía los datos de los condominios como respuesta
+        res.status(200).json(parcelaData); // Envía los datos de los condominios como respuesta
       } catch (error) {
         console.error(error);
         res.status(500).send('Error al obtener los condominios de la base de datos.');
@@ -52,11 +52,11 @@ export const parcela  =async (req: Request, res: Response) => {
 
 export const createParcela = async (req: Request, res: Response) => {
     try {
-        const { id, name, lote, area, price, location, image, condominio } = req.body;
+        const { id, name, lote, area, price, location, image, description } = req.body;
     
        
     
-        if (!id || !name || !lote || !area || !price || !location || !image || !condominio) {
+        if (!id || !name || !lote || !area || !price || !location || !image || !description) {
           throw new Error('El campo name e id son requeridos.');
         }
     
@@ -68,7 +68,7 @@ export const createParcela = async (req: Request, res: Response) => {
           price,
           location,
           image,
-          condominio
+          description
         };
     
         const nuevoParcela = new ParcelaModel(data);
