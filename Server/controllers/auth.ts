@@ -9,19 +9,15 @@ export const parcelas = async (req: Request, res: Response) => {
     if (!name) {
       try {
         const parcelaData = await ParcelaModel.find(); // Ejecuta la consulta a la base de datos para obtener los condominios
-    
-        res.status(200).json({parcelaData}); // Envía los datos de los condominios como respuesta
+        res.status(200).json(parcelaData); // Envía los datos de los condominios como respuesta
       } catch (error) {
-        console.error(error);
         res.status(500).send('Error al obtener los condominios de la base de datos.');
       }  
     } else {
          try { 
              const parcelaName = await ParcelaModel.findOne({name:name}); // Ejecuta la consulta a la base de datos para obtener los condominios
-        
              res.status(200).json({parcelaName}); // Envía los datos de los condominios como respuesta
            } catch (error) {
-             console.error(error);
              res.status(500).send('Error al obtener los condominios de la base de datos.');
            } 
         
@@ -35,16 +31,9 @@ export const parcela  =async (req: Request, res: Response) => {
     if (!id ) {
       throw new Error('El campo  id no existe .');
     }
-    console.log(id);
-    
-    const respo = await ParcelaModel.find({_id:id})
-    console.log(respo);
-    
-    
+    const respo = await ParcelaModel.find({_id:id})    
     res.status(200).json({respo})
-    
    } catch (error) {
-    console.error(error);
     res.status(500).send('Error al obtener los parcela de la base de datos.');
    }
    
@@ -52,14 +41,10 @@ export const parcela  =async (req: Request, res: Response) => {
 
 export const createParcela = async (req: Request, res: Response) => {
     try {
-        const { id, name, lote, area, price, location, image, condominio } = req.body;
-    
-       
-    
+        const { id, name, lote, area, price, location, image, condominio } = req.body;    
         if (!id || !name || !lote || !area || !price || !location || !image || !condominio) {
           throw new Error('El campo name e id son requeridos.');
         }
-    
         const data = {
           id,
           name,
@@ -73,23 +58,14 @@ export const createParcela = async (req: Request, res: Response) => {
     
         const nuevoParcela = new ParcelaModel(data);
         const parcelaCreado = await nuevoParcela.save();
-        
-
         const parcelaId = await ParcelaModel.find({name:data.name})
-        console.log(parcelaId);
-        
-
         const parcelaActualizado = await CondominioModel.findByIdAndUpdate(
           parcelaId,
           { $push: { parcelas: parcelaCreado._id } },
           { new: true }
         );
-        console.log(parcelaActualizado);
-        
-    
         res.status(201).json(parcelaCreado);
       } catch (error) {
-        console.error(error);
         res.status(500).send('Error al crear la parcela en la base de datos.');
       }
   };
@@ -98,11 +74,9 @@ export const createParcela = async (req: Request, res: Response) => {
   export const createCondominio = async (req: Request, res: Response) => {
     try {
       const { id, name, location, access, parcelas, description, image } = req.body;
-      console.log(req.body)
       if (!id || !name) {
         throw new Error('El campo name e id son requeridos.');
       }
-  
       const data = {
         id,
         name,
@@ -118,7 +92,6 @@ export const createParcela = async (req: Request, res: Response) => {
   
       res.status(201).json(condominioCreado);
     } catch (error) {
-      console.error(error);
       res.status(500).send('Error al crear el condominio en la base de datos.');
     }
   };
@@ -146,12 +119,9 @@ export const updateParcela = async (req: Request, res: Response) => {
   
       return res.status(200).json(parcelaActualizado);
     } catch (error) {
-      console.error(error);
       return res.status(500).json({ error: 'Error al actualizar la parcela en la base de datos.' });
     }
-  };
-
-  
+  }; 
 
   export const deleteParcela = async (req: Request, res: Response) => {
     try {
@@ -165,7 +135,6 @@ export const updateParcela = async (req: Request, res: Response) => {
   
       return res.status(200).json(parcela);
     } catch (error) {
-      console.error(error);
       return res.status(500).json({ error: 'Error al eliminar la parcela de la base de datos.' });
     }
   };
