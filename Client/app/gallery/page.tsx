@@ -1,7 +1,8 @@
-import Card from "../../components/Card/Card";
-import Filter from "@/components/Filters/Filter";
-import 'tailwindcss/tailwind.css';
-import CustomPagination from '@/components/CustomPagination/CustomPagination';
+"use client"
+import Card from "../../components/Card/Card"
+import Filter from "@/components/Filters/Filter"
+import "tailwindcss/tailwind.css"
+import CustomPagination from "@/components/CustomPagination/CustomPagination"
 
 export default function Gallery() {
   const cardTypes = [
@@ -18,26 +19,18 @@ export default function Gallery() {
       <div className="flex pt-[2rem]">
         <Filter />
         <div className="flex-grow pl-[20rem] px-2">
-          {
-            cardTypes.map
-              ((card, index) => (
-                <div key={index} className="mb-2">
-                  <Card
-                    name={
-                      card.Name
-                    }
-                    precio={card.Precio}
-                    superficie={card.Superficie}
-                  />
-                </div>
-              ))}
-          <CustomPagination
-            resPerPage={2}
-            productsCount={5}
-          />
+          {cardTypes.map((card, index) => (
+            <div key={index} className="mb-2">
+              <Card
+                name={card.Name}
+                precio={card.Precio}
+                superficie={card.Superficie}
+              />
+            </div>
+          ))}
+          <CustomPagination resPerPage={2} productsCount={5} />
         </div>
       </div>
-
     </div>
   )
 }
