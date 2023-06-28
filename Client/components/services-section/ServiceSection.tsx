@@ -66,7 +66,7 @@ const ServiceSection = () => {
               className="w-screen h-48 object-cover"
             />
             <h3 className="text-[1.5rem] font-bold mt-3">
-              Motoniveladora y Cercado
+              Maquinaria y Cercado
             </h3>
             <p>
               Brindamos soluciones profesionales de nivelación de terrenos y
@@ -83,7 +83,7 @@ const ServiceSection = () => {
             />
             <h3 className="text-[1.5rem] font-bold mt-3">Legales</h3>
             <p>
-              Ofrecemos asesoramiento experto en notarías y registros de bienes
+              Ofrecemos asesoramiento Legal experto y registros de bienes
               raíces para garantizar transacciones seguras y cumplimiento legal.
             </p>
           </div>
@@ -95,7 +95,7 @@ const ServiceSection = () => {
               className="w-screen h-48 object-cover"
             />
             <h3 className="text-[1.5rem] font-bold mt-3">
-              Jardinería y paisajismo
+              Jardinería y Paisajismo
             </h3>
             <p>
               Transformamos espacios exteriores, creando diseños personalizados

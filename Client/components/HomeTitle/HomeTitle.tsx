@@ -9,12 +9,12 @@ export default function HomeTitle() {
       </h1>
       <h1 className="text-lg text-white font-bold">Invierte de manera inteligente</h1>
       <p className="w-[70%] text-white">
-        Ten el futuro que deseas, aprovecha cada minuto e invierte en tierra
+        Ten la vida que deseas, aprovecha cada minuto e invierte en tu Futuro
       </p>
       <h5 className="text-base text-white font-bold">Conoce todas las posibilidades</h5>
       <div>
         <Link href="/gallery">
-          <Button text={"Galería"} />
+          <Button text={"Parcelas"} />
         </Link>
       </div>
     </div>
