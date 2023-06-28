@@ -178,6 +178,6 @@ export default function Navbar() {
           <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" />
         </div>
       )}
-    </nav>
-  )
+    </nav>
+  )
 }
