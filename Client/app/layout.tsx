@@ -16,9 +16,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <title>{metadata.title}</title>
       <meta name="description" content={metadata.description} />
+      
       <body className={inter.className}>
         <Providers>
           <Navbar />
