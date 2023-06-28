@@ -1,33 +1,22 @@
 import { Request, Response } from "express"
 import CondominioModel from '../models/condominio';
 import ParcelaModel from '../models/parcela'; 
+import searchCondominios from "../handlers/searchCondominios";
 
+// esta ruta trae por query( el nombre del condominio) sus parcelas  y sin query trae todas las parcelas existentes 
 export const parcelas = async (req: Request, res: Response) => {
-    const {name} = req.query
-   
-    
-    if (!name) {
-      try {
-        const parcelaData = await ParcelaModel.find(); // Ejecuta la consulta a la base de datos para obtener los condominios
-    
-        res.status(200).json({parcelaData}); // Envía los datos de los condominios como respuesta
-      } catch (error) {
-        console.error(error);
-        res.status(500).send('Error al obtener los condominios de la base de datos.');
-      }  
-    } else {
-         try { 
-             const parcelaName = await ParcelaModel.findOne({name:name}); // Ejecuta la consulta a la base de datos para obtener los condominios
-        
-             res.status(200).json({parcelaName}); // Envía los datos de los condominios como respuesta
-           } catch (error) {
-             console.error(error);
-             res.status(500).send('Error al obtener los condominios de la base de datos.');
-           } 
-        
-     }
+  
+  try {
+    const {name } = req.query
+      const parcelas= await searchCondominios(name);     
+      res.status(200).json(parcelas);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error al obtener los condominios de la base de datos.');
+    }
 
- } 
+  } 
+
 
 export const parcela  =async (req: Request, res: Response) => {
    const {id} = req.params
