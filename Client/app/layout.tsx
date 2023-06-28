@@ -6,7 +6,7 @@ import Providers from "@/redux/provider"
 const inter = Montserrat({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Parcelas de Chile",
+  title: "Parcelas",
   description: "Generada y Creada por Estudiantes"
 }
 
