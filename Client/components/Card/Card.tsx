@@ -2,6 +2,7 @@
 import axios from "axios"
 import "tailwindcss/tailwind.css"
 import { useEffect, useState } from "react"
+import { CloudinaryContext, Image } from "cloudinary-react";
 import Link from "next/link"
 import style from "./card.module.css"
 import Button from "../Button/Button"
@@ -13,22 +14,33 @@ interface CardProps {
 }
 
 function Card({ name, precio, superficie }: CardProps) {
-  const [imageUrl, setImageUrl] = useState("")
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [click, setClick] = useState(false)
 
   useEffect(() => {
-    const fetchImage = async () => {
+    const fetchImages = async () => {
       try {
-        let response = await fetch("https://picsum.photos/1000/300")
-        const imageUrl = response.url
-        setImageUrl(imageUrl)
+        
+        const response = await axios.get(
+          "https://api.cloudinary.com/v1_1/parcelas/resources/image",
+          {
+            params: {
+              type: "upload",
+              prefix: "Parcelas", 
+            },
+          }
+        );
+        const images = response.data.resources.map(
+          (image: { secure_url: string }) => image.secure_url
+        );
+        setImageUrls(images);
       } catch (error) {
-        console.log("Error al obtener imagen", error)
+        console.log("Error al obtener las imágenes de Cloudinary", error);
       }
-    }
-
-    fetchImage()
-  }, [])
+    };
+  
+    fetchImages();
+  }, []);
 
   const onClick = () => {
     setClick(!click)
@@ -48,13 +60,22 @@ function Card({ name, precio, superficie }: CardProps) {
             <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
           </svg>} */}
       </div>
-      {imageUrl && (
-        <img
-          src={imageUrl}
+
+      <div>
+      <CloudinaryContext cloudName="parcelas">
+      {imageUrls.map((imageUrl, index) => (
+        <div key={index}>
+        <Image
+          publicId={imageUrl}
           alt="Img Aleatoria"
+          crop="fill"
           className="absolute w-full top-0 left-0 z-[-1]"
         />
-      )}
+        </div>
+        ))}
+      </CloudinaryContext>
+      </div>
+
       <div className="w-[25%]  transition duration-300 bg-transparent  z-30 p-2 h-full  border-black  ">
         <div className="hover:opacity-100">
           <h1 className={`${style.textShadow} font-bold opacity-100 `}>

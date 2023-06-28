@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, ChangeEvent } from "react"
+import swal from 'sweetalert';
 import UploadImage from "../UploadImage/UploadImage"
 import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
@@ -59,14 +60,14 @@ export default function FormSection() {
           id="description"
         />
 
-        <div className="mt-4">
+{/*         <div className="mt-4">
           <input
             className="rounded-md placeholder:text-center border-[1px] border-gray-200 w-[100%]"
             placeholder="Servicios"
             type="text"
             id="services"
           />
-        </div>
+        </div> */}
 
         <div className="text-black bg-green pt-[1rem]">
           <UploadImage />
