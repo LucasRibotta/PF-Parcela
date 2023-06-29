@@ -3,25 +3,22 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { UserCard } from "./userCard";
 
 export default function Login() {
-    // get session from nextAuth
     const { data: session } = useSession();
     console.log(session);
-    // useSession uses React Context
 
-    // if the user exists -> show a Sign Out button and their information
-    if(session) {
+    if (session) {
         return (
-            <>
-                <button onClick={() => signOut()} type="button" className="btn btn-primary">Sign Out of Google</button>
+            <div>
+                <button onClick={() => signOut()} type="button">Salir de Google</button>
                 {/* Pass session info to server component */}
-                <UserCard user={session?.user}/>
-            </>
+                <UserCard user={session?.user} />
+            </div>
         )
     } else {
         return (
-            <>
-                <button onClick={() => signIn()} type="button" className="btn btn-primary">Sign In with Google</button>
-            </>
+            <div>
+                <button onClick={() => signIn()} type="button">Entrar con Google</button>
+            </div>
         )
     }
 

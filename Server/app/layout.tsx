@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.css"
 import ProvidersWrapper from './ProvidersWrapper'
 
 export default function RootLayout({
