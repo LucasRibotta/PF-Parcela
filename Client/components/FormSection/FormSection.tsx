@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, ChangeEvent } from "react"
-import swal from 'sweetalert';
+
 import UploadImage from "../UploadImage/UploadImage"
 import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
@@ -13,8 +13,8 @@ export default function FormSection() {
   }
 
   return (
-    <form className="flex flex-col md:flex-row w-[100%] h-full sm:w-[640px] md:w-[768px] lg:w-[1024px]  mx-auto bg-[#f3f4f6] shadow-2xl text-white rounded-3xl overflow-hidden">
-      <div className="relative flex flex-col w-[100%] md:h-auto md:w-[50%] lg:w-[50%]  text-white">
+    <form className="flex flex-col md:flex-row w-[100%] h-full sm:w-[640px] md:w-[768px] lg:w-[1024px] mx-auto bg-[#f3f4f6] shadow-2xl text-white rounded-3xl overflow-hidden ">
+      <div className="relative flex flex-col w-[100%]  md:w-[50%] lg:w-[50%]  text-white">
         <div className="h-[100%] w-[100%]">
           <LocationMaps location={location} />
         </div>
@@ -33,9 +33,9 @@ export default function FormSection() {
         </div>
       </div>
 
-      <div className="flex flex-col m-auto p-[2rem] h-[70%] w-[50%] text-black ">
-        <h2 className="mb-4 text-center font-bold text-[30px]">
-          Describenos tu parcela{" "}
+      <div className="flex flex-col m-auto px-[4rem] w-[50%] text-black ">
+        <h2 className="mb-4 text-center text-3xl font-black">
+          Describenos tu parcela
         </h2>
         <input
           className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
@@ -60,7 +60,7 @@ export default function FormSection() {
           id="description"
         />
 
-{/*         <div className="mt-4">
+        {/*         <div className="mt-4">
           <input
             className="rounded-md placeholder:text-center border-[1px] border-gray-200 w-[100%]"
             placeholder="Servicios"
