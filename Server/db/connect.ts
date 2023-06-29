@@ -1,6 +1,6 @@
 import mongoose, {ConnectOptions} from "mongoose";
 
-import 'dotenv/config'
+import "dotenv/config"
 
 async function connectDB(): Promise<void> {  
     if (!process.env.MONGODB_URL) {
@@ -20,4 +20,4 @@ async function connectDB(): Promise<void> {
     }
 }
 
-export default connectDB;
+export default connectDB

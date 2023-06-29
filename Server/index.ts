@@ -9,10 +9,18 @@ import passport from 'passport';
 import session from 'express-session'
 import flash from 'connect-flash';
 import localAauth from "./passport/local-auth";
-
+import "dotenv/config";
+import cors from "cors";
+import * as bodyParser from 'body-parser';
 const PORT = process.env.PORT || 3001
+// Configuración de CORS
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
 const app = express(); 
+app.use(cors(corsOptions));
 
 app.use(express.json()); 
 app.use( (req,res, next) => {
