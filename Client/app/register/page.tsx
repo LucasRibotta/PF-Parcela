@@ -89,6 +89,7 @@ export default function Register() {
             >
               Registrarse
             </button>
+            
 
             <div className="mt-4 text-[#333] leading-[20px] tracking-[0.5px] text-[14px]">
               Ya posees una cuenta?

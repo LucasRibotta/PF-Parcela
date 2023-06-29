@@ -1,14 +1,15 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit"
 import { userApi } from "./services/userApi"
+import { parcelApi } from "./services/paqueteApi"
 import { setupListeners } from "@reduxjs/toolkit/dist/query"
 import userReducer from "./features/userSlice"
-import { parcelApi } from "./services/parcelApi"
+import { loginApi } from "./services/loginApi"
 
 const rootReducer = combineReducers({
   user: userReducer,
-
   [userApi.reducerPath]: userApi.reducer,
-  [parcelApi.reducerPath]: parcelApi.reducer
+  [parcelApi.reducerPath]: parcelApi.reducer,
+  [loginApi.reducerPath]: loginApi.reducer,
   // Agrega más reducers aquí
 })
 
@@ -16,9 +17,7 @@ export const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
-      .concat(parcelApi.middleware)
-      .concat(userApi.middleware)
+    getDefaultMiddleware().concat([userApi.middleware,parcelApi.middleware]),
 })
 setupListeners(store.dispatch)
 

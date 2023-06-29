@@ -4,7 +4,27 @@ import Filter from "@/components/Filters/Filter"
 import "tailwindcss/tailwind.css"
 import CustomPagination from "@/components/CustomPagination/CustomPagination"
 
-export default function Gallery() {
+
+// interface Parcela {
+//   name: string
+//   lote: number
+//   area: number
+//   price: number
+//   location: string[]
+//   image: string
+//   deleted: boolean
+//   parcelData: string[]
+// }
+
+export default function  Gallery(){
+//  let pe = []
+//   const {data, error, isLoading, isFetching} =  useGetParcelasQuery(null)
+//   if(isLoading || isFetching) return <p>Loading</p>
+//   if (error) return <p>Some error</p>
+//   // if(!data || !Array.isArray(data)) return <p>no data</p>
+//   data?.map(e => console.log(e.price, '-----'))
+//   //.log(data , ' -------');
+//   //data?.map(e => console.log(e))
   const cardTypes = [
     { Name: "Tipo 1", Precio: "USD 100", Superficie: "100 km2" },
     { Name: "Tipo 2", Precio: "USD 200", Superficie: "200 km2" },

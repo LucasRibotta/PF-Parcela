@@ -164,7 +164,6 @@ export default function Admin() {
             </div>
           </div>
         </div>
-
         <div className="flex flex-col flex-1 p-4  bg-gray-800">
           <h1 className="text-2xl font-bold text-white">Dashboard</h1>
           <div className="flex flex-wrap mt-6 ">

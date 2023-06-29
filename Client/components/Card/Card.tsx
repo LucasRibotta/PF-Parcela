@@ -9,8 +9,8 @@ import Button from "../Button/Button"
 
 interface CardProps {
   name: string
-  precio: string
-  superficie: string
+  precio: number
+  superficie: number
 }
 
 function Card({ name, precio, superficie }: CardProps) {
@@ -22,11 +22,11 @@ function Card({ name, precio, superficie }: CardProps) {
       try {
         
         const response = await axios.get(
-          "https://api.cloudinary.com/v1_1/parcelas/resources/image",
+          "https://api.cloudinary.com/v1_1/parcelas/resources",
           {
             params: {
               type: "upload",
-              prefix: "Parcelas", 
+              prefix: "Parcelas/", 
             },
           }
         );
@@ -67,7 +67,7 @@ function Card({ name, precio, superficie }: CardProps) {
         <div key={index}>
         <Image
           publicId={imageUrl}
-          alt="Img Aleatoria"
+          alt="Img Parcela"
           crop="fill"
           className="absolute w-full top-0 left-0 z-[-1]"
         />

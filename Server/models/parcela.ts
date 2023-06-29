@@ -1,31 +1,3 @@
-// import mongoose, { Schema, Document } from "mongoose";
-// interface IParcela extends Document {
-//     lote: number;
-//     area: number;
-//     price: number;
-//     services: string[];
-//     idUsersFavorite:String;
-//     image: string[];
-//     deleted: boolean; // Nuevo campo para el borrado lógico
-//     condominio: Types.ObjectId;
-//   }
-
-
-// const parcelaSchema = new Schema <IParcela>({
-//     id:{type:String, require:true},
-//     lote:{type:Number, unique:true},
-//     idUsersFavorite:String,//combio era favorite
-//     area:{type:Number, require:true},
-//     price:{type:Number, require:true},
-//     services:{type:[String], require:true},
-//     image:{type:[String], require:true},
-//     deleted: { type: Boolean, default: false },
-//     condominio: { type: Schema.Types.ObjectId, ref: "Condominio", required: true }
-   
-// })
-
-// export default mongoose.model<IParcela>('Parcela', parcelaSchema);
-
 import { Schema, model, Document, Types } from "mongoose";
 import Condominio from "../models/condominio";
 interface IParcela extends Document {
@@ -36,7 +8,7 @@ interface IParcela extends Document {
   location: string[];
   image: string;
   deleted: boolean;
-  condominio: String; // Referencia al Condominio
+  description: String; // Referencia al Condominio
 }
 
 const parcelaSchema = new Schema<IParcela>({
@@ -47,7 +19,7 @@ const parcelaSchema = new Schema<IParcela>({
   location: { type: [String], required: true },
   image: { type: String, required: true },
   deleted: { type: Boolean, default: false },
-  condominio: { type: Schema.Types.String, ref: "Condominio", required: true }
+  description: { type: Schema.Types.String, ref: "Condominio", required: true }
 });
 
 const Parcela = model<IParcela>("Parcela", parcelaSchema);
