@@ -12,15 +12,15 @@ import {
 
 const router = express.Router();
 
-router.use((req,res,next) => {
-    isAuthenticated(req,res,next)
-    next()
-})
-
 router.get("/parcelas", parcelas)
 router.get("/parcelas/:id", parcela)
-router.post("/condominio", createCondominio)
 router.post("/parcela", createParcela)
+// router.use((req,res,next) => {
+//     isAuthenticated(req,res,next)
+//     next()
+// })
+
+router.post("/condominio", createCondominio)
 router.put("/updateParcela/:id", updateParcela)
 router.put("/deleteParcela/:id", deleteParcela)
 

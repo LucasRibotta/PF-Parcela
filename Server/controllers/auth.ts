@@ -38,7 +38,7 @@ export const parcela = async (req: Request, res: Response) => {
       throw new Error('El campo  id no existe .');
     }
     const parcela = await idParcela(id)
-    res.status(200).json({ parcela })
+    res.status(200).json(parcela)
   } catch (error) {
     console.error(error);
     res.status(500).send('Error al obtener los parcela de la base de datos.');
@@ -48,16 +48,16 @@ export const parcela = async (req: Request, res: Response) => {
 
 export const createParcela = async (req: Request, res: Response) => {
   try {
-    const { id, name, lote, area, price, location, image, description } = req.body;
+    const { name, lote, area, price, location, image, description } = req.body;
+
+    console.log(name);
 
 
-
-    if (!id || !name || !lote || !area || !price || !location || !image || !description) {
+    if (!name || !lote || !area || !price || !location || !image || !description) {
       throw new Error('El campo name e id son requeridos.');
     }
 
     const data = {
-      id,
       name,
       lote,
       area,
