@@ -86,6 +86,7 @@ export const createParcela = async (req: Request, res: Response) => {
     }
   };
 
+// actualiza una parcela por id
 export const updateParcela = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
@@ -107,7 +108,7 @@ export const updateParcela = async (req: Request, res: Response) => {
   };
 
   
-
+// borrado logico por _id
   export const deleteParcela = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
