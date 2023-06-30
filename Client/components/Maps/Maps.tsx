@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, Marker, InfoWindow, LoadScript } from '@react-google-maps/api';
+import mapStyles from './MapaStyle';
 import axios from 'axios';
 
 interface LocationMapsProps {
@@ -78,7 +79,8 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
           <GoogleMap
             mapContainerStyle={{ height: '100%', width: '100%' }}
             center={center}
-            zoom={12}
+            options={{styles: mapStyles}}
+            zoom={7}
             onClick={handleMapClick}
           >
             {markerPosition.lat !== 0 && <Marker position={markerPosition} />}
@@ -88,7 +90,7 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
                 position={markerPosition}
                 onCloseClick={() => setShowInfoWindow(false)}
               >
-                <div>
+                <div className='text-black font-bold'>
                   <h4>Ubicación seleccionada:</h4>
                   <p>Latitud: {markerPosition.lat}</p>
                   <p>Longitud: {markerPosition.lng}</p>
