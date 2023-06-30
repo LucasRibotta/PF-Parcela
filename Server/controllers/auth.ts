@@ -1,8 +1,12 @@
 import { Request, Response } from "express"
 import CondominioModel from '../models/condominio';
-import ParcelaModel from '../models/parcela'; 
+import ParcelaModel  from '../models/parcela'; 
 import searchParcelas from "../handlers/searchParcelas";
 import idParcela from "../handlers/idParcela"
+import functionCreate from "../handlers/createParcela"
+import createCondo from "../handlers/createCondominio"
+import updateParce from "../handlers/updateParcela"
+import deletedParce from "../handlers/deleteParcela";
 
 // esta ruta trae por query( el nombre del condominio) sus parcelas  y sin query trae todas las parcelas existentes 
 export const parcelas = async (req: Request, res: Response) => {
@@ -34,56 +38,40 @@ export const parcela  =async (req: Request, res: Response) => {
    
 }
 
+// Crea parcela y guarda en el condominio el id de la parcela 
 export const createParcela = async (req: Request, res: Response) => {
     try {
-        const { id, name, lote, area, price, location, image, description } = req.body;
-    
-       
-    
-        if (!id || !name || !lote || !area || !price || !location || !image || !description) {
-          throw new Error('El campo name e id son requeridos.');
-        }
-    
+      const {name, lote, area, price, location, image, description, condominio } = req.body;
+      
+      if ( !name || !lote || !area || !price || !location || !image || !description || !condominio) {
+        throw new Error('El campo name e id son requeridos.');
+      }
+     
         const data = {
-          id,
           name,
           lote,
           area,
           price,
           location,
           image,
-          description
+          description,
+          condominio
         };
     
-        const nuevoParcela = new ParcelaModel(data);
-        const parcelaCreado = await nuevoParcela.save();
-        
-
-        const parcelaId = await ParcelaModel.find({name:data.name})
-        console.log(parcelaId);
-        
-
-        const parcelaActualizado = await CondominioModel.findByIdAndUpdate(
-          parcelaId,
-          { $push: { parcelas: parcelaCreado._id } },
-          { new: true }
-        );
-        console.log(parcelaActualizado);
-        
-    
-        res.status(201).json(parcelaCreado);
+      const parcelaCreada =await functionCreate(data);    
+        res.status(201).json(parcelaCreada);
       } catch (error) {
         console.error(error);
         res.status(500).send('Error al crear la parcela en la base de datos.');
       }
   };
 
- 
+  //Crear condominio
   export const createCondominio = async (req: Request, res: Response) => {
-    try {
-      const { id, name, location, access, parcelas, description, image } = req.body;
+    try { 
+      const { id,  name, location, access, parcelas, description, image } = req.body;
       console.log(req.body)
-      if (!id || !name) {
+      if ( !name|| !location|| !access|| !parcelas || !description||! image) {
         throw new Error('El campo name e id son requeridos.');
       }
   
@@ -94,12 +82,10 @@ export const createParcela = async (req: Request, res: Response) => {
         access,
         description,
         image,
-        parcelas: parcelas // Inicializa el campo parcelas como un array vacío
+        parcelas
       };
   
-      const nuevoCondominio = new CondominioModel(data);
-      const condominioCreado = await nuevoCondominio.save();
-  
+      const condominioCreado = await createCondo(data);
       res.status(201).json(condominioCreado);
     } catch (error) {
       console.error(error);
@@ -110,20 +96,14 @@ export const createParcela = async (req: Request, res: Response) => {
 export const updateParcela = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const { area, price, services, image, condominio } = req.body;  
+      const { name, lote, area, price, location, image, condominio, description} = req.body;  
   
       if (!id) {
         throw new Error('El campo id es requerido.');
       }
-  
-      const parcelaActualizado = await ParcelaModel.findByIdAndUpdate(id, {
-        area,
-        price,
-        services,
-        image,
-        condominio
-      }, { new: true })
-  
+      const data = {id,name, lote, area, price, location, image, description, condominio}
+      
+      const parcelaActualizado = await updateParce(id, name, lote, area, price, location, image, condominio, description)
       if (!parcelaActualizado) {
         return res.status(404).json({ error: 'El documento no existe.' });
       }
@@ -140,14 +120,13 @@ export const updateParcela = async (req: Request, res: Response) => {
   export const deleteParcela = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-  
-      const parcela = await ParcelaModel.findByIdAndUpdate(id, { deleted: true }, { new: true });
-  
-      if (!parcela) {
+
+      const borrado = await deletedParce(id)
+      if (!borrado) {
         return res.status(404).json({ error: 'Parcela no encontrada.' });
       }
   
-      return res.status(200).json(parcela);
+      return res.status(200).json(borrado);
     } catch (error) {
       console.error(error);
       return res.status(500).json({ error: 'Error al eliminar la parcela de la base de datos.' });
