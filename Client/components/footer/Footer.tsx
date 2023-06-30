@@ -33,7 +33,7 @@ const Footer = () => {
                     <div className="flex flex-col justify-center text-center p-4 w-[33%] ">
                         <h3>Preguntas frecuentes</h3>
                         <ul className="mt-6">
-                            <li className="font-medium mb-2">¿Como subo mis parcelas?</li>
+                            <li className="font-medium mb-2">¿Como publico mi parcela?</li>
                             <li className="font-medium mb-2">¿Como puedo comprar?</li>
                         </ul>
                     </div>
