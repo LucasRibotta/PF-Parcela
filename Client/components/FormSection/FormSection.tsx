@@ -4,19 +4,24 @@ import swal from 'sweetalert';
 import UploadImage from "../UploadImage/UploadImage"
 import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
+import { useCreateParcelaMutation } from '@/redux/services/parcelApi'
 import Confirmation from "../confirmation/Confirmation"
 
 export default function FormSection() {
+  
   const [location, setLocation] = useState("")
   const [confirmation, setConfirmation] = useState(false);
   const [info, setInfo] = useState({
     name: "",
-    lote: "",
-    area: "",
-    price: "",
+    lote: 0,
+    area: 0,
+    price: 0,
     location: "",
     description: "",
+    image: []
   });
+  const [createParcela] = useCreateParcelaMutation()
+ 
 
 
 
@@ -33,16 +38,19 @@ export default function FormSection() {
     if (true) {
       setInfo({
         name: "",
-        lote: "",
-        area: "",
-        price: "",
+        lote: 0,
+        area: 0,
+        price: 0,
         location: "",
         description: "",
+        image: []
       });
       setLocation("");
     }
 
     setConfirmation(true);
+    createParcela(info)
+    
 
     setTimeout(() => {
       setConfirmation(false);
