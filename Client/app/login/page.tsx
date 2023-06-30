@@ -1,7 +1,10 @@
 import Image from "next/image"
 import logo from "../../img/forestImage.jpg"
 import Link from "next/link"
-import { BiLogoFacebook, BiLogoGmail } from "react-icons/bi"
+// import { InfoUserLogged } from "../../components/InfoUserLogged/InfoUserLogged";
+// import { useSession, signIn, signOut } from "next-auth/react";
+// import { BiLogoFacebook, BiLogoGmail } from "react-icons/bi"
+import ButtonGoogle from "@/components/ButtonGoogle/ButtonGoogle";
 
 export default function Login() {
   return (
@@ -11,7 +14,10 @@ export default function Login() {
           <h2 className="text-3xl font-black mb-6 ">Iniciar sesión</h2>
           <div className="flex pb-4">
             <div className="border-[1px] text[#ddd] rounded-[50%] inline-flex justify-center items-center mx-[5px] h-[40px] w-[40px]">
-              <BiLogoGmail className="h-4 w-4 text-[#51a8a1]" />
+              {/* Reemplazar el BiLogoGmail por un Boton que contenga al BiLogoGmail... */}
+              {/* <BiLogoGmail className="h-4 w-4 text-[#51a8a1]" /> */}
+              <ButtonGoogle />
+              {/* ...y reemplazar este BiLogoGmail  */}
             </div>
           </div>
           <div className="mb-4">

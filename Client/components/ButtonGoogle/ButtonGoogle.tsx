@@ -1,8 +1,9 @@
 "use client"
 import { useSession, signIn, signOut } from "next-auth/react";
-import { UserCard } from "./userCard";
+import { InfoUserLogged } from "@/components/InfoUserLogged/InfoUserLogged";
+import { BiLogoGmail } from "react-icons/bi";
 
-export default function Login() {
+export default function ButtonGoogle() {
     const { data: session } = useSession();
     console.log(session);
 
@@ -11,13 +12,15 @@ export default function Login() {
             <div>
                 <button onClick={() => signOut()} type="button">Salir de Google</button>
                 {/* Pass session info to server component */}
-                <UserCard user={session?.user} />
+                <InfoUserLogged user={session?.user} />
             </div>
         )
     } else {
         return (
             <div>
-                <button onClick={() => signIn()} type="button">Entrar con Google</button>
+                <button onClick={() => signIn()} type="button">
+                    <BiLogoGmail className="h-4 w-4 text-[#51a8a1]" />
+                </button>
             </div>
         )
     }
