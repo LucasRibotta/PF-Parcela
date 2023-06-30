@@ -46,19 +46,17 @@ export const createParcela = async (req: Request, res: Response) => {
       if ( !name || !lote || !area || !price || !location || !image || !description || !condominio) {
         throw new Error('El campo name e id son requeridos.');
       }
-     
-        const data = {
-          name,
-          lote,
-          area,
-          price,
-          location,
-          image,
-          description,
-          condominio
-        };
-    
-      const parcelaCreada =await functionCreate(data);    
+  
+      const parcelaCreada =await functionCreate(  
+        name,
+        lote,
+        area,
+        price,
+        location,
+        image,
+        description,
+        condominio
+        );    
         res.status(201).json(parcelaCreada);
       } catch (error) {
         console.error(error);
@@ -71,21 +69,16 @@ export const createParcela = async (req: Request, res: Response) => {
     try { 
       const { id,  name, location, access, parcelas, description, image } = req.body;
       console.log(req.body)
-      if ( !name|| !location|| !access|| !parcelas || !description||! image) {
+      if ( !name|| !location|| !access|| !description||! image) {
         throw new Error('El campo name e id son requeridos.');
       }
-  
-      const data = {
-        id,
+      const condominioCreado = await createCondo( id,
         name,
         location,
         access,
         description,
         image,
-        parcelas
-      };
-  
-      const condominioCreado = await createCondo(data);
+        parcelas);
       res.status(201).json(condominioCreado);
     } catch (error) {
       console.error(error);
@@ -101,8 +94,6 @@ export const updateParcela = async (req: Request, res: Response) => {
       if (!id) {
         throw new Error('El campo id es requerido.');
       }
-      const data = {id,name, lote, area, price, location, image, description, condominio}
-      
       const parcelaActualizado = await updateParce(id, name, lote, area, price, location, image, condominio, description)
       if (!parcelaActualizado) {
         return res.status(404).json({ error: 'El documento no existe.' });

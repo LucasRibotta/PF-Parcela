@@ -1,11 +1,28 @@
 import ParcelaModel from "../models/parcela"
 import CondominioModel from '../models/condominio';
 
-const createParcela = async (data:any) => {
+const createParcela = async (  name:string,
+  lote:number,
+  area:number,
+  price:number,
+  location:string,
+  image:string,
+  description:string,
+  condominio:string
+  ) => {
 
-    const nuevoParcela = new ParcelaModel(data);
+    const nuevoParcela = new ParcelaModel({
+      name,
+      lote,
+      area,
+      price,
+      location,
+      image,
+      description,
+      condominio
+    });
         const parcelaCreado = await nuevoParcela.save();
-    const [condominioId] = await CondominioModel.find({name:data.condominio})
+    const [condominioId] = await CondominioModel.find({name:condominio})
         const id = condominioId._id;
         await CondominioModel.findByIdAndUpdate(
           id,
