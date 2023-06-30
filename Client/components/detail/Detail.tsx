@@ -10,32 +10,42 @@ import Vegetation from "@/img/svgs/Vegetacion"
 import Connection from "@/img/svgs/Connection"
 import Energy from "@/img/svgs/Energy"
 import LocationMaps from "../Maps/Maps"
+import { useParams } from "next/navigation"
+import { useGetParcelaByIdQuery } from "@/redux/services/paqueteApi"
+
 
 const DetailSection = () => {
+  const params = useParams();
+  const parcela = {
+    id: params.id,
+  }
+  const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
+  if (isLoading || isFetching) return <p>Loading</p>
+  if (error) return <p>Some error</p>
+  console.log(data?.location);
+
 
 
   return (
+
+
     <>
       <img
-        src="https://picsum.photos/1920/1080"
+        src={data?.image[0]}
         alt="parcela"
         className="absolute object-cover top-0 left-0 w-full h-screen  -z-10 animate-aparition "
       />
       <div className=" rounded-3xl border-solid border-spacing-0 w-[100%] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px] m-auto  relative overflow-hidden bg-white bg-opacity-30 border-transparent">
         <div className="flex flex-col justify-center m-auto w-full h-screen relative">
           <h1 className={`absolute left-[6%] bottom-[50%] lg:bottom-[6%] text-lg md:text-3xl font-semibold text-white text-[25px] ${style.shadowText}`}>
-            Terra Alta
+            {data?.name}
           </h1>
 
           <div className="absolute bottom-0 sm:right-[50%] sm:translate-x-[50%] translate-y-[50%] lg:right-[6%] lg:translate-x-0 p-4 w-[100%] sm:w-[100%] lg:w-[45%] bg-[#f8f8f8] lg:p-8 mt-3 rounded-2xl text-black ">
             <h3 className="font-bold my-10">Tomeco, Región del Biobío.</h3>
             <span className="my-10 font-bold">98% Vendido</span>
             <p className="my-10 text-justify">
-              Terra Alta es un proyecto inmobiliario diverso, perfecto para
-              inversión, segunda vivienda o residencia principal. Cuenta con 39
-              parcelas con distintas características de suelo, que van desde
-              limpias planicies en altura hasta sectores con generosa vegetación
-              mixta.
+              {data?.description }
             </p>
             <div className="grid grid-cols-2 mx-auto justify-center my-10">
               <div className="text-center p-5 flex items-center justify-center ">
@@ -52,7 +62,7 @@ const DetailSection = () => {
                     d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"
                   />
                 </svg>
-                <h3>5.000+ M2</h3>
+                <h3>{data?.area } M2</h3>
               </div>
               <div className="text-center p-5 flex items-center justify-center ">
                 <svg
@@ -78,7 +88,7 @@ const DetailSection = () => {
                 >
                   <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z" />
                 </svg>
-                <h3>$16.990.000 CLP</h3>
+                <h3>${data.price} CLP</h3>
               </div>
               <div className="text-center p-5 flex items-center justify-center ">
                 <svg
@@ -107,7 +117,7 @@ const DetailSection = () => {
 
             <div className="m-1 p-[20px] grid grid-cols-1  bg-[#fff4dd] text-[#ffb41c] rounded-2xl ">
               <div className="flex items-center mb-4">
-                <Paisaje/>
+                <Paisaje />
                 <h2 className="pl-2 font-bold">Proyecto Diverso</h2>
               </div>
               <p className="text-justify font-medium">Perfecto para invertir, segunda vivienda o residencia principal.</p>
@@ -122,14 +132,14 @@ const DetailSection = () => {
 
             <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f3ec] text-[#00b39c] rounded-2xl ">
               <div className="flex items-center mb-4">
-                <Camino/>
+                <Camino />
                 <h2 className=" pl-2 font-bold">Acceso Optimo</h2>
               </div>
               <p className="text-justify font-medium">Camino de acceso apto para cualquier vehiculo.</p>
             </div>
             <div className="m-1 p-[20px] grid grid-cols-1  bg-[#fed3d3] text-[#fb5252] rounded-2xl ">
               <div className="flex items-center mb-4">
-                <Vegetation/>
+                <Vegetation />
                 <h2 className=" pl-2 font-bold">Superficie y Vegetación Mixta</h2>
               </div>
               <p className="text-justify font-medium">Planicies, pendientes, estero, arboles frutales y vegetación variada.</p>
@@ -137,14 +147,14 @@ const DetailSection = () => {
 
             <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f7f7] text-[#1fcfcd] rounded-2xl ">
               <div className="flex items-center mb-4 ">
-                <Connection/>
+                <Connection />
                 <h2 className=" mb-2 pl-2 font-bold">Conectividad digital</h2>
               </div>
               <p className="text-justify font-medium">Excelente señal telefonica y conectividad 4G en el sector.</p>
             </div>
             <div className="m-1 p-[20px] grid grid-cols-1  bg-[#dbe4f8] text-[#00143f] rounded-2xl ">
               <div className="flex items-center mb-4">
-                <Energy/>
+                <Energy />
                 <h2 className=" pl-2 font-bold">Factibilidad de Energía Eléctrica.</h2>
               </div>
               <p className="text-justify font-medium">Tendido eléctrico de fácil desarrollo comunitario.</p>
@@ -160,44 +170,17 @@ const DetailSection = () => {
             Galeria
           </h2>
           <div className="w-full rounded-3xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
-            <div className="w-[95%] bg-slate-300 h-[400px] m-2 box-border rounded-3xl ">
-              <h3>Inserte imagen</h3>
-            </div>
-            <div className="w-[95%] bg-slate-300 h-[400px] m-2 box-border rounded-3xl ">
-              <h3>Inserte imagen</h3>
-            </div>
-            <div className="w-[95%] bg-slate-300 h-[400px] m-2 box-border rounded-3xl ">
-              <h3>Inserte imagen</h3>
-            </div>
-            <div className="w-[95%] bg-slate-300 h-[400px] m-2 box-border rounded-3xl ">
-              <h3>Inserte imagen</h3>
-            </div>
-            <div className="w-[95%] bg-slate-300 h-[400px] m-2 box-border rounded-3xl ">
-              <h3>Inserte imagen</h3>
-            </div>
-            <div className="w-[95%] bg-slate-300 h-[400px] m-2 box-border rounded-3xl ">
-              <h3>Inserte imagen</h3>
-            </div>
-            <div className="w-[95%] bg-slate-300 h-[400px] m-2 box-border rounded-3xl ">
-              <h3>Inserte imagen</h3>
-            </div>
-            <div className="w-[95%] bg-slate-300 h-[400px] m-2 box-border rounded-3xl ">
-              <h3>Inserte imagen</h3>
-            </div>
-            <div className="w-[95%] bg-slate-300 h-[400px] m-2 box-border rounded-3xl ">
-              <h3>Inserte imagen</h3>
-            </div>
-            <div className="w-[95%] bg-slate-300 h-[400px] m-2 box-border rounded-3xl ">
-              <h3>Inserte imagen</h3>
-            </div>
+            {
+              data?.image.map((el, index) => <img key={index} src={el} alt={el} className="w-[95%] bg-slate-300 h-[400px] m-2 box-border object-cover rounded-3xl " />)
+            }
           </div>
         </div>
 
         <div className="w-[100%] h-[500px] rounded-3xl overflow-hidden m-5 mx-auto bg-gray-600 mb-28">
-          <LocationMaps location="Argentina" />
+          <LocationMaps location={data?.location} />
         </div>
 
-        <div className="w-[70%] h-[100px] bg-slate-500 mx-auto">
+        <div className="">
           seccion de movilidad
         </div>
 

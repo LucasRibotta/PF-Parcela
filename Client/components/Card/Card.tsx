@@ -9,24 +9,26 @@ import Button from "../Button/Button"
 
 interface CardProps {
   name: string
-  precio: string
-  superficie: string
+  precio: number
+  superficie: number
+  image: string
+  id: string
 }
 
-function Card({ name, precio, superficie }: CardProps) {
+function Card({ name, precio, superficie, image, id }: CardProps) {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [click, setClick] = useState(false)
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        
+
         const response = await axios.get(
           "https://api.cloudinary.com/v1_1/parcelas/resources",
           {
             params: {
               type: "upload",
-              prefix: "Parcelas/", 
+              prefix: "Parcelas/",
             },
           }
         );
@@ -38,7 +40,7 @@ function Card({ name, precio, superficie }: CardProps) {
         console.log("Error al obtener las imágenes de Cloudinary", error);
       }
     };
-  
+
     fetchImages();
   }, []);
 
@@ -47,7 +49,7 @@ function Card({ name, precio, superficie }: CardProps) {
   }
 
   return (
-    <div className="flex-1 justify-center max-w-full text-white overflow-hidden shadow  rounded-md border-solid border-5 border-black-500 transform hover:scale-[101%] transition duration-300 ease-in-out relative">
+    <div className="flex-1 justify-center max-w-full text-white overflow-hidden shadow  rounded-md border-solid border-5 border-black-500 transform hover:scale-[101%] transition duration-300 ease-in-out relative mb-4">
       <div
         className="flex-end m-auto absolute right-6 items-end text-red-600"
         onClick={onClick}
@@ -62,7 +64,8 @@ function Card({ name, precio, superficie }: CardProps) {
       </div>
 
       <div>
-      <CloudinaryContext cloudName="parcelas">
+        <img src={image} alt="" className="absolute -z-10" />
+      {/* <CloudinaryContext cloudName="parcelas">
       {imageUrls.map((imageUrl, index) => (
         <div key={index}>
         <Image
@@ -73,7 +76,7 @@ function Card({ name, precio, superficie }: CardProps) {
         />
         </div>
         ))}
-      </CloudinaryContext>
+      </CloudinaryContext> */}
       </div>
 
       <div className="w-[25%]  transition duration-300 bg-transparent  z-30 p-2 h-full  border-black  ">
@@ -87,7 +90,7 @@ function Card({ name, precio, superficie }: CardProps) {
           <h5 className={`${style.textShadow} font-bold opacity-100 `}>
             Superficie: {superficie}
           </h5>
-          <Link href="/detail" className=" [&>button]:my-5 ">
+          <Link href={`/detail/${id}`} className=" [&>button]:my-5 ">
             <Button text={"Ver más..."} />
           </Link>
         </div>
