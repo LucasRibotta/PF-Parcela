@@ -1,6 +1,4 @@
 import { Request, Response } from "express"
-import CondominioModel from '../models/condominio';
-import ParcelaModel  from '../models/parcela'; 
 import searchParcelas from "../handlers/searchParcelas";
 import idParcela from "../handlers/idParcela"
 import functionCreate from "../handlers/createParcela"

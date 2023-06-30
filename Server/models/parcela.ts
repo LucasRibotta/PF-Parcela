@@ -1,5 +1,5 @@
-import { Schema, model, Document, Types } from "mongoose";
-import Condominio from "../models/condominio";
+import { Schema, model, Document } from "mongoose";
+
 interface IParcela extends Document {
   name: string;
   lote: number;
