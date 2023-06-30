@@ -80,7 +80,7 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
             mapContainerStyle={{ height: '100%', width: '100%' }}
             center={center}
             options={{styles: mapStyles}}
-            zoom={5}
+            zoom={7}
             onClick={handleMapClick}
           >
             {markerPosition.lat !== 0 && <Marker position={markerPosition} />}
@@ -90,7 +90,7 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
                 position={markerPosition}
                 onCloseClick={() => setShowInfoWindow(false)}
               >
-                <div className='text-black'>
+                <div className='text-black font-bold'>
                   <h4>Ubicación seleccionada:</h4>
                   <p>Latitud: {markerPosition.lat}</p>
                   <p>Longitud: {markerPosition.lng}</p>
