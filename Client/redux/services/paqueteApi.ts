@@ -2,6 +2,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 interface Parcela {
+  _id: string
+  id: string
   name: string
   lote: number
   area: number
@@ -46,11 +48,11 @@ export const parcelApi = createApi({
     })
   })
 })
-export const useGetParcelasQuery = parcelApi.endpoints.getParcelas.useQuery
+// export const useGetParcelasQuery = parcelApi.endpoints.getParcelas.useQuery
 export const {
   useCreateParcelaMutation,
   useDeleteParcelaMutation,
   useGetParcelaByIdQuery,
-  //useGetParcelasQuery,
+  useGetParcelasQuery,
   useUpdateParcelaMutation
 } = parcelApi

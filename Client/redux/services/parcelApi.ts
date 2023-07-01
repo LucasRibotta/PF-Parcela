@@ -6,8 +6,9 @@ interface Parcela {
   lote: number
   area: number
   price: number
-  location: string[]
-  image: string
+  location: string
+  description: string
+  images: string[]
   deleted: boolean
   parcelaData:[]
 }
