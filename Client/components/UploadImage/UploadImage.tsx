@@ -1,44 +1,95 @@
-import React, { useState, ChangeEvent } from 'react';
-import Axios from 'axios';
+import React, { useState } from "react"
+import Axios from "axios"
+import { Image, Transformation } from "cloudinary-react"
 
 export default function UploadImage() {
-  const [imageSelected, setImageSelected] = useState<string | File>('');
+  const [imagesSelected, setImagesSelected] = useState<File[]>([])
+  const [uploadedImages, setUploadedImages] = useState<string[]>([])
+  const [uploadSuccess, setUploadSuccess] = useState<boolean>(false)
 
-  const uploadImg = () => {
-    if (typeof imageSelected === 'string') {
-      console.log('No se ha seleccionado ninguna imagen');
-      return;
+  const uploadImg = async () => {
+    if (imagesSelected.length === 0) {
+      console.log("No image has been selected")
+      return
     }
 
-    const formData = new FormData();
-    formData.append('file', imageSelected);
-    formData.append('upload_preset', 'parcelasImg');
-    formData.append('folder', 'Parcelas');
+    try {
+      const uploadPromises = imagesSelected.map(async (image) => {
+        try {
+          const formData = new FormData()
+          formData.append("file", image)
+          formData.append("upload_preset", "parcelasImg")
+          formData.append("public_id", "Parcelas/" + image.name)
 
-    Axios.post('https://api.cloudinary.com/v1_1/parcelas/image/upload', formData)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log('Error uploading image to Cloudinary', error);
-    });
-  
-  };
+          const response = await Axios.post(
+            "https://api.cloudinary.com/v1_1/parcelas/image/upload",
+            formData
+          )
+          return response.data.secure_url
+        } catch (error) {
+          console.log("Error uploading image to Cloudinary", error)
+          throw error
+        }
+      })
 
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]!;
-    if (file) {
-      setImageSelected(file);
+      const uploadedImageUrls = await Promise.all(uploadPromises)
+      setUploadedImages(uploadedImageUrls)
+      setUploadSuccess(true)
+    } catch (error) {
+      console.log("Error uploading images to Cloudinary", error)
     }
-  };
+  }
+
+  const handleButtonClick = () => {
+    const input = document.createElement("input")
+    input.type = "file"
+    input.multiple = true
+    input.accept = "image/*"
+
+    input.onchange = (event: any) => {
+      const files = (event.target as HTMLInputElement).files
+      if (files && files.length > 0) {
+        const selectedImages = Array.from(files)
+        setImagesSelected(selectedImages)
+      }
+    }
+
+    input.click()
+  }
 
   return (
-    <div>
-      <input type="file" onChange={handleImageChange} />
+    <div className="flex flex-col justify-center items-start text-black">
+      <div className=" flex justify-center rounded-lg cursor-pointer w-[100%] mb-[1rem] ">
+        <button
+          className="py-2 px-4 bg-[#51a8a1] m-2 rounded-md text-white transition-all duration-300 hover:bg-[#126e67] hover:font-semibold"
+          type="button"
+          onClick={handleButtonClick}
+        >
+          Añadir Imagen
+        </button>
+        <button
+          className="py-2 px-4 bg-[#51a8a1] m-2 rounded-md text-white transition-all duration-300 hover:bg-[#126e67] hover:font-semibold"
+          type="button"
+          onClick={uploadImg}
+        >
+          Subir Imagen
+        </button>
+        {uploadSuccess ? (
+          <p className="text-green-500">Subida correctamente</p>
+        ) : (
+          imagesSelected.length > 0 && (
+            <p>{imagesSelected.length} Imagen seleccionada</p>
+          )
+        )}
+      </div>
 
-      <button onClick={uploadImg}>Upload Image</button>
-
-
+      {/* <div className='flex flex-row w-[15%] h-[15%] ml-[3rem] mt-[2rem] '>
+        <Image cloudName="parcelas" publicId="https://res.cloudinary.com/parcelas/image/upload/v1687573942/0d66c79d-ad42-4bad-b8e1-43b1228b2e37_d3uzal.jpg" alt='Carga Imagen'>
+          <Transformation angle="-45" />
+          <Transformation effect="trim" angle="45" crop="scale" width="600" />
+          <Transformation overlay="text:Arial_100:Hello" />
+        </Image>
+      </div> */}
     </div>
-  );
+  )
 }
