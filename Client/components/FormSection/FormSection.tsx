@@ -1,10 +1,10 @@
 "use client"
 import React, { useState, ChangeEvent, useEffect } from "react"
-import swal from 'sweetalert';
+import swal from "sweetalert"
 import UploadImage from "../UploadImage/UploadImage"
 import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
-import { useCreateParcelaMutation } from '@/redux/services/parcelApi'
+import { useCreateParcelaMutation } from "@/redux/services/parcelApi"
 import Confirmation from "../confirmation/Confirmation"
 import { useAppSelector } from "@/redux/hooks";
 import { number } from "prop-types";
@@ -21,7 +21,6 @@ type information = {
 
 
 export default function FormSection() {
-
   const [location, setLocation] = useState("")
   const [confirmation, setConfirmation] = useState(false);
   const [info, setInfo] = useState<information>({
@@ -42,18 +41,16 @@ export default function FormSection() {
     setInfo({ ...info, location: posMap, image: imageCloud });
   }, [posMap, imageCloud]);
 
-
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = event.target;
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target
 
     setInfo({ ...info, [name]: value })
-
   }
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+    event.preventDefault()
 
     if (true) {
       setInfo({
@@ -64,19 +61,16 @@ export default function FormSection() {
         location: "",
         description: "",
         image: []
-      });
-      setLocation("");
+      })
+      setLocation("")
     }
 
-    setConfirmation(true);
+    setConfirmation(true)
     createParcela(info)
 
-
     setTimeout(() => {
-      setConfirmation(false);
-    }, 2000);
-
-
+      setConfirmation(false)
+    }, 2000)
   }
 
   const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +81,10 @@ export default function FormSection() {
   return (
     <>
       {confirmation && <Confirmation />}
-      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row w-[100%] h-full sm:w-[640px] md:w-[768px] lg:w-[1024px]  mx-auto bg-[#f3f4f6] shadow-2xl text-white rounded-3xl overflow-hidden">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col md:flex-row w-[100%] h-full sm:w-[640px] md:w-[768px] lg:w-[1024px]  mx-auto bg-[#f3f4f6] shadow-2xl text-white rounded-3xl overflow-hidden"
+      >
         <div className="relative flex flex-col w-[100%] md:h-auto md:w-[50%] lg:w-[50%]  text-white">
           <div className="h-[100%] w-[100%]">
             <LocationMaps location={location} />
