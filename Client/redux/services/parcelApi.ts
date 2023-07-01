@@ -3,9 +3,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 interface Parcela {
   name: string
-  lote: number
-  area: number
-  price: number
+  lote: number|null
+  area: number|null
+  price: number|null
   location: string
   description: string
   images: string[]
