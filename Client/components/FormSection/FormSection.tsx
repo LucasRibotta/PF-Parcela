@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, ChangeEvent } from "react"
-import swal from "sweetalert"
+import swal from "sweetalert2"
 import UploadImage from "../UploadImage/UploadImage"
 import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
