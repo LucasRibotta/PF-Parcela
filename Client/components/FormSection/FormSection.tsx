@@ -1,14 +1,15 @@
 "use client"
-import React, { useState, ChangeEvent } from "react"
+import React, { useState, ChangeEvent, useEffect } from "react"
 import swal from 'sweetalert';
 import UploadImage from "../UploadImage/UploadImage"
 import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
 import { useCreateParcelaMutation } from '@/redux/services/parcelApi'
 import Confirmation from "../confirmation/Confirmation"
+import { useAppSelector } from "@/redux/hooks";
 
 export default function FormSection() {
-  
+
   const [location, setLocation] = useState("")
   const [confirmation, setConfirmation] = useState(false);
   const [info, setInfo] = useState({
@@ -21,7 +22,12 @@ export default function FormSection() {
     image: []
   });
   const [createParcela] = useCreateParcelaMutation()
- 
+  let posMap = ""
+  posMap = useAppSelector((state) => state.coordenada.position)
+
+  useEffect(() => {
+    setInfo({ ...info, location: posMap })
+  }, [posMap])
 
 
 
@@ -34,6 +40,7 @@ export default function FormSection() {
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
+
 
     if (true) {
       setInfo({
@@ -50,7 +57,7 @@ export default function FormSection() {
 
     setConfirmation(true);
     createParcela(info)
-    
+
 
     setTimeout(() => {
       setConfirmation(false);
@@ -80,6 +87,7 @@ export default function FormSection() {
                 className="text-black ml-2"
                 type="text"
                 id="location"
+                name="location"
                 value={location}
                 onChange={handleLocationChange}
               />

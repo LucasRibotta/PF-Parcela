@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { GoogleMap, Marker, InfoWindow, LoadScript } from '@react-google-maps/api';
 import mapStyles from './MapaStyle';
 import axios from 'axios';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { setCoordenadaPosition } from '@/redux/features/coordenadaSlice';
+
 
 interface LocationMapsProps {
   location: string;
@@ -14,6 +17,7 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
   const [showInfoWindow, setShowInfoWindow] = useState(false);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [locationFound, setLocationFound] = useState(true);
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     const getCoordinatesFromLocation = async () => {
@@ -47,6 +51,7 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
         if (!isNaN(lat) && !isNaN(lng)) {
           setCenter({ lat, lng });
           setMarkerPosition({ lat, lng });
+
         }
       } catch (error) {
         console.error('Error al obtener las coordenadas de la ubicación', error);
@@ -69,6 +74,7 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
       const lng = latLng.lng();
       setMarkerPosition({ lat, lng });
       setShowInfoWindow(true);
+      dispatch(setCoordenadaPosition(`${lat}, ${lng}`));
     }
   };
 
@@ -87,8 +93,8 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
 
             {showInfoWindow && (
               <InfoWindow
-                position={markerPosition}
-                onCloseClick={() => setShowInfoWindow(false)}
+              position={markerPosition}
+              onCloseClick={() => setShowInfoWindow(false)}
               >
                 <div className='text-black font-bold'>
                   <h4>Ubicación seleccionada:</h4>
