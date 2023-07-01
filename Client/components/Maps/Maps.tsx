@@ -7,6 +7,8 @@ import {
 } from "@react-google-maps/api"
 import mapStyles from "./MapaStyle"
 import axios from "axios"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { setCoordenadaPosition } from "@/redux/features/coordenadaSlice"
 
 interface LocationMapsProps {
   location: string
@@ -21,6 +23,7 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
   const [showInfoWindow, setShowInfoWindow] = useState(false)
   const [mapLoaded, setMapLoaded] = useState(false)
   const [locationFound, setLocationFound] = useState(true)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     const getCoordinatesFromLocation = async () => {
@@ -79,6 +82,7 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
       const lng = latLng.lng()
       setMarkerPosition({ lat, lng })
       setShowInfoWindow(true)
+      dispatch(setCoordenadaPosition(`${lat}, ${lng}`))
     }
   }
 
