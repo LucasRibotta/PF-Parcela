@@ -4,9 +4,11 @@ import { parcelApi } from "./services/paqueteApi"
 import { setupListeners } from "@reduxjs/toolkit/dist/query"
 import userReducer from "./features/userSlice"
 import { loginApi } from "./services/loginApi"
+import parcelReducer from "./features/parcelSlice"
 
 const rootReducer = combineReducers({
   user: userReducer,
+  parcel: parcelReducer,
   [userApi.reducerPath]: userApi.reducer,
   [parcelApi.reducerPath]: parcelApi.reducer,
   [loginApi.reducerPath]: loginApi.reducer,
