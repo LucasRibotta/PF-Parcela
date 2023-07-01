@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   coordenada: coordenadaReducer,
   [userApi.reducerPath]: userApi.reducer,
   [parcelApi.reducerPath]: parcelApi.reducer,
-  [loginApi.reducerPath]: loginApi.reducer,
+  [loginApi.reducerPath]: loginApi.reducer
   // Agrega más reducers aquí
 })
 
@@ -19,7 +19,7 @@ export const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([userApi.middleware,parcelApi.middleware]),
+    getDefaultMiddleware().concat([userApi.middleware, parcelApi.middleware])
 })
 setupListeners(store.dispatch)
 
