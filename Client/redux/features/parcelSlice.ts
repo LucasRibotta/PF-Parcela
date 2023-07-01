@@ -12,6 +12,8 @@ interface Parcela {
 interface ParcelasState {
   allParcelas: Parcela[]
   parcelas: Parcela[]
+  orderBy: string,
+  locationSelected: string
 }
 
 const initialState: ParcelasState = {
