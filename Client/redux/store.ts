@@ -4,14 +4,16 @@ import { parcelApi } from "./services/paqueteApi"
 import { setupListeners } from "@reduxjs/toolkit/dist/query"
 import userReducer from "./features/userSlice"
 import { loginApi } from "./services/loginApi"
+import coordenadaReducer from "./features/coordenadaSlice"
 import parcelReducer from "./features/parcelSlice"
 
 const rootReducer = combineReducers({
   user: userReducer,
+  coordenada: coordenadaReducer,
   parcel: parcelReducer,
   [userApi.reducerPath]: userApi.reducer,
   [parcelApi.reducerPath]: parcelApi.reducer,
-  [loginApi.reducerPath]: loginApi.reducer,
+  [loginApi.reducerPath]: loginApi.reducer
   // Agrega más reducers aquí
 })
 
@@ -19,7 +21,7 @@ export const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([userApi.middleware,parcelApi.middleware]),
+    getDefaultMiddleware().concat([userApi.middleware, parcelApi.middleware])
 })
 setupListeners(store.dispatch)
 

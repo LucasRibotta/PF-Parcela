@@ -1,40 +1,40 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface Parcela {
-  // id: string
+  id: string
   name: string
-  lote: number
-  area: number
   price: number
   location: string[]
+  area: number
   // Otras propiedades de la parcela
 }
 
-interface ParcelsState {
-  parcels: Parcela[]
-  orderBy: string
-  locationSelected: string
+interface ParcelasState {
+  allParcelas: Parcela[]
+  parcelas: Parcela[]
 }
 
-const initialState: ParcelsState = {
-  parcels: [],
+const initialState: ParcelasState = {
+  allParcelas: [],
+  parcelas: [],
   orderBy: "",
   locationSelected: ""
 }
 
-const parcelSlice = createSlice({
-  name: "parcel",
+const parcelasSlice = createSlice({
+  name: "parcelas",
   initialState,
   reducers: {
-    setParcels: (state, action: PayloadAction<Parcela[]>) => {
-      state.parcels = action.payload
+    setParcelas: (state, action: PayloadAction<Parcela[]>) => {
+      state.allParcelas = action.payload
+      state.parcelas = action.payload
     },
-    sortParcels: (state, action: PayloadAction<string>) => {
+    sortParcelas: (state, action: PayloadAction<string>) => {
       const orderBy = action.payload
       if (orderBy === "asc") {
-        state.parcels.sort((a, b) => a.price - b.price)
+        state.parcelas.sort((a, b) => a.price - b.price)
       } else if (orderBy === "desc") {
-        state.parcels.sort((a, b) => b.price - a.price)
+        state.parcelas.sort((a, b) => b.price - a.price)
       }
     },
     setLocationSelected: (state, action: PayloadAction<string>) => {
@@ -43,6 +43,6 @@ const parcelSlice = createSlice({
   }
 })
 
-export const { setParcels, sortParcels } = parcelSlice.actions
+export const { setParcelas, sortParcelas, setLocationSelected } = parcelasSlice.actions
 
-export default parcelSlice.reducer 
+export default parcelasSlice.reducer

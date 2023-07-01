@@ -6,10 +6,11 @@ interface Parcela {
   lote: number
   area: number
   price: number
-  location: string[]
-  image: string
+  location: string
+  description: string
+  images: string[]
   deleted: boolean
-  parcelaData:[]
+  parcelaData: []
 }
 
 export const parcelApi = createApi({
@@ -18,12 +19,9 @@ export const parcelApi = createApi({
     baseUrl: "http://localhost:3001/api/auth/"
   }),
   endpoints: (builder) => ({
-    // getParcelas: builder.query<Parcela[], { name: string}>({
-    //   query: ({ name }) => `parcelas/${name}`
-    // }),
     getParcelas: builder.query<Parcela[], string>({
-        query: (nombre) => `parcelas?nombre=${nombre}`
-      }), 
+      query: (nombre) => `parcelas?nombre=${nombre}`
+    }),
     getParcelaById: builder.query<Parcela, { id: string }>({
       query: ({ id }) => `parcelas/${id}`
     }),

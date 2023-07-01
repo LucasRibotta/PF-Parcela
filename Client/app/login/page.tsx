@@ -3,11 +3,13 @@ import Image from "next/image"
 import logo from "../../img/forestImage.jpg"
 import Link from "next/link"
 import { BiLogoFacebook, BiLogoGmail } from "react-icons/bi"
+import ButtonGoogle from "@/components/ButtonGoogle/ButtonGoogle";
 import { useEffect, useState } from "react"
 import { useAppSelector, useAppDispatch } from "@/redux/hooks"
 import { setUserAdmin } from "@/redux/features/userSlice"
 import { useRouter } from "next/navigation"
 import Swal from "sweetalert2"
+import axios from "axios"
 
 type CustomEvent = {
   target: HTMLInputElement
@@ -17,7 +19,7 @@ export default function Login() {
   const router = useRouter()
   const [error, setError] = useState("")
   const [input, setInput] = useState({
-    name: "",
+    email: "",
     password: ""
   })
   const adminLoggedIn = useAppSelector((state) => state.user.isAdmin)
@@ -28,7 +30,7 @@ export default function Login() {
     if (name === "name") {
       setInput({
         ...input,
-        [name]: value
+        email: value
       })
     }
     if (name === "password") {
@@ -39,12 +41,27 @@ export default function Login() {
     }
   }
 
+  const handleUser = async () => {
+    try {
+      const response = await axios.post("http://localhost:3001/login", input)
+
+      const data = response.data
+
+      if (data) {
+        console.log(data)
+      }
+    } catch (error) {
+      console.log(error.response.data)
+      setError("Ocurrió un error al iniciar sesión")
+    }
+  }
+
   const handleLogin = () => {
     // Aquí puedes realizar la validación del usuario en tu backend
     // por ejemplo, utilizando una llamada a la API
 
     // Simulación de verificación de usuario
-    if (input.name === "admin" && input.password === "admin123") {
+    if (input.email === "admin" && input.password === "admin123") {
       // Usuario válido, realizar acción de inicio de sesión exitosa
       dispatch(setUserAdmin(true))
       Swal.fire(`¡Bienvenido!`, "Has iniciado sesion", "success")
@@ -73,7 +90,10 @@ export default function Login() {
           <h2 className="text-3xl font-black mb-6 ">Iniciar sesión</h2>
           <div className="flex pb-4">
             <div className="border-[1px] text[#ddd] rounded-[50%] inline-flex justify-center items-center mx-[5px] h-[40px] w-[40px]">
-              <BiLogoGmail className="h-4 w-4 text-[#51a8a1]" />
+              {/* Reemplazar el BiLogoGmail por un Boton que contenga al BiLogoGmail... */}
+              {/* <BiLogoGmail className="h-4 w-4 text-[#51a8a1]" /> */}
+              <ButtonGoogle />
+              {/* ...y reemplazar este BiLogoGmail  */}
             </div>
           </div>
           <div className="mb-4">
@@ -81,7 +101,7 @@ export default function Login() {
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#51a8a1]"
               id="email"
               name="name"
-              value={input.name}
+              value={input.email}
               type="email"
               placeholder="Email"
               onChange={handleInputChange}
@@ -105,7 +125,7 @@ export default function Login() {
             <button
               className="bg-[#51a8a1] hover:bg-[#126e67] ease-in-out min-w-[9rem] max-w-[9rem] duration-300 text-white font-bold py-2 px-4 rounded-[20px]  focus:outline-none focus:shadow-outline"
               type="button"
-              onClick={handleLogin}
+              onClick={handleUser}
             >
               Iniciar sesión
             </button>

@@ -2,7 +2,7 @@
 import axios from "axios"
 import "tailwindcss/tailwind.css"
 import { useEffect, useState } from "react"
-import { CloudinaryContext, Image } from "cloudinary-react";
+import { CloudinaryContext, Image } from "cloudinary-react"
 import Link from "next/link"
 import style from "./card.module.css"
 import Button from "../Button/Button"
@@ -16,33 +16,32 @@ interface CardProps {
 }
 
 function Card({ name, precio, superficie, image, id }: CardProps) {
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>([])
   const [click, setClick] = useState(false)
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
-
         const response = await axios.get(
           "https://api.cloudinary.com/v1_1/parcelas/resources",
           {
             params: {
               type: "upload",
-              prefix: "Parcelas/",
-            },
+              prefix: "Parcelas/"
+            }
           }
-        );
+        )
         const images = response.data.resources.map(
           (image: { secure_url: string }) => image.secure_url
-        );
-        setImageUrls(images);
+        )
+        setImageUrls(images)
       } catch (error) {
-        console.log("Error al obtener las imágenes de Cloudinary", error);
+        // console.log("Error al obtener las imágenes de Cloudinary", error);
       }
-    };
+    }
 
-    fetchImages();
-  }, []);
+    fetchImages()
+  }, [])
 
   const onClick = () => {
     setClick(!click)
@@ -65,7 +64,7 @@ function Card({ name, precio, superficie, image, id }: CardProps) {
 
       <div>
         <img src={image} alt="" className="absolute -z-10" />
-      {/* <CloudinaryContext cloudName="parcelas">
+        {/* <CloudinaryContext cloudName="parcelas">
       {imageUrls.map((imageUrl, index) => (
         <div key={index}>
         <Image

@@ -1,54 +1,63 @@
 "use client"
-import React, { useState, ChangeEvent } from "react"
-import swal from 'sweetalert';
+import React, { useState, ChangeEvent, useEffect } from "react"
+import swal from "sweetalert"
 import UploadImage from "../UploadImage/UploadImage"
 import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
+import { useCreateParcelaMutation } from "@/redux/services/parcelApi"
 import Confirmation from "../confirmation/Confirmation"
+import { useAppSelector } from "@/redux/hooks"
 
 export default function FormSection() {
   const [location, setLocation] = useState("")
-  const [confirmation, setConfirmation] = useState(false);
+  const [confirmation, setConfirmation] = useState(false)
   const [info, setInfo] = useState({
     name: "",
-    lote: "",
-    area: "",
-    price: "",
+    lote: 0,
+    area: 0,
+    price: 0,
     location: "",
     description: "",
-  });
+    image: []
+  })
+  const [createParcela] = useCreateParcelaMutation()
+  let posMap = ""
+  posMap = useAppSelector((state) => state.coordenada.position)
 
+  useEffect(() => {
+    setInfo({ ...info, location: posMap })
+  }, [posMap])
 
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = event.target;
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target
 
     setInfo({ ...info, [name]: value })
-
   }
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (true) {
       setInfo({
         name: "",
-        lote: "",
-        area: "",
-        price: "",
+        lote: 0,
+        area: 0,
+        price: 0,
         location: "",
         description: "",
-      });
-      setLocation("");
+        image: []
+      })
+      setLocation("")
     }
 
-    setConfirmation(true);
+    setConfirmation(true)
+    createParcela(info)
 
     setTimeout(() => {
-      setConfirmation(false);
-    }, 2000);
-
-
+      setConfirmation(false)
+    }, 2000)
   }
 
   const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +68,10 @@ export default function FormSection() {
   return (
     <>
       {confirmation && <Confirmation />}
-      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row w-[100%] h-full sm:w-[640px] md:w-[768px] lg:w-[1024px]  mx-auto bg-[#f3f4f6] shadow-2xl text-white rounded-3xl overflow-hidden">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col md:flex-row w-[100%] h-full sm:w-[640px] md:w-[768px] lg:w-[1024px]  mx-auto bg-[#f3f4f6] shadow-2xl text-white rounded-3xl overflow-hidden"
+      >
         <div className="relative flex flex-col w-[100%] md:h-auto md:w-[50%] lg:w-[50%]  text-white">
           <div className="h-[100%] w-[100%]">
             <LocationMaps location={location} />
@@ -72,6 +84,7 @@ export default function FormSection() {
                 className="text-black ml-2"
                 type="text"
                 id="location"
+                name="location"
                 value={location}
                 onChange={handleLocationChange}
               />
