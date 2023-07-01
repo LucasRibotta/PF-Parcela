@@ -11,9 +11,9 @@ import { number } from "prop-types";
 
 type information = {
   name: string
-  lote: number|null
-  area: number|null
-  price: number|null
+  lote: number | null
+  area: number | null
+  price: number | null
   location: string
   description: string
   image: string[]
@@ -31,11 +31,11 @@ export default function FormSection() {
     location: "",
     description: "",
     image: []
-  } );
+  });
   const [createParcela] = useCreateParcelaMutation()
   let posMap = ""
   posMap = useAppSelector((state) => state.coordenada.position)
-  const imageCloud = useAppSelector( state => state.coordenada.image)
+  const imageCloud = useAppSelector(state => state.coordenada.image)
 
   useEffect(() => {
     setInfo({ ...info, location: posMap, image: imageCloud });
@@ -164,6 +164,15 @@ export default function FormSection() {
           <div className="text-black bg-green pt-[1rem]">
             <UploadImage />
           </div>
+
+          <div className="flex w-full min-h-[70px] max-h-max">
+            {imageCloud?.map((el, index) =>
+              <>
+                <img className="w-[100px] h-[70px] m-2 rounded-md" key={index} src={el} alt={el} />
+              </>
+            )}
+          </div>
+
 
           <div className=" pt-1 flex justify-center  m-auto">
             <Button text="Create" />
