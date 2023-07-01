@@ -50,7 +50,7 @@ export const createParcela = async (req: Request, res: Response) => {
   try {
     const { name, lote, area, price, location, image, description } = req.body;
 
-    console.log(name);
+    console.log(req.body);
 
 
     if (!name || !lote || !area || !price || !location || !image || !description) {

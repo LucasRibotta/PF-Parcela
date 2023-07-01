@@ -1,11 +1,23 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Axios from "axios"
 import { Image, Transformation } from "cloudinary-react"
+import { useAppDispatch } from "@/redux/hooks"
+import { setImageCloud } from "@/redux/features/coordenadaSlice"
 
 export default function UploadImage() {
   const [imagesSelected, setImagesSelected] = useState<File[]>([])
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
   const [uploadSuccess, setUploadSuccess] = useState<boolean>(false)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(setImageCloud(uploadedImages));
+  }, [uploadedImages])
+
+
+
+  // console.log(uploadedImages);
+
 
   const uploadImg = async () => {
     if (imagesSelected.length === 0) {
