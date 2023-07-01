@@ -6,27 +6,40 @@ import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
 import { useCreateParcelaMutation } from "@/redux/services/parcelApi"
 import Confirmation from "../confirmation/Confirmation"
-import { useAppSelector } from "@/redux/hooks"
+import { useAppSelector } from "@/redux/hooks";
+import { number } from "prop-types";
+
+type information = {
+  name: string
+  lote: number | null
+  area: number | null
+  price: number | null
+  location: string
+  description: string
+  image: string[]
+}
+
 
 export default function FormSection() {
   const [location, setLocation] = useState("")
-  const [confirmation, setConfirmation] = useState(false)
-  const [info, setInfo] = useState({
+  const [confirmation, setConfirmation] = useState(false);
+  const [info, setInfo] = useState<information>({
     name: "",
-    lote: 0,
-    area: 0,
-    price: 0,
+    lote: null,
+    area: null,
+    price: null,
     location: "",
     description: "",
     image: []
-  })
+  });
   const [createParcela] = useCreateParcelaMutation()
   let posMap = ""
   posMap = useAppSelector((state) => state.coordenada.position)
+  const imageCloud = useAppSelector(state => state.coordenada.image)
 
   useEffect(() => {
-    setInfo({ ...info, location: posMap })
-  }, [posMap])
+    setInfo({ ...info, location: posMap, image: imageCloud });
+  }, [posMap, imageCloud]);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -42,9 +55,9 @@ export default function FormSection() {
     if (true) {
       setInfo({
         name: "",
-        lote: 0,
-        area: 0,
-        price: 0,
+        lote: null,
+        area: null,
+        price: null,
         location: "",
         description: "",
         image: []
@@ -112,7 +125,7 @@ export default function FormSection() {
             id="lote"
             name="lote"
             onChange={handleChange}
-            value={info.lote}
+            value={info.lote ?? ""}
           />
           <input
             className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
@@ -120,7 +133,7 @@ export default function FormSection() {
             placeholder="Area"
             name="area"
             onChange={handleChange}
-            value={info.area}
+            value={info.area ?? ""}
           />
           <input
             className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
@@ -128,7 +141,7 @@ export default function FormSection() {
             placeholder="Precio"
             name="price"
             onChange={handleChange}
-            value={info.price}
+            value={info.price ?? ""}
           />
           <textarea
             className="rounded-md h-[100px] placeholder:text-center border-[1px] border-gray-200"
@@ -151,6 +164,15 @@ export default function FormSection() {
           <div className="text-black bg-green pt-[1rem]">
             <UploadImage />
           </div>
+
+          <div className="flex w-full min-h-[70px] max-h-max">
+            {imageCloud?.map((el, index) =>
+              <>
+                <img className="w-[100px] h-[70px] m-2 rounded-md" key={index} src={el} alt={el} />
+              </>
+            )}
+          </div>
+
 
           <div className=" pt-1 flex justify-center  m-auto">
             <Button text="Create" />
