@@ -12,6 +12,10 @@ import localAauth from "./passport/local-auth";
 import "dotenv/config";
 import cors from "cors";
 import * as bodyParser from 'body-parser';
+
+
+const dotenv = require("dotenv");
+
 const PORT = process.env.PORT || 3001
 // Configuración de CORS
 const corsOptions = {
@@ -20,6 +24,9 @@ const corsOptions = {
 };
 
 const app = express(); 
+
+dotenv.config();
+
 app.use(cors(corsOptions));
 
 app.use(express.json()); 
