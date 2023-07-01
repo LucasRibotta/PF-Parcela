@@ -18,8 +18,8 @@ export default function UploadImage() {
         try {
           const formData = new FormData()
           formData.append("file", image)
-          formData.append("upload_preset", "parcelasImg")
-          formData.append("public_id", "Parcelas/" + image.name)
+          formData.append("upload_preset", "parcelas")
+          formData.append("public_id", "parcelas/" + image.name)
 
           const response = await Axios.post(
             "https://api.cloudinary.com/v1_1/parcelas/image/upload",
