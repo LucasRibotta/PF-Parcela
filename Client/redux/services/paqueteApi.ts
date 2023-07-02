@@ -10,6 +10,7 @@ interface Parcela {
   price: number
   location: string[]
   image: string
+  description: string
   deleted: boolean
   parcelaData: string[]
 }

@@ -12,7 +12,7 @@ export default function UploadImage() {
 
   useEffect(() => {
     dispatch(setImageCloud(uploadedImages));
-  }, [uploadedImages])
+  }, [dispatch, uploadedImages])
 
 
 
