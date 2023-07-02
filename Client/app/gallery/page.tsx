@@ -1,40 +1,50 @@
-import Card from "../../components/Card/Card";
-import SearchBar from "@/components/SearchBar/SearchBar";
-import Filter from "@/components/Filters/Filter";
-import Order from "@/components/Filters/Order"
-import 'tailwindcss/tailwind.css';
+"use client"
+import Card from "../../components/Card/Card"
+import Filter from "@/components/Filters/Filter"
+import "tailwindcss/tailwind.css"
+import CustomPagination from "@/components/CustomPagination/CustomPagination"
+import { useGetParcelasQuery } from "@/redux/services/paqueteApi"
+
+
+interface Parcela {
+  name: string
+  lote: number
+  area: number
+  price: number
+  location: string[]
+  image: string
+  deleted: boolean
+  parcelData: string[]
+  desccption: string
+  _id: string
+}
 
 export default function Gallery() {
-  const cardTypes = [
-    { Name: "Tipo 1", Precio: "USD 100", Superficie: '100 km2' },
-    { Name: "Tipo 2", Precio: "USD 200", Superficie: '200 km2' },
-    { Name: "Tipo 3", Precio: "USD 300", Superficie: '300 km2' },
-    { Name: "Tipo 4", Precio: "USD 400", Superficie: '400 km2' },
-    { Name: "Tipo 5", Precio: "USD 500", Superficie: '500 km2' },
-    { Name: "Tipo 6", Precio: "USD 600", Superficie: '600 km2' }
-  ];
+  const { data, error, isLoading, isFetching } = useGetParcelasQuery(null)
+  if (isLoading || isFetching) return <p>Loading</p>
+  if (error) return <p>Some error</p>
+  if (!data || !Array.isArray(data)) return <p>no data</p>
+
+  console.log(data);
+
 
   return (
-    <div className="flex flex-row bg-blue-500 h-full">
-      <div>
-        <SearchBar />
-      </div>
-      <div className="h-full w-1/1 bg-gray-500 p-4">
-        <h1>Filtrar por</h1>
-        <Filter/>
-        <h1>Ordenar por</h1>
-        <Order/>
-      </div>
-      <div className="items-center w-full pl-[10rem] px-2 flex-wrap">
-        {cardTypes.map((card, index) => (
-          <div key={index} className="mb-2">
+    <div className="flex m-auto flex-col relative w-full pt-[5rem] lg:w-[1280px]">
+      <div className="flex pt-[2rem]">
+        <Filter />
+        <div className="flex-grow pl-[20rem] px-2">
+          {data.map((el, index) => (
             <Card
-              name={card.Name}
-              precio={card.Precio}
-              superficie={card.Superficie}
+              key={index}
+              name={el.name}
+              precio={el.price}
+              superficie={el.area}
+              image={el.image[0]}
+              id={el._id}
             />
-          </div>
-        ))}
+          ))}
+          <CustomPagination resPerPage={2} productsCount={5} />
+        </div>
       </div>
     </div>
   )

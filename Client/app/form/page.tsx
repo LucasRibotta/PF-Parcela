@@ -1,10 +1,10 @@
-import React from 'react'
-import FormSection from '../../components/FormSection/FormSection'
+import React from "react"
+import FormSection from "../../components/FormSection/FormSection"
 
 export default function Form() {
   return (
-    <div className='flex flex-col pt-[10rem]'>
-        <FormSection />
+    <div className="flex flex-col h-screen pt-[6rem] pb-[2rem]">
+      <FormSection />
     </div>
   )
 }
