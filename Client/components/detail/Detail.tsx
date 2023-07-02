@@ -10,8 +10,10 @@ import Vegetation from "@/img/svgs/Vegetacion"
 import Connection from "@/img/svgs/Connection"
 import Energy from "@/img/svgs/Energy"
 import LocationMaps from "../Maps/Maps"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useGetParcelaByIdQuery } from "@/redux/services/parcelApi"
+import Swal from 'sweetalert2'
+import { useDeleteParcelaMutation } from "@/redux/services/paqueteApi"
 
 
 const DetailSection = () => {
@@ -19,9 +21,41 @@ const DetailSection = () => {
   const parcela = {
     id: params.id,
   }
+  const router = useRouter();
+  const [deleteParcela] = useDeleteParcelaMutation()
   const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
   if (isLoading || isFetching) return <p>Loading</p>
   if (error) return <p>Some error</p>
+
+
+
+  const deleteParcel = () => {
+    Swal.fire({
+      title: 'Deseas eliminar esta parcela?',
+      text: "Esta eliminacion no se puede revertir",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminalo',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Eliminado',
+          'Tu parcela a sido eliminada',
+          'success'
+        )
+        deleteParcela(parcela);
+        setTimeout(() => {
+          router.push('/gallery');
+        }, 3000)
+
+      }
+    })
+  }
+
+
 
 
 
@@ -30,7 +64,7 @@ const DetailSection = () => {
 
     <>
       <img
-        src={data?.image[0] }
+        src={data?.image[0]}
         alt="parcela"
         className="absolute object-cover top-0 left-0 w-full h-screen  -z-10 animate-aparition "
       />
@@ -188,9 +222,10 @@ const DetailSection = () => {
           <Link href={`/form/${parcela.id}`}>
             <Button text={"Editar"}></Button>
           </Link>
-          <Link href={`/form/${parcela.id}`}>
+          <div onClick={deleteParcel}>
             <Button text={"Eliminar"}></Button>
-          </Link>
+          </div>
+
           <Link href="/" className="mr-8 shadow-lg">
             <Button text={"Comprar Ahora"}></Button>
           </Link>

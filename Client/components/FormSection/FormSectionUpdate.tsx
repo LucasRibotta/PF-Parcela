@@ -64,6 +64,7 @@ export default function FormSectionUpdate() {
   },[imageCloud, data?.image])
 
   useEffect(() => {
+    setInfo({...info, location: posMap});
     if (data?.image.length === 0) {
       setInfo({ ...info, location: posMap, image: imageCloud });
     }
