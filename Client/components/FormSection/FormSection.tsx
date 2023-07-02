@@ -105,7 +105,7 @@ export default function FormSection() {
           </div>
         </div>
 
-        <div className="flex flex-col m-auto p-[2rem] h-[70%] w-[50%] text-black ">
+        <div className="flex flex-col m-auto p-[2rem] w-[50%] text-black ">
           <h2 className="mb-4 text-center font-bold text-[30px]">
             Describenos tu parcela{" "}
           </h2>

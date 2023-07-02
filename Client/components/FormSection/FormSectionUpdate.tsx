@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import React, { useState, ChangeEvent, useEffect } from "react"
 import swal from "sweetalert"
@@ -49,20 +51,22 @@ export default function FormSectionUpdate() {
     price: data?.price ?? null,
     location: data?.location ?? "",
     description: data?.description ?? "",
-    image: (data?.image ?? [])
+    image: data?.image ?? []
   });
 
   useEffect(() => {
     if (data?.image) {
       setImages([...data.image,...imageCloud]);
+    } else {
+      setImages([...info.image, ...imageCloud])
     }
+    setInfo({ ...info, image: data?.image ? [...data.image, ...imageCloud] : [...info.image, ...imageCloud] });
   },[imageCloud, data?.image])
-  // if (imageCloud) {
-  //   images.push(...imageCloud);
-  // }
 
   useEffect(() => {
-    setInfo({ ...info, location: posMap });
+    if (data?.image.length === 0) {
+      setInfo({ ...info, location: posMap, image: imageCloud });
+    }
   }, [posMap, imageCloud]);
 
   useEffect(() => {
@@ -80,9 +84,11 @@ export default function FormSectionUpdate() {
   }, [data, isLoading, isFetching])
 
 
+
   const handlerDelete = (photo: string) => {
     const fil = images.filter(el => el !== photo)
     setImages(fil)
+    setInfo({ ...info, image: fil })
   }
 
 
@@ -215,7 +221,7 @@ export default function FormSectionUpdate() {
           </div>
 
           <div className="grid grid-cols-3 w-full mx-auto">
-            {images.map((el, index) =>
+            {images?.map((el, index) =>
               <>
                 <div className={`relative ${style.close} `}>
                   <img className="w-[100px] h-[70px] mx-auto my-2 rounded-md" key={index} src={el} alt={el} />
