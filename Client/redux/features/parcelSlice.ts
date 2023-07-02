@@ -16,15 +16,11 @@ interface Parcela {
 interface ParcelasState {
   allParcelas: Parcela[]
   parcelas: Parcela[]
-  orderBy: string,
-  locationSelected: string
 }
 
 const initialState: ParcelasState = {
   allParcelas: [],
   parcelas: [],
-  orderBy: "",
-  locationSelected: ""
 }
 
 const parcelasSlice = createSlice({
@@ -43,12 +39,9 @@ const parcelasSlice = createSlice({
         state.parcelas.sort((a, b) => b.price - a.price)
       }
     },
-    setLocationSelected: (state, action: PayloadAction<string>) => {
-      state.locationSelected = action.payload
-     },
   }
 })
 
-export const { setParcelas, sortParcelas, setLocationSelected } = parcelasSlice.actions
+export const { setParcelas, sortParcelas } = parcelasSlice.actions
 
 export default parcelasSlice.reducer
