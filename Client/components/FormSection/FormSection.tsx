@@ -1,62 +1,76 @@
 "use client"
-import React, { useState, ChangeEvent } from "react"
-import swal from 'sweetalert';
+import React, { useState, ChangeEvent, useEffect } from "react"
+import swal from "sweetalert"
 import UploadImage from "../UploadImage/UploadImage"
 import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
-import { useCreateParcelaMutation } from '@/redux/services/parcelApi'
+import { useCreateParcelaMutation } from "@/redux/services/parcelApi"
 import Confirmation from "../confirmation/Confirmation"
+import { useAppSelector } from "@/redux/hooks";
+import { number } from "prop-types";
+
+type information = {
+  name: string
+  lote: number | null
+  area: number | null
+  price: number | null
+  location: string
+  description: string
+  image: string[]
+}
+
 
 export default function FormSection() {
-  
   const [location, setLocation] = useState("")
   const [confirmation, setConfirmation] = useState(false);
-  const [info, setInfo] = useState({
+  const [info, setInfo] = useState<information>({
     name: "",
-    lote: 0,
-    area: 0,
-    price: 0,
+    lote: null,
+    area: null,
+    price: null,
     location: "",
     description: "",
     image: []
   });
   const [createParcela] = useCreateParcelaMutation()
- 
+  let posMap = ""
+  posMap = useAppSelector((state) => state.coordenada.position)
+  const imageCloud = useAppSelector(state => state.coordenada.image)
 
+  useEffect(() => {
+    setInfo({ ...info, location: posMap, image: imageCloud });
+  }, [posMap, imageCloud]);
 
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = event.target;
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target
 
     setInfo({ ...info, [name]: value })
-
   }
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (true) {
       setInfo({
         name: "",
-        lote: 0,
-        area: 0,
-        price: 0,
+        lote: null,
+        area: null,
+        price: null,
         location: "",
         description: "",
         image: []
-      });
-      setLocation("");
+      })
+      setLocation("")
     }
 
-    setConfirmation(true);
+    setConfirmation(true)
     createParcela(info)
-    
 
     setTimeout(() => {
-      setConfirmation(false);
-    }, 2000);
-
-
+      setConfirmation(false)
+    }, 2000)
   }
 
   const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -67,7 +81,10 @@ export default function FormSection() {
   return (
     <>
       {confirmation && <Confirmation />}
-      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row w-[100%] h-full sm:w-[640px] md:w-[768px] lg:w-[1024px]  mx-auto bg-[#f3f4f6] shadow-2xl text-white rounded-3xl overflow-hidden">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col md:flex-row w-[100%] h-full sm:w-[640px] md:w-[768px] lg:w-[1024px]  mx-auto bg-[#f3f4f6] shadow-2xl text-white rounded-3xl overflow-hidden"
+      >
         <div className="relative flex flex-col w-[100%] md:h-auto md:w-[50%] lg:w-[50%]  text-white">
           <div className="h-[100%] w-[100%]">
             <LocationMaps location={location} />
@@ -80,6 +97,7 @@ export default function FormSection() {
                 className="text-black ml-2"
                 type="text"
                 id="location"
+                name="location"
                 value={location}
                 onChange={handleLocationChange}
               />
@@ -107,7 +125,7 @@ export default function FormSection() {
             id="lote"
             name="lote"
             onChange={handleChange}
-            value={info.lote}
+            value={info.lote ?? ""}
           />
           <input
             className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
@@ -115,7 +133,7 @@ export default function FormSection() {
             placeholder="Area"
             name="area"
             onChange={handleChange}
-            value={info.area}
+            value={info.area ?? ""}
           />
           <input
             className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
@@ -123,7 +141,7 @@ export default function FormSection() {
             placeholder="Precio"
             name="price"
             onChange={handleChange}
-            value={info.price}
+            value={info.price ?? ""}
           />
           <textarea
             className="rounded-md h-[100px] placeholder:text-center border-[1px] border-gray-200"
@@ -146,6 +164,15 @@ export default function FormSection() {
           <div className="text-black bg-green pt-[1rem]">
             <UploadImage />
           </div>
+
+          <div className="flex w-full min-h-[70px] max-h-max">
+            {imageCloud?.map((el, index) =>
+              <>
+                <img className="w-[100px] h-[70px] m-2 rounded-md" key={index} src={el} alt={el} />
+              </>
+            )}
+          </div>
+
 
           <div className=" pt-1 flex justify-center  m-auto">
             <Button text="Create" />

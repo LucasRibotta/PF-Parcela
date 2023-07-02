@@ -1,11 +1,23 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Axios from "axios"
 import { Image, Transformation } from "cloudinary-react"
+import { useAppDispatch } from "@/redux/hooks"
+import { setImageCloud } from "@/redux/features/coordenadaSlice"
 
 export default function UploadImage() {
   const [imagesSelected, setImagesSelected] = useState<File[]>([])
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
   const [uploadSuccess, setUploadSuccess] = useState<boolean>(false)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(setImageCloud(uploadedImages));
+  }, [uploadedImages])
+
+
+
+  // console.log(uploadedImages);
+
 
   const uploadImg = async () => {
     if (imagesSelected.length === 0) {
@@ -18,8 +30,8 @@ export default function UploadImage() {
         try {
           const formData = new FormData()
           formData.append("file", image)
-          formData.append("upload_preset", "parcelasImg")
-          formData.append("public_id", "Parcelas/" + image.name)
+          formData.append("upload_preset", "parcelas")
+          formData.append("public_id", "parcelas/" + image.name)
 
           const response = await Axios.post(
             "https://api.cloudinary.com/v1_1/parcelas/image/upload",
