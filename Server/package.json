@@ -5,7 +5,7 @@
     "start": "next start",
     "lint": "next lint",
     "dev": "nodemon index.ts",
-    "build": "tsc"
+    "build": "npm run your-build-script"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^1.0.0",
