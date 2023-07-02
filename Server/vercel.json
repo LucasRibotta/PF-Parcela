@@ -1,9 +1,10 @@
 {
-    "functions": {
-      "prebuild": {
-        "command": "npm run build"
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/node"
       }
-    },
+    ],
     "env": {
       "MONGODB_URI": "MONGODB_URL"
     }
