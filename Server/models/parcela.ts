@@ -6,7 +6,7 @@ interface IParcela extends Document {
   area: number;
   price: number;
   location: string;
-  image: string[];
+  images: string[];
   deleted: boolean;
   description: string; // Referencia al Condominio
 }
@@ -17,7 +17,7 @@ const parcelaSchema = new Schema<IParcela>({
   area: { type: Number, required: true },
   price: { type: Number, required: true },
   location: { type: String, required: true },
-  image: { type: [String], required: true },
+  images: { type: [String], required: true },
   deleted: { type: Boolean, default: false },
   description: { type: Schema.Types.String, ref: "Condominio", required: true }
 });

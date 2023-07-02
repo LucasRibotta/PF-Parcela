@@ -22,7 +22,6 @@ const DetailSection = () => {
   const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
   if (isLoading || isFetching) return <p>Loading</p>
   if (error) return <p>Some error</p>
-  console.log(data?.location);
 
 
 
@@ -62,7 +61,7 @@ const DetailSection = () => {
                     d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"
                   />
                 </svg>
-                <h3>{data?.area } M2</h3>
+                <h3>{data?.area } m<sup>2</sup></h3>
               </div>
               <div className="text-center p-5 flex items-center justify-center ">
                 <svg
@@ -186,6 +185,9 @@ const DetailSection = () => {
 
         {/* <Button text={"Agregar a carro"}></Button> */}
         <div className="fixed flex justify-end bottom-6 w-[300px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px]">
+          <Link href={`/form/${parcela.id}`}>
+            <Button text={"Editar"}></Button>
+          </Link>
           <Link href="/" className="mr-8 shadow-lg">
             <Button text={"Comprar Ahora"}></Button>
           </Link>
