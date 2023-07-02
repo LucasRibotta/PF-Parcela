@@ -1,11 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface Parcela {
-  id: string
   name: string
-  price: number
-  location: string[]
-  area: number
+  lote: number|null
+  area: number|null
+  price: number|null
+  location: string
+  description: string
+  images: string[]
+  deleted: boolean
+  parcelaData: []
   // Otras propiedades de la parcela
 }
 
