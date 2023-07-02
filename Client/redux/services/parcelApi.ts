@@ -55,6 +55,6 @@ export const {
   useCreateParcelaMutation,
   useDeleteParcelaMutation,
   useGetParcelaByIdQuery,
-  //useGetParcelasQuery,
+  // useGetParcelasQuery,
   useUpdateParcelaMutation
 } = parcelApi
