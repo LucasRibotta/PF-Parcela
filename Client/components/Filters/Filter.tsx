@@ -8,9 +8,6 @@ import { setParcelas } from "@/redux/features/parcelSlice"
 export default function Filter() {
   const { data, error, isLoading, isFetching } = useGetParcelasQuery()
 
-  const handleSubmit = () => {
-    console.log("filtroUbicacion", data)
-  }
   
   
   return (
