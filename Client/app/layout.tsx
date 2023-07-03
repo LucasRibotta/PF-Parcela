@@ -1,10 +1,10 @@
+/* eslint-disable @next/next/no-head-element */
 import "./globals.css"
 import { Montserrat } from "next/font/google"
 import Navbar from "@/components/Navbar/Navbar"
 import ProvidersWrapper from "./ProvidersWrapper"
 import Footer from "@/components/footer/Footer"
 import Providers from "@/redux/provider"
-
 const inter = Montserrat({ subsets: ["latin"] })
 
 export const metadata = {
@@ -50,7 +50,6 @@ export default function RootLayout({
           <Providers>
             <Navbar />
             {children}
-            {/* <Footer /> */}
           </Providers>
         </ProvidersWrapper>
       </body>

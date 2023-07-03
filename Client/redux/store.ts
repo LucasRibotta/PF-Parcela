@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit"
 import { userApi } from "./services/userApi"
-import { parcelApi } from "./services/paqueteApi"
+import { parcelApi } from "./services/parcelApi"
 import { setupListeners } from "@reduxjs/toolkit/dist/query"
 import userReducer from "./features/userSlice"
 import { loginApi } from "./services/loginApi"
@@ -10,7 +10,7 @@ import parcelReducer from "./features/parcelSlice"
 const rootReducer = combineReducers({
   user: userReducer,
   coordenada: coordenadaReducer,
-  parcel: parcelReducer,
+  parcelas: parcelReducer,
   [userApi.reducerPath]: userApi.reducer,
   [parcelApi.reducerPath]: parcelApi.reducer,
   [loginApi.reducerPath]: loginApi.reducer

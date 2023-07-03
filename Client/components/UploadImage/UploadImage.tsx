@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react"
 import Axios from "axios"
 import { Image, Transformation } from "cloudinary-react"
