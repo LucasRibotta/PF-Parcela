@@ -11,7 +11,7 @@ interface CardProps {
   name: string
   precio: number | string | null
   superficie: number | null
-  image: string[]
+  image: string[]|string
   id: string
   description: string
 }
