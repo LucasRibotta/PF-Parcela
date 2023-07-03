@@ -1,19 +1,27 @@
 "use client"
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import 'tailwindcss/tailwind.css';
+import { useGetParcelasQuery } from "@/redux/services/parcelApi";
+import { setParcelas } from "@/redux/features/parcelSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 
 export default function SearchBar() {
   const [keyword, setKeyword] = useState('');
+  const dispatch = useAppDispatch()
 
-  const router = useRouter();
+  const { data, error, isLoading, isFetching } = useGetParcelasQuery(keyword);
+
+
+  const parcelState = useAppSelector((state) => state.parcel.parcelas)
 
   const handleSubmit = () => {
     if (keyword) {
-      router.push(`/?name=${keyword}`)
-    } else {
-      router.push('/')
+      const filtered = data?.filter(e => e.name.toLowerCase().includes(keyword.toLowerCase()))
+      
+      if(filtered !== undefined) {
+        dispatch(setParcelas(filtered))
+      }
     }
   }
 

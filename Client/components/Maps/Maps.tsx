@@ -94,7 +94,7 @@ const LocationMaps = ({ location }: LocationMapsProps) => {
             mapContainerStyle={{ height: "100%", width: "100%" }}
             center={center}
             options={{ styles: mapStyles }}
-            zoom={7}
+            zoom={11}
             onClick={handleMapClick}
           >
             {markerPosition.lat !== 0 && <Marker position={markerPosition} />}

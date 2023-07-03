@@ -9,7 +9,10 @@ import session from "express-session"
 import flash from "connect-flash"
 import localAauth from "./passport/local-auth"
 import newAuthRouter from "./router/user.router"
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6858cbc228b7ab75f532f692d831955f406abe4a
 import cors from "cors"
 import * as bodyParser from "body-parser"
 const PORT = process.env.PORT || 3001
@@ -19,8 +22,21 @@ const corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
-const app = express()
-app.use(cors(corsOptions))
+const app = express(); 
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+app.use(cors(corsOptions));
+
+app.use(express.json()); 
+app.use( (req,res, next) => {
+    localAauth()
+    next()
+})
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.use(express.json())
 app.use((req, res, next) => {
