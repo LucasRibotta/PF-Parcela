@@ -41,16 +41,20 @@ export const login = async (req: Request, res: Response) => {
   }
 
   if (user.isAdmin) {
-    const adminToken = jwt.sign({ userId: user._id }, adminSecretKey, {
-      expiresIn: 86400
-    })
+    // const adminToken = jwt.sign({ userId: user._id }, adminSecretKey, {
+    //   expiresIn: 86400
+    // })
 
-    return res.status(200).json({ token: adminToken })
+    return res
+      .status(200)
+      .json({ email, password, isAdmin: true, isCompany: false })
   } else {
-    const token = jwt.sign({ userId: user._id }, secretKey, {
-      expiresIn: 86400
-    })
+    // const token = jwt.sign({ userId: user._id }, secretKey, {
+    //   expiresIn: 86400
+    // })
 
-    return res.status(200).json({ token })
+    return res
+      .status(200)
+      .json({ email, password, isAdmin: false, isCompany: false })
   }
 }
