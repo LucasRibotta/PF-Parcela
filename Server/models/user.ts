@@ -10,7 +10,7 @@ export interface User {
   email: string
   password: string
   isAdmin: boolean
-  // accessLevel: number
+  isCompany: boolean
   encryptPassword(password: string): string
   comparePassword(password: string): boolean
 }
@@ -23,7 +23,8 @@ const userSchema = new Schema<User>({
   date: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  isAdmin: { type: Boolean, default: false }
+  isAdmin: { type: Boolean, default: false },
+  isCompany: { type: Boolean, default: false }
   // accessLevel: { type: Number, required: false, default: 1 }
 })
 
