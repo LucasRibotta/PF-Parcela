@@ -7,6 +7,7 @@ import LocationMaps from "../Maps/Maps"
 import { useCreateParcelaMutation } from "@/redux/services/parcelApi"
 import Confirmation from "../confirmation/Confirmation"
 import { useAppSelector } from "@/redux/hooks";
+import { validate } from "../Validate/validate";
 import { number } from "prop-types";
 
 type information = {
@@ -49,29 +50,61 @@ export default function FormSection() {
     setInfo({ ...info, [name]: value })
   }
 
-  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  // const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  
+  //   try {
+  //     const validData = validate.parse(info);
+  //     // Los datos son válidos, realizar acciones adicionales
+  //     setConfirmation(true);
+  //     createParcela(validData);
+  
+  //     setTimeout(() => {
+  //       setConfirmation(false);
+  //     }, 2000);
+      
+  //     // Restablecer campos del formulario
+  //     setInfo({
+  //       name: "",
+  //       lote: null,
+  //       area: null,
+  //       price: null,
+  //       location: "",
+  //       description: "",
+  //       image: [],
+  //     });
+  //     setLocation("");
+  //   } catch (error) {
+  //     // Manejo los errores de validación
+  //     console.log(error);
+  //     swal("Error", "Los datos del formulario no son válidos", "error");
+  //   }
+  // }
 
-    if (true) {
-      setInfo({
-        name: "",
-        lote: null,
-        area: null,
-        price: null,
-        location: "",
-        description: "",
-        image: []
-      })
-      setLocation("")
-    }
 
-    setConfirmation(true)
-    createParcela(info)
+   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+     event.preventDefault()
 
-    setTimeout(() => {
-      setConfirmation(false)
-    }, 2000)
-  }
+     if (true) {
+       setInfo({
+         name: "",
+         lote: null,
+         area: null,
+         price: null,
+         location: "",
+         description: "",
+         image: []
+       })
+       setLocation("")
+     }
+
+     setConfirmation(true)
+     createParcela(info)
+
+     setTimeout(() => {
+       setConfirmation(false)
+     }, 2000)
+   }
 
   const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLocation(event.target.value)
