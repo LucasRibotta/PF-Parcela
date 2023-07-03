@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import React, { useState, ChangeEvent, useEffect } from "react"
 import swal from "sweetalert"
@@ -8,7 +10,6 @@ import { useCreateParcelaMutation } from "@/redux/services/parcelApi"
 import Confirmation from "../confirmation/Confirmation"
 import { useAppSelector } from "@/redux/hooks";
 import { number } from "prop-types";
-import Image from "next/image"
 
 type information = {
   name: string
@@ -40,7 +41,7 @@ export default function FormSection() {
 
   useEffect(() => {
     setInfo({ ...info, location: posMap, image: imageCloud });
-  }, [posMap, imageCloud, info]);
+  }, [posMap, imageCloud]);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -169,7 +170,7 @@ export default function FormSection() {
           <div className="flex w-full min-h-[70px] max-h-max">
             {imageCloud?.map((el, index) =>
               <>
-                <Image className="w-[100px] h-[70px] m-2 rounded-md" key={index} src={el} alt={el} />
+                <img className="w-[100px] h-[70px] m-2 rounded-md" key={index} src={el} alt={el} />
               </>
             )}
           </div>
