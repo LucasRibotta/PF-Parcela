@@ -9,7 +9,6 @@ import passport from 'passport';
 import session from 'express-session'
 import flash from 'connect-flash';
 import localAauth from "./passport/local-auth";
-import "dotenv/config";
 import cors from "cors";
 import * as bodyParser from 'body-parser';
 
