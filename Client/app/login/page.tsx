@@ -51,7 +51,7 @@ export default function Login() {
         console.log(data)
       }
     } catch (error) {
-      console.log(error.response.data)
+      
       setError("Ocurrió un error al iniciar sesión")
     }
   }

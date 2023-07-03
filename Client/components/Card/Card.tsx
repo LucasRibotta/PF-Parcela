@@ -9,9 +9,9 @@ import Button from "../Button/Button"
 
 interface CardProps {
   name: string
-  precio: number | string
-  superficie: number
-  image: string
+  precio: number | string | null
+  superficie: number | null
+  image: string[]
   id: string
   description: string
 }
@@ -64,7 +64,7 @@ function Card({ name, precio, superficie, image, id }: CardProps) {
       </div>
 
       <div>
-        <img src={image} alt="" className="absolute -z-10" />
+        <Image src={image} alt="" className="absolute -z-10" />
         {/* <CloudinaryContext cloudName="parcelas">
       {imageUrls.map((imageUrl, index) => (
         <div key={index}>
@@ -85,10 +85,10 @@ function Card({ name, precio, superficie, image, id }: CardProps) {
             Nombre: {name}
           </h1>
           <h2 className={`${style.textShadow} font-bold opacity-100 `}>
-            Precio: {precio}
+            Precio: {precio?.toLocaleString()}
           </h2>
           <h5 className={`${style.textShadow} font-bold opacity-100 `}>
-            Superficie: {superficie}
+            Superficie: {superficie?.toLocaleString()}
           </h5>
           <Link href={`/detail/${id}`} className=" [&>button]:my-5 ">
             <Button text={"Ver más..."} />

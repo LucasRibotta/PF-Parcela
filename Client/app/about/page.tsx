@@ -14,7 +14,7 @@ export default function About() {
           ) : (
             <div>
               {data?.map((user) => (
-                <div>
+                <div key={user.id}>
                   <div>{user.username}</div>
                   <div>{user.name}</div>
                   <div>{user.email}</div>

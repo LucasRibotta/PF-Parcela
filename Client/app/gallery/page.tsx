@@ -3,13 +3,13 @@ import Card from "../../components/Card/Card"
 import Filter from "@/components/Filters/Filter"
 import "tailwindcss/tailwind.css"
 import CustomPagination from "@/components/CustomPagination/CustomPagination"
-import { useGetParcelasQuery } from "@/redux/services/paqueteApi"
+import { useGetParcelasQuery } from "@/redux/services/parcelApi"
 import { setParcelas } from "@/redux/features/parcelSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useState, useEffect } from "react"
 
 export default function Gallery() {
-  const { data, error, isLoading, isFetching } = useGetParcelasQuery(null)
+  const { data, error, isLoading, isFetching } = useGetParcelasQuery("")
   const dispatch = useAppDispatch()
   const parcels = useAppSelector((state) => state.parcelas.parcelas)
 

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-head-element */
 import "./globals.css"
 import { Montserrat } from "next/font/google"
 import Navbar from "@/components/Navbar/Navbar"

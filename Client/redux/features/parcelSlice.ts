@@ -4,7 +4,8 @@ interface Parcela {
   _id: string
   name: string
   price: number | string | null
-  area: number
+  lote: number | null
+  area: number | null
   location: string[]
   image: string[]
   deleted: boolean
@@ -59,7 +60,7 @@ const parcelasSlice = createSlice({
 
       if (filtroSuperficie === "5000") {
         filteredParcels = state.allParcelas.filter(
-          (parcela) => parcela.area <= 5000
+          (parcela) => (parcela.area ?? 0) <= 5000
         )
 
         return {
@@ -68,7 +69,7 @@ const parcelasSlice = createSlice({
         }
       } else if (filtroSuperficie === "5500") {
         filteredParcels = state.allParcelas.filter(
-          (parcela) => parcela.area > 5000 && parcela.area <= 5500
+          (parcela) => (parcela.area ?? 0) > 5000 && (parcela.area ?? 0) <= 5500
         )
 
         return {
@@ -77,7 +78,8 @@ const parcelasSlice = createSlice({
         }
       } else if (filtroSuperficie === "10000") {
         filteredParcels = state.allParcelas.filter(
-          (parcela) => parcela.area > 5500 && parcela.area <= 10000
+          (parcela) =>
+            (parcela.area ?? 0) > 5500 && (parcela.area ?? 0) <= 10000
         )
 
         return {
@@ -86,7 +88,7 @@ const parcelasSlice = createSlice({
         }
       } else if (filtroSuperficie === "10000+") {
         filteredParcels = state.allParcelas.filter(
-          (parcela) => parcela.area > 10000
+          (parcela) => (parcela.area ?? 0) > 10000
         )
 
         return {
