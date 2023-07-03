@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 interface Parcela {
   _id: string
   name: string
-  price: number | string
+  price: number | string | null
   area: number
   location: string[]
   image: string[]
