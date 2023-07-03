@@ -9,10 +9,6 @@ import session from "express-session"
 import flash from "connect-flash"
 import localAauth from "./passport/local-auth"
 import newAuthRouter from "./router/user.router"
-<<<<<<< HEAD
-
-=======
->>>>>>> 6858cbc228b7ab75f532f692d831955f406abe4a
 import cors from "cors"
 import * as bodyParser from "body-parser"
 const PORT = process.env.PORT || 3001
