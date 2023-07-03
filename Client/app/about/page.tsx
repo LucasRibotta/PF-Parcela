@@ -1,4 +1,3 @@
-"use client"
 import { useGetUsersQuery } from "@/redux/services/userApi"
 
 export default function About() {

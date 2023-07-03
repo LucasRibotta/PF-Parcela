@@ -4,41 +4,37 @@ import Filter from "@/components/Filters/Filter"
 import "tailwindcss/tailwind.css"
 import CustomPagination from "@/components/CustomPagination/CustomPagination"
 import { useGetParcelasQuery } from "@/redux/services/paqueteApi"
-
-
-interface Parcela {
-  name: string
-  lote: number
-  area: number
-  price: number
-  location: string[]
-  image: string
-  deleted: boolean
-  parcelData: string[]
-  desccption: string
-  _id: string
-}
+import { setParcelas } from "@/redux/features/parcelSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useState, useEffect } from "react"
 
 export default function Gallery() {
   const { data, error, isLoading, isFetching } = useGetParcelasQuery(null)
+  const dispatch = useAppDispatch()
+  const parcels = useAppSelector((state) => state.parcelas.parcelas)
+
+  useEffect(() => {
+    if (data && Array.isArray(data)) {
+      dispatch(setParcelas(data))
+    }
+  }, [data, dispatch])
+
   if (isLoading || isFetching) return <p>Loading</p>
   if (error) return <p>Some error</p>
   if (!data || !Array.isArray(data)) return <p>no data</p>
-
-  console.log(data);
-
 
   return (
     <div className="flex m-auto flex-col relative w-full pt-[5rem] lg:w-[1280px]">
       <div className="flex pt-[2rem]">
         <Filter />
         <div className="flex-grow pl-[20rem] px-2">
-          {data.map((el, index) => (
+          {parcels.map((el, index) => (
             <Card
               key={index}
               name={el.name}
-              precio={el.price}
+              precio={`CLP $${el.price}`}
               superficie={el.area}
+              description={el.description}
               image={el.image[0]}
               id={el._id}
             />

@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface Parcela {
-  id: string
+  _id: string
   name: string
-  price: number
-  // Otras propiedades de la parcela
+  price: number | string
+  area: number
+  location: string[]
+  image: string[]
+  deleted: boolean
+  parcelaData: string[]
+  description: string
 }
-
 interface ParcelasState {
   allParcelas: Parcela[]
   parcelas: Parcela[]
@@ -27,15 +31,74 @@ const parcelasSlice = createSlice({
     },
     sortParcelas: (state, action: PayloadAction<string>) => {
       const orderBy = action.payload
+      let sortedParcels: Parcela[]
+
       if (orderBy === "asc") {
-        state.parcelas.sort((a, b) => a.price - b.price)
+        sortedParcels = [...state.parcelas].sort(
+          (a, b) => Number(a.price) - Number(b.price)
+        )
+
+        return {
+          ...state,
+          parcelas: sortedParcels
+        }
       } else if (orderBy === "desc") {
-        state.parcelas.sort((a, b) => b.price - a.price)
+        sortedParcels = [...state.parcelas].sort(
+          (a, b) => Number(b.price) - Number(a.price)
+        )
+
+        return {
+          ...state,
+          parcelas: sortedParcels
+        }
+      }
+    },
+    filterParcelas: (state, action: PayloadAction<string>) => {
+      const filtroSuperficie = action.payload
+      let filteredParcels: Parcela[]
+
+      if (filtroSuperficie === "5000") {
+        filteredParcels = state.allParcelas.filter(
+          (parcela) => parcela.area <= 5000
+        )
+
+        return {
+          ...state,
+          parcelas: filteredParcels
+        }
+      } else if (filtroSuperficie === "5500") {
+        filteredParcels = state.allParcelas.filter(
+          (parcela) => parcela.area > 5000 && parcela.area <= 5500
+        )
+
+        return {
+          ...state,
+          parcelas: filteredParcels
+        }
+      } else if (filtroSuperficie === "10000") {
+        filteredParcels = state.allParcelas.filter(
+          (parcela) => parcela.area > 5500 && parcela.area <= 10000
+        )
+
+        return {
+          ...state,
+          parcelas: filteredParcels
+        }
+      } else if (filtroSuperficie === "10000+") {
+        filteredParcels = state.allParcelas.filter(
+          (parcela) => parcela.area > 10000
+        )
+
+        return {
+          ...state,
+          parcelas: filteredParcels
+        }
       }
     }
   }
 })
 
-export const { setParcelas, sortParcelas } = parcelasSlice.actions
+export const { setParcelas, sortParcelas, filterParcelas } =
+  parcelasSlice.actions
 
 export default parcelasSlice.reducer
