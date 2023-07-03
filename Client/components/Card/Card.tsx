@@ -9,8 +9,8 @@ import Button from "../Button/Button"
 
 interface CardProps {
   name: string
-  precio: number
-  superficie: number
+  precio: number| null
+  superficie: number| null
   image: string
   id: string
 }
@@ -84,10 +84,10 @@ function Card({ name, precio, superficie, image, id }: CardProps) {
             Nombre: {name}
           </h1>
           <h2 className={`${style.textShadow} font-bold opacity-100 `}>
-            Precio: {precio}
+            Precio: {precio?.toLocaleString()}
           </h2>
           <h5 className={`${style.textShadow} font-bold opacity-100 `}>
-            Superficie: {superficie}
+            Superficie: {superficie?.toLocaleString()}
           </h5>
           <Link href={`/detail/${id}`} className=" [&>button]:my-5 ">
             <Button text={"Ver más..."} />

@@ -122,18 +122,19 @@ export const createCondominio = async (req: Request, res: Response) => {
 export const updateParcela = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { area, price, services, image, condominio } = req.body;
-
+    const { name, lote, area, price, location, image, description } = req.body;
     if (!id) {
       throw new Error('El campo id es requerido.');
     }
 
     const parcelaActualizado = await ParcelaModel.findByIdAndUpdate(id, {
+      name,
+      lote,
       area,
       price,
-      services,
+      location,
       image,
-      condominio
+      description,
     }, { new: true })
 
     if (!parcelaActualizado) {
@@ -152,6 +153,7 @@ export const updateParcela = async (req: Request, res: Response) => {
 export const deleteParcela = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    console.log(id);
 
     const parcela = await ParcelaModel.findByIdAndUpdate(id, { deleted: true }, { new: true });
 

@@ -1,13 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import React, { useState, ChangeEvent, useEffect } from "react"
 import swal from "sweetalert"
 import UploadImage from "../UploadImage/UploadImage"
 import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
-import { useCreateParcelaMutation } from "@/redux/services/parcelApi"
 import Confirmation from "../confirmation/Confirmation"
 import { useAppSelector } from "@/redux/hooks";
 import { number } from "prop-types";
+import { useGetParcelaByIdQuery, useUpdateParcelaMutation } from "@/redux/services/parcelApi"
+import { useParams } from "next/navigation"
+import style from "./formSectionUpdate.module.css"
 
 type information = {
   name: string
@@ -20,30 +24,80 @@ type information = {
 }
 
 
-export default function FormSection() {
-  const [location, setLocation] = useState("")
-  const [confirmation, setConfirmation] = useState(false);
-  const [info, setInfo] = useState<information>({
-    name: "",
-    lote: null,
-    area: null,
-    price: null,
-    location: "",
-    description: "",
-    image: []
-  });
-  const [createParcela] = useCreateParcelaMutation()
-  let posMap = ""
-  posMap = useAppSelector((state) => state.coordenada.position)
+
+export default function FormSectionUpdate() {
+
+  const [updateParcela] = useUpdateParcelaMutation()
+  const params = useParams()
+  const parcela = {
+    id: params.id,
+  }
+  const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
   const imageCloud = useAppSelector(state => state.coordenada.image)
 
+  console.log(data);
+  // console.log(data.image);
+  let posMap = ""
+  posMap = useAppSelector((state) => state.coordenada.position)
+
+
+  const [location, setLocation] = useState("")
+  const [confirmation, setConfirmation] = useState(false);
+  const [images, setImages] = useState<string[]>([]);
+  const [info, setInfo] = useState<information>({
+    name: data?.name ?? "",
+    lote: data?.lote ?? null,
+    area: data?.area ?? null,
+    price: data?.price ?? null,
+    location: data?.location ?? "",
+    description: data?.description ?? "",
+    image: data?.image ?? []
+  });
+
   useEffect(() => {
-    setInfo({ ...info, location: posMap, image: imageCloud });
+    if (data?.image) {
+      setImages([...data.image, ...imageCloud]);
+    } else {
+      setImages([...info.image, ...imageCloud])
+    }
+  }, [imageCloud, data?.image])
+
+  useEffect(() => {
+    setInfo({ ...info, image: images });
+  }, [images, data?.image])
+
+  useEffect(() => {
+    setInfo({ ...info, location: posMap });
+    if (data?.image.length === 0) {
+      setInfo({ ...info, location: posMap, image: imageCloud });
+    }
   }, [posMap, imageCloud]);
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  useEffect(() => {
+    setInfo({
+      ...info,
+      name: data?.name ?? "",
+      lote: data?.lote ?? null,
+      area: data?.area ?? null,
+      price: data?.price ?? null,
+      location: data?.location ?? "",
+      description: data?.description ?? "",
+      image: data?.image ?? []
+    })
+    setLocation(data?.location ?? "")
+  }, [data, isLoading, isFetching])
+
+
+
+  const handlerDelete = (photo: string) => {
+    const fil = images.filter(el => el !== photo)
+    setImages(fil)
+    setInfo({ ...info, image: fil })
+  }
+
+
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target
 
     setInfo({ ...info, [name]: value })
@@ -52,7 +106,13 @@ export default function FormSection() {
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault()
 
+    const update = {
+      id: parcela.id,
+      data: info,
+    }
+
     if (true) {
+      updateParcela(update)
       setInfo({
         name: "",
         lote: null,
@@ -66,7 +126,6 @@ export default function FormSection() {
     }
 
     setConfirmation(true)
-    createParcela(info)
 
     setTimeout(() => {
       setConfirmation(false)
@@ -83,7 +142,7 @@ export default function FormSection() {
       {confirmation && <Confirmation />}
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col md:flex-row w-[100%] h-full sm:w-[640px] md:w-[768px] lg:w-[1024px]  mx-auto bg-[#f3f4f6] shadow-2xl text-white rounded-3xl overflow-hidden"
+        className="flex flex-col md:flex-row w-[100%] sm:w-[640px] md:w-[768px] lg:w-[1024px]  mx-auto bg-[#f3f4f6] shadow-2xl text-white rounded-3xl overflow-hidden h-auto"
       >
         <div className="relative flex flex-col w-[100%] md:h-auto md:w-[50%] lg:w-[50%]  text-white">
           <div className="h-[100%] w-[100%]">
@@ -107,7 +166,7 @@ export default function FormSection() {
 
         <div className="flex flex-col m-auto p-[2rem] w-[50%] text-black ">
           <h2 className="mb-4 text-center font-bold text-[30px]">
-            Describenos tu parcela{" "}
+            Que deseas editar{" "}
           </h2>
           <input
             className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
@@ -165,17 +224,25 @@ export default function FormSection() {
             <UploadImage />
           </div>
 
-          <div className="flex w-full min-h-[70px] max-h-max">
-            {imageCloud?.map((el, index) =>
+          <div className="grid grid-cols-3 w-full mx-auto">
+            {images?.map((el, index) =>
               <>
-                <img className="w-[100px] h-[70px] m-2 rounded-md" key={index} src={el} alt={el} />
+                <div className={`relative ${style.close} `}>
+                  <img className="w-[100px] h-[70px] mx-auto my-2 rounded-md" key={index} src={el} alt={el} />
+                  <div className="absolute top-0 right-0 opacity-0" onClick={() => handlerDelete(el)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                  </div>
+                </div>
               </>
             )}
           </div>
 
 
-          <div className=" pt-1 flex justify-center  m-auto">
-            <Button text="Create" />
+          <div className=" pt-1 flex justify-center  pb-4 ">
+            <Button text="Actualizar" />
           </div>
         </div>
       </form>

@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface Parcela {
+  _id: string
   name: string
   lote: number|null
   area: number|null
   price: number|null
   location: string
   description: string
-  images: string[]
+  image: string[]
   deleted: boolean
   parcelaData: []
   // Otras propiedades de la parcela
@@ -34,9 +35,9 @@ const parcelasSlice = createSlice({
     sortParcelas: (state, action: PayloadAction<string>) => {
       const orderBy = action.payload
       if (orderBy === "asc") {
-        state.parcelas.sort((a, b) => a.price - b.price)
+        state.parcelas.sort((a, b) => (a.price ?? 0) - (b.price ?? 0))
       } else if (orderBy === "desc") {
-        state.parcelas.sort((a, b) => b.price - a.price)
+        state.parcelas.sort((a, b) => (b.price ?? 0) - (a.price ?? 0))
       }
     },
   }
