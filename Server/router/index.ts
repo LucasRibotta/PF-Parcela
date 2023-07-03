@@ -5,17 +5,12 @@ import authentication from "./authentication"
 
 const router = Router()
 
-<<<<<<< HEAD
-const router = Router();
 // SECCION DE MERCADOPAGO
 const PaymentController = require("../controllers/PaymentController");
 const PaymentService = require("../services/PaymentService");
 
 const PaymentInstance = new PaymentController(new PaymentService());
 //---------------------------------------------
-=======
-router.use("/", authentication)
->>>>>>> 22b6132ac5a7f645a239d597e021a1b1d6e62587
 
 router.get("/profile", (req, res) => {
   console.log(req.user)
@@ -52,7 +47,6 @@ router.get("/logout", (req, res, next) => {
 
 router.use("/auth", authRoutes)
 
-<<<<<<< HEAD
 // MERCADOPAGO
 router.get("/", function (req, res, next) {
     return res.json({
@@ -70,6 +64,3 @@ router.get("/payment", function (req, res, next) {
   });
 
 export default router;
-=======
-export default router
->>>>>>> 22b6132ac5a7f645a239d597e021a1b1d6e62587

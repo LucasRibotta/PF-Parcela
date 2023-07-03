@@ -1,21 +1,4 @@
 import "dotenv/config"
-<<<<<<< HEAD
-import express from "express";
-import router from "./router";
-import connectDB from "./db/connect";
-import path from 'path';
-import morgan from 'morgan'
-import passport from 'passport';
-import session from 'express-session'
-import flash from 'connect-flash';
-import localAauth from "./passport/local-auth";
-import cors from "cors";
-import * as bodyParser from 'body-parser';
-
-
-const dotenv = require("dotenv");
-
-=======
 import express from "express"
 import router from "./router"
 import connectDB from "./db/connect"
@@ -26,10 +9,8 @@ import session from "express-session"
 import flash from "connect-flash"
 import localAauth from "./passport/local-auth"
 import newAuthRouter from "./router/user.router"
-import "dotenv/config"
 import cors from "cors"
 import * as bodyParser from "body-parser"
->>>>>>> 22b6132ac5a7f645a239d597e021a1b1d6e62587
 const PORT = process.env.PORT || 3001
 // Configuración de CORS
 const corsOptions = {
@@ -37,8 +18,8 @@ const corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
-<<<<<<< HEAD
 const app = express(); 
+const dotenv = require("dotenv");
 
 dotenv.config();
 
@@ -52,10 +33,6 @@ app.use( (req,res, next) => {
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-=======
-const app = express()
-app.use(cors(corsOptions))
->>>>>>> 22b6132ac5a7f645a239d597e021a1b1d6e62587
 
 app.use(express.json())
 app.use((req, res, next) => {
