@@ -3,7 +3,7 @@ import Image from "next/image"
 import logo from "../../img/forestImage.jpg"
 import Link from "next/link"
 import { BiLogoFacebook, BiLogoGmail } from "react-icons/bi"
-import ButtonGoogle from "@/components/ButtonGoogle/ButtonGoogle";
+import ButtonGoogle from "@/components/ButtonGoogle/ButtonGoogle"
 import { useEffect, useState } from "react"
 import { useAppSelector, useAppDispatch } from "@/redux/hooks"
 import { setUserAdmin } from "@/redux/features/userSlice"
@@ -125,7 +125,7 @@ export default function Login() {
             <button
               className="bg-[#51a8a1] hover:bg-[#126e67] ease-in-out min-w-[9rem] max-w-[9rem] duration-300 text-white font-bold py-2 px-4 rounded-[20px]  focus:outline-none focus:shadow-outline"
               type="button"
-              onClick={handleUser}
+              onClick={handleLogin}
             >
               Iniciar sesión
             </button>

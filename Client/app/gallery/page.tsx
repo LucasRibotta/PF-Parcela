@@ -1,27 +1,23 @@
 "use client"
-import { useEffect, useState } from "react"
 import Card from "../../components/Card/Card"
 import Filter from "@/components/Filters/Filter"
 import "tailwindcss/tailwind.css"
 import CustomPagination from "@/components/CustomPagination/CustomPagination"
 import { useGetParcelasQuery } from "@/redux/services/parcelApi"
-import parcelReducer from "@/redux/features/parcelSlice"
-import { useAppSelector } from "@/redux/hooks"
-
+import { setParcelas } from "@/redux/features/parcelSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useState, useEffect } from "react"
 
 export default function Gallery() {
   const { data, error, isLoading, isFetching } = useGetParcelasQuery("")
-  const [parcelasToRender, setParcelasToRender] = useState(data)
-  const parcelState = useAppSelector((state) => state.parcel)
+  const dispatch = useAppDispatch()
+  const parcels = useAppSelector((state) => state.parcelas.parcelas)
 
   useEffect(() => {
-    if (data && data?.length > 0) {
-      setParcelasToRender(data)
+    if (data && Array.isArray(data)) {
+      dispatch(setParcelas(data))
     }
-    if (parcelState.parcelas.length > 0) {
-      setParcelasToRender(parcelState.parcelas)
-    }
-  }, [parcelState, data])
+  }, [data, dispatch])
 
   if (isLoading || isFetching) return <p>Loading</p>
   if (error) return <p>Some error</p>
@@ -32,23 +28,22 @@ export default function Gallery() {
       <div className="flex pt-[2rem]">
         <Filter />
         <div className="flex-grow pl-[20rem] px-2">
-          {parcelasToRender &&
-            parcelasToRender.map((el, index) => {
-              if (el.deleted === false) {
-                return (
-                  <Card
-                    key={index}
-                    name={el.name}
-                    precio={el.price}
-                    superficie={el.area}
-                    image={el.image[0]}
-                    id={el._id}
-                  />
-                );
-              } else {
-                return null;
-              }
-            })}
+          {parcels.map((el, index) => {
+            if (el.deleted === false) {
+             return(
+              <Card
+                key={index}
+                name={el.name}
+                 precio={`CLP $${el.price?.toLocaleString() }`}
+                superficie={el.area}
+                description={el.description}
+                image={el.image[0]}
+                id={el._id}
+               />
+             )
+            }
+          }
+          )}
           <CustomPagination resPerPage={2} productsCount={5} />
         </div>
       </div>

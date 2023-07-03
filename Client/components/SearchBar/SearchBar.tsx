@@ -13,12 +13,12 @@ export default function SearchBar() {
   const { data, error, isLoading, isFetching } = useGetParcelasQuery(keyword);
 
 
-  const parcelState = useAppSelector((state) => state.parcel.parcelas)
+  const parcelState = useAppSelector((state) => state.parcelas.parcelas)
 
   const handleSubmit = () => {
     if (keyword) {
       const filtered = data?.filter(e => e.name.toLowerCase().includes(keyword.toLowerCase()))
-      
+
       if(filtered !== undefined) {
         dispatch(setParcelas(filtered))
       }
@@ -41,6 +41,6 @@ export default function SearchBar() {
         onChange={(e) => setKeyword(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-    </div> 
+    </div>
   );
 };
