@@ -10,6 +10,8 @@ import {
     deleteParcela
 } from "../controllers/auth"
 
+import users from '../controllers/users'
+
 const router = express.Router();
 
 router.get("/parcelas", parcelas)
@@ -20,6 +22,7 @@ router.post("/parcela", createParcela)
 //     next()
 // })
 
+router.get('/users', users)
 router.post("/condominio", createCondominio)
 router.put("/updateParcela/:id", updateParcela)
 router.put("/deleteParcela/:id", deleteParcela)

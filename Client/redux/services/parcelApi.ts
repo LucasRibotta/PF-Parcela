@@ -3,14 +3,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 interface Parcela {
   name: string
-  lote: number
-  area: number
-  price: number
+  lote: number|null
+  area: number|null
+  price: number|null
   location: string
   description: string
   images: string[]
   deleted: boolean
-  parcelaData:[]
+  parcelaData: []
 }
 
 export const parcelApi = createApi({
@@ -19,8 +19,8 @@ export const parcelApi = createApi({
     baseUrl: "http://localhost:3001/api/auth/"
   }),
   endpoints: (builder) => ({
-    getParcelas: builder.query<Parcela[], null>({
-      query: () => "parcelas"
+    getParcelas: builder.query<Parcela[], string>({
+      query: (nombre) => `parcelas?nombre=${nombre}`
     }),
     getParcelaById: builder.query<Parcela, { id: string }>({
       query: ({ id }) => `parcelas/${id}`
@@ -55,6 +55,6 @@ export const {
   useCreateParcelaMutation,
   useDeleteParcelaMutation,
   useGetParcelaByIdQuery,
-  //useGetParcelasQuery,
+  // useGetParcelasQuery,
   useUpdateParcelaMutation
 } = parcelApi
