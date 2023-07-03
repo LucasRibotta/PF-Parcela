@@ -9,7 +9,7 @@ import session from "express-session"
 import flash from "connect-flash"
 import localAauth from "./passport/local-auth"
 import newAuthRouter from "./router/user.router"
-import "dotenv/config"
+
 import cors from "cors"
 import * as bodyParser from "body-parser"
 const PORT = process.env.PORT || 3001
