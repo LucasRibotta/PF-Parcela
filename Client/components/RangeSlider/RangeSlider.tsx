@@ -1,6 +1,8 @@
 "use client"
 import React from "react"
 import { useState, useEffect, useRef } from "react"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { filterPrice, updatePriceRange } from "@/redux/features/parcelSlice"
 
 type sliderProps = {
   initialMin: number
@@ -21,63 +23,66 @@ export const RangeSlider = ({
   min,
   max,
   step,
-  priceCap
+  priceCap,
 }: sliderProps) => {
   const progressRef = useRef(null as HTMLDivElement | null)
-  const [minValue, setMinValue] = useState(initialMin)
-  const [maxValue, setMaxValue] = useState(initialMax)
+  const dispatch = useAppDispatch()
+  const { minPrice, maxPrice } = useAppSelector((state) => state.parcelas.priceRange , (prev, current) => prev.minPrice === current.minPrice && prev.maxPrice === current.maxPrice);
 
   const handleMin = (e: CustomEvent) => {
-    if (maxValue - minValue >= priceCap && maxValue <= max) {
-      if (parseInt(e.target.value) > maxValue) {
+    if (maxPrice - minPrice >= priceCap && maxPrice <= max) {
+      if (parseInt(e.target.value) > maxPrice) {
       } else {
-        setMinValue(parseInt(e.target.value))
+        dispatch(updatePriceRange({ min: parseInt(e.target.value), max: maxPrice }));
       }
     } else {
-      if (parseInt(e.target.value) < minValue) {
-        setMinValue(parseInt(e.target.value))
+      if (parseInt(e.target.value) < minPrice) {
+        dispatch(updatePriceRange({ min: parseInt(e.target.value), max: maxPrice }));
       }
     }
   }
 
   const handleMax = (e: CustomEvent) => {
-    if (maxValue - minValue >= priceCap && maxValue <= max) {
-      if (parseInt(e.target.value) < minValue) {
+    if (maxPrice - minPrice >= priceCap && maxPrice <= max) {
+      if (parseInt(e.target.value) < minPrice) {
       } else {
-        setMaxValue(parseInt(e.target.value))
+        dispatch(updatePriceRange({ min: minPrice, max: parseInt(e.target.value) }));
       }
     } else {
-      if (parseInt(e.target.value) > maxValue) {
-        setMaxValue(parseInt(e.target.value))
+      if (parseInt(e.target.value) > maxPrice) {
+        dispatch(updatePriceRange({ min: minPrice, max: parseInt(e.target.value) }));
       }
     }
   }
 
   useEffect(() => {
     if (progressRef.current) {
-      progressRef.current.style.left = (minValue / max) * step + "%"
-      progressRef.current.style.right = step - (maxValue / max) * step + "%"
+      progressRef.current.style.left = (minPrice / max) * step + "%"
+      progressRef.current.style.right = step - (maxPrice / max) * step + "%"
     }
-  }, [minValue, maxValue, max, step])
+  }, [minPrice, maxPrice, max, step])
 
+  const handleFilterPrice = (event: any) => {
+    const filterPriceRange = event?.target.value
+    dispatch(filterPrice(filterPriceRange))
+  }
+  
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col " onChange={handleFilterPrice}>
       <div className="flex justify-between items-center mb-6 mt-2 gap-2">
         <div className="rounded-md">
           <span className="p-2 ">Min CLP $</span>
           <input
-            onChange={(e) => setMinValue(parseInt(e.target.value))}
             type="number"
-            value={minValue}
+            value={minPrice}
             className="w-full rounded-md border border-gray-400 pl-2"
           />
         </div>
         <div className="rounded-md">
           <span className="p-2 ">Max CLP $</span>
           <input
-            onChange={(e) => setMaxValue(parseInt(e.target.value))}
             type="number"
-            value={maxValue}
+            value={maxPrice}
             className="w-full rounded-md border border-gray-400 pl-2"
           />
         </div>
@@ -98,7 +103,7 @@ export const RangeSlider = ({
             min={min}
             step={step}
             max={max}
-            value={minValue}
+            value={minPrice}
             className="range-min absolute w-full  -top-1  h-1   bg-transparent  appearance-none pointer-events-none"
           />
 
@@ -108,7 +113,7 @@ export const RangeSlider = ({
             min={min}
             step={step}
             max={max}
-            value={maxValue}
+            value={maxPrice}
             className="range-max absolute w-full  -top-1 h-1  bg-transparent appearance-none  pointer-events-none"
           />
         </div>

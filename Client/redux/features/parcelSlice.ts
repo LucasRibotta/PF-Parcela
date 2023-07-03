@@ -14,12 +14,20 @@ interface Parcela {
 }
 interface ParcelasState {
   allParcelas: Parcela[]
-  parcelas: Parcela[]
+  parcelas: Parcela[] 
+  priceRange: {
+    minPrice: number
+    maxPrice: number
+  } 
 }
 
 const initialState: ParcelasState = {
   allParcelas: [],
-  parcelas: []
+  parcelas: [],
+  priceRange: {
+    minPrice: 0,
+    maxPrice: 60000000
+  }
 }
 
 const parcelasSlice = createSlice({
@@ -53,6 +61,23 @@ const parcelasSlice = createSlice({
           parcelas: sortedParcels
         }
       }
+    },
+    updatePriceRange: (state, action: PayloadAction<{ min: number; max: number }>) => {
+      state.priceRange.minPrice = action.payload.min;
+      state.priceRange.maxPrice = action.payload.max
+
+    },
+    filterPrice : (state, action: PayloadAction<{ min: number; max: number }>) => {
+        if (state.priceRange) {
+          let filteredPriceParcels = state.allParcelas.filter(
+           (parcela) => Number(parcela.price) >= state.priceRange.minPrice && Number(parcela.price) <= state.priceRange.maxPrice
+           )
+         
+         return {
+           ...state,
+           parcelas: filteredPriceParcels
+         }
+       }
     },
     filterParcelas: (state, action: PayloadAction<string>) => {
       const filtroSuperficie = action.payload
@@ -100,7 +125,6 @@ const parcelasSlice = createSlice({
   }
 })
 
-export const { setParcelas, sortParcelas, filterParcelas } =
-  parcelasSlice.actions
+export const { setParcelas, sortParcelas, filterParcelas, updatePriceRange, filterPrice } = parcelasSlice.actions
 
 export default parcelasSlice.reducer
