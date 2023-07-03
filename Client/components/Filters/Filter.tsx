@@ -3,13 +3,10 @@ import Order from "@/components/Filters/Order"
 import SearchBar from "@/components/SearchBar/SearchBar"
 import { RangeSlider } from "../RangeSlider/RangeSlider"
 import { useGetParcelasQuery } from "@/redux/services/parcelApi"
-import { setParcelas } from "@/redux/features/parcelSlice"
 
 export default function Filter() {
   const { data, error, isLoading, isFetching } = useGetParcelasQuery()
 
-  
-  
   return (
     <div
       className="fixed h-full w-[16rem] bg-gray-500 p-4 rounded-lg"
@@ -18,7 +15,7 @@ export default function Filter() {
       <SearchBar />
       <div className="mb-4">
         <label className="block mb-2">Ubicación:</label>
-        <select className="block w-full p-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] " onChange={handleSubmit}>
+        <select className="block w-full p-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] " >
           <option value="">Selecciona una ubicación</option>
           <option value="Camino a Ensenada">Camino a Ensenada</option>
           <option value="Camino a Nueva Braunau">Camino a Nueva Braunau</option>
@@ -43,10 +40,10 @@ export default function Filter() {
         <label>Precio:</label>
       </div>
       <RangeSlider
-        initialMin={1000000}
-        initialMax={25000000}
+        initialMin={0}
+        initialMax={60000000}
         min={0}
-        max={26000000}
+        max={60000000}
         step={100}
         priceCap={1000}
       />
