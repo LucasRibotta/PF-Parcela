@@ -10,7 +10,7 @@ import parcelReducer from "./features/parcelSlice"
 const rootReducer = combineReducers({
   user: userReducer,
   coordenada: coordenadaReducer,
-  parcel: parcelReducer,
+  parcelas: parcelReducer,
   [userApi.reducerPath]: userApi.reducer,
   [parcelApi.reducerPath]: parcelApi.reducer,
   [loginApi.reducerPath]: loginApi.reducer

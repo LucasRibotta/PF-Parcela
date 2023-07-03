@@ -1,12 +1,13 @@
 "use client"
-import { useEffect, useState } from "react"
+
 import Card from "../../components/Card/Card"
 import Filter from "@/components/Filters/Filter"
 import "tailwindcss/tailwind.css"
 import CustomPagination from "@/components/CustomPagination/CustomPagination"
 import { useGetParcelasQuery } from "@/redux/services/paqueteApi"
-import parcelReducer from "@/redux/features/parcelSlice"
-import { useAppSelector } from "@/redux/hooks"
+import { setParcelas, filterPrice } from "@/redux/features/parcelSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useEffect, useState } from "react"
 
 
 interface Parcela {
@@ -23,18 +24,18 @@ interface Parcela {
 }
 
 export default function Gallery() {
-  const { data, error, isLoading, isFetching } = useGetParcelasQuery(null)
-  const [parcelasToRender, setParcelasToRender] = useState(data)
-  const parcelState = useAppSelector((state) => state.parcel)
+  const { data, error, isLoading, isFetching } = useGetParcelasQuery("")
+  const dispatch = useAppDispatch()
+  const parcels = useAppSelector((state) => state.parcelas.parcelas)
+  const priceRangeState = useAppSelector((state) => state.priceRange)
+  
 
   useEffect(() => {
-    if (data?.length > 0) {
-      setParcelasToRender(data)
+
+    if (data && Array.isArray(data)) {
+      dispatch(setParcelas(data))
     }
-    if (parcelState.parcelas.length > 0) {
-      setParcelasToRender(parcelState.parcelas)
-    }
-  }, [parcelState, data])
+  }, [data, dispatch])
 
   if (isLoading || isFetching) return <p>Loading</p>
   if (error) return <p>Some error</p>
@@ -45,7 +46,7 @@ export default function Gallery() {
       <div className="flex pt-[2rem]">
         <Filter />
         <div className="flex-grow pl-[20rem] px-2">
-          {parcelasToRender && parcelasToRender.map((el, index) => (
+          {parcels.map((el, index) => (
             <Card
               key={index}
               name={el.name}
@@ -55,7 +56,7 @@ export default function Gallery() {
               id={el._id}
             />
           ))}
-          <CustomPagination resPerPage={2} productsCount={5} />
+          <CustomPagination resPerPage={5} productsCount={12} />
         </div>
       </div>
     </div>
