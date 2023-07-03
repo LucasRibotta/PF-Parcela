@@ -2,10 +2,15 @@ import "tailwindcss/tailwind.css"
 import Order from "@/components/Filters/Order"
 import SearchBar from "@/components/SearchBar/SearchBar"
 import { RangeSlider } from "../RangeSlider/RangeSlider"
-import { useGetParcelasQuery } from "@/redux/services/parcelApi"
+import { filterParcelas } from "@/redux/features/parcelSlice"
+import { useAppDispatch } from "@/redux/hooks"
 
 export default function Filter() {
-  const { data, error, isLoading, isFetching } = useGetParcelasQuery()
+  const dispatch = useAppDispatch()
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const filterBy = event.target.value
+    dispatch(filterParcelas(filterBy))
+  }
 
   return (
     <div
@@ -15,7 +20,7 @@ export default function Filter() {
       <SearchBar />
       <div className="mb-4">
         <label className="block mb-2">Ubicación:</label>
-        <select className="block w-full p-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] " >
+        <select className="block w-full p-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] ">
           <option value="">Selecciona una ubicación</option>
           <option value="Camino a Ensenada">Camino a Ensenada</option>
           <option value="Camino a Nueva Braunau">Camino a Nueva Braunau</option>
@@ -28,12 +33,15 @@ export default function Filter() {
       </div>
       <div className="mb-4">
         <label className="block mb-2">Superficie:</label>
-        <select className="block w-full p-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1]">
-          <option>Selecciona una superficie</option>
-          <option>5.000 m² totales o menos</option>
-          <option>5.000 a 5.500 m² totales</option>
-          <option>5.500 a 10.000 m² totales</option>
-          <option>10.000 m² totales o más</option>
+        <select
+          className="block w-full p-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1]"
+          onChange={handleFilterChange}
+        >
+          <option value="">Selecciona una superficie</option>
+          <option value="5000">5.000 m² totales o menos</option>
+          <option value="5500">5.000 a 5.500 m² totales</option>
+          <option value="10000">5.500 a 10.000 m² totales</option>
+          <option value="10000+">10.000 m² totales o más</option>
         </select>
       </div>
       <div>

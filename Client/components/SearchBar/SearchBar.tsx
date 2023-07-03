@@ -16,7 +16,7 @@ export default function SearchBar() {
   const handleSubmit = () => {
     if (keyword) {
       const filtered = data?.filter(e => e.name.toLowerCase().includes(keyword.toLowerCase()))
-      
+
       if(filtered !== undefined) {
         dispatch(setParcelas(filtered))
       }
@@ -39,6 +39,6 @@ export default function SearchBar() {
         onChange={(e) => setKeyword(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-    </div> 
+    </div>
   );
 };
