@@ -9,10 +9,11 @@ import Button from "../Button/Button"
 
 interface CardProps {
   name: string
-  precio: number| null
-  superficie: number| null
-  image: string
+  precio: number | string | null
+  superficie: number | null
+  image: string[]|string
   id: string
+  description: string
 }
 
 function Card({ name, precio, superficie, image, id }: CardProps) {
