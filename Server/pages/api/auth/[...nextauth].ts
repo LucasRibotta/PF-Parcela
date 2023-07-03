@@ -9,4 +9,5 @@ export default NextAuth({
 			clientSecret: "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",
 		}),
 	],
+	secret: "parcelamapaches", 
 });
