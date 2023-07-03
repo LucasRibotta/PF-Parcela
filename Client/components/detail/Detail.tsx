@@ -11,9 +11,8 @@ import Connection from "@/img/svgs/Connection"
 import Energy from "@/img/svgs/Energy"
 import LocationMaps from "../Maps/Maps"
 import { useParams, useRouter } from "next/navigation"
-import { useGetParcelaByIdQuery } from "@/redux/services/parcelApi"
+import { useGetParcelaByIdQuery, useDeleteParcelaMutation } from "@/redux/services/parcelApi"
 import Swal from 'sweetalert2'
-import { useDeleteParcelaMutation } from "@/redux/services/paqueteApi"
 
 
 const DetailSection = () => {

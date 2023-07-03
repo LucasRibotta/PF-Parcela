@@ -56,15 +56,18 @@ export default function FormSectionUpdate() {
 
   useEffect(() => {
     if (data?.image) {
-      setImages([...data.image,...imageCloud]);
+      setImages([...data.image, ...imageCloud]);
     } else {
       setImages([...info.image, ...imageCloud])
     }
-    setInfo({ ...info, image: data?.image ? [...data.image, ...imageCloud] : [...info.image, ...imageCloud] });
-  },[imageCloud, data?.image])
+  }, [imageCloud, data?.image])
 
   useEffect(() => {
-    setInfo({...info, location: posMap});
+    setInfo({ ...info, image: images });
+  }, [images, data?.image])
+
+  useEffect(() => {
+    setInfo({ ...info, location: posMap });
     if (data?.image.length === 0) {
       setInfo({ ...info, location: posMap, image: imageCloud });
     }

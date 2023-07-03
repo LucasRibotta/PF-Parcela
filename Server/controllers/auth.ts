@@ -153,6 +153,7 @@ export const updateParcela = async (req: Request, res: Response) => {
 export const deleteParcela = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    console.log(id);
 
     const parcela = await ParcelaModel.findByIdAndUpdate(id, { deleted: true }, { new: true });
 
