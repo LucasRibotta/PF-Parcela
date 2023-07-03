@@ -4,8 +4,7 @@
     "buildNN": "next build",
     "start": "next start",
     "lint": "next lint",
-    "dev": "node index.ts",
-    "build": "next build"
+    "dev": "node index.ts"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^1.0.0",
