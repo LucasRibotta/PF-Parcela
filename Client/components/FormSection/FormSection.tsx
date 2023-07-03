@@ -8,8 +8,8 @@ import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
 import { useCreateParcelaMutation } from "@/redux/services/parcelApi"
 import Confirmation from "../confirmation/Confirmation"
-import { useAppSelector } from "@/redux/hooks";
-import { number } from "prop-types";
+import { useAppSelector } from "@/redux/hooks"
+import { number } from "prop-types"
 
 type information = {
   name: string
@@ -21,10 +21,9 @@ type information = {
   image: string[]
 }
 
-
 export default function FormSection() {
   const [location, setLocation] = useState("")
-  const [confirmation, setConfirmation] = useState(false);
+  const [confirmation, setConfirmation] = useState(false)
   const [info, setInfo] = useState<information>({
     name: "",
     lote: null,
@@ -33,15 +32,15 @@ export default function FormSection() {
     location: "",
     description: "",
     image: []
-  });
+  })
   const [createParcela] = useCreateParcelaMutation()
   let posMap = ""
   posMap = useAppSelector((state) => state.coordenada.position)
-  const imageCloud = useAppSelector(state => state.coordenada.image)
+  const imageCloud = useAppSelector((state) => state.coordenada.image)
 
   useEffect(() => {
-    setInfo({ ...info, location: posMap, image: imageCloud });
-  }, [posMap, imageCloud]);
+    setInfo({ ...info, location: posMap, image: imageCloud })
+  }, [posMap, imageCloud])
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -107,7 +106,7 @@ export default function FormSection() {
           </div>
         </div>
 
-        <div className="flex flex-col m-auto p-[2rem] w-[50%] text-black ">
+        <div className="flex flex-col m-auto p-[2rem] px-[4rem] w-[50%] text-black ">
           <h2 className="mb-4 text-center font-bold text-[30px]">
             Describenos tu parcela{" "}
           </h2>
@@ -168,13 +167,17 @@ export default function FormSection() {
           </div>
 
           <div className="flex w-full min-h-[70px] max-h-max">
-            {imageCloud?.map((el, index) =>
+            {imageCloud?.map((el, index) => (
               <>
-                <img className="w-[100px] h-[70px] m-2 rounded-md" key={index} src={el} alt={el} />
+                <img
+                  className="w-[100px] h-[70px] m-2 rounded-md"
+                  key={index}
+                  src={el}
+                  alt={el}
+                />
               </>
-            )}
+            ))}
           </div>
-
 
           <div className=" pt-1 flex justify-center  m-auto">
             <Button text="Create" />
