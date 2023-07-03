@@ -65,7 +65,7 @@ export default function Navbar() {
       // Redirect the user to another page or show an error message
       router.push("/")
     }
-  }, [pathName, userAdmin])
+  }, [pathName, router, userAdmin])
 
   // useEffect(() => {
   //   // Realizar consulta a la base de datos para verificar si el usuario es administrador
