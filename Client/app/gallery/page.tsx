@@ -28,17 +28,22 @@ export default function Gallery() {
       <div className="flex pt-[2rem]">
         <Filter />
         <div className="flex-grow pl-[20rem] px-2">
-          {parcels.map((el, index) => (
-            <Card
-              key={index}
-              name={el.name}
-              precio={`CLP $${el.price}`}
-              superficie={el.area}
-              description={el.description}
-              image={el.image[0]}
-              id={el._id}
-            />
-          ))}
+          {parcels.map((el, index) => {
+            if (el.deleted === false) {
+             return(
+              <Card
+                key={index}
+                name={el.name}
+                 precio={`CLP $${el.price?.toLocaleString() }`}
+                superficie={el.area}
+                description={el.description}
+                image={el.image[0]}
+                id={el._id}
+               />
+             )
+            }
+          }
+          )}
           <CustomPagination resPerPage={2} productsCount={5} />
         </div>
       </div>
