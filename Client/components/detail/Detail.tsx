@@ -13,6 +13,9 @@ import LocationMaps from "../Maps/Maps"
 import { useParams, useRouter } from "next/navigation"
 import { useGetParcelaByIdQuery, useDeleteParcelaMutation } from "@/redux/services/parcelApi"
 import Swal from 'sweetalert2'
+import { MercadoPagoButton } from "@/app/mercadopago/components/MercadoPagoButton"
+/* import { Product } from "@/app/mercadopago/Mock/product"; */
+import { useEffect, useState } from "react";
 
 
 const DetailSection = () => {
@@ -53,7 +56,46 @@ const DetailSection = () => {
       }
     })
   }
-
+interface NotificationType {
+    isOpen: boolean;
+    type: "approved" | "failure" | null;
+    content: string;
+  }
+  
+  const Home= () => {
+    const [notification, setNotification] = useState<NotificationType>({
+      isOpen: false,
+      type: null,
+      content: "",
+    });
+  
+    useEffect(() => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const status = urlParams.get("status");
+  
+      if (status === "approved") {
+        setNotification({
+          content: "Pago aprobado!",
+          isOpen: true,
+          type: "approved",
+        });
+      } else if (status === "failure") {
+        setNotification({
+          content: "Pago fallido!",
+          isOpen: true,
+          type: "failure",
+        });
+      }
+  
+      setTimeout(() => {
+        setNotification({
+          isOpen: false,
+          type: null,
+          content: "",
+        });
+      }, 5000);
+    }, []);
+}
 
 
 
@@ -229,10 +271,9 @@ const DetailSection = () => {
           <div onClick={deleteParcel}>
             <Button text={"Eliminar"}></Button>
           </div>
+          
+          <MercadoPagoButton product = {Product}/>
 
-          <Link href="/" className="mr-8 shadow-lg">
-            <Button text={"Comprar Ahora"}></Button>
-          </Link>
         </div>
       </div>
     </>

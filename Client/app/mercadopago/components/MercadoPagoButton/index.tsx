@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { IProduct } from "../../Mock/product";
+import {parcelApi} from "@/redux/services/parcelApi"
+/* import { IProduct } from "../../Mock/product"; */
 import { Loader } from "../Loader/index";
 import axios from "axios";
 
 import styles from "./styles.module.scss";
 
 interface MercadoPagoButtonProps {
-  product: IProduct;
+  product: typeof parcelApi;
 }
 
 export const MercadoPagoButton = ({ product }: MercadoPagoButtonProps) => {
