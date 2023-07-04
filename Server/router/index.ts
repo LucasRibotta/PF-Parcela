@@ -5,17 +5,17 @@ import authRoutes from "./auth"
 
 const router = Router()
 
-// SECCION DE MERCADOPAGO
+/* // SECCION DE MERCADOPAGO
 const PaymentController = require("../controllers/PaymentController");
 const PaymentService = require("../services/PaymentService");
 
 const PaymentInstance = new PaymentController(new PaymentService());
-//---------------------------------------------
+//--------------------------------------------- */
 
 
 router.use("/auth", authRoutes)
 
-// MERCADOPAGO
+/* // MERCADOPAGO
 router.get("/", function (req, res, next) {
     return res.json({
       "/payment": "generates a payment link",
@@ -29,6 +29,6 @@ router.get("/payment", function (req, res, next) {
   
   router.get("/subscription", function (req, res, next) {
     PaymentInstance.getSubscriptionLink(req, res);
-  });
+  }); */
 
 export default router;
