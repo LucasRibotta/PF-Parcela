@@ -13,7 +13,7 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         const response = await axios.post(
-          "http://localhost:3001/login",
+          "https://pf-parcela-production.up.railway.app/api/auth/login",
           credentials
         )
         const user = response.data

@@ -5,8 +5,11 @@ import logo from "../../img/homePicture.jpg"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import Swal from "sweetalert2"
+import { useRouter } from "next/navigation"
 
 export default function Register() {
+  const router = useRouter()
   const [name, setName] = useState("")
   const [lastname, setLastname] = useState("")
   const [phone, setPhone] = useState("")
@@ -33,20 +36,35 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
+      const response = await fetch(
+        "https://pf-parcela-production.up.railway.app/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        }
+      )
 
       if (response.ok) {
         const responseData = await response.json()
-        console.log(responseData)
+        Swal.fire(
+          `¡Gracias ${responseData.name}!`,
+          "Te has registrado exitosamente",
+          "success"
+        )
+        return router.push("/login")
       } else {
         const errorData = await response.json()
-        console.error(errorData)
+        if (errorData) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Parece que algo salio mal!",
+            footer: '<a href="">Completaste los campos correctamente?</a>'
+          })
+        }
       }
     } catch (error) {
       console.error(error)
