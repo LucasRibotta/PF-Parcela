@@ -10,18 +10,25 @@ import { useCreateParcelaMutation } from "@/redux/services/parcelApi"
 import Confirmation from "../confirmation/Confirmation"
 import { useAppSelector } from "@/redux/hooks"
 import { number } from "prop-types"
+import { useRouter } from "next/navigation"
 
 type information = {
+  _id?: string
   name: string
+  price: number | string | null
   lote: number | null
   area: number | null
-  price: number | null
   location: string
-  description: string
   image: string[]
+  deleted?: boolean
+  parcelaData?: string[]
+  description: string
 }
 
 export default function FormSection() {
+
+  const router = useRouter();
+
   const [location, setLocation] = useState("")
   const [confirmation, setConfirmation] = useState(false)
   const [info, setInfo] = useState<information>({
@@ -71,6 +78,7 @@ export default function FormSection() {
 
     setTimeout(() => {
       setConfirmation(false)
+      router.push('/gallery');
     }, 2000)
   }
 
