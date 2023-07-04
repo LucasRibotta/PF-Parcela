@@ -66,9 +66,7 @@ app.use((req, res, next) => {
 })
 
 app.use("/api", router)
-
 app.use(newAuthRouter)
-
 app.listen(PORT, () => {
   connectDB()
   console.log("App escuchando en el puerto :", PORT)
