@@ -230,7 +230,7 @@ const DetailSection = () => {
             <Button text={"Eliminar"}></Button>
           </div>
 
-          <Link href="/" className="mr-8 shadow-lg">
+          <Link href="/pago" className="mr-8 shadow-lg">
             <Button text={"Comprar Ahora"}></Button>
           </Link>
         </div>

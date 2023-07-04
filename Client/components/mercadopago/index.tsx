@@ -11,7 +11,7 @@ interface NotificationType {
   content: string;
 }
 
-export default function Home() {
+export default function Pago() {
   const [notification, setNotification] = useState<NotificationType>({
     isOpen: false,
     type: null,
