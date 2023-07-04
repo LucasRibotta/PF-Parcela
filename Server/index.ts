@@ -23,27 +23,10 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-app.use(cors(corsOptions));
+/* app.use(cors(corsOptions)); */
 
 app.use(express.json()); 
-app.use( (req,res, next) => {
-    localAauth()
-    next()
-})
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(express.json())
-app.use((req, res, next) => {
-  localAauth()
-  next()
-})
-
-app.set("views", path.join(__dirname, "views"))
-app.set("view engine", "ejs")
-
-app.use(express.json())
 app.use(morgan("dev"))
 app.use(express.urlencoded({ extended: true }))
 
