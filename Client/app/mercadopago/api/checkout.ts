@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const product: IProduct = req.body.product; //ESTA ES LA LINEA DONDE VA EL PRODUCTO
 
-    const URL = "localhost:3000"; //DESPUES CAMBIAR POR EL DE PRODUCCION
+    const URL = "localhost:3000"; //DESPUES CAMBIAR POR EL DE PRODUCCION / UTILIZAR NGROK
 
     try {
       const preference: CreatePreferencePayload = {
