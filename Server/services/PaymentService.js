@@ -5,7 +5,7 @@ class PaymentService {
     const url = "https://api.mercadopago.com/checkout/preferences";
 
     const body = {
-      payer_email: "ACA PONGO EL USUARIO QUE TENGO QUE GENERAR COMO TEST", // OJO VER ESTO NO OLVIDARSE
+      payer_email: "TESTUSER1074272512", // OJO VER ESTO NO OLVIDARSE
       items: [
         {
           title: "Dummy Title",
@@ -45,7 +45,7 @@ class PaymentService {
         currency_id: "CLP"
       },
       back_url: "https://google.cl", //OJO CAMBIAR
-      payer_email: "MAIL DEL USUARIO TEST GENERADO POR MP" // OJO VER ESTO NO OLVIDARSE
+      payer_email: "TESTUSER1074272512" // OJO VER ESTO NO OLVIDARSE
     };
 
     const subscription = await axios.post(url, body, {
