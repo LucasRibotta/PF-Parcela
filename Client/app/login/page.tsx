@@ -4,16 +4,23 @@ import logo from "../../img/forestImage.jpg"
 import Link from "next/link"
 import ButtonGoogle from "@/components/ButtonGoogle/ButtonGoogle"
 import { FormEvent, useEffect, useState } from "react"
-import { redirect, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import Swal from "sweetalert2"
 import { signIn } from "next-auth/react"
+import { useSession } from "next-auth/react"
+import { setUserData, setUserLoggedIn } from "@/redux/features/userSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 
 type CustomEvent = {
   target: HTMLInputElement
 }
 
 export default function Login() {
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.user.userData)
   const router = useRouter()
+  const { data: session, status } = useSession()
+
   const [error, setError] = useState("")
   const [input, setInput] = useState({
     email: "",
@@ -36,6 +43,14 @@ export default function Login() {
     }
   }
 
+  useEffect(() => {
+    if (status === "authenticated" && session?.user) {
+      dispatch(setUserData(session.user))
+      dispatch(setUserLoggedIn(true))
+      router.push("/")
+    }
+  }, [status, session])
+
   const handleSubmit = async (event: FormEvent<HTMLButtonElement>) => {
     const res = await signIn("credentials", {
       email: input.email,
@@ -52,22 +67,6 @@ export default function Login() {
       setError("Error de autenticación")
     }
   }
-
-  // const handleLogin = () => {
-  //   // Aquí puedes realizar la validación del usuario en tu backend
-  //   // por ejemplo, utilizando una llamada a la API
-
-  //   // Simulación de verificación de usuario
-  //   if (input.email === "admin" && input.password === "admin123") {
-  //     // Usuario válido, realizar acción de inicio de sesión exitosa
-  //     dispatch(setUserAdmin(true))
-  //     Swal.fire(`¡Bienvenido!`, "Has iniciado sesion", "success")
-  //     router.push("/admin")
-  //   } else {
-  //     // Usuario no válido, mostrar mensaje de error
-  //     setError("Usuario o contraseña incorrectos")
-  //   }
-  // }
 
   useEffect(() => {
     if (error) {
