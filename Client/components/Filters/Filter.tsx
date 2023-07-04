@@ -48,10 +48,10 @@ export default function Filter() {
         <label>Precio:</label>
       </div>
       <RangeSlider
-        initialMin={1000000}
-        initialMax={25000000}
+        initialMin={0}
+        initialMax={60000000}
         min={0}
-        max={26000000}
+        max={60000000}
         step={100}
         priceCap={1000}
       />

@@ -12,8 +12,6 @@ export default function SearchBar() {
 
   const { data, error, isLoading, isFetching } = useGetParcelasQuery(keyword)
 
-  const parcelState = useAppSelector((state) => state.parcelas.parcelas)
-
   const handleSubmit = () => {
     if (keyword) {
       const filtered = data?.filter((e) =>
@@ -23,7 +21,7 @@ export default function SearchBar() {
       if (filtered !== undefined) {
         dispatch(setParcelas(filtered))
       }
-    }
+    } 
   }
 
   const handleKeyDown = (e: any) => {

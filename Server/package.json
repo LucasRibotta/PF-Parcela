@@ -1,11 +1,11 @@
 {
     "scripts": {
         "devNN": "next dev",
-        "buildNN": "next build",
+        "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "dev": "nodemon index.ts",
-        "build": "npm run dev"
+        "dev": "nodemon index.ts"
+        
     },
     "dependencies": {
         "@auth/mongodb-adapter": "^1.0.0",
