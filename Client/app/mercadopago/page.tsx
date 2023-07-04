@@ -1,3 +1,4 @@
+import { formatNumber } from "./utils/formatNumber";
 import { MercadoPagoButton } from "./components/MercadoPagoButton";
 import { Product } from "./Mock/product";
 import { useEffect, useState } from "react";
@@ -11,7 +12,7 @@ interface NotificationType {
   content: string;
 }
 
-export default function Home() {
+export default function Pago() {
   const [notification, setNotification] = useState<NotificationType>({
     isOpen: false,
     type: null,
@@ -59,7 +60,7 @@ export default function Home() {
         <div className={styles.data}>
           <div className={styles.top}>
             <h2>{Product.title}</h2>
-            <h3>{Product.price}</h3>
+            <h3>{formatNumber(Product.price)}</h3>
           </div>
 
           <div className={styles.center}>

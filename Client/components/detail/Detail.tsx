@@ -13,8 +13,6 @@ import LocationMaps from "../Maps/Maps"
 import { useParams, useRouter } from "next/navigation"
 import { useGetParcelaByIdQuery, useDeleteParcelaMutation, parcelApi } from "@/redux/services/parcelApi"
 import Swal from 'sweetalert2'
-import { MercadoPagoButton } from "@/app/mercadopago/components/MercadoPagoButton"
-/* import { Product } from "@/app/mercadopago/Mock/product"; */
 import { useEffect, useState } from "react";
 
 
@@ -271,8 +269,11 @@ interface NotificationType {
           <div onClick={deleteParcel}>
             <Button text={"Eliminar"}></Button>
           </div>
+          <Link href="Client\app\mercadopago\page.tsx">
+            <Button text={"Comprar Parcela"}></Button>
+          </Link>
           
-          <MercadoPagoButton product = {parcelApi}/>
+
 
         </div>
       </div>

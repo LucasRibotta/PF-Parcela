@@ -9,7 +9,7 @@ export interface IProduct {
   export const Product: IProduct = {
     id: 1,
     title: "Parcela",
-    price: 26000000,
+    price: 26000,
     description: [
       "PArcela totalmente plana, con gente adentro pero simpatica, ellos son gratis y van como exclavos, sobre todo el pelado",
     ],
