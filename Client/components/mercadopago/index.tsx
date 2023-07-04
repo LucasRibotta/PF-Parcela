@@ -1,4 +1,7 @@
+
 'use client'
+
+import { formatNumber } from "./utils/formatNumber";
 import { MercadoPagoButton } from "./components/MercadoPagoButton";
 import { Product } from "./Mock/product";
 import { useEffect, useState } from "react";
@@ -60,7 +63,7 @@ export default function Pago() {
         <div className={styles.data}>
           <div className={styles.top}>
             <h2>{Product.title}</h2>
-            <h3>{Product.price}</h3>
+            <h3>{formatNumber(Product.price)}</h3>
           </div>
 
           <div className={styles.center}>

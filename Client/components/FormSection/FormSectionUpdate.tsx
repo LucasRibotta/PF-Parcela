@@ -6,27 +6,30 @@ import swal from "sweetalert"
 import UploadImage from "../UploadImage/UploadImage"
 import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
-import Confirmation from "../confirmation/Confirmation"
 import { useAppSelector } from "@/redux/hooks";
-import { number } from "prop-types";
 import { useGetParcelaByIdQuery, useUpdateParcelaMutation } from "@/redux/services/parcelApi"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import style from "./formSectionUpdate.module.css"
+import ConfirmationUpdate from "../confirmation/ConfirmationUpdate"
 
 type information = {
+  _id?: string
   name: string
+  price: number | string | null
   lote: number | null
   area: number | null
-  price: number | null
   location: string
-  description: string
   image: string[]
+  deleted?: boolean
+  parcelaData?: string[]
+  description: string
 }
 
 
 
 export default function FormSectionUpdate() {
 
+  const router = useRouter();
   const [updateParcela] = useUpdateParcelaMutation()
   const params = useParams()
   const parcela = {
@@ -67,7 +70,9 @@ export default function FormSectionUpdate() {
   }, [images, data?.image])
 
   useEffect(() => {
-    setInfo({ ...info, location: posMap });
+    if (posMap !== "") {
+      setInfo({ ...info, location: posMap });
+    }
     if (data?.image.length === 0) {
       setInfo({ ...info, location: posMap, image: imageCloud });
     }
@@ -129,6 +134,7 @@ export default function FormSectionUpdate() {
 
     setTimeout(() => {
       setConfirmation(false)
+      router.push(`/detail/${parcela.id}`)
     }, 2000)
   }
 
@@ -139,7 +145,7 @@ export default function FormSectionUpdate() {
 
   return (
     <>
-      {confirmation && <Confirmation />}
+      {confirmation && <ConfirmationUpdate />}
       <form
         onSubmit={handleSubmit}
         className="flex flex-col md:flex-row w-[100%] sm:w-[640px] md:w-[768px] lg:w-[1024px]  mx-auto bg-[#f3f4f6] shadow-2xl text-white rounded-3xl overflow-hidden h-auto"

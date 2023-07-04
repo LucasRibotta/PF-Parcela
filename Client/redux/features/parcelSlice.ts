@@ -6,7 +6,7 @@ interface Parcela {
   price: number | string | null
   lote: number | null
   area: number | null
-  location: string[]
+  location: string
   image: string[]
   deleted: boolean
   parcelaData: string[]
@@ -19,7 +19,7 @@ interface ParcelasState {
   priceRange: {
     minPrice: number
     maxPrice: number
-  } 
+  }
 }
 
 const initialState: ParcelasState = {
@@ -80,7 +80,7 @@ const parcelasSlice = createSlice({
           let filteredPriceParcels = state.allParcelas.filter(
            (parcela) => Number(parcela.price) >= state.priceRange.minPrice && Number(parcela.price) <= state.priceRange.maxPrice
            )
-         
+
          return {
            ...state,
            parcelas: filteredPriceParcels

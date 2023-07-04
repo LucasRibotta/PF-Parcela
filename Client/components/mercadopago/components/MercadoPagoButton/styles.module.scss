@@ -1,10 +1,10 @@
 .button {
     width: fit-content;
     text-decoration: none;
-    background-color: #3483fa;
-    padding: 0 2rem;
-    height: 50px;
-    border-radius: 0.5rem;
+    background-color: #51a8a1;
+    padding: 0 1rem;
+    height: 38px;
+    border-radius: 0rem;
     border: none;
     cursor: pointer;
     color: white;
@@ -17,6 +17,7 @@
     transition-duration: 0.3s;
   
     &:hover {
-      transform: scale(1.1);
+      background-color: #126e67;
+      /* transform: scale(1.1); */
     }
   }
