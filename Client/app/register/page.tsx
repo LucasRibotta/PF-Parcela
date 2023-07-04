@@ -37,7 +37,7 @@ export default function Register() {
 
     try {
       const response = await fetch(
-        "https://pf-parcela-production.up.railway.app/api/auth/register",
+        "https://pf-parcela-production.up.railway.app/register",
         {
           method: "POST",
           headers: {
