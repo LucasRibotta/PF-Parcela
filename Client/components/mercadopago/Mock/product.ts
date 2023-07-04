@@ -1,3 +1,4 @@
+
 export interface IProduct {
     id: number;
     title: string;
@@ -6,12 +7,10 @@ export interface IProduct {
     description: string[];
   }
   
-  export const Product: IProduct = {
-    id: 1,
-    title: "Parcela",
-    price: 26000000,
-    description: [
-      "PArcela totalmente plana, con gente adentro pero simpatica, ellos son gratis y van como exclavos, sobre todo el pelado",
-    ],
-    img: "https://casolutions.cl/img/entrada.jpg",
+  export default function Product({id, title, price, description, img}:IProduct) {
+    id: id
+    title: title
+    price: price
+    description: description
+    img: img
   };

@@ -1,9 +1,10 @@
+'use client'
 import { MercadoPagoButton } from "./components/MercadoPagoButton";
 import { Product } from "./Mock/product";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import styles from "@/styles/Home.module.scss";
+import styles from "./components/MercadoPagoButton/styles.module.scss";
 
 interface NotificationType {
   isOpen: boolean;

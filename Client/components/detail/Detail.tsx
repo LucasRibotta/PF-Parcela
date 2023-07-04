@@ -231,7 +231,7 @@ const DetailSection = () => {
           </div>
 
           <Link href="/pago" className="mr-8 shadow-lg">
-            <Button text={"Comprar Ahora"}></Button>
+            <Button text={"Comprar Ahora"} ></Button>
           </Link>
         </div>
       </div>

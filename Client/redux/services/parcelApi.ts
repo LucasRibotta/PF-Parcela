@@ -11,12 +11,13 @@ interface Parcela {
   deleted: boolean
   parcelaData: string[]
   description: string
+  
 }
 
 export const parcelApi = createApi({
   reducerPath: "parcelApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3001/api/auth/"
+    baseUrl: "https://pf-parcela-production.up.railway.app/api/auth"
   }),
   endpoints: (builder) => ({
     getParcelas: builder.query<Parcela[], string>({

@@ -15,6 +15,7 @@ interface Parcela {
 interface ParcelasState {
   allParcelas: Parcela[]
   parcelas: Parcela[] 
+  parcelaData: Parcela
   priceRange: {
     minPrice: number
     maxPrice: number
@@ -27,6 +28,13 @@ const initialState: ParcelasState = {
   priceRange: {
     minPrice: 0,
     maxPrice: 60000000
+  },
+  parcelaData: {
+    _id : "",
+    name: "",
+    price: 0,
+    description: "",
+    image: []
   }
 }
 
