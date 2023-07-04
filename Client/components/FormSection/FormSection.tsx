@@ -11,6 +11,7 @@ import Confirmation from "../confirmation/Confirmation"
 import { useAppSelector } from "@/redux/hooks";
 import { validate } from "../Validate/validate";
 import { number } from "prop-types";
+import { ZodError } from 'zod';
 
 type information = {
   name: string
@@ -51,61 +52,47 @@ export default function FormSection() {
     setInfo({ ...info, [name]: value })
   }
 
-  // const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
   
-  //   try {
-  //     const validData = validate.parse(info);
-  //     // Los datos son válidos, realizar acciones adicionales
-  //     setConfirmation(true);
-  //     createParcela(validData);
-  
-  //     setTimeout(() => {
-  //       setConfirmation(false);
-  //     }, 2000);
+    try {
+     
+      const convertedInfo = {
+        ...info,
+        lote: typeof info.lote === 'number' ? info.lote : parseInt(info.lote || '0', 10),
+        area: typeof info.area === 'number' ? info.area : parseInt(info.area || '0'),
+        price: typeof info.price === 'number' ? info.price : parseInt(info.price || '0'),
+      };
+      const validData= validate.parse(convertedInfo);
       
-  //     // Restablecer campos del formulario
-  //     setInfo({
-  //       name: "",
-  //       lote: null,
-  //       area: null,
-  //       price: null,
-  //       location: "",
-  //       description: "",
-  //       image: [],
-  //     });
-  //     setLocation("");
-  //   } catch (error) {
-  //     // Manejo los errores de validación
-  //     console.log(error);
-  //     swal("Error", "Los datos del formulario no son válidos", "error");
-  //   }
-  // }
+      setConfirmation(true);
+      createParcela({ ...validData, location: [validData.location] });
+  
+      setTimeout(() => {
+        setConfirmation(false);
+      }, 2000);
+      
+      // Restablecer campos del formulario
+      setInfo({
+        name: "",
+        lote: null,
+        area: null,
+        price: null,
+        location: "",
+        description: "",
+        image: [],
+      });
+      setLocation("");
+    } catch (error){
 
 
-   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
-     event.preventDefault()
-
-     if (true) {
-       setInfo({
-         name: "",
-         lote: null,
-         area: null,
-         price: null,
-         location: "",
-         description: "",
-         image: []
-       })
-       setLocation("")
-     }
-
-     setConfirmation(true)
-     createParcela(info)
-
-     setTimeout(() => {
-       setConfirmation(false)
-     }, 2000)
-   }
+      if (error instanceof ZodError) {
+        const errorMessages = error.errors.map((err) => err.message);
+        const errorMessage = errorMessages.join('\n');
+        swal("Error", errorMessage, "error");
+      }
+    }
+  }
 
   const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLocation(event.target.value)

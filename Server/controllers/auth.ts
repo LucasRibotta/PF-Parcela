@@ -50,11 +50,8 @@ export const createParcela = async (req: Request, res: Response) => {
   try {
     const { name, lote, area, price, location, image, description } = req.body;
 
-    console.log(req.body);
-
-
     if (!name || !lote || !area || !price || !location || !image || !description) {
-      throw new Error('El campo name e id son requeridos.');
+      throw new Error('Todos los campo son requeridos.');
     }
 
     const data = {
@@ -62,7 +59,7 @@ export const createParcela = async (req: Request, res: Response) => {
       lote,
       area,
       price,
-      location,
+      location: location.join(", "),
       image,
       description
     };
@@ -71,16 +68,15 @@ export const createParcela = async (req: Request, res: Response) => {
     const parcelaCreado = await nuevoParcela.save();
 
 
-    const parcelaId = await ParcelaModel.find({ name: data.name })
-    console.log(parcelaId);
+    // const parcelaId = await ParcelaModel.find({ name: data.name })
 
 
-    const parcelaActualizado = await CondominioModel.findByIdAndUpdate(
-      parcelaId,
-      { $push: { parcelas: parcelaCreado._id } },
-      { new: true }
-    );
-    console.log(parcelaActualizado);
+    // const parcelaActualizado = await CondominioModel.findByIdAndUpdate(
+    //   parcelaId,
+    //   { $push: { parcelas: parcelaCreado._id } },
+    //   { new: true }
+    // );
+    // console.log(parcelaActualizado);
 
 
     res.status(201).json(parcelaCreado);
