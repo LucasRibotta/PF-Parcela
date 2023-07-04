@@ -1,9 +1,6 @@
 {
     "scripts": {
-        "devNN": "next dev",
-        "build": "next build",
-        "start": "next start",
-        "lint": "next lint",
+        "build": "node index.js",
         "dev": "nodemon index.ts"
     },
     "dependencies": {
