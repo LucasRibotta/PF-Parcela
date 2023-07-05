@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar"
 import ProvidersWrapper from "./ProvidersWrapper"
 import Footer from "@/components/footer/Footer"
 import Providers from "@/redux/provider"
+
 const inter = Montserrat({ subsets: ["latin"] })
 
 export const metadata = {
