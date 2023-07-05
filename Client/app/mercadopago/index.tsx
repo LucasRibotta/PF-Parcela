@@ -1,4 +1,4 @@
-import { MercadoPagoButton } from "./components/MercadoPagoButton";
+/* import { MercadoPagoButton } from "./components/MercadoPagoButton"; */
 import { Product } from "./Mock/product";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -72,9 +72,9 @@ export default function Home() {
             </ul>
           </div>
 
-          <div>
+        {/*   <div>
             <MercadoPagoButton product={Product} />
-          </div>
+          </div> */}
         </div>
       </div>
 
