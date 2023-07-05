@@ -1,27 +1,28 @@
 import { useEffect, useState } from "react";
-import {parcelApi} from "@/redux/services/parcelApi"
-/* import { IProduct } from "../../Mock/product"; */
+import { IProduct } from "../../Mock/product";
 import { Loader } from "../Loader/index";
 import axios from "axios";
 
 import styles from "./styles.module.scss";
 
 interface MercadoPagoButtonProps {
-  product: typeof parcelApi;
+  product: IProduct;
 }
 
 export const MercadoPagoButton = ({ product }: MercadoPagoButtonProps) => {
   const [url, setUrl] = useState<null | string>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
+  console.log(product);
+
   useEffect(() => {
     const generateLink = async () => {
       setLoading(true);
 
       try {
-        const { data: preference } = await axios.post("/api/checkout", {
-          product,
-        });
+        const { data: preference } = await axios.post("../../api/checkout.ts",
+          product
+        );
 
         setUrl(preference.url);
       } catch (error) {
