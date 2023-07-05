@@ -14,7 +14,7 @@ export default function HomeTitle() {
       <h5 className="text-base text-white font-bold">Conoce todas las posibilidades</h5>
       <div>
         <Link href="/gallery">
-          <Button text={"Galería"} />
+          <Button text={"Parcelas"} />
         </Link>
       </div>
     </div>

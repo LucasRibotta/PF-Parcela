@@ -19,7 +19,7 @@ export default function Admin() {
           </a>
           <div className="w-full px-2">
             <div className="flex flex-col items-center w-full mt-3 border-t border-gray-700">
-              <a
+              {/* <a
                 className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
                 href="#"
               >
@@ -38,8 +38,8 @@ export default function Admin() {
                   />
                 </svg>
                 <span className="ml-2 text-sm font-medium">Gráficos</span>
-              </a>
-              <a
+              </a> */}
+              {/* <a
                 className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
                 href="#"
               >
@@ -58,7 +58,7 @@ export default function Admin() {
                   />
                 </svg>
                 <span className="ml-2 text-sm font-medium">Buscar</span>
-              </a>
+              </a> */}
 
               <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                 <svg
@@ -78,7 +78,7 @@ export default function Admin() {
                 </Link>
               </div>
 
-              <a
+              {/* <a
                 className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
                 href="#"
               >
@@ -97,9 +97,9 @@ export default function Admin() {
                   />
                 </svg>
                 <span className="ml-2 text-sm font-medium">Docs</span>
-              </a>
+              </a> */}
             </div>
-            <div className="flex flex-col items-center w-full mt-2 border-t border-gray-700">
+            {/* <div className="flex flex-col items-center w-full mt-2 border-t border-gray-700">
               <a
                 className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
                 href="#"
@@ -161,7 +161,7 @@ export default function Admin() {
                 <span className="ml-2 text-sm font-medium">Mensajes</span>
                 <span className="absolute top-0 left-0 w-2 h-2 mt-2 ml-2 bg-indigo-500 rounded-full"></span>
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex flex-col flex-1 p-4  bg-gray-800">
