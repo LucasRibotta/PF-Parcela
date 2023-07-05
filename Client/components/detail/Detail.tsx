@@ -14,6 +14,8 @@ import { useParams, useRouter } from "next/navigation"
 import { useGetParcelaByIdQuery, useDeleteParcelaMutation, parcelApi } from "@/redux/services/parcelApi"
 import Swal from 'sweetalert2'
 import { useEffect, useState } from "react";
+import { useAppDispatch } from "@/redux/hooks"
+import { setParcelaData } from "@/redux/features/parcelSlice"
 
 
 const DetailSection = () => {
@@ -21,11 +23,20 @@ const DetailSection = () => {
   const parcela = {
     id: params.id,
   }
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [deleteParcela] = useDeleteParcelaMutation()
   const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
+  useEffect(() => {
+    if (data) {
+      dispatch(setParcelaData(data));
+    }
+  },[data])
+
+
+
   if (isLoading || isFetching) return <p>Loading</p>
-  if (error) return <p>Some error</p>
+  if (error) return <p>Some error</p>;
 
 
 
@@ -59,18 +70,18 @@ interface NotificationType {
     type: "approved" | "failure" | null;
     content: string;
   }
-  
+
   const Home= () => {
     const [notification, setNotification] = useState<NotificationType>({
       isOpen: false,
       type: null,
       content: "",
     });
-  
+
     useEffect(() => {
       const urlParams = new URLSearchParams(window.location.search);
       const status = urlParams.get("status");
-  
+
       if (status === "approved") {
         setNotification({
           content: "Pago aprobado!",
@@ -84,7 +95,7 @@ interface NotificationType {
           type: "failure",
         });
       }
-  
+
       setTimeout(() => {
         setNotification({
           isOpen: false,
@@ -269,10 +280,11 @@ interface NotificationType {
           <div onClick={deleteParcel}>
             <Button text={"Eliminar"}></Button>
           </div>
-          <Link href="Client\app\mercadopago\page.tsx">
-            <Button text={"Comprar Parcela"}></Button>
+
+          <Link href="/pago" className="mr-8 shadow-lg">
+            <Button text={"Comprar Ahora"} ></Button>
           </Link>
-          
+
 
 
         </div>
