@@ -34,7 +34,7 @@ export default function Gallery() {
               <Card
                 key={index}
                 name={el.name}
-                 precio={`CLP $${el.price?.toLocaleString() }`}
+                precio={`CLP $${el.price?.toLocaleString() }`}
                 superficie={el.area}
                 description={el.description}
                 image={el.image[0]}
