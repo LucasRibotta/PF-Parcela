@@ -8,16 +8,17 @@ mercadopago.configure({
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log("entraste");
   if (req.method === "POST") {
     const product: IProduct = req.body.product; //ESTA ES LA LINEA DONDE VA EL PRODUCTO
-
+    
     const URL = "fe8ca8f43333-2133126022626341053.ngrok-free.app"; //DESPUES CAMBIAR POR EL DE PRODUCCION / UTILIZAR NGROK
 
     try {
       const preference: CreatePreferencePayload = {
         items: [
           {
-            title: product.title,
+            title: product.name,
             unit_price: product.price,
             quantity: 1,
           },

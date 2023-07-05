@@ -4,17 +4,17 @@ interface Parcela {
   _id: string
   name: string
   price: number | string | null
-  lote: number | null
-  area: number | null
-  location: string
+  lote?: number | null
+  area?: number | null
+  location?: string
   image: string[]
-  deleted: boolean
-  parcelaData: string[]
+  deleted?: boolean
+  parcelaData?: string[]
   description: string
 }
 interface ParcelasState {
   allParcelas: Parcela[]
-  parcelas: Parcela[] 
+  parcelas: Parcela[]
   parcelaData: Parcela
   priceRange: {
     minPrice: number
@@ -45,6 +45,9 @@ const parcelasSlice = createSlice({
     setParcelas: (state, action: PayloadAction<Parcela[]>) => {
       state.allParcelas = action.payload
       state.parcelas = action.payload
+    },
+    setParcelaData: (state, action: PayloadAction<Parcela>) => {
+      state.parcelaData = action.payload
     },
     sortParcelas: (state, action: PayloadAction<string>) => {
       const orderBy = action.payload
@@ -133,6 +136,6 @@ const parcelasSlice = createSlice({
   }
 })
 
-export const { setParcelas, sortParcelas, filterParcelas, updatePriceRange, filterPrice } = parcelasSlice.actions
+export const { setParcelas, sortParcelas, filterParcelas, updatePriceRange, filterPrice, setParcelaData } = parcelasSlice.actions
 
 export default parcelasSlice.reducer

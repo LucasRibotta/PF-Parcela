@@ -1,16 +1,12 @@
 
 export interface IProduct {
-    id: number;
-    title: string;
-    price: number;
-    img: string;
-    description: string[];
-  }
-  
-  export default function Product({id, title, price, description, img}:IProduct) {
-    id: id
-    title: title
-    price: price
-    description: description
-    img: img
-  };
+  _id: string;
+  name: string;
+  price: number | string | null;
+  image: string[];
+  description: string;
+}
+
+export default function Product(product: IProduct) {
+  const { _id, name, price, description, image } = product
+};
