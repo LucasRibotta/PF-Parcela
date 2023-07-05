@@ -15,7 +15,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const URL = "https://pf-parcela-front.vercel.app/"; //DESPUES CAMBIAR POR EL DE PRODUCCION / UTILIZAR NGROK
 
     try {
-      if(typeof product.price === 'number' || typeof product.price === 'string'){
       const preference: CreatePreferencePayload = {
         items: [
           {
@@ -31,11 +30,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
         notification_url: `${URL}/api/notify`,
       };
-    
+
       const response = await mercadopago.preferences.create(preference);
 
       res.status(200).send({ url: response.body.init_point });
-    }
     } catch (error) {}
   } else {
     res.status(400).json({ message: "Method not allowed" });
