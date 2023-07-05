@@ -2,28 +2,30 @@
 import Image from "next/image"
 import logo from "../../img/forestImage.jpg"
 import Link from "next/link"
-import { BiLogoFacebook, BiLogoGmail } from "react-icons/bi"
 import ButtonGoogle from "@/components/ButtonGoogle/ButtonGoogle"
-import { useEffect, useState } from "react"
-import { useAppSelector, useAppDispatch } from "@/redux/hooks"
-import { setUserAdmin } from "@/redux/features/userSlice"
+import { FormEvent, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Swal from "sweetalert2"
-import axios from "axios"
+import { signIn } from "next-auth/react"
+import { useSession } from "next-auth/react"
+import { setUserData, setUserLoggedIn } from "@/redux/features/userSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 
 type CustomEvent = {
   target: HTMLInputElement
 }
 
 export default function Login() {
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.user.userData)
   const router = useRouter()
+  const { data: session, status } = useSession()
+
   const [error, setError] = useState("")
   const [input, setInput] = useState({
     email: "",
     password: ""
   })
-  const adminLoggedIn = useAppSelector((state) => state.user.isAdmin)
-  const dispatch = useAppDispatch()
 
   const handleInputChange = (event: CustomEvent) => {
     const { name, value } = event.target
@@ -41,34 +43,28 @@ export default function Login() {
     }
   }
 
-  const handleUser = async () => {
-    try {
-      const response = await axios.post("http://localhost:3001/login", input)
-
-      const data = response.data
-
-      if (data) {
-        console.log(data)
-      }
-    } catch (error) {
-      
-      setError("Ocurrió un error al iniciar sesión")
+  useEffect(() => {
+    if (status === "authenticated" && session?.user) {
+      dispatch(setUserData(session.user))
+      dispatch(setUserLoggedIn(true))
+      router.push("/")
     }
-  }
+  }, [status, session])
 
-  const handleLogin = () => {
-    // Aquí puedes realizar la validación del usuario en tu backend
-    // por ejemplo, utilizando una llamada a la API
+  const handleSubmit = async (event: FormEvent<HTMLButtonElement>) => {
+    const res = await signIn("credentials", {
+      email: input.email,
+      password: input.password,
+      redirect: false
+    })
 
-    // Simulación de verificación de usuario
-    if (input.email === "admin" && input.password === "admin123") {
-      // Usuario válido, realizar acción de inicio de sesión exitosa
-      dispatch(setUserAdmin(true))
-      Swal.fire(`¡Bienvenido!`, "Has iniciado sesion", "success")
-      router.push("/admin")
+    if (res?.error) {
+      setError(res.error as string)
+    } else if (res?.ok && res.url) {
+      Swal.fire(`¡Bienvenido!`, "Has iniciado sesión", "success")
+      return router.push("/")
     } else {
-      // Usuario no válido, mostrar mensaje de error
-      setError("Usuario o contraseña incorrectos")
+      setError("Error de autenticación")
     }
   }
 
@@ -125,7 +121,7 @@ export default function Login() {
             <button
               className="bg-[#51a8a1] hover:bg-[#126e67] ease-in-out min-w-[9rem] max-w-[9rem] duration-300 text-white font-bold py-2 px-4 rounded-[20px]  focus:outline-none focus:shadow-outline"
               type="button"
-              onClick={handleLogin}
+              onClick={handleSubmit}
             >
               Iniciar sesión
             </button>

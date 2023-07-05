@@ -8,22 +8,29 @@ import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
 import { useCreateParcelaMutation } from "@/redux/services/parcelApi"
 import Confirmation from "../confirmation/Confirmation"
-import { useAppSelector } from "@/redux/hooks";
 import { validate } from "../Validate/validate";
-import { number } from "prop-types";
 import { ZodError } from 'zod';
+import { useAppSelector } from "@/redux/hooks"
+import { number } from "prop-types"
+import { useRouter } from "next/navigation"
 
 type information = {
+  _id?: string
   name: string
+  price: number | string | null
   lote: number | null
   area: number | null
-  price: number | null
   location: string
-  description: string
   image: string[]
+  deleted?: boolean
+  parcelaData?: string[]
+  description: string
 }
 
 export default function FormSection() {
+
+  const router = useRouter();
+
   const [location, setLocation] = useState("")
   const [confirmation, setConfirmation] = useState(false)
   const [info, setInfo] = useState<information>({
@@ -65,11 +72,20 @@ export default function FormSection() {
       };
       const validData= validate.parse(convertedInfo);
       
+    //   setConfirmation(true)
+    // createParcela(info)
+
+    // setTimeout(() => {
+    //   setConfirmation(false)
+    //   router.push('/gallery');
+    // }, 2000)
+
       setConfirmation(true);
-      createParcela({ ...validData, location: [validData.location] });
+      createParcela({ ...validData, location: validData.location });
   
       setTimeout(() => {
         setConfirmation(false);
+        router.push('/gallery');
       }, 2000);
       
       // Restablecer campos del formulario
@@ -92,6 +108,8 @@ export default function FormSection() {
         swal("Error", errorMessage, "error");
       }
     }
+
+    
   }
 
   const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {

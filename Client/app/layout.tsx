@@ -51,7 +51,6 @@ export default function RootLayout({
           <Providers>
             <Navbar />
             {children}
-            {/* <Footer /> */}
           </Providers>
         </ProvidersWrapper>
       </body>

@@ -10,30 +10,29 @@ import { usePathname } from "next/navigation"
 import {
   setUserAdmin,
   setUserData,
-  setUserLoggedIn,
-  setUsersData
+  setUserLoggedIn
 } from "@/redux/features/userSlice"
 import { useAppSelector, useAppDispatch } from "@/redux/hooks"
-import { useGetUsersQuery } from "@/redux/services/userApi"
 import { useRouter } from "next/navigation"
+import { signOut } from "next-auth/react"
 
 export default function Navbar() {
-  const [navbarBackground, setNavbarBackground] = useState(false)
-  // const [userLoggedIn, setUserLoggedIn] = useState(false)
-  // const [userAdmin, setUserAdmin] = useState(true)
-
+  const dispatch = useAppDispatch()
   const router = useRouter()
+
+  const [navbarBackground, setNavbarBackground] = useState(false)
+
   const userLoggedIn = useAppSelector((state) => state.user.loggedIn)
   const userAdmin = useAppSelector((state) => state.user.isAdmin)
-  const usersData = useAppSelector((state) => state.user.users)
-  const dispatch = useAppDispatch()
-
-  // const dispatch = useAppDispatch()
-
-  // const { data, error, isLoading, isFetching } = useGetUsersQuery(null)
-
-  // const otherUsersData = dispatch(setUsersData(data))
-  // console.log(otherUsersData)
+  const user = useAppSelector((state) => state.user.userData)
+  console.log(user)
+  useEffect(() => {
+    if (user?.email === "admin@admin.com") {
+      dispatch(setUserAdmin(true))
+    } else {
+      dispatch(setUserAdmin(false))
+    }
+  }, [user])
 
   const activeLink =
     "border-b-2  border-[#51a8a1] text-[#51a8a1] duration-200 cursor-pointer"
@@ -55,9 +54,13 @@ export default function Navbar() {
     }
   }, [navbarBackground])
 
-  const handleLogout = () => {
-    dispatch(setUserAdmin(false))
-    router.push("/")
+  const handleLogout = async () => {
+    const closeSession = await signOut()
+    if (closeSession) {
+      dispatch(setUserAdmin(false))
+      dispatch(setUserLoggedIn(false))
+      dispatch(setUserData(null))
+    }
   }
 
   useEffect(() => {
@@ -66,29 +69,6 @@ export default function Navbar() {
       router.push("/")
     }
   }, [pathName, router, userAdmin])
-
-  // useEffect(() => {
-  //   // Realizar consulta a la base de datos para verificar si el usuario es administrador
-  //   const fetchUserData = async () => {
-  //     try {
-  //       // Aquí realizas tu consulta a la base de datos
-  //       // Puedes usar la biblioteca de tu elección para realizar la consulta
-  //       const response = await fetch("/api/user") // Ejemplo de endpoint para obtener los datos del usuario
-  //       const userData = await response.json()
-
-  //       // Verificar si el usuario es administrador
-  //       if (userData.accesLevel === 2) {
-  //         setUserAdmin(true)
-  //       }
-  //     } catch (error) {
-  //       console.log("Error al obtener los datos del usuario:", error)
-  //     }
-  //   }
-
-  //   if (userLoggedIn) {
-  //     fetchUserData()
-  //   }
-  // }, [userLoggedIn])
 
   return (
     <nav
@@ -150,9 +130,12 @@ export default function Navbar() {
         <>
           {userLoggedIn ? (
             <div className="w-3/12 flex items-center justify-end gap-4">
-              <AiOutlineSearch className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
+              {/* <AiOutlineSearch className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
               <AiOutlineShoppingCart className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
-              <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" />
+              <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" /> */}
+              <div onClick={handleLogout}>
+                <Button text={"cerrar sesión"} />
+              </div>
             </div>
           ) : (
             <div className="w-3/12 flex items-center justify-end">
@@ -175,7 +158,7 @@ export default function Navbar() {
           <div onClick={handleLogout}>
             <Button text={"cerrar sesión"} />
           </div>
-          <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" />
+          {/* <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" /> */}
         </div>
       )}
     </nav>

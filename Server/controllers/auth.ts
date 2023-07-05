@@ -59,7 +59,7 @@ export const createParcela = async (req: Request, res: Response) => {
       lote,
       area,
       price,
-      location: location.join(", "),
+      location,
       image,
       description
     };
