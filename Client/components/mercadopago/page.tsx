@@ -1,13 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @next/next/no-img-element */
 
 'use client'
 
 import { formatNumber } from "./utils/formatNumber";
 import { MercadoPagoButton } from "./components/MercadoPagoButton";
-import { Product } from "./Mock/product";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-
+import Product from "./Mock/product";
 import styles from "./components/MercadoPagoButton/styles.module.scss";
+import { useAppSelector } from "@/redux/hooks";
 
 interface NotificationType {
   isOpen: boolean;
@@ -15,16 +17,23 @@ interface NotificationType {
   content: string;
 }
 
+
+
 export default function Pago() {
+
   const [notification, setNotification] = useState<NotificationType>({
     isOpen: false,
     type: null,
     content: "",
   });
+  const dataParcel = useAppSelector(state => state.parcelas.parcelaData);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get("status");
+
+    const info = Product(dataParcel);
+
 
     if (status === "approved") {
       setNotification({
@@ -52,32 +61,25 @@ export default function Pago() {
   return (
     <main className={styles.container}>
       <div className={styles.productContainer}>
-        <Image
-          src={Product.img}
-          alt={Product.title}
-          width={360}
-          height={450}
-          priority
-        />
+        <img src={dataParcel.image[0]} alt={dataParcel.name} className="w-[360px] h-[450px]" />
+
 
         <div className={styles.data}>
           <div className={styles.top}>
-            <h2>{Product.title}</h2>
-            <h3>{formatNumber(Product.price)}</h3>
+            <h2>{dataParcel.name}</h2>
+            <h3>{Number(dataParcel.price)}</h3>
           </div>
 
           <div className={styles.center}>
             <span>Descripción:</span>
 
             <ul>
-              {Product.description.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
+              {dataParcel.description}
             </ul>
           </div>
 
           <div>
-            <MercadoPagoButton product={Product} />
+            <MercadoPagoButton product={dataParcel} />
           </div>
         </div>
       </div>

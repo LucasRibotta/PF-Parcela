@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import Link from "next/link"
 import Image from "next/image"
@@ -98,22 +99,22 @@ export default function Navbar() {
             Parcelas
           </Link>
         </li>
-        <li className="px-[22px] py-[20px]">
+        {/* <li className="px-[22px] py-[20px]">
           <Link
             className={pathName === "/about" ? activeLink : inactiveLink}
             href="/about"
           >
             Nosotros
           </Link>
-        </li>
-        <li className="px-[22px] py-[20px]">
+        </li> */}
+        {/* <li className="px-[22px] py-[20px]">
           <Link
             className={pathName === "/contact" ? activeLink : inactiveLink}
             href="/contact"
           >
             Contacto
           </Link>
-        </li>
+        </li> */}
         {userAdmin ? (
           <li className="px-[22px] py-[20px]">
             <Link
