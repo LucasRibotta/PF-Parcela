@@ -18,7 +18,7 @@ export default function Filter() {
       style={{ height: "calc(100vh - 7rem - 1.9rem)" }}
     >
       <SearchBar />
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label className="block mb-2">Ubicación:</label>
         <select className="block w-full p-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] ">
           <option value="">Selecciona una ubicación</option>
@@ -30,7 +30,7 @@ export default function Filter() {
           <option value="Puerto Chico">Puerto Chico</option>
           <option value="Puerto Varas">Puerto Varas</option>
         </select>
-      </div>
+      </div> */}
       <div className="mb-4">
         <label className="block mb-2">Superficie:</label>
         <select
