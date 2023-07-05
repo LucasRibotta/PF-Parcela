@@ -10,7 +10,7 @@ import Button from "../Button/Button"
 interface CardProps {
   name: string
   precio: number | string | null
-  superficie: number | null
+  superficie?: number | null
   image: string[]|string
   id: string
   description: string
