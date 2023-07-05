@@ -85,7 +85,7 @@ export default function Login() {
         <div className="w-1/2 bg-gray-100 p-10 flex flex-col justify-center items-center rounded-l-xl shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
           <h2 className="text-3xl font-black mb-6 ">Iniciar sesión</h2>
           <div className="flex pb-4">
-            <div className="border-[1px] text[#ddd] rounded-[50%] inline-flex justify-center items-center mx-[5px] h-[40px] w-[40px]">
+            <div className="border-none text[#ddd] rounded-[50%] inline-flex justify-center items-center mx-[5px] h-[40px] w-[40px]">
               {/* Reemplazar el BiLogoGmail por un Boton que contenga al BiLogoGmail... */}
               {/* <BiLogoGmail className="h-4 w-4 text-[#51a8a1]" /> */}
               <ButtonGoogle />
