@@ -60,7 +60,7 @@ const DetailSection = () => {
         )
         deleteParcela(parcela);
         setTimeout(() => {
-          router.push('/gallery');
+          router.push('/parcelas');
         }, 3000)
 
       }
