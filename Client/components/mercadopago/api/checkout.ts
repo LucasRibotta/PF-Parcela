@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         items: [
           {
             title: product.name,
-            unit_price: product.price,
+            unit_price: product.price.toString(),
             quantity: 1,
           },
         ],
