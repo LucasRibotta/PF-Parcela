@@ -78,7 +78,7 @@ export default function FormSection() {
 
     setTimeout(() => {
       setConfirmation(false)
-      router.push('/gallery');
+      router.push('/parcelas');
     }, 2000)
   }
 
