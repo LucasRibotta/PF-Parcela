@@ -8,7 +8,7 @@ import { setParcelas } from "@/redux/features/parcelSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useState, useEffect } from "react"
 
-export default function Gallery() {
+export default function Parcelas() {
   const { data, error, isLoading, isFetching } = useGetParcelasQuery("")
   const dispatch = useAppDispatch()
   const parcels = useAppSelector((state) => state.parcelas.parcelas)
@@ -34,7 +34,7 @@ export default function Gallery() {
               <Card
                 key={index}
                 name={el.name}
-                 precio={`CLP $${el.price?.toLocaleString() }`}
+                precio={`CLP $${el.price?.toLocaleString() }`}
                 superficie={el.area}
                 description={el.description}
                 image={el.image[0]}

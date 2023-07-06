@@ -13,7 +13,7 @@ export default function HomeTitle() {
       </p>
       <h5 className="text-base text-white font-bold">Conoce todas las posibilidades</h5>
       <div>
-        <Link href="/gallery">
+        <Link href="/parcelas">
           <Button text={"Parcelas"} />
         </Link>
       </div>

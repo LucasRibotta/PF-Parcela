@@ -98,8 +98,8 @@ export default function Navbar() {
         </li>
         <li className="px-[22px] py-[20px]">
           <Link
-            className={pathName === "/gallery" ? activeLink : inactiveLink}
-            href="/gallery"
+            className={pathName === "/parcelas" ? activeLink : inactiveLink}
+            href="/parcelas"
           >
             Parcelas
           </Link>
