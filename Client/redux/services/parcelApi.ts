@@ -11,6 +11,7 @@ interface Parcela {
   deleted: boolean
   parcelaData: string[]
   description: string
+  
 }
 
 export const parcelApi = createApi({
