@@ -6,6 +6,7 @@ import { useGetParcelasQuery } from "@/redux/services/parcelApi"
 import { setParcelas } from "@/redux/features/parcelSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import Button from "../Button/Button"
+import { HiOutlineRefresh } from "react-icons/hi"
 
 export default function SearchBar() {
   const [keyword, setKeyword] = useState("")
@@ -50,11 +51,8 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="mb-4">
+    <div className="mb-4  flex">
       <div className="relative">
-        <div onClick={reset}>
-          <Button text="all" />
-        </div>
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <svg
             className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -74,12 +72,17 @@ export default function SearchBar() {
         </div>
         <input
           type="text"
-          className="block w-full p-[6px] pl-10 text-sm text-gray-900 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1]"
+          className="block w-full p-[6px] pl-10 text-sm text-gray-900 border rounded-l-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1]"
           placeholder="Buscar..."
           value={keyword}
           onChange={(e) => handleChange(e)}
           onKeyDown={handleKeyDown}
         />
+      </div>
+      <div onClick={reset}>
+        <button className="bg-[#51a8a1] border-[#51a8a1] border-[1px] text-white hover:bg-[#126e67] rounded-r-md ease-in-out duration-300 p-[6px]">
+          <HiOutlineRefresh className="h-5 w-5" />
+        </button>
       </div>
     </div>
 
