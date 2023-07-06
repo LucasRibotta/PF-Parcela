@@ -10,14 +10,12 @@ export default function Order() {
   }
 
   return (
-    <div>
-      <select
-        className="block w-full p-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] "
-        onChange={handleSortChange}
-      >
-        <option value="asc">Menor precio</option>
-        <option value="desc">Mayor precio</option>
-      </select>
-    </div>
+    <select
+      className="block w-full p-[6px] text-sm font-medium rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1]"
+      onChange={handleSortChange}
+    >
+      <option value="asc">Menor precio</option>
+      <option value="desc">Mayor precio</option>
+    </select>
   )
 }
