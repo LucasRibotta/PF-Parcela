@@ -17,7 +17,12 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks"
 import { useRouter } from "next/navigation"
 import { signOut } from "next-auth/react"
 
+import { useSession } from "next-auth/react"
+
 export default function Navbar() {
+
+  const { data: session, status } = useSession()
+
   const dispatch = useAppDispatch()
   const router = useRouter()
 
@@ -43,7 +48,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isTop = window.scrollY < 200
+      const isTop = window.scrollY < 300
       if (isTop !== navbarBackground) {
         setNavbarBackground(isTop)
       }
@@ -75,8 +80,8 @@ export default function Navbar() {
     <nav
       className={`flex fixed  items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full shadow-md ${
         navbarBackground
-          ? "bg-[#22222263]"
-          : "bg-[#2222229c] ease-in-out duration-300"
+          ? "bg-[#222222b0]"
+          : "bg-[#222222e7] ease-in-out duration-300"
       }`}
     >
       <div className="w-3/12">
@@ -129,11 +134,23 @@ export default function Navbar() {
 
       {!userAdmin ? (
         <>
-          {userLoggedIn ? (
+          {status === "authenticated"? (
+        //  {userLoggedIn ? ( 
             <div className="w-3/12 flex items-center justify-end gap-4">
               {/* <AiOutlineSearch className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
               <AiOutlineShoppingCart className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
               <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" /> */}
+            <Link href={"/userDataRegister"}>
+                <button >
+              {
+                session?.user?.image ?
+                  <img src={session?.user?.image ?? "default-image-url"} className="sm:h-9 sm:w-9 rounded-full hover:scale-110" alt="no found" />
+                :
+                  <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" />
+                }
+                </button>
+            </Link>
+
               <div onClick={handleLogout}>
                 <Button text={"cerrar sesión"} />
               </div>

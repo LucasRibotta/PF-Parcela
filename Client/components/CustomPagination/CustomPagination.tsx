@@ -49,8 +49,12 @@ export default function CustomPagination({
         firstPageText={"Inicio"}
         lastPageText={"Final"}
         itemClass="relative inline-flex items-center border-[1px] border-[#51a8a1] bg-[#51a8a1] text-white rounded-full ease-in-out duration-300 px-4 py-[8px] focus:z-20 mx-1"
-        activeLinkClass="z-10 inline-flex items-center text-[#51a8a1] focus:z-20 ease-in-out duration-300"
+        activeLinkClass="z-10 inline-flex items-center text-[#51a8a1] focus:z-20 ease-in-out duration-300 "
         activeClass="z-10 inline-flex items-center border-[1px] border-[#51a8a1] bg-transparent font-bold focus:z-20"
+        itemClassFirst="rounded-md"
+        itemClassPrev="rounded-md"
+        itemClassNext="rounded-md"
+        itemClassLast="rounded-md"
       />
     </div>
   )
