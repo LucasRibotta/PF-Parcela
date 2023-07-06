@@ -48,7 +48,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isTop = window.scrollY < 200
+      const isTop = window.scrollY < 300
       if (isTop !== navbarBackground) {
         setNavbarBackground(isTop)
       }
@@ -80,8 +80,8 @@ export default function Navbar() {
     <nav
       className={`flex fixed  items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full shadow-md ${
         navbarBackground
-          ? "bg-[#22222263]"
-          : "bg-[#2222229c] ease-in-out duration-300"
+          ? "bg-[#222222b0]"
+          : "bg-[#222222e7] ease-in-out duration-300"
       }`}
     >
       <div className="w-3/12">
