@@ -1,5 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+interface UserState {
+  users: any[]
+  loggedIn: boolean
+  isAdmin: boolean
+  userData: {
+    email: string
+  } | null
+}
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -7,7 +16,7 @@ const userSlice = createSlice({
     loggedIn: false,
     isAdmin: false,
     userData: null
-  },
+  } as UserState,
   reducers: {
     setUserLoggedIn: (state, action) => {
       state.loggedIn = action.payload
