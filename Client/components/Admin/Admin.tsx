@@ -8,16 +8,18 @@ import { setParcelas } from "@/redux/features/parcelSlice"
 import { useGetParcelasQuery } from "@/redux/services/parcelApi"
 
 export default function AdminDash() {
-  const { data, error, isLoading, isFetching } = useGetParcelasQuery("")
+
+
   const dispatch = useAppDispatch()
+  const { data, error, isLoading, isFetching } = useGetParcelasQuery("")
   useEffect(() => {
     if (data && Array.isArray(data)) {
       dispatch(setParcelas(data))
     }
   }, [data, dispatch])
-
-  const user = useAppSelector((state) => state.user.userData)
   const parcelas = useAppSelector((state) => state.parcelas.allParcelas)
+  const user = useAppSelector((state) => state.user.userData)
+
 
   return (
     <PrivateRoute>
