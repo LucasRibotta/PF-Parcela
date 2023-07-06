@@ -1,9 +1,10 @@
-import Pago from '../../components/mercadopago/index'
+import Sell from '../../components/mercadopago/index'
 
 export default function pago() {
   return (
     <div>
-        <Pago />
+      <h1>hola</h1>
+        <Sell />
     </div>
   )
 }

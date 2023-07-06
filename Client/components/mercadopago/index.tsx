@@ -19,7 +19,7 @@ interface NotificationType {
 
 
 
-export default function Pago() {
+export default function Sell() {
 
   const [notification, setNotification] = useState<NotificationType>({
     isOpen: false,
