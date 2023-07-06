@@ -4,21 +4,22 @@ interface Parcela {
   _id: string
   name: string
   price: number | string | null
-  lote: number | null
-  area: number | null
-  location: string[]
+  lote?: number | null
+  area?: number | null
+  location?: string
   image: string[]
-  deleted: boolean
-  parcelaData: string[]
+  deleted?: boolean
+  parcelaData?: string[]
   description: string
 }
 interface ParcelasState {
   allParcelas: Parcela[]
-  parcelas: Parcela[] 
+  parcelas: Parcela[]
+  parcelaData: Parcela
   priceRange: {
     minPrice: number
     maxPrice: number
-  } 
+  }
 }
 
 const initialState: ParcelasState = {
@@ -27,6 +28,13 @@ const initialState: ParcelasState = {
   priceRange: {
     minPrice: 0,
     maxPrice: 60000000
+  },
+  parcelaData: {
+    _id : "",
+    name: "",
+    price: 0,
+    description: "",
+    image: []
   }
 }
 
@@ -37,6 +45,9 @@ const parcelasSlice = createSlice({
     setParcelas: (state, action: PayloadAction<Parcela[]>) => {
       state.allParcelas = action.payload
       state.parcelas = action.payload
+    },
+    setParcelaData: (state, action: PayloadAction<Parcela>) => {
+      state.parcelaData = action.payload
     },
     sortParcelas: (state, action: PayloadAction<string>) => {
       const orderBy = action.payload
@@ -72,7 +83,7 @@ const parcelasSlice = createSlice({
           let filteredPriceParcels = state.allParcelas.filter(
            (parcela) => Number(parcela.price) >= state.priceRange.minPrice && Number(parcela.price) <= state.priceRange.maxPrice
            )
-         
+
          return {
            ...state,
            parcelas: filteredPriceParcels
@@ -125,6 +136,6 @@ const parcelasSlice = createSlice({
   }
 })
 
-export const { setParcelas, sortParcelas, filterParcelas, updatePriceRange, filterPrice } = parcelasSlice.actions
+export const { setParcelas, sortParcelas, filterParcelas, updatePriceRange, filterPrice, setParcelaData } = parcelasSlice.actions
 
 export default parcelasSlice.reducer

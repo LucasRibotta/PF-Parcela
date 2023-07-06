@@ -6,11 +6,12 @@ interface Parcela {
   price: number | string | null
   lote: number | null
   area: number | null
-  location: string[]
+  location: string
   image: string[]
   deleted: boolean
   parcelaData: string[]
   description: string
+  
 }
 
 export const parcelApi = createApi({

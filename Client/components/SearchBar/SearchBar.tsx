@@ -5,22 +5,36 @@ import "tailwindcss/tailwind.css"
 import { useGetParcelasQuery } from "@/redux/services/parcelApi"
 import { setParcelas } from "@/redux/features/parcelSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import Button from "../Button/Button"
 
 export default function SearchBar() {
   const [keyword, setKeyword] = useState("")
   const dispatch = useAppDispatch()
 
-  const { data, error, isLoading, isFetching } = useGetParcelasQuery(keyword)
+  const { data, error, isLoading, isFetching } = useGetParcelasQuery("")
+
+  const removeAccents = (str: string) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+  }
 
   const handleSubmit = () => {
     if (keyword) {
-      const filtered = data?.filter((e) =>
-        e.name.toLowerCase().includes(keyword.toLowerCase())
-      )
+      const filtered = data?.filter((e) => {
+        const accentsData = removeAccents(e.name)
+        const accentsInput = removeAccents(keyword)
+        return accentsData.toLowerCase().includes(accentsInput.toLowerCase())
+      })
 
       if (filtered !== undefined) {
         dispatch(setParcelas(filtered))
       }
+    }
+  }
+
+  const reset = () => {
+    if (data) {
+      dispatch(setParcelas(data))
+      setKeyword("")
     }
   }
 
@@ -30,9 +44,17 @@ export default function SearchBar() {
     }
   }
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value)
+    handleSubmit()
+  }
+
   return (
     <div className="mb-4">
       <div className="relative">
+        <div onClick={reset}>
+          <Button text="all" />
+        </div>
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <svg
             className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -55,7 +77,7 @@ export default function SearchBar() {
           className="block w-full p-[6px] pl-10 text-sm text-gray-900 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1]"
           placeholder="Buscar..."
           value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
+          onChange={(e) => handleChange(e)}
           onKeyDown={handleKeyDown}
         />
       </div>

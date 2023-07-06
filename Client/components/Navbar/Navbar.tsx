@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import Link from "next/link"
 import Image from "next/image"
@@ -16,7 +17,12 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks"
 import { useRouter } from "next/navigation"
 import { signOut } from "next-auth/react"
 
+import { useSession } from "next-auth/react"
+
 export default function Navbar() {
+
+  const { data: session, status } = useSession()
+
   const dispatch = useAppDispatch()
   const router = useRouter()
 
@@ -92,28 +98,28 @@ export default function Navbar() {
         </li>
         <li className="px-[22px] py-[20px]">
           <Link
-            className={pathName === "/gallery" ? activeLink : inactiveLink}
-            href="/gallery"
+            className={pathName === "/parcelas" ? activeLink : inactiveLink}
+            href="/parcelas"
           >
             Parcelas
           </Link>
         </li>
-        <li className="px-[22px] py-[20px]">
+        {/* <li className="px-[22px] py-[20px]">
           <Link
             className={pathName === "/about" ? activeLink : inactiveLink}
             href="/about"
           >
             Nosotros
           </Link>
-        </li>
-        <li className="px-[22px] py-[20px]">
+        </li> */}
+        {/* <li className="px-[22px] py-[20px]">
           <Link
             className={pathName === "/contact" ? activeLink : inactiveLink}
             href="/contact"
           >
             Contacto
           </Link>
-        </li>
+        </li> */}
         {userAdmin ? (
           <li className="px-[22px] py-[20px]">
             <Link
@@ -128,11 +134,23 @@ export default function Navbar() {
 
       {!userAdmin ? (
         <>
-          {userLoggedIn ? (
+          {status === "authenticated"? (
+        //  {userLoggedIn ? ( 
             <div className="w-3/12 flex items-center justify-end gap-4">
               {/* <AiOutlineSearch className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
               <AiOutlineShoppingCart className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
               <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" /> */}
+            <Link href={"/userDataRegister"}>
+                <button >
+              {
+                session?.user?.image ?
+                  <img src={session?.user?.image ?? "default-image-url"} className="sm:h-9 sm:w-9 rounded-full hover:scale-110" alt="no found" />
+                :
+                  <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" />
+                }
+                </button>
+            </Link>
+
               <div onClick={handleLogout}>
                 <Button text={"cerrar sesión"} />
               </div>

@@ -2,15 +2,10 @@ import "dotenv/config"
 import express from "express"
 import router from "./router"
 import connectDB from "./db/connect"
-import path from "path"
 import morgan from "morgan"
-import passport from "passport"
-import session from "express-session"
-import flash from "connect-flash"
-import localAauth from "./passport/local-auth"
 import newAuthRouter from "./router/user.router"
-import cors from "cors"
-import * as bodyParser from "body-parser"
+// import cors from "cors"
+
 const PORT = process.env.PORT || 3001
 // Configuración de CORS
 const corsOptions = {
@@ -19,31 +14,11 @@ const corsOptions = {
 }
 
 const app = express(); 
-const dotenv = require("dotenv");
 
-dotenv.config();
-
-app.use(cors(corsOptions));
+/* app.use(cors(corsOptions)); */
 
 app.use(express.json()); 
-app.use( (req,res, next) => {
-    localAauth()
-    next()
-})
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(express.json())
-app.use((req, res, next) => {
-  localAauth()
-  next()
-})
-
-app.set("views", path.join(__dirname, "views"))
-app.set("view engine", "ejs")
-
-app.use(express.json())
 app.use(morgan("dev"))
 app.use(express.urlencoded({ extended: true }))
 
@@ -59,31 +34,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(
-  session({
-    secret: "parcelas venta mapaches",
-    cookie: {
-      maxAge: 300000
-    },
-    resave: false,
-    saveUninitialized: false
-  })
-)
-
-app.use(flash())
-app.use(passport.initialize())
-app.use(passport.session())
-
-app.use((req, res, next) => {
-  res.locals.signupMessage = req.flash("signupMessage")
-  res.locals.signinMessage = req.flash("signinMessage")
-
-  app.locals.user = req.user
-  next()
-})
-
 app.use("/api", router)
-
 app.use(newAuthRouter)
 
 app.listen(PORT, () => {

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import Link from "next/link"
@@ -11,8 +12,11 @@ import Connection from "@/img/svgs/Connection"
 import Energy from "@/img/svgs/Energy"
 import LocationMaps from "../Maps/Maps"
 import { useParams, useRouter } from "next/navigation"
-import { useGetParcelaByIdQuery, useDeleteParcelaMutation } from "@/redux/services/parcelApi"
+import { useGetParcelaByIdQuery, useDeleteParcelaMutation, parcelApi } from "@/redux/services/parcelApi"
 import Swal from 'sweetalert2'
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "@/redux/hooks"
+import { setParcelaData } from "@/redux/features/parcelSlice"
 
 
 const DetailSection = () => {
@@ -20,11 +24,20 @@ const DetailSection = () => {
   const parcela = {
     id: params.id,
   }
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [deleteParcela] = useDeleteParcelaMutation()
   const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
+  useEffect(() => {
+    if (data) {
+      dispatch(setParcelaData(data));
+    }
+  },[data])
+
+
+
   if (isLoading || isFetching) return <p>Loading</p>
-  if (error) return <p>Some error</p>
+  if (error) return <p>Some error</p>;
 
 
 
@@ -47,13 +60,52 @@ const DetailSection = () => {
         )
         deleteParcela(parcela);
         setTimeout(() => {
-          router.push('/gallery');
+          router.push('/parcelas');
         }, 3000)
 
       }
     })
   }
+interface NotificationType {
+    isOpen: boolean;
+    type: "approved" | "failure" | null;
+    content: string;
+  }
 
+  const Home= () => {
+    const [notification, setNotification] = useState<NotificationType>({
+      isOpen: false,
+      type: null,
+      content: "",
+    });
+
+    useEffect(() => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const status = urlParams.get("status");
+
+      if (status === "approved") {
+        setNotification({
+          content: "Pago aprobado!",
+          isOpen: true,
+          type: "approved",
+        });
+      } else if (status === "failure") {
+        setNotification({
+          content: "Pago fallido!",
+          isOpen: true,
+          type: "failure",
+        });
+      }
+
+      setTimeout(() => {
+        setNotification({
+          isOpen: false,
+          type: null,
+          content: "",
+        });
+      }, 5000);
+    }, []);
+}
 
 
 
@@ -90,7 +142,7 @@ const DetailSection = () => {
                   viewBox="0 0 16 16"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"
                   />
                 </svg>
@@ -207,7 +259,7 @@ const DetailSection = () => {
               <img key={index} src={el} alt={el} className="w-[95%] bg-slate-300 h-[400px] m-2 box-border object-cover rounded-3xl" />
             ))
           ) : (
-            
+
             <div>No se encontraron datos</div>
           )}
           </div>
@@ -230,9 +282,12 @@ const DetailSection = () => {
             <Button text={"Eliminar"}></Button>
           </div>
 
-          <Link href="/" className="mr-8 shadow-lg">
-            <Button text={"Comprar Ahora"}></Button>
+          <Link href="/pago" className="mr-8 shadow-lg">
+            <Button text={"Comprar Ahora"} ></Button>
           </Link>
+
+
+
         </div>
       </div>
     </>

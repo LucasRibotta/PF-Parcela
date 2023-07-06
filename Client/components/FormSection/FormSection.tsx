@@ -8,20 +8,29 @@ import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
 import { useCreateParcelaMutation } from "@/redux/services/parcelApi"
 import Confirmation from "../confirmation/Confirmation"
+import { validate } from "../Validate/validate";
+import { ZodError } from 'zod';
 import { useAppSelector } from "@/redux/hooks"
 import { number } from "prop-types"
+import { useRouter } from "next/navigation"
 
 type information = {
+  _id?: string
   name: string
+  price: number | string | null
   lote: number | null
   area: number | null
-  price: number | null
   location: string
-  description: string
   image: string[]
+  deleted?: boolean
+  parcelaData?: string[]
+  description: string
 }
 
 export default function FormSection() {
+
+  const router = useRouter();
+
   const [location, setLocation] = useState("")
   const [confirmation, setConfirmation] = useState(false)
   const [info, setInfo] = useState<information>({
@@ -51,9 +60,35 @@ export default function FormSection() {
   }
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    event.preventDefault();
+  
+    try {
+     
+      const convertedInfo = {
+        ...info,
+        lote: typeof info.lote === 'number' ? info.lote : parseInt(info.lote || '0', 10),
+        area: typeof info.area === 'number' ? info.area : parseInt(info.area || '0'),
+        price: typeof info.price === 'number' ? info.price : parseInt(info.price || '0'),
+      };
+      const validData= validate.parse(convertedInfo);
+      
+    //   setConfirmation(true)
+    // createParcela(info)
 
-    if (true) {
+    // setTimeout(() => {
+    //   setConfirmation(false)
+    //   router.push('/gallery');
+    // }, 2000)
+
+      setConfirmation(true);
+      createParcela({ ...validData, location: validData.location });
+  
+      setTimeout(() => {
+        setConfirmation(false);
+        router.push('/gallery');
+      }, 2000);
+      
+      // Restablecer campos del formulario
       setInfo({
         name: "",
         lote: null,
@@ -61,17 +96,20 @@ export default function FormSection() {
         price: null,
         location: "",
         description: "",
-        image: []
-      })
-      setLocation("")
+        image: [],
+      });
+      setLocation("");
+    } catch (error){
+
+
+      if (error instanceof ZodError) {
+        const errorMessages = error.errors.map((err) => err.message);
+        const errorMessage = errorMessages.join('\n');
+        swal("Error", errorMessage, "error");
+      }
     }
 
-    setConfirmation(true)
-    createParcela(info)
-
-    setTimeout(() => {
-      setConfirmation(false)
-    }, 2000)
+    
   }
 
   const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -180,7 +218,7 @@ export default function FormSection() {
           </div>
 
           <div className=" pt-1 flex justify-center  m-auto">
-            <Button text="Create" />
+            <Button text="Crear Parcela" />
           </div>
         </div>
       </form>
