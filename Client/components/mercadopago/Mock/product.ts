@@ -1,8 +1,15 @@
-
 export interface IProduct {
   _id: string;
   name: string;
-  price?: number | string | null;
+  price: number | string | null;
+  image: string[];
+  description: string;
+}
+
+export interface ProductN {
+  _id: string;
+  name: string;
+  price: number |  null;
   image: string[];
   description: string;
 }
