@@ -188,7 +188,7 @@ export default function FormSection() {
           </div>
 
           <div className=" pt-1 flex justify-center  m-auto">
-            <Button text="Create" />
+            <Button text="Crear Parcela" />
           </div>
         </div>
       </form>

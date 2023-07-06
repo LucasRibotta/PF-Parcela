@@ -1,13 +1,13 @@
 import { CreatePreferencePayload } from "mercadopago/models/preferences/create-payload.model";
 import { NextApiRequest, NextApiResponse } from "next";
-import Product, { IProduct } from "../Mock/product";
+import Product, { IProduct, ProductN } from "../Mock/product";
 import mercadopago from "mercadopago";
 
 mercadopago.configure({
   access_token: process.env.NEXT_ACCESS_TOKEN!,
 });
 
-function convertPriceToNumber(product: IProduct): IProduct {
+function convertPriceToNumber(product: IProduct): ProductN {
   const convertedPrice = typeof product.price === 'string' ? parseFloat(product.price) : product.price;
   return { ...product, price: convertedPrice };
 }

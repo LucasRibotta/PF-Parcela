@@ -8,7 +8,7 @@ import { setParcelas } from "@/redux/features/parcelSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useState, useEffect } from "react"
 
-export default function Gallery() {
+export default function Parcelas() {
   const { data, error, isLoading, isFetching } = useGetParcelasQuery("")
   const dispatch = useAppDispatch()
   const parcels = useAppSelector((state) => state.parcelas.parcelas)
