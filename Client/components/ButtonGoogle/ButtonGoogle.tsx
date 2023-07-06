@@ -1,9 +1,13 @@
 "use client"
+
 import { useSession, signIn, signOut } from "next-auth/react"
 import { InfoUserLogged } from "@/components/InfoUserLogged/InfoUserLogged"
-import { BiLogoGmail } from "react-icons/bi"
+import { BiBorderRadius, BiLogoGmail } from "react-icons/bi"
+import {FcGoogle} from "react-icons/fc"
+import {HiUserCircle} from "react-icons/hi"
 
 export default function ButtonGoogle() {
+  const {data: session, status} = useSession()
   // const { data: session } = useSession();
   // console.log(session);
 
@@ -18,8 +22,12 @@ export default function ButtonGoogle() {
   // } else {
   return (
     <div>
-      <button onClick={() => signIn()} type="button">
-        <BiLogoGmail className="h-4 w-4 text-[#51a8a1]" />
+      <button onClick={() => signIn('google')} type="button">
+     
+      <FcGoogle className="text-center sm:w-10 sm:h-10 "/>
+      
+    
+        {/* <BiLogoGmail className="h-4 w-4 text-[#51a8a1]" /> */}
       </button>
     </div>
   )
