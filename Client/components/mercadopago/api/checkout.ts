@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const info = convertPriceToNumber(product)
 
-    const URL = "https://pf-parcela-front.vercel.app/"; //DESPUES CAMBIAR POR EL DE PRODUCCION / UTILIZAR NGROK
+    const URL = "https://pf-parcela-front.vercel.app"; //DESPUES CAMBIAR POR EL DE PRODUCCION / UTILIZAR NGROK
 
     try {
       if (typeof info.price === 'number' || typeof info.price === 'string') {

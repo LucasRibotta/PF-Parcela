@@ -3,7 +3,8 @@
 // import Image from "next/image";
 import Image from "next/image"
 import { useEffect, useState } from "react"
-
+import Other from "@/components/Other/Other"
+import { PiPlantDuotone } from "react-icons/pi"
 const ServiceSection = () => {
   const [image1, setImage1] = useState("")
   const [image2, setImage2] = useState("")
@@ -39,10 +40,15 @@ const ServiceSection = () => {
           </div>
         </div>
         <div className="mt-16 w-[40%] flex flex-col items-start space-y-4 p-4 text-justify">
-          <h1 className="font-bold text-[1.5rem]">
-            Somos personas que buscan evidenciar el mejor vivir.
-          </h1>
-          <h1 className="font-bold text-[1rem]">Conoce mas sobre nosotros</h1>
+          <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+            <div className="flex items-center justify-center w-10 my-2 h-10 rounded-full bg-[#b7fcf6] ">
+              <PiPlantDuotone className="h-[2rem] w-[2rem] text-[#51a8a1]" />
+            </div>
+            <h2 className="max-w-lg  text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+              Buscamos evidenciar{" "}
+              <span className="text-[#51a8a1]">el mejor vivir</span>
+            </h2>
+          </div>
           <p>
             Somos una E-Commerce encargado de la ventas de parcelas. Tenemos más
             de 10 condominios en funcionamiento y disponibles para que
@@ -50,13 +56,13 @@ const ServiceSection = () => {
             opciones perfectas que tenemos para ti, tus gustos y necesidades.
             Entregándote una paz, tranquilidad y sobre todo una mejor calidad de
             vida. Conoce todo sobre nuestra propuesta y la familia Parcelas de
-            Chile.{" "}
+            Chile.
           </p>
         </div>
       </div>
 
       <div className="mt-16 mb-16 px-4">
-        <h2 className="font-bold mb-5 text-center text-[2rem] ">Servicios</h2>
+        {/* <h2 className="font-bold mb-5 text-center text-[2rem] ">Servicios</h2>
 
         <div className="flex p-4 rounded-lg transition-transform animate-aparition">
           <div className="flex flex-col mx-1 items-center [&>p]:text-justify [&>p]:m-4 [&>img]:rounded-xl border-2 border-teal-400 p-3 rounded-lg">
@@ -102,7 +108,8 @@ const ServiceSection = () => {
               y manteniendo áreas verdes hermosas y saludables.
             </p>
           </div>
-        </div>
+        </div> */}
+        <Other />
       </div>
     </section>
   )

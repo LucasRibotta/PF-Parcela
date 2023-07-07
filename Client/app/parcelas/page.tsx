@@ -24,26 +24,27 @@ export default function Parcelas() {
   if (!data || !Array.isArray(data)) return <p>no data</p>
 
   return (
-    <div className="flex m-auto flex-col relative w-full pt-[5rem] lg:w-[1280px]">
-      <div className="flex pt-[2rem]">
+    <div className="flex m-auto flex-col relative w-full pt-[5rem] ">
+      <div className="flex">
         <Filter />
-        <div className="flex-grow pl-[20rem] px-2">
-          {parcels.map((el, index) => {
-            if (el.deleted === false) {
-             return(
-              <Card
-                key={index}
-                name={el.name}
-                precio={`CLP $${el.price?.toLocaleString() }`}
-                superficie={el.area}
-                description={el.description}
-                image={el.image[0]}
-                id={el._id}
-               />
-             )
-            }
-          }
-          )}
+        <div className="flex flex-col justify-center items-center pl-[18rem] pt-[3rem]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2">
+            {parcels.map((el, index) => {
+              if (el.deleted === false) {
+                return (
+                  <Card
+                    key={index}
+                    name={el.name}
+                    precio={`CLP $${el.price?.toLocaleString()}`}
+                    superficie={el.area}
+                    description={el.description}
+                    image={el.image[0]}
+                    id={el._id}
+                  />
+                )
+              }
+            })}
+          </div>
           <CustomPagination resPerPage={2} productsCount={5} />
         </div>
       </div>

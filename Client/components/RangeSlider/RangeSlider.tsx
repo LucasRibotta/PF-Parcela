@@ -23,21 +23,29 @@ export const RangeSlider = ({
   min,
   max,
   step,
-  priceCap,
+  priceCap
 }: sliderProps) => {
   const progressRef = useRef(null as HTMLDivElement | null)
   const dispatch = useAppDispatch()
-  const { minPrice, maxPrice } = useAppSelector((state) => state.parcelas.priceRange , (prev, current) => prev.minPrice === current.minPrice && prev.maxPrice === current.maxPrice);
+  const { minPrice, maxPrice } = useAppSelector(
+    (state) => state.parcelas.priceRange,
+    (prev, current) =>
+      prev.minPrice === current.minPrice && prev.maxPrice === current.maxPrice
+  )
 
   const handleMin = (e: CustomEvent) => {
     if (maxPrice - minPrice >= priceCap && maxPrice <= max) {
       if (parseInt(e.target.value) > maxPrice) {
       } else {
-        dispatch(updatePriceRange({ min: parseInt(e.target.value), max: maxPrice }));
+        dispatch(
+          updatePriceRange({ min: parseInt(e.target.value), max: maxPrice })
+        )
       }
     } else {
       if (parseInt(e.target.value) < minPrice) {
-        dispatch(updatePriceRange({ min: parseInt(e.target.value), max: maxPrice }));
+        dispatch(
+          updatePriceRange({ min: parseInt(e.target.value), max: maxPrice })
+        )
       }
     }
   }
@@ -46,11 +54,15 @@ export const RangeSlider = ({
     if (maxPrice - minPrice >= priceCap && maxPrice <= max) {
       if (parseInt(e.target.value) < minPrice) {
       } else {
-        dispatch(updatePriceRange({ min: minPrice, max: parseInt(e.target.value) }));
+        dispatch(
+          updatePriceRange({ min: minPrice, max: parseInt(e.target.value) })
+        )
       }
     } else {
       if (parseInt(e.target.value) > maxPrice) {
-        dispatch(updatePriceRange({ min: minPrice, max: parseInt(e.target.value) }));
+        dispatch(
+          updatePriceRange({ min: minPrice, max: parseInt(e.target.value) })
+        )
       }
     }
   }
@@ -66,24 +78,22 @@ export const RangeSlider = ({
     const filterPriceRange = event?.target.value
     dispatch(filterPrice(filterPriceRange))
   }
-  
+
   return (
     <div className="flex flex-col " onChange={handleFilterPrice}>
       <div className="flex justify-between items-center mb-6 mt-2 gap-2">
         <div className="rounded-md">
-          <span className="p-2 ">Min CLP $</span>
+          <span className="p-2 text-white text-sm font-medium">Min CLP $</span>
           <input
-            type="number"
             value={minPrice}
-            className="w-full rounded-md border border-gray-400 pl-2"
+            className="w-full rounded-md  p-[6px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] text-sm font-medium pl-2"
           />
         </div>
         <div className="rounded-md">
-          <span className="p-2 ">Max CLP $</span>
+          <span className="p-2 text-white text-sm font-medium">Max CLP $</span>
           <input
-            type="number"
             value={maxPrice}
-            className="w-full rounded-md border border-gray-400 pl-2"
+            className="w-full rounded-md  p-[6px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] text-sm font-medium pl-2"
           />
         </div>
       </div>
@@ -104,7 +114,7 @@ export const RangeSlider = ({
             step={step}
             max={max}
             value={minPrice}
-            className="range-min absolute w-full  -top-1  h-1   bg-transparent  appearance-none pointer-events-none"
+            className="range-min absolute w-full -top-1  h-1 bg-transparent appearance-none pointer-events-none"
           />
 
           <input
