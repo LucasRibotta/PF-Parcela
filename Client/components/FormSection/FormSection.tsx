@@ -11,7 +11,6 @@ import Confirmation from "../confirmation/Confirmation"
 import { validate } from "../Validate/validate";
 import { ZodError } from 'zod';
 import { useAppSelector } from "@/redux/hooks"
-import { number } from "prop-types"
 import { useRouter } from "next/navigation"
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
 
@@ -62,9 +61,9 @@ export default function FormSection() {
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
+
     try {
-     
+
       const convertedInfo = {
         ...info,
         lote: typeof info.lote === 'number' ? info.lote : parseInt(info.lote || '0', 10),
@@ -72,7 +71,7 @@ export default function FormSection() {
         price: typeof info.price === 'number' ? info.price : parseInt(info.price || '0'),
       };
       const validData= validate.parse(convertedInfo);
-      
+
     //   setConfirmation(true)
     // createParcela(info)
 
@@ -83,12 +82,12 @@ export default function FormSection() {
 
       setConfirmation(true);
       createParcela({ ...validData, location: validData.location });
-  
+
       setTimeout(() => {
         setConfirmation(false);
-        router.push('/gallery');
+        router.push('/parcelas');
       }, 2000);
-      
+
       // Restablecer campos del formulario
       setInfo({
         name: "",
@@ -110,13 +109,13 @@ export default function FormSection() {
       }
     }
 
-    setConfirmation(true)
-    createParcela(info)
+    // setConfirmation(true)
+    // createParcela(info)
 
-    setTimeout(() => {
-      setConfirmation(false)
-      router.push('/parcelas');
-    }, 2000)
+    // setTimeout(() => {
+    //   setConfirmation(false)
+    //   router.push('/parcelas');
+    // }, 2000)
   }
 
   const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -126,7 +125,7 @@ export default function FormSection() {
 
   return (
     <>
-      <PrivateRoute>
+      {/* <PrivateRoute> */}
 
         {confirmation && <Confirmation />}
         <form
@@ -231,7 +230,7 @@ export default function FormSection() {
             </div>
           </div>
         </form>
-      </PrivateRoute>
+      {/* </PrivateRoute> */}
     </>
   )
 }
