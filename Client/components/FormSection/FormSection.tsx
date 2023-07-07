@@ -212,11 +212,11 @@ export default function FormSection() {
               <UploadImage />
             </div>
 
-            <div className="flex w-full min-h-[70px] max-h-max">
+            <div className="grid grid-cols-3 w-full min-h-[70px] max-h-max">
               {imageCloud?.map((el, index) => (
                 <>
                   <img
-                    className="w-[100px] h-[70px] m-2 rounded-md"
+                    className="w-[100px] h-[70px] object-cover object-center m-2 rounded-md"
                     key={index}
                     src={el}
                     alt={el}
