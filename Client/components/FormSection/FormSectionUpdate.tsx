@@ -27,10 +27,7 @@ type information = {
   description: string
 }
 
-
-
 export default function FormSectionUpdate() {
-
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [updateParcela] = useUpdateParcelaMutation()
@@ -93,15 +90,11 @@ export default function FormSectionUpdate() {
     setLocation(data?.location ?? "")
   }, [data, isLoading])
 
-
-
   const handlerDelete = (photo: string) => {
     const fil = images.filter(el => el !== photo)
     setImages(fil)
     setInfo({ ...info, image: fil })
   }
-
-
 
   const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target
@@ -174,7 +167,7 @@ export default function FormSectionUpdate() {
 
           <div className="flex flex-col m-auto p-[2rem] w-[50%] text-black ">
             <h2 className="mb-4 text-center font-bold text-[30px]">
-              Que deseas editar{" "}
+              ¿Qué deseas editar?{" "}
             </h2>
             <input
               className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
@@ -197,7 +190,7 @@ export default function FormSectionUpdate() {
             <input
               className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
               type="Number"
-              placeholder="Area"
+              placeholder="Área"
               name="area"
               onChange={handleChange}
               value={info.area ?? ""}
@@ -212,7 +205,7 @@ export default function FormSectionUpdate() {
             />
             <textarea
               className="rounded-md h-[100px] placeholder:text-center border-[1px] border-gray-200"
-              placeholder="Describenos la parcela que creaste"
+              placeholder="Descríbenos la parcela que creaste"
               name="description"
               id="description"
               onChange={handleChange}

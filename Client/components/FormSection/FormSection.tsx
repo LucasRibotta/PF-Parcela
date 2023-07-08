@@ -70,15 +70,15 @@ export default function FormSection() {
         area: typeof info.area === 'number' ? info.area : parseInt(info.area || '0'),
         price: typeof info.price === 'number' ? info.price : parseInt(info.price || '0'),
       };
-      const validData= validate.parse(convertedInfo);
+      const validData: information = validate.parse(convertedInfo);
 
-    //   setConfirmation(true)
-    // createParcela(info)
+      //   setConfirmation(true)
+      // createParcela(info)
 
-    // setTimeout(() => {
-    //   setConfirmation(false)
-    //   router.push('/gallery');
-    // }, 2000)
+      // setTimeout(() => {
+      //   setConfirmation(false)
+      //   router.push('/gallery');
+      // }, 2000)
 
       setConfirmation(true);
       createParcela({ ...validData, location: validData.location });
@@ -99,7 +99,7 @@ export default function FormSection() {
         image: [],
       });
       setLocation("");
-    } catch (error){
+    } catch (error) {
 
 
       if (error instanceof ZodError) {
@@ -154,7 +154,7 @@ export default function FormSection() {
 
           <div className="flex flex-col m-auto p-[2rem] px-[4rem] w-[50%] text-black ">
             <h2 className="mb-4 text-center font-bold text-[30px]">
-              Describenos tu parcela{" "}
+              Descríbenos tu parcela{" "}
             </h2>
             <input
               className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
@@ -177,7 +177,7 @@ export default function FormSection() {
             <input
               className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
               type="Number"
-              placeholder="Area"
+              placeholder="Área"
               name="area"
               onChange={handleChange}
               value={info.area ?? ""}
@@ -192,7 +192,7 @@ export default function FormSection() {
             />
             <textarea
               className="rounded-md h-[100px] placeholder:text-center border-[1px] border-gray-200"
-              placeholder="Describenos la parcela que creaste"
+              placeholder="Descríbenos la parcela que creaste"
               name="description"
               id="description"
               onChange={handleChange}

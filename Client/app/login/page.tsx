@@ -74,8 +74,8 @@ export default function Login() {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Parece que algo salio mal!",
-        footer: '<a href="">Tienes una cuenta registrada?</a>'
+        text: "Parece que algo salió mal!",
+        footer: '<a href="">¿Tienes una cuenta registrada?</a>'
       })
     }
   }, [error])
@@ -117,7 +117,7 @@ export default function Login() {
           </div>
           <div className="space-y-4 flex flex-col justify-center items-center">
             <div className="mt-4 text-[#333] leading-[20px] tracking-[0.5px] text-[14px]">
-              Olvidate tu constraseña?
+              ¿Olvidaste tu constraseña?
             </div>
             <button
               className="bg-[#51a8a1] hover:bg-[#126e67] ease-in-out min-w-[9rem] max-w-[9rem] duration-300 text-white font-bold py-2 px-4 rounded-[20px]  focus:outline-none focus:shadow-outline"
