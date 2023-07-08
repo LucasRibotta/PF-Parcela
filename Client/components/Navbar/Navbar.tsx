@@ -78,11 +78,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`flex fixed  items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full shadow-md ${
-        navbarBackground
+      className={`flex fixed  items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full shadow-md ${navbarBackground
           ? "bg-[#222222b0]"
           : "bg-[#222222e7] ease-in-out duration-300"
-      }`}
+        }`}
     >
       <div className="w-3/12">
         <Image src={logo} alt="#" className="w-[6rem] " />
@@ -134,22 +133,22 @@ export default function Navbar() {
 
       {!userAdmin ? (
         <>
-          {status === "authenticated"? (
-        //  {userLoggedIn ? ( 
+          {status === "authenticated" ? (
+            //  {userLoggedIn ? ( 
             <div className="w-3/12 flex items-center justify-end gap-4">
               {/* <AiOutlineSearch className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
               <AiOutlineShoppingCart className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
               <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" /> */}
-            <Link href={"/userDataRegister"}>
+              <Link href={"/userDataRegister"}>
                 <button >
-              {
-                session?.user?.image ?
-                  <img src={session?.user?.image ?? "default-image-url"} className="sm:h-9 sm:w-9 rounded-full hover:scale-110" alt="no found" />
-                :
-                  <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" />
-                }
+                  {
+                    session?.user?.image ?
+                      <img src={session?.user?.image ?? "default-image-url"} className="sm:h-9 sm:w-9 rounded-full hover:scale-110" alt="no found" />
+                      :
+                      <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" />
+                  }
                 </button>
-            </Link>
+              </Link>
 
               <div onClick={handleLogout}>
                 <Button text={"cerrar sesión"} />
@@ -174,7 +173,7 @@ export default function Navbar() {
       ) : (
         <div className="w-3/12 flex items-center justify-end gap-4">
           <div onClick={handleLogout}>
-            <Button text={"cerrar sesión"} />
+            <Button text={"Cerrar sesión"} />
           </div>
           {/* <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" /> */}
         </div>

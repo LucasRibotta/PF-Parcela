@@ -6,7 +6,7 @@ export function InfoUserLogged({ user }: { user: DefaultSession["user"] }) {
     return (
         <div>
             <div>
-                <p>Current Logged In User</p>
+                <p>Usuario actualmente registrado</p>
                 <h5>{user?.name}</h5>
                 <p>{user?.email}</p>
             </div>
