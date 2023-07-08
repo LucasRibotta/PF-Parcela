@@ -61,7 +61,7 @@ export default function Register() {
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Parece que algo salio mal!",
+            text: "Parece que algo salió mal!",
             footer: '<a href="">Completaste los campos correctamente?</a>'
           })
         }
@@ -173,7 +173,7 @@ export default function Register() {
             </button>
 
             <div className="mt-4 text-[#333] leading-[20px] tracking-[0.5px] text-[14px]">
-              Ya posees una cuenta?
+              ¿Ya posees una cuenta?
             </div>
 
             <div>

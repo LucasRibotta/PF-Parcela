@@ -50,11 +50,11 @@ const ServiceSection = () => {
             </h2>
           </div>
           <p>
-            Somos una E-Commerce encargado de la ventas de parcelas. Tenemos más
+            Somos una E-Commerce encargada de la ventas de parcelas. Tenemos más
             de 10 condominios en funcionamiento y disponibles para que
             encuentres el lugar que tanto estás buscando y revises todas las
             opciones perfectas que tenemos para ti, tus gustos y necesidades.
-            Entregándote una paz, tranquilidad y sobre todo una mejor calidad de
+            Entregándote paz, tranquilidad y sobre todo una mejor calidad de
             vida. Conoce todo sobre nuestra propuesta y la familia Parcelas de
             Chile.
           </p>

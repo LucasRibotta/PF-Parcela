@@ -31,7 +31,7 @@ const Card = ({ name, id }: Card) => {
             if (result.isConfirmed) {
                 Swal.fire(
                     'Eliminado',
-                    'Tu parcela a sido eliminada',
+                    '¡Tu parcela ha sido eliminada!',
                     'success'
                 )
                 deleteParcela({ id: id });
