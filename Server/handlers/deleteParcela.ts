@@ -1,9 +1,9 @@
-import ParcelaModel from '../models/parcela'; 
+import ParcelaModel from '../models/parcela';
 
 const deletedParce = async (id: string) => {
-    const parcela = await ParcelaModel.findByIdAndUpdate(id, { deleted: true }, { new: true });
-  
-    return parcela;
-  }
+  const parcela = await ParcelaModel.findByIdAndRemove(id);
+
+  return parcela;
+}
 
 export default deletedParce;

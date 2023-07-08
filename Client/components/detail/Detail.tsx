@@ -12,7 +12,7 @@ import Connection from "@/img/svgs/Connection"
 import Energy from "@/img/svgs/Energy"
 import LocationMaps from "../Maps/Maps"
 import { useParams, useRouter } from "next/navigation"
-import { useGetParcelaByIdQuery, useDeleteParcelaMutation, parcelApi } from "@/redux/services/parcelApi"
+import { useGetParcelaByIdQuery, useDeleteParcelaMutation, parcelApi, useDesableParcelaMutation } from "@/redux/services/parcelApi"
 import Swal from 'sweetalert2'
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/redux/hooks"
@@ -27,6 +27,7 @@ const DetailSection = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [deleteParcela] = useDeleteParcelaMutation()
+  const [desableParcela] = useDesableParcelaMutation();
   const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
   useEffect(() => {
     if (data) {
@@ -43,22 +44,22 @@ const DetailSection = () => {
 
   const deleteParcel = () => {
     Swal.fire({
-      title: '¿Deseas eliminar esta parcela?',
-      text: "Esta eliminación no se puede revertir",
+      title: '¿Deseas deshabilitar esta parcela?',
+      text: "Si aceptas se inhabilitará el producto",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, elimínalo',
+      confirmButtonText: 'Sí, deshabilita',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire(
-          'Eliminado',
-          'Tu parcela ha sido eliminada',
+          'Inhabilitado con éxito',
+          'Tu parcela ha sido desactivada',
           'success'
         )
-        deleteParcela(parcela);
+        desableParcela(parcela);
         setTimeout(() => {
           router.push('/parcelas');
         }, 3000)
@@ -274,7 +275,7 @@ const DetailSection = () => {
             <Button text={"Editar"}></Button>
           </Link>
           <div onClick={deleteParcel}>
-            <Button text={"Eliminar"}></Button>
+            <Button text={"Deshabilitar"}></Button>
           </div>
 
           <Link href="/pago" className="mr-8 shadow-lg">

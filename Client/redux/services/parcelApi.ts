@@ -11,13 +11,13 @@ interface Parcela {
   deleted: boolean
   parcelaData: string[]
   description: string
-  
+
 }
 
 export const parcelApi = createApi({
   reducerPath: "parcelApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://pf-parcela-production.up.railway.app/api/auth"
+    baseUrl: "http://localhost:3001/api/auth"
   }),
   endpoints: (builder) => ({
     getParcelas: builder.query<Parcela[], string>({
@@ -48,7 +48,13 @@ export const parcelApi = createApi({
         url: `deleteParcela/${id}`,
         method: "PUT"
       })
-    })
+    }),
+    desableParcela: builder.mutation<void, { id: string }>({
+      query: ({ id }) => ({
+        url: `/desableParcela/${id}`,
+        method: "PUT"
+      })
+    }),
   })
 })
 // export const useGetParcelasQuery = parcelApi.endpoints.getParcelas.useQuery
@@ -57,5 +63,6 @@ export const {
   useDeleteParcelaMutation,
   useGetParcelaByIdQuery,
   useGetParcelasQuery,
-  useUpdateParcelaMutation
+  useUpdateParcelaMutation,
+  useDesableParcelaMutation,
 } = parcelApi
