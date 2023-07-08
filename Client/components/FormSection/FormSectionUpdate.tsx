@@ -6,12 +6,13 @@ import swal from "sweetalert"
 import UploadImage from "../UploadImage/UploadImage"
 import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
-import { useAppSelector } from "@/redux/hooks";
-import { useGetParcelaByIdQuery, useUpdateParcelaMutation } from "@/redux/services/parcelApi"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useGetParcelaByIdQuery, useGetParcelasQuery, useUpdateParcelaMutation } from "@/redux/services/parcelApi"
 import { useParams, useRouter } from "next/navigation"
 import style from "./formSectionUpdate.module.css"
 import ConfirmationUpdate from "../confirmation/ConfirmationUpdate"
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
+import { setParcelas } from "@/redux/features/parcelSlice"
 
 type information = {
   _id?: string
@@ -28,16 +29,15 @@ type information = {
 
 export default function FormSectionUpdate() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const [updateParcela] = useUpdateParcelaMutation()
   const params = useParams()
   const parcela = {
     id: params.id,
   }
-  const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
+  const { data, error, isLoading } = useGetParcelaByIdQuery(parcela);
   const imageCloud = useAppSelector(state => state.coordenada.image)
 
-  console.log(data);
-  // console.log(data.image);
   let posMap = ""
   posMap = useAppSelector((state) => state.coordenada.position)
 
@@ -88,7 +88,7 @@ export default function FormSectionUpdate() {
       image: data?.image ?? []
     })
     setLocation(data?.location ?? "")
-  }, [data, isLoading, isFetching])
+  }, [data, isLoading])
 
   const handlerDelete = (photo: string) => {
     const fil = images.filter(el => el !== photo)

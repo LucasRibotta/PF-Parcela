@@ -11,7 +11,6 @@ import Confirmation from "../confirmation/Confirmation"
 import { validate } from "../Validate/validate";
 import { ZodError } from 'zod';
 import { useAppSelector } from "@/redux/hooks"
-import { number } from "prop-types"
 import { useRouter } from "next/navigation"
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
 
@@ -71,7 +70,7 @@ export default function FormSection() {
         area: typeof info.area === 'number' ? info.area : parseInt(info.area || '0'),
         price: typeof info.price === 'number' ? info.price : parseInt(info.price || '0'),
       };
-      const validData = validate.parse(convertedInfo);
+      const validData: information = validate.parse(convertedInfo);
 
       //   setConfirmation(true)
       // createParcela(info)
@@ -86,7 +85,7 @@ export default function FormSection() {
 
       setTimeout(() => {
         setConfirmation(false);
-        router.push('/gallery');
+        router.push('/parcelas');
       }, 2000);
 
       // Restablecer campos del formulario
@@ -110,13 +109,13 @@ export default function FormSection() {
       }
     }
 
-    setConfirmation(true)
-    createParcela(info)
+    // setConfirmation(true)
+    // createParcela(info)
 
-    setTimeout(() => {
-      setConfirmation(false)
-      router.push('/parcelas');
-    }, 2000)
+    // setTimeout(() => {
+    //   setConfirmation(false)
+    //   router.push('/parcelas');
+    // }, 2000)
   }
 
   const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -126,7 +125,7 @@ export default function FormSection() {
 
   return (
     <>
-      <PrivateRoute>
+      {/* <PrivateRoute> */}
 
         {confirmation && <Confirmation />}
         <form
@@ -213,11 +212,11 @@ export default function FormSection() {
               <UploadImage />
             </div>
 
-            <div className="flex w-full min-h-[70px] max-h-max">
+            <div className="grid grid-cols-3 w-full min-h-[70px] max-h-max">
               {imageCloud?.map((el, index) => (
                 <>
                   <img
-                    className="w-[100px] h-[70px] m-2 rounded-md"
+                    className="w-[100px] h-[70px] object-cover object-center m-2 rounded-md"
                     key={index}
                     src={el}
                     alt={el}
@@ -231,7 +230,7 @@ export default function FormSection() {
             </div>
           </div>
         </form>
-      </PrivateRoute>
+      {/* </PrivateRoute> */}
     </>
   )
 }
