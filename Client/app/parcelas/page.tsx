@@ -3,6 +3,7 @@ import Card from "../../components/Card/Card"
 import Filter from "@/components/Filters/Filter"
 import "tailwindcss/tailwind.css"
 import CustomPagination from "@/components/CustomPagination/CustomPagination"
+import SearchNotFound from "@/components/SearchNotFound/SearchNotFound"
 import { useGetParcelasQuery } from "@/redux/services/parcelApi"
 import { setParcelas } from "@/redux/features/parcelSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
@@ -13,6 +14,11 @@ export default function Parcelas() {
   const { data, error, isLoading, isFetching } = useGetParcelasQuery("")
   const dispatch = useAppDispatch()
   const parcels = useAppSelector((state) => state.parcelas.parcelas)
+  const [page, setPage] = useState(1);
+  const [porPage, setPorPage] = useState(9);
+  const [inputPage, setInputPage] = useState(1);
+  const currentParcels = parcels.slice((page - 1) * porPage, (page - 1) * porPage + porPage);
+  const max = Math.ceil(parcels.length / porPage);
 
   useEffect(() => {
     if (data && Array.isArray(data)) {
@@ -35,23 +41,29 @@ export default function Parcelas() {
         <Filter />
         <div className="flex flex-col justify-center items-center pl-[18rem] pt-[3rem]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2">
-            {parcels.map((el, index) => {
-              if (el.deleted === false) {
-                return (
-                  <Card
-                    key={index}
-                    name={el.name}
-                    precio={`CLP $${el.price?.toLocaleString()}`}
-                    superficie={el.area}
-                    description={el.description}
-                    image={el.image[0]}
-                    id={el._id}
-                  />
-                )
-              }
-            })}
+            {
+              currentParcels.length?
+                currentParcels.map((el, index) => {
+                  if (el.deleted === false) {
+                    return (
+                      <Card
+                        key={index}
+                        name={el.name}
+                        precio={`CLP $${el.price?.toLocaleString()}`}
+                        superficie={el.area}
+                        description={el.description}
+                        image={el.image[0]}
+                        id={el._id}
+                      />
+                    )
+                  }
+                }) : <SearchNotFound/>
+            }
           </div>
-          <CustomPagination resPerPage={2} productsCount={5} />
+          {
+            currentParcels.length?
+            <CustomPagination max={max} page={page} setPage={setPage} inputPage={inputPage} setInputPage={setInputPage} /> : null
+          } 
         </div>
       </div>
     </div>

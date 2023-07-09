@@ -46,7 +46,7 @@ export default function UploadImage() {
       })
 
       const uploadedImageUrls = await Promise.all(uploadPromises)
-      setUploadedImages(uploadedImageUrls)
+      setUploadedImages([...uploadedImages, ...uploadedImageUrls])
       setUploadSuccess(true)
     } catch (error) {
       console.log("Error uploading images to Cloudinary", error)
@@ -70,22 +70,19 @@ export default function UploadImage() {
     input.click()
   }
 
+  useEffect(() => {
+    uploadImg();
+  }, [imagesSelected])
+
   return (
     <div className="flex flex-col justify-center items-start text-black">
-      <div className=" flex justify-center rounded-lg cursor-pointer w-[100%] mb-[1rem] ">
+      <div className=" flex flex-col items-center justify-center rounded-lg cursor-pointer w-[100%] mb-[1rem] ">
         <button
           className="py-2 px-4 bg-[#51a8a1] m-2 rounded-md text-white transition-all duration-300 hover:bg-[#126e67] hover:font-semibold"
           type="button"
           onClick={handleButtonClick}
         >
           Añadir Imagen
-        </button>
-        <button
-          className="py-2 px-4 bg-[#51a8a1] m-2 rounded-md text-white transition-all duration-300 hover:bg-[#126e67] hover:font-semibold"
-          type="button"
-          onClick={uploadImg}
-        >
-          Subir Imagen
         </button>
         {uploadSuccess ? (
           <p className="text-green-500">Subida correctamente</p>

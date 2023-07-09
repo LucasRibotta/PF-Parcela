@@ -65,8 +65,8 @@ export default function Login() {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Parece que algo salio mal!",
-        footer: '<a href="">Tienes una cuenta registrada?</a>'
+        text: "Parece que algo salió mal!",
+        footer: '<a href="">¿Tienes una cuenta registrada?</a>'
       })
     }
   }, [error])

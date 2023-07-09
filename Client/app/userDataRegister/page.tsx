@@ -10,6 +10,7 @@ const UserDataRegister = () => {
   return (
     <div>
       <img src={session?.user?.image ?? "default-image-url"} alt="not found" />
+
       <p>{session?.user?.email}</p>
       <p>{session?.user?.name}</p>
     </div>
