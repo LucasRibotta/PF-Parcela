@@ -31,7 +31,7 @@ export default function Navbar() {
   const userLoggedIn = useAppSelector((state) => state.user.loggedIn)
   const userAdmin = useAppSelector((state) => state.user.isAdmin)
   const user = useAppSelector((state) => state.user.userData)
-  console.log(user)
+
   useEffect(() => {
     if (user?.email === "admin@admin.com") {
       dispatch(setUserAdmin(true))
