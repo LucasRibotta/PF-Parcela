@@ -19,4 +19,5 @@ export const validate = z.object({
 	location: z.string().nonempty("* La ubicación es requerida"),
 	description: z.string().nonempty("* La descripción es requerida"),
 	image: z.array(z.string()).min(1, "* Al menos una imagen es requerida"),
+	user: z.string(),
 });
