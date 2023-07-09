@@ -12,6 +12,7 @@ import { validate } from "../Validate/validate";
 import { ZodError } from 'zod';
 import { useAppSelector } from "@/redux/hooks"
 import { useRouter } from "next/navigation"
+import style from './formSection.module.css'
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
 
 type information = {
@@ -33,6 +34,7 @@ export default function FormSection() {
 
   const [location, setLocation] = useState("")
   const [confirmation, setConfirmation] = useState(false)
+  const [image, setImage] = useState<string[]>([])
   const [info, setInfo] = useState<information>({
     name: "",
     lote: null,
@@ -49,6 +51,7 @@ export default function FormSection() {
 
   useEffect(() => {
     setInfo({ ...info, location: posMap, image: imageCloud })
+    setImage(imageCloud)
   }, [posMap, imageCloud])
 
   const handleChange = (
@@ -116,6 +119,14 @@ export default function FormSection() {
     //   setConfirmation(false)
     //   router.push('/parcelas');
     // }, 2000)
+  }
+
+  const handlerDelete = (photo: string) => {
+    const fil = imageCloud.filter(el => el !== photo)
+    setInfo({ ...info, image: fil })
+    setImage(fil)
+    
+
   }
 
   const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -213,16 +224,19 @@ export default function FormSection() {
             </div>
 
             <div className="grid grid-cols-3 w-full min-h-[70px] max-h-max">
-              {imageCloud?.map((el, index) => (
-                <>
-                  <img
-                    className="w-[100px] h-[70px] object-cover object-center m-2 rounded-md"
-                    key={index}
-                    src={el}
-                    alt={el}
-                  />
-                </>
-              ))}
+              {image?.map((el, index) => (
+                 <>
+                 <div className={`relative ${style.close} `}>
+                   <img className="w-[100px] h-[70px] mx-auto my-2 rounded-md" key={index} src={el} alt={el} />
+                   <div className="absolute top-0 right-0 opacity-0" onClick={() => handlerDelete(el)}>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-circle" viewBox="0 0 16 16">
+                       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                       <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                     </svg>
+                   </div>
+                 </div>
+               </>
+             ))}
             </div>
 
             <div className=" pt-1 flex justify-center  m-auto">
