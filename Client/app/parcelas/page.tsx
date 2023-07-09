@@ -6,7 +6,8 @@ import CustomPagination from "@/components/CustomPagination/CustomPagination"
 import { useGetParcelasQuery } from "@/redux/services/parcelApi"
 import { setParcelas } from "@/redux/features/parcelSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
+import Loading from "@/components/Loading/Loading"
 
 export default function Parcelas() {
   const { data, error, isLoading, isFetching } = useGetParcelasQuery("")
@@ -19,7 +20,12 @@ export default function Parcelas() {
     }
   }, [data, dispatch])
 
-  if (isLoading || isFetching) return <p>Loading</p>
+  if (isLoading || isFetching)
+    return (
+      <div>
+        <Loading />
+      </div>
+    )
   if (error) return <p>Some error</p>
   if (!data || !Array.isArray(data)) return <p>no data</p>
 

@@ -22,7 +22,6 @@ const userSchema = new Schema<User>({
   password: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
   isCompany: { type: Boolean, default: false }
-  // accessLevel: { type: Number, required: false, default: 1 }
 })
 
 export default model<User>("User", userSchema, "user")
