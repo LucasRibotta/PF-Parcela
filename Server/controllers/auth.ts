@@ -40,10 +40,10 @@ export const parcela  =async (req: Request, res: Response) => {
 // Crea parcela y guarda en el condominio el id de la parcela
 export const createParcela = async (req: Request, res: Response) => {
     try {
-      const {name, lote, area, price, location, image, description, condominio } = req.body;
+      const {name, lote, area, price, location, image, description, condominio, user } = req.body;
 
-      if ( !name || !lote || !area || !price || !location || !image || !description ) {
-        throw new Error('El campo name e id son requeridos.');
+      if ( !name || !lote || !area || !price || !location || !image || !description || !user ) {
+        throw new Error('Los datos requeridos estan incompletos.');
       }
 
       const parcelaCreada =await functionCreate(
@@ -54,7 +54,8 @@ export const createParcela = async (req: Request, res: Response) => {
         location,
         image,
         description,
-        condominio
+        condominio,
+        user,
         );
         res.status(201).json(parcelaCreada);
       } catch (error) {

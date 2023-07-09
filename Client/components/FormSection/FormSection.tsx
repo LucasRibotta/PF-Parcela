@@ -26,11 +26,13 @@ type information = {
   deleted?: boolean
   parcelaData?: string[]
   description: string
+  user: string
 }
 
 export default function FormSection() {
 
   const router = useRouter();
+  const user = useAppSelector((state) => state.user.userData)
 
   const [location, setLocation] = useState("")
   const [confirmation, setConfirmation] = useState(false)
@@ -42,7 +44,8 @@ export default function FormSection() {
     price: null,
     location: "",
     description: "",
-    image: []
+    image: [],
+    user: ""
   })
   const [createParcela] = useCreateParcelaMutation()
   let posMap = ""
@@ -72,6 +75,7 @@ export default function FormSection() {
         lote: typeof info.lote === 'number' ? info.lote : parseInt(info.lote || '0', 10),
         area: typeof info.area === 'number' ? info.area : parseInt(info.area || '0'),
         price: typeof info.price === 'number' ? info.price : parseInt(info.price || '0'),
+        user: user?.email,
       };
       const validData: information = validate.parse(convertedInfo);
 
@@ -100,6 +104,7 @@ export default function FormSection() {
         location: "",
         description: "",
         image: [],
+        user: "",
       });
       setLocation("");
     } catch (error) {
