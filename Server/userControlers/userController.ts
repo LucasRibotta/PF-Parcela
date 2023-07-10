@@ -24,7 +24,7 @@ export const register = async (
 }
 
 export const login = async (req: Request, res: Response) => {
-  const { email, password } = req.body
+  const { email, password, name, tel } = req.body
 
   if (!email || !password) {
     return res
@@ -45,12 +45,8 @@ export const login = async (req: Request, res: Response) => {
   }
 
   if (user.isAdmin) {
-    return res
-      .status(200)
-      .json({ email, password, isAdmin: true, isCompany: false })
+    return res.status(200).json({ email, isAdmin: true, isCompany: false })
   } else {
-    return res
-      .status(200)
-      .json({ email, password, isAdmin: false, isCompany: false })
+    return res.status(200).json({ email, isAdmin: false, isCompany: false })
   }
 }
