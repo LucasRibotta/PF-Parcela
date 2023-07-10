@@ -14,21 +14,21 @@ interface profi extends Profile {
 }
 
 const handler = NextAuth({
-  providers: [
-    CredentialsProvider({
-      name: "Credentials",
+	providers: [
+		CredentialsProvider({
+			name: "Credentials",
 
-      credentials: {
-        email: { label: "email", type: "email", placeholder: "Email" },
-        password: { label: "Password", type: "password" }
-      },
-      async authorize(credentials, req) {
-        const response = await axios.post(
-          "https://pf-parcela-production.up.railway.app/login",
-          credentials
-        )
-        const user = response.data
-        console.log(user)
+			credentials: {
+				email: { label: "email", type: "email", placeholder: "Email" },
+				password: { label: "Password", type: "password" },
+			},
+			async authorize(credentials, req) {
+				const response = await axios.post(
+					"https://pf-parcela-production.up.railway.app/login",
+					credentials,
+				);
+				const user = response.data;
+				console.log(user);
 
         if (user) {
           return user
@@ -93,4 +93,4 @@ const handler = NextAuth({
   }
 })
 
-export { handler as GET, handler as POST }
+export { handler as GET, handler as POST };
