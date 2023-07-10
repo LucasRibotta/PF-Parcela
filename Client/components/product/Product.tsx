@@ -6,6 +6,7 @@ import Card from "../Admin/Card"
 import Link from "next/link"
 import SearchBar from "../SearchBar/SearchBar"
 import { useSession } from "next-auth/react"
+import { useAppSession } from "@/app/hook"
 
 type UserService = {
     email: string
@@ -22,7 +23,7 @@ const ProductSection = () => {
     // const { data, error, isLoading, isFetching } = useGetParcelasQuery("")
     const parcelas = useAppSelector(state => state.parcelas.parcelas)
 
-    const { data: session, status } = useSession();
+    const { user, session, status } = useAppSession();
 
     useEffect(() => {
         if (parcelas && Array.isArray(parcelas)) {

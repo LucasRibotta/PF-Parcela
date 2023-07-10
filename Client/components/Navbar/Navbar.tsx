@@ -8,33 +8,27 @@ import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai"
 import UserMenu from "../UserMenu/UserMenu"
 import React, { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
-import {
-  setUserAdmin,
-  setUserData,
-  setUserLoggedIn
-} from "@/redux/features/userSlice"
+import { setUserAdmin, setUserData } from "@/redux/features/userSlice"
 import { useAppSelector, useAppDispatch } from "@/redux/hooks"
 import { useRouter } from "next/navigation"
 import { signOut } from "next-auth/react"
-import { useSession } from "next-auth/react"
+import { useAppSession } from "@/app/hook"
 
 export default function Navbar() {
-  const { data: session, status } = useSession()
-
   const dispatch = useAppDispatch()
   const router = useRouter()
-
   const [navbarBackground, setNavbarBackground] = useState(false)
   const userAdmin = useAppSelector((state) => state.user.isAdmin)
-  const user = useAppSelector((state) => state.user.userData)
+  const { user, session, status } = useAppSession()
 
   useEffect(() => {
-    if (session?.user?.isCompany === true || session?.user?.isAdmin === true) {
+    if (user?.isCompany === true || user?.isAdmin === true) {
       dispatch(setUserAdmin(true))
     } else {
       dispatch(setUserAdmin(false))
     }
   }, [user])
+
 
   const activeLink =
     "border-b-2  border-[#51a8a1] text-[#51a8a1] duration-200 cursor-pointer"
@@ -59,17 +53,15 @@ export default function Navbar() {
   const handleLogout = async () => {
     const closeSession = await signOut()
     if (closeSession) {
-      dispatch(setUserAdmin(false))
-      dispatch(setUserLoggedIn(false))
       dispatch(setUserData(null))
     }
   }
 
   useEffect(() => {
-    if (pathName === "/admin" && !userAdmin) {
+    if (pathName === "/admin" && (!user?.isAdmin && !user?.isCompany)) {
       router.push("/")
     }
-  }, [pathName, router, userAdmin])
+  }, [pathName, router])
 
   return (
     <nav
@@ -115,7 +107,7 @@ export default function Navbar() {
             Contacto
           </Link>
         </li> */}
-        {userAdmin ? (
+        {(user?.isAdmin || user?.isCompany) ? (
           <li className="px-[22px] py-[20px]">
             <Link
               className={pathName === "/admin" ? activeLink : inactiveLink}
@@ -127,7 +119,7 @@ export default function Navbar() {
         ) : null}
       </ul>
 
-      {!userAdmin ? (
+      {(user?.isAdmin || user?.isCompany) ? (
         <>
           {status === "authenticated" ? (
             //  {userLoggedIn ? (
