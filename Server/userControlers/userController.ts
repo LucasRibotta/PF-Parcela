@@ -32,7 +32,7 @@ export const login = async (req: Request, res: Response) => {
       .json({ message: "Please. Send your email and password" })
   }
   const user = await User.findOne({ email })
-  console.log(password, user?.password)
+  console.log("esto es server:",user)
   if (!user) {
     return res.status(400).json({ message: "The user does not exist" })
   }
@@ -44,13 +44,7 @@ export const login = async (req: Request, res: Response) => {
     return res.status(401).json({ message: "Invalid password" })
   }
 
-  if (user.isAdmin) {
     return res
       .status(200)
-      .json({ email, password, isAdmin: true, isCompany: false })
-  } else {
-    return res
-      .status(200)
-      .json({ email, password, isAdmin: false, isCompany: false })
-  }
+      .json({ email, isAdmin: user.isAdmin, isCompany: user.isCompany })
 }

@@ -5,6 +5,14 @@ import { useEffect, useState } from "react"
 import Card from "../Admin/Card"
 import Link from "next/link"
 import SearchBar from "../SearchBar/SearchBar"
+import { useSession } from "next-auth/react"
+
+type UserService = {
+    email: string
+    password: string
+    isAdmin: boolean
+    isCompany: boolean
+}
 
 
 const ProductSection = () => {
@@ -13,7 +21,9 @@ const ProductSection = () => {
     const [val, setVal] = useState(false);
     // const { data, error, isLoading, isFetching } = useGetParcelasQuery("")
     const parcelas = useAppSelector(state => state.parcelas.parcelas)
-    const user = useAppSelector((state) => state.user.userData)
+
+    const { data: session, status } = useSession();
+
     useEffect(() => {
         if (parcelas && Array.isArray(parcelas)) {
             dispatch(setParcelas(parcelas))
@@ -55,8 +65,13 @@ const ProductSection = () => {
             </div>
             <h2 className="text-2xl font-bold text-white">Parcelas activas</h2>
             <div className="grid grid-cols-2 mt-6 ">
-                {parcelas && parcelas.map(el => {
-                    if (el.deleted === false) {
+                {parcelas && session?.user?.isCompany === true && parcelas.map(el => {
+                    if (el.deleted === false && session?.user?.email === el.user) {
+                        return <div className=" w-full flex " key={el._id}><Card name={el.name} id={el._id} deleted={el.deleted} /></div>
+                    }
+                })}
+                {parcelas && session?.user?.isAdmin === true && parcelas.map(el => {
+                    if (el.deleted === false ) {
                         return <div className=" w-full flex " key={el._id}><Card name={el.name} id={el._id} deleted={el.deleted} /></div>
                     }
                 })}
