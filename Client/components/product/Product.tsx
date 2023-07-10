@@ -66,12 +66,12 @@ const ProductSection = () => {
             </div>
             <h2 className="text-2xl font-bold text-white">Parcelas activas</h2>
             <div className="grid grid-cols-2 mt-6 ">
-                {parcelas && session?.user?.isCompany === true && parcelas.map(el => {
+                {parcelas && user?.isCompany === true && parcelas.map(el => {
                     if (el.deleted === false && session?.user?.email === el.user) {
                         return <div className=" w-full flex " key={el._id}><Card name={el.name} id={el._id} deleted={el.deleted} /></div>
                     }
                 })}
-                {parcelas && session?.user?.isAdmin === true && parcelas.map(el => {
+                {parcelas && user?.isAdmin === true && parcelas.map(el => {
                     if (el.deleted === false ) {
                         return <div className=" w-full flex " key={el._id}><Card name={el.name} id={el._id} deleted={el.deleted} /></div>
                     }
