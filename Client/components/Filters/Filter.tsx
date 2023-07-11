@@ -30,13 +30,13 @@ export default function Filter() {
 
   return (
     <div
-      className={`fixed h-full w-[15rem] p-4 flex justify-center items-center ${
+      className={`fixed h-full w-[15rem] p-4 flex justify-center items-center shadow-lg ${
         filterBackground
           ? "bg-[#222222b0]"
           : "bg-[#222222e7] ease-in-out duration-300"
       }`}
     >
-      <div className="flex flex-col justify-center items-center gap-8 pb-[6rem]">
+      <div className="flex flex-col justify-center items-center gap-8 pb-[6rem] ">
         <SearchBar />
         <div className="mb-4">
           <select className="block text-sm font-medium w-full p-[6px] rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] ">

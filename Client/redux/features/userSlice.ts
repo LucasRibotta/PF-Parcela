@@ -6,6 +6,8 @@ interface UserState {
   isAdmin: boolean
   userData: {
     email: string
+    isAdmin: boolean
+    isCompany: boolean
   } | null
 }
 
