@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const info = convertPriceToNumber(product)
 
-    const URL = "fe8ca8f43333-2133126022626341053.ngrok-free.app"; //DESPUES CAMBIAR POR EL DE PRODUCCION / UTILIZAR NGROK
+    const URL = "http://localhost:3000"; //DESPUES CAMBIAR POR EL DE PRODUCCION / UTILIZAR NGROK
 
     try {
       if (typeof info.price === 'number' || typeof info.price === 'string') {

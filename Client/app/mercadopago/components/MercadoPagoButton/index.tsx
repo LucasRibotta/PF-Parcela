@@ -3,6 +3,7 @@ import { IProduct } from "../../Mock/product";
 import { Loader } from "../Loader/index";
 import axios from "axios";
 
+
 import styles from "./styles.module.scss";
 
 interface MercadoPagoButtonProps {
