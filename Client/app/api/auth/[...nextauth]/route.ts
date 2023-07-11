@@ -17,11 +17,10 @@ interface se  extends Session {
   isAdmin?: boolean,
   isCompany?: boolean
 }
-
 const handler = NextAuth({
-	providers: [
-		CredentialsProvider({
-			name: "Credentials",
+  providers: [
+    CredentialsProvider({
+      name: "Credentials",
 
 			credentials: {
 				email: { label: "email", type: "email", placeholder: "Email" },
@@ -46,19 +45,19 @@ const handler = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       authorization: {
-          params: {
-            prompt: "consent",
-            access_type: "offline",
-            response_type: "code"
-          }
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
         }
+      }
     })
   ],
-  
+
   callbacks: {
     jwt({ account, user, profile, session, token }) {
       if (user) {
-        token.user = user  
+        token.user = user
       }
       return token
     },   
@@ -98,4 +97,4 @@ const handler = NextAuth({
   }
 })
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }
