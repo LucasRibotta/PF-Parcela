@@ -50,12 +50,12 @@ export default function Filter() {
   return (
     <>
       <div ref={sidebarRef}
-        className={`fixed w-[15rem] p-4 flex  justify-center overflow-hidden  shadow-lg left-0 ${filterBackground
+        className={`fixed w-[15rem] p-4 flex z-[500] justify-center overflow-hidden  shadow-lg left-0 ${filterBackground
           ? "bg-[#222222b0]"
           : "bg-[#222222e7] ease-in-out duration-300"
           } ${isOpen ? "h-full" : "h-4 rounded-ee-3xl"}`}
       >
-        <div className="flex relative flex-col justify-center items-center gap-8 pb-[6rem] pt-5">
+        <div className="flex relative flex-col  items-center pb-[6rem] pt-5">
           <div className="fixed top-0 left-0 mt-[85px] ms-4" onClick={() => toggleSidebar()} >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" className="bi bi-list" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
