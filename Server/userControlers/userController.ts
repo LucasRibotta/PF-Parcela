@@ -6,9 +6,9 @@ export const register = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  
+
   const { name, lastname, email, password, image, provider, accessToken} = req.body
-  
+
   if (!password || !email) {
     return res
       .status(400)
@@ -35,7 +35,7 @@ export const login = async (req: Request, res: Response) => {
       .json({ message: "Please. Send your email and password" })
   }
   const user = await User.findOne({ email })
-  console.log(password, user?.password)
+  console.log("esto es server:",user)
   if (!user) {
     return res.status(400).json({ message: "The user does not exist" })
   }
@@ -46,10 +46,5 @@ export const login = async (req: Request, res: Response) => {
   if (!isMatch) {
     return res.status(401).json({ message: "Invalid password" })
   }
-
-  if (user.isAdmin) {
-    return res.status(200).json({ email, isAdmin: true, isCompany: false })
-  } else {
-    return res.status(200).json({ email, isAdmin: false, isCompany: false })
-  }
+    return res.status(200).json({ email, isAdmin: user.isAdmin, isCompany: user.isCompany })
 }

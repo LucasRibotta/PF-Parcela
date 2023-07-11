@@ -8,7 +8,7 @@ import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai"
 import UserMenu from "../UserMenu/UserMenu"
 import React, { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
-import { setUserData } from "@/redux/features/userSlice"
+import { setUserAdmin, setUserData } from "@/redux/features/userSlice"
 import { useAppSelector, useAppDispatch } from "@/redux/hooks"
 import { useRouter } from "next/navigation"
 import { signOut } from "next-auth/react"
@@ -18,7 +18,17 @@ export default function Navbar() {
   const dispatch = useAppDispatch()
   const router = useRouter()
   const [navbarBackground, setNavbarBackground] = useState(false)
+  const userAdmin = useAppSelector((state) => state.user.isAdmin)
   const { user, session, status } = useAppSession()
+
+  useEffect(() => {
+    if (user?.isCompany === true || user?.isAdmin === true) {
+      dispatch(setUserAdmin(true))
+    } else {
+      dispatch(setUserAdmin(false))
+    }
+  }, [user])
+
 
   const activeLink =
     "border-b-2  border-[#51a8a1] text-[#51a8a1] duration-200 cursor-pointer"
@@ -48,7 +58,7 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    if (pathName === "/admin" && !user?.isAdmin) {
+    if (pathName === "/admin" && (!user?.isAdmin && !user?.isCompany)) {
       router.push("/")
     }
   }, [pathName, router])
@@ -97,7 +107,7 @@ export default function Navbar() {
             Contacto
           </Link>
         </li> */}
-        {user?.isAdmin ? (
+        {(user?.isAdmin || user?.isCompany) ? (
           <li className="px-[22px] py-[20px]">
             <Link
               className={pathName === "/admin" ? activeLink : inactiveLink}
@@ -109,7 +119,7 @@ export default function Navbar() {
         ) : null}
       </ul>
 
-      {!user?.isAdmin ? (
+      {!user ? (
         <>
           {status === "authenticated" ? (
             //  {userLoggedIn ? (

@@ -51,7 +51,7 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="mb-4  flex">
+    <div className="mb-4 mt-10 flex">
       <div className="relative">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <svg
