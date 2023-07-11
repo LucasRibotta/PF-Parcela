@@ -16,7 +16,7 @@ export const parcelas = async (req: Request, res: Response) => {
       res.status(200).json(parcelas);
     } catch (error) {
       console.error(error);
-      res.status(500).send('Error al obtener los condominios de la base de datos.');
+      res.status(500).send('Error al obtener las parcelas de la base de datos.');
     }
 
   }
