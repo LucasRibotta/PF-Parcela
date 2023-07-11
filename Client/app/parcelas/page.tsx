@@ -40,10 +40,10 @@ export default function Parcelas() {
 
   return (
     <div className="flex m-auto flex-col relative w-full pt-[5rem] ">
-      <div className="flex">
+      <div className="flex justify-center">
         <Filter />
-        <div className="flex flex-col justify-center items-center pl-[18rem] pt-[3rem]">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2">
+        <div className="flex flex-col justify-center items-center pt-[3rem]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2 mx-auto">
             {currentParcels.length ? (
               currentParcels.map((el, index) => {
                 if (el.deleted === false) {

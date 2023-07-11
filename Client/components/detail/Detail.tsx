@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { setParcelaData } from "@/redux/features/parcelSlice"
 import { useSession } from "next-auth/react"
+import { useAppSession } from "@/app/hook"
 
 
 const DetailSection = () => {
@@ -25,9 +26,8 @@ const DetailSection = () => {
   const parcela = {
     id: params.id,
   }
-  const {data: session, status} = useSession();
+  const {session, status, user} = useAppSession();
   // const user = useAppSelector((state) => state.user.userData)
-  const user = session?.user
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [deleteParcela] = useDeleteParcelaMutation()
@@ -43,6 +43,19 @@ const DetailSection = () => {
 
   if (isLoading || isFetching) return <p>Loading</p>
   if (error) return <p>Some error</p>;
+
+  const optionEdit = () => {
+    return (
+      <>
+        <Link href={`/form/${parcela.id}`}>
+          <Button text={"Editar"}></Button>
+        </Link>
+        <div onClick={deleteParcel}>
+          <Button text={"Deshabilitar"}></Button>
+        </div>
+      </>
+    )
+  }
 
 
 
@@ -277,20 +290,22 @@ const DetailSection = () => {
         <div className="fixed flex justify-end bottom-6 w-[300px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px]">
 
 
-          {user?.email === data?.user &&
-            <>
-              <Link href={`/form/${parcela.id}`}>
-                <Button text={"Editar"}></Button>
-              </Link>
-              <div onClick={deleteParcel}>
-                <Button text={"Deshabilitar"}></Button>
-              </div>
-            </>
+          {user && user?.email === data?.user &&
+            optionEdit()
+          }
+          {user &&  user.isAdmin &&
+            optionEdit()
           }
 
+          {status === 'authenticated' ?
           <Link href="/pago" className="mr-8 shadow-lg">
             <Button text={"Comprar Ahora"} ></Button>
           </Link>
+            :
+          <Link href="/login" className="mr-8 shadow-lg">
+            <Button text={"Comprar Ahora"} ></Button>
+          </Link>
+          }
 
 
 

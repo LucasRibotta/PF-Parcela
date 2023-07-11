@@ -119,7 +119,7 @@ export default function Navbar() {
         ) : null}
       </ul>
 
-      {(user?.isAdmin || user?.isCompany) ? (
+      {!user ? (
         <>
           {status === "authenticated" ? (
             //  {userLoggedIn ? (
