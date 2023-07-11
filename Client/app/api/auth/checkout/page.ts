@@ -1,6 +1,6 @@
 import { CreatePreferencePayload } from "mercadopago/models/preferences/create-payload.model";
 import { NextApiRequest, NextApiResponse } from "next";
-import Product, { IProduct, ProductN } from "../mercadopago/Mock/product";
+import Product, { IProduct, ProductN } from "../../mercadopago/Mock/product";
 import mercadopago from "mercadopago";
 
 mercadopago.configure({
