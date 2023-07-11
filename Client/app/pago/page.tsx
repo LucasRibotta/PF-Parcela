@@ -1,4 +1,4 @@
-import Sell from '../../components/mercadopago/index'
+import Sell from '../mercadopago/index'
 
 export default function pago() {
   return (

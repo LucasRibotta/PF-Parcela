@@ -3,7 +3,7 @@
 
 'use client'
 
-import { formatNumber } from "./utils/formatNumber";
+/* import { formatNumber } from "./utils/formatNumber"; */
 import { MercadoPagoButton } from "./components/MercadoPagoButton";
 import { useEffect, useState } from "react";
 import Image from "next/image";
