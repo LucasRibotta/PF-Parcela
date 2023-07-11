@@ -1,20 +1,18 @@
-"use client"
-import { useSession } from "next-auth/react"
-
-const UserDataRegister = () => {
-  const { data: session, status } = useSession()
-  if (status === "authenticated") {
-    console.log("userData", "componente de usuario registrado")
-  }
-
+export default function Settings() {
   return (
-    <div>
-      <img src={session?.user?.image ?? "default-image-url"} alt="not found" />
-
-      <p>{session?.user?.email}</p>
-      <p>{session?.user?.name}</p>
+    <div className="mt-[1rem]">
+      <h3 className="text-xl font-bold leading-normal">Mi cuenta</h3>
+      <div className="flex flex-col gap-4 mt-4 w-[60%]">
+        <div className="bg-white w-full mb-6 shadow-xl rounded-lg p-4">
+          Cambiar fecha de nacimiento
+        </div>
+        <div className="bg-white w-full mb-6 shadow-xl rounded-lg p-4">
+          Cambiar telefono
+        </div>
+        <div className="bg-white w-full mb-6 shadow-xl rounded-lg p-4">
+          Cambiar contraseña
+        </div>
+      </div>
     </div>
   )
 }
-
-export default UserDataRegister
