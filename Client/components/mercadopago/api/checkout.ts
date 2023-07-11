@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const info = convertPriceToNumber(product)
 
-    const URL = "http://localhost:3001"; //DESPUES CAMBIAR POR EL DE PRODUCCION / UTILIZAR NGROK
+    const URL = "https://pf-parcela-production.up.railway.app"; //DESPUES CAMBIAR POR EL DE PRODUCCION / UTILIZAR NGROK
 
     try {
       if (typeof info.price === 'number' || typeof info.price === 'string') {
