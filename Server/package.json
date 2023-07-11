@@ -2,7 +2,7 @@
   "scripts": {
     "devNN": "next dev",
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "node index.js",
     "lint": "next lint",
     "dev": "nodemon --exec npx ts-node index.ts"
   },
