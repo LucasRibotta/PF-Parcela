@@ -9,7 +9,10 @@ import {
     desableParcela
 } from "../controllers/auth"
 
-import users from '../controllers/users'
+import {
+    users,
+    userDelete,
+} from '../controllers/users'
 
 const router = express.Router();
 
