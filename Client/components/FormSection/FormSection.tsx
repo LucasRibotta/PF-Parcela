@@ -11,7 +11,6 @@ import Confirmation from "../confirmation/Confirmation"
 import { validate } from "../Validate/validate";
 import { ZodError } from 'zod';
 import { useAppSelector } from "@/redux/hooks"
-import { number } from "prop-types"
 import { useRouter } from "next/navigation"
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
 
@@ -26,11 +25,13 @@ type information = {
   deleted?: boolean
   parcelaData?: string[]
   description: string
+  user: string
 }
 
 export default function FormSection() {
 
   const router = useRouter();
+  const user = useAppSelector((state) => state.user.userData)
 
   const [location, setLocation] = useState("")
   const [confirmation, setConfirmation] = useState(false)
@@ -41,7 +42,8 @@ export default function FormSection() {
     price: null,
     location: "",
     description: "",
-    image: []
+    image: [],
+    user: ""
   })
   const [createParcela] = useCreateParcelaMutation()
   let posMap = ""
@@ -62,33 +64,34 @@ export default function FormSection() {
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
+
     try {
-     
+
       const convertedInfo = {
         ...info,
         lote: typeof info.lote === 'number' ? info.lote : parseInt(info.lote || '0', 10),
         area: typeof info.area === 'number' ? info.area : parseInt(info.area || '0'),
         price: typeof info.price === 'number' ? info.price : parseInt(info.price || '0'),
+        user: user?.email,
       };
-      const validData= validate.parse(convertedInfo);
-      
-    //   setConfirmation(true)
-    // createParcela(info)
+      const validData: information = validate.parse(convertedInfo);
 
-    // setTimeout(() => {
-    //   setConfirmation(false)
-    //   router.push('/gallery');
-    // }, 2000)
+      //   setConfirmation(true)
+      // createParcela(info)
+
+      // setTimeout(() => {
+      //   setConfirmation(false)
+      //   router.push('/gallery');
+      // }, 2000)
 
       setConfirmation(true);
       createParcela({ ...validData, location: validData.location });
-  
+
       setTimeout(() => {
         setConfirmation(false);
-        router.push('/gallery');
+        router.push('/parcelas');
       }, 2000);
-      
+
       // Restablecer campos del formulario
       setInfo({
         name: "",
@@ -98,9 +101,10 @@ export default function FormSection() {
         location: "",
         description: "",
         image: [],
+        user: "",
       });
       setLocation("");
-    } catch (error){
+    } catch (error) {
 
 
       if (error instanceof ZodError) {
@@ -110,13 +114,13 @@ export default function FormSection() {
       }
     }
 
-    setConfirmation(true)
-    createParcela(info)
+    // setConfirmation(true)
+    // createParcela(info)
 
-    setTimeout(() => {
-      setConfirmation(false)
-      router.push('/parcelas');
-    }, 2000)
+    // setTimeout(() => {
+    //   setConfirmation(false)
+    //   router.push('/parcelas');
+    // }, 2000)
   }
 
   const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -126,7 +130,7 @@ export default function FormSection() {
 
   return (
     <>
-      <PrivateRoute>
+      {/* <PrivateRoute> */}
 
         {confirmation && <Confirmation />}
         <form
@@ -155,7 +159,7 @@ export default function FormSection() {
 
           <div className="flex flex-col m-auto p-[2rem] px-[4rem] w-[50%] text-black ">
             <h2 className="mb-4 text-center font-bold text-[30px]">
-              Describenos tu parcela{" "}
+              Descríbenos tu parcela{" "}
             </h2>
             <input
               className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
@@ -178,7 +182,7 @@ export default function FormSection() {
             <input
               className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
               type="Number"
-              placeholder="Area"
+              placeholder="Área"
               name="area"
               onChange={handleChange}
               value={info.area ?? ""}
@@ -193,7 +197,7 @@ export default function FormSection() {
             />
             <textarea
               className="rounded-md h-[100px] placeholder:text-center border-[1px] border-gray-200"
-              placeholder="Describenos la parcela que creaste"
+              placeholder="Descríbenos la parcela que creaste"
               name="description"
               id="description"
               onChange={handleChange}
@@ -213,11 +217,11 @@ export default function FormSection() {
               <UploadImage />
             </div>
 
-            <div className="flex w-full min-h-[70px] max-h-max">
+            <div className="grid grid-cols-3 w-full min-h-[70px] max-h-max">
               {imageCloud?.map((el, index) => (
                 <>
                   <img
-                    className="w-[100px] h-[70px] m-2 rounded-md"
+                    className="w-[100px] h-[70px] object-cover object-center m-2 rounded-md"
                     key={index}
                     src={el}
                     alt={el}
@@ -231,7 +235,7 @@ export default function FormSection() {
             </div>
           </div>
         </form>
-      </PrivateRoute>
+      {/* </PrivateRoute> */}
     </>
   )
 }

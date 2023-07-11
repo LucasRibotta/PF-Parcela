@@ -6,12 +6,13 @@ import swal from "sweetalert"
 import UploadImage from "../UploadImage/UploadImage"
 import Button from "../Button/Button"
 import LocationMaps from "../Maps/Maps"
-import { useAppSelector } from "@/redux/hooks";
-import { useGetParcelaByIdQuery, useUpdateParcelaMutation } from "@/redux/services/parcelApi"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useGetParcelaByIdQuery, useGetParcelasQuery, useUpdateParcelaMutation } from "@/redux/services/parcelApi"
 import { useParams, useRouter } from "next/navigation"
 import style from "./formSectionUpdate.module.css"
 import ConfirmationUpdate from "../confirmation/ConfirmationUpdate"
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
+import { setParcelas } from "@/redux/features/parcelSlice"
 
 type information = {
   _id?: string
@@ -26,21 +27,17 @@ type information = {
   description: string
 }
 
-
-
 export default function FormSectionUpdate() {
-
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const [updateParcela] = useUpdateParcelaMutation()
   const params = useParams()
   const parcela = {
     id: params.id,
   }
-  const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
+  const { data, error, isLoading } = useGetParcelaByIdQuery(parcela);
   const imageCloud = useAppSelector(state => state.coordenada.image)
 
-  console.log(data);
-  // console.log(data.image);
   let posMap = ""
   posMap = useAppSelector((state) => state.coordenada.position)
 
@@ -91,17 +88,13 @@ export default function FormSectionUpdate() {
       image: data?.image ?? []
     })
     setLocation(data?.location ?? "")
-  }, [data, isLoading, isFetching])
-
-
+  }, [data, isLoading])
 
   const handlerDelete = (photo: string) => {
     const fil = images.filter(el => el !== photo)
     setImages(fil)
     setInfo({ ...info, image: fil })
   }
-
-
 
   const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target
@@ -174,7 +167,7 @@ export default function FormSectionUpdate() {
 
           <div className="flex flex-col m-auto p-[2rem] w-[50%] text-black ">
             <h2 className="mb-4 text-center font-bold text-[30px]">
-              Que deseas editar{" "}
+              ¿Qué deseas editar?{" "}
             </h2>
             <input
               className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
@@ -197,7 +190,7 @@ export default function FormSectionUpdate() {
             <input
               className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
               type="Number"
-              placeholder="Area"
+              placeholder="Área"
               name="area"
               onChange={handleChange}
               value={info.area ?? ""}
@@ -212,7 +205,7 @@ export default function FormSectionUpdate() {
             />
             <textarea
               className="rounded-md h-[100px] placeholder:text-center border-[1px] border-gray-200"
-              placeholder="Describenos la parcela que creaste"
+              placeholder="Descríbenos la parcela que creaste"
               name="description"
               id="description"
               onChange={handleChange}

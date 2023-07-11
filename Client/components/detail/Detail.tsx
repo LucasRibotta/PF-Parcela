@@ -12,11 +12,13 @@ import Connection from "@/img/svgs/Connection"
 import Energy from "@/img/svgs/Energy"
 import LocationMaps from "../Maps/Maps"
 import { useParams, useRouter } from "next/navigation"
-import { useGetParcelaByIdQuery, useDeleteParcelaMutation, parcelApi } from "@/redux/services/parcelApi"
+import { useGetParcelaByIdQuery, useDeleteParcelaMutation, parcelApi, useDesableParcelaMutation } from "@/redux/services/parcelApi"
 import Swal from 'sweetalert2'
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { setParcelaData } from "@/redux/features/parcelSlice"
+import { useSession } from "next-auth/react"
+import { useAppSession } from "@/app/hook"
 
 
 const DetailSection = () => {
@@ -24,41 +26,57 @@ const DetailSection = () => {
   const parcela = {
     id: params.id,
   }
+  const {session, status, user} = useAppSession();
+  // const user = useAppSelector((state) => state.user.userData)
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [deleteParcela] = useDeleteParcelaMutation()
+  const [desableParcela] = useDesableParcelaMutation();
   const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
   useEffect(() => {
     if (data) {
       dispatch(setParcelaData(data));
     }
-  },[data])
+  }, [data])
 
 
 
   if (isLoading || isFetching) return <p>Loading</p>
   if (error) return <p>Some error</p>;
 
+  const optionEdit = () => {
+    return (
+      <>
+        <Link href={`/form/${parcela.id}`}>
+          <Button text={"Editar"}></Button>
+        </Link>
+        <div onClick={deleteParcel}>
+          <Button text={"Deshabilitar"}></Button>
+        </div>
+      </>
+    )
+  }
+
 
 
   const deleteParcel = () => {
     Swal.fire({
-      title: 'Deseas eliminar esta parcela?',
-      text: "Esta eliminacion no se puede revertir",
+      title: '¿Deseas deshabilitar esta parcela?',
+      text: "Si aceptas se inhabilitará el producto",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminalo',
+      confirmButtonText: 'Sí, deshabilita',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire(
-          'Eliminado',
-          'Tu parcela a sido eliminada',
+          'Inhabilitado con éxito',
+          'Tu parcela ha sido desactivada',
           'success'
         )
-        deleteParcela(parcela);
+        desableParcela(parcela);
         setTimeout(() => {
           router.push('/parcelas');
         }, 3000)
@@ -66,13 +84,13 @@ const DetailSection = () => {
       }
     })
   }
-interface NotificationType {
+  interface NotificationType {
     isOpen: boolean;
     type: "approved" | "failure" | null;
     content: string;
   }
 
-  const Home= () => {
+  const Home = () => {
     const [notification, setNotification] = useState<NotificationType>({
       isOpen: false,
       type: null,
@@ -85,13 +103,13 @@ interface NotificationType {
 
       if (status === "approved") {
         setNotification({
-          content: "Pago aprobado!",
+          content: "¡Pago aprobado!",
           isOpen: true,
           type: "approved",
         });
       } else if (status === "failure") {
         setNotification({
-          content: "Pago fallido!",
+          content: "¡Pago fallido!",
           isOpen: true,
           type: "failure",
         });
@@ -105,14 +123,9 @@ interface NotificationType {
         });
       }, 5000);
     }, []);
-}
-
-
-
+  }
 
   return (
-
-
     <>
       <img
         src={data?.image[0]}
@@ -195,7 +208,7 @@ interface NotificationType {
 
 
         <div className="w-[100%] sm:w-[100%] lg:w-[45%] p-8  rounded-br-2xl text-white mb-20 mt-[350px] lg:mt-0">
-          <h3 className="font-bold text-black mb-8">Caracteristicas:</h3>
+          <h3 className="font-bold text-black mb-8">Características:</h3>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 [&>div]:w-[98%] text-gray-950 ">
 
@@ -211,22 +224,22 @@ interface NotificationType {
                 <Pago />
                 <h2 className=" pl-2 font-bold">Facilidades de Pago</h2>
               </div>
-              <p className="text-justify font-medium">Credito directo, pago en cuotas y descuentos en efectivo.</p>
+              <p className="text-justify font-medium">Crédito directo, pago en cuotas y descuentos en efectivo.</p>
             </div>
 
             <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f3ec] text-[#00b39c] rounded-2xl ">
               <div className="flex items-center mb-4">
                 <Camino />
-                <h2 className=" pl-2 font-bold">Acceso Optimo</h2>
+                <h2 className=" pl-2 font-bold">Acceso óptimo</h2>
               </div>
-              <p className="text-justify font-medium">Camino de acceso apto para cualquier vehiculo.</p>
+              <p className="text-justify font-medium">Camino de acceso apto para cualquier vehículo.</p>
             </div>
             <div className="m-1 p-[20px] grid grid-cols-1  bg-[#fed3d3] text-[#fb5252] rounded-2xl ">
               <div className="flex items-center mb-4">
                 <Vegetation />
                 <h2 className=" pl-2 font-bold">Superficie y Vegetación Mixta</h2>
               </div>
-              <p className="text-justify font-medium">Planicies, pendientes, estero, arboles frutales y vegetación variada.</p>
+              <p className="text-justify font-medium">Planicies, pendientes, estero, árboles frutales y vegetación variada.</p>
             </div>
 
             <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f7f7] text-[#1fcfcd] rounded-2xl ">
@@ -234,7 +247,7 @@ interface NotificationType {
                 <Connection />
                 <h2 className=" mb-2 pl-2 font-bold">Conectividad digital</h2>
               </div>
-              <p className="text-justify font-medium">Excelente señal telefonica y conectividad 4G en el sector.</p>
+              <p className="text-justify font-medium">Excelente señal telefónica y conectividad 4G en el sector.</p>
             </div>
             <div className="m-1 p-[20px] grid grid-cols-1  bg-[#dbe4f8] text-[#00143f] rounded-2xl ">
               <div className="flex items-center mb-4">
@@ -254,14 +267,14 @@ interface NotificationType {
             Galeria
           </h2>
           <div className="w-full rounded-3xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
-          {data ? (
-            Array.isArray(data.image) && data.image.map((el: string, index: number) => (
-              <img key={index} src={el} alt={el} className="w-[95%] bg-slate-300 h-[400px] m-2 box-border object-cover rounded-3xl" />
-            ))
-          ) : (
+            {data ? (
+              Array.isArray(data.image) && data.image.map((el: string, index: number) => (
+                <img key={index} src={el} alt={el} className="w-[95%] bg-slate-300 h-[400px] m-2 box-border object-cover rounded-3xl" />
+              ))
+            ) : (
 
-            <div>No se encontraron datos</div>
-          )}
+              <div>No se encontraron datos</div>
+            )}
           </div>
         </div>
 
@@ -275,16 +288,24 @@ interface NotificationType {
 
         {/* <Button text={"Agregar a carro"}></Button> */}
         <div className="fixed flex justify-end bottom-6 w-[300px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px]">
-          <Link href={`/form/${parcela.id}`}>
-            <Button text={"Editar"}></Button>
-          </Link>
-          <div onClick={deleteParcel}>
-            <Button text={"Eliminar"}></Button>
-          </div>
 
+
+          {user && user?.email === data?.user &&
+            optionEdit()
+          }
+          {user &&  user.isAdmin &&
+            optionEdit()
+          }
+
+          {status === 'authenticated' ?
           <Link href="/pago" className="mr-8 shadow-lg">
             <Button text={"Comprar Ahora"} ></Button>
           </Link>
+            :
+          <Link href="/login" className="mr-8 shadow-lg">
+            <Button text={"Comprar Ahora"} ></Button>
+          </Link>
+          }
 
 
 
