@@ -5,7 +5,8 @@ import {
     createCondominio,
     createParcela,
     updateParcela,
-    deleteParcela
+    deleteParcela,
+    desableParcela
 } from "../controllers/auth"
 
 import users from '../controllers/users'
@@ -21,6 +22,7 @@ router.get('/users', users)
 router.post("/condominio", createCondominio)
 router.put("/updateParcela/:id", updateParcela)
 router.put("/deleteParcela/:id", deleteParcela)
+router.put("/desableParcela/:id", desableParcela)
 
 
 

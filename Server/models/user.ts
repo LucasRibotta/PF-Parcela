@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose"
-import bcrypt from "bcrypt"
 
 export interface User {
   id: number
@@ -9,10 +8,10 @@ export interface User {
   date: string
   email: string
   password: string
+  provider?: string
+  accessToken?: string
   isAdmin: boolean
   isCompany: boolean
-  encryptPassword(password: string): string
-  comparePassword(password: string): boolean
 }
 
 const userSchema = new Schema<User>({
@@ -20,19 +19,13 @@ const userSchema = new Schema<User>({
   name: { type: String, required: true },
   lastname: { type: String, required: true },
   phone: { type: Number, required: false },
-  date: { type: String, required: true },
+  date: { type: String, required: false, default: Date() },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  provider: {type: String, required: false, default: "local"},
+  accessToken: { type: String, required: false},
   isAdmin: { type: Boolean, default: false },
   isCompany: { type: Boolean, default: false }
-  // accessLevel: { type: Number, required: false, default: 1 }
 })
-
-userSchema.methods.encryptPassword = (password: string): string => {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-}
-userSchema.methods.comparePassword = function (password: string): boolean {
-  return bcrypt.compareSync(password, this.password)
-}
 
 export default model<User>("User", userSchema, "user")

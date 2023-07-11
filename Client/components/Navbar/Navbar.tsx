@@ -5,35 +5,30 @@ import Image from "next/image"
 import logo from "../../img/logoIcon.png"
 import Button from "../Button/Button"
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai"
-import { BiSolidUserCircle } from "react-icons/bi"
+import UserMenu from "../UserMenu/UserMenu"
 import React, { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
-import {
-  setUserAdmin,
-  setUserData,
-  setUserLoggedIn
-} from "@/redux/features/userSlice"
+import { setUserAdmin, setUserData } from "@/redux/features/userSlice"
 import { useAppSelector, useAppDispatch } from "@/redux/hooks"
 import { useRouter } from "next/navigation"
 import { signOut } from "next-auth/react"
+import { useAppSession } from "@/app/hook"
 
 export default function Navbar() {
   const dispatch = useAppDispatch()
   const router = useRouter()
-
   const [navbarBackground, setNavbarBackground] = useState(false)
-
-  const userLoggedIn = useAppSelector((state) => state.user.loggedIn)
   const userAdmin = useAppSelector((state) => state.user.isAdmin)
-  const user = useAppSelector((state) => state.user.userData)
-  console.log(user)
+  const { user, session, status } = useAppSession()
+
   useEffect(() => {
-    if (user?.email === "admin@admin.com") {
+    if (user?.isCompany === true || user?.isAdmin === true) {
       dispatch(setUserAdmin(true))
     } else {
       dispatch(setUserAdmin(false))
     }
   }, [user])
+
 
   const activeLink =
     "border-b-2  border-[#51a8a1] text-[#51a8a1] duration-200 cursor-pointer"
@@ -43,7 +38,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isTop = window.scrollY < 200
+      const isTop = window.scrollY < 300
       if (isTop !== navbarBackground) {
         setNavbarBackground(isTop)
       }
@@ -58,25 +53,22 @@ export default function Navbar() {
   const handleLogout = async () => {
     const closeSession = await signOut()
     if (closeSession) {
-      dispatch(setUserAdmin(false))
-      dispatch(setUserLoggedIn(false))
       dispatch(setUserData(null))
     }
   }
 
   useEffect(() => {
-    if (pathName === "/admin" && !userAdmin) {
-      // Redirect the user to another page or show an error message
+    if (pathName === "/admin" && (!user?.isAdmin && !user?.isCompany)) {
       router.push("/")
     }
-  }, [pathName, router, userAdmin])
+  }, [pathName, router])
 
   return (
     <nav
       className={`flex fixed  items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full shadow-md ${
         navbarBackground
-          ? "bg-[#22222263]"
-          : "bg-[#2222229c] ease-in-out duration-300"
+          ? "bg-[#222222b0]"
+          : "bg-[#222222e7] ease-in-out duration-300"
       }`}
     >
       <div className="w-3/12">
@@ -93,8 +85,8 @@ export default function Navbar() {
         </li>
         <li className="px-[22px] py-[20px]">
           <Link
-            className={pathName === "/gallery" ? activeLink : inactiveLink}
-            href="/gallery"
+            className={pathName === "/parcelas" ? activeLink : inactiveLink}
+            href="/parcelas"
           >
             Parcelas
           </Link>
@@ -115,7 +107,7 @@ export default function Navbar() {
             Contacto
           </Link>
         </li> */}
-        {userAdmin ? (
+        {(user?.isAdmin || user?.isCompany) ? (
           <li className="px-[22px] py-[20px]">
             <Link
               className={pathName === "/admin" ? activeLink : inactiveLink}
@@ -127,16 +119,15 @@ export default function Navbar() {
         ) : null}
       </ul>
 
-      {!userAdmin ? (
+      {!user ? (
         <>
-          {userLoggedIn ? (
+          {status === "authenticated" ? (
+            //  {userLoggedIn ? (
             <div className="w-3/12 flex items-center justify-end gap-4">
               {/* <AiOutlineSearch className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
               <AiOutlineShoppingCart className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
               <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" /> */}
-              <div onClick={handleLogout}>
-                <Button text={"cerrar sesión"} />
-              </div>
+              <UserMenu session={session} handleLogout={handleLogout} />
             </div>
           ) : (
             <div className="w-3/12 flex items-center justify-end">
@@ -156,10 +147,7 @@ export default function Navbar() {
         </>
       ) : (
         <div className="w-3/12 flex items-center justify-end gap-4">
-          <div onClick={handleLogout}>
-            <Button text={"cerrar sesión"} />
-          </div>
-          {/* <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" /> */}
+          <UserMenu session={session} handleLogout={handleLogout} />
         </div>
       )}
     </nav>
