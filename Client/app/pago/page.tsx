@@ -6,7 +6,7 @@ import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 
 
 
-export default function pago() {
+const Pago = () => {
   const [preferenceId, setPreferenceId] = useState(null);
 
 
@@ -37,19 +37,19 @@ export default function pago() {
 
   return (
     <div>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
 
 
       <h1>Hola Luquitas</h1>
       {/* <Sell /> */}
       <button onClick={handleBuy}>Comprar</button>
-      {preferenceId && <Wallet initialization={{ preferenceId}} />}
+      {preferenceId && <Wallet initialization={{ preferenceId }} />}
     </div>
 
-    
+
   )
 }
