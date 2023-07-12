@@ -11,6 +11,7 @@ interface Parcela {
   deleted?: boolean
   parcelaData?: string[]
   description: string
+  user: string
 }
 interface ParcelasState {
   allParcelas: Parcela[]
@@ -31,6 +32,7 @@ const initialState: ParcelasState = {
   },
   parcelaData: {
     _id : "",
+    user: "",
     name: "",
     price: 0,
     description: "",
