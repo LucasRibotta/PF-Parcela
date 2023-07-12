@@ -7,9 +7,9 @@ import updateUser from "../handlers/updateUser";
 
 
 export const users = async (req: Request, res: Response) => {
-    const { lastname } = req.query
+    const { name } = req.query
 
-    if (!lastname) {
+    if (!name) {
         try {
             const usersData = await User.find()
             if (usersData) res.status(200).json(usersData)
@@ -19,7 +19,10 @@ export const users = async (req: Request, res: Response) => {
         }
     } else {
         try {
-            const userData = await User.findOne({ lastname: lastname })
+            const regex = new RegExp(name.toString(), 'i');
+            console.log("nombre procesado",regex);
+
+            const userData = await User.find({ name: { $regex: regex } });
             if (userData) res.status(200).json(userData)
             else throw new Error('No se encuentró ese usuario')
         }
