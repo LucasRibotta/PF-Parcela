@@ -4,6 +4,7 @@ import axios from "axios";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import { useParams } from "next/navigation";
 import { useGetParcelaByIdQuery } from "@/redux/services/parcelApi";
+import Button from "@/components/Button/Button";
 /* import Sell from '../mercadopago/index'; */
 
 
@@ -43,19 +44,16 @@ const pago = () => {
   };
 
   return (
-    <div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
-
-      <h1>Hola Luquitas</h1>
-      <p>{`Nombre del Producto: ${data?.name}`}</p><hr/>
-      <p>{`Precio: ${data?.price}`}</p><hr/>
-      
-      <button onClick={handleBuy}>Comprar</button>
+    <div className="pt-[100px] ps-[15px]">
+      <h1>Detalle de su Compra</h1>
+      <br/>
+      <p>{`Nombre: ${data?.name}`}</p><hr/>
+      <p>{`Área: ${data?.area?.toLocaleString()}`} m<sup>2</sup></p><hr/>
+      <p>{`Precio: CLP $ ${data?.price?.toLocaleString()}.-`}</p><hr/>
+      <br/>
+      <div onClick={handleBuy}>
+      <Button text={"Comprar"} ></Button>
+      </div>
       {preferenceId && <Wallet initialization={{ preferenceId }} />}
     </div>
 
