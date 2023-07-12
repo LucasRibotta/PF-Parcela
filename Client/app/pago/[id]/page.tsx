@@ -5,7 +5,7 @@ import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import { useParams } from "next/navigation";
 import { useGetParcelaByIdQuery } from "@/redux/services/parcelApi";
 import Button from "@/components/Button/Button";
-/* import Sell from '../mercadopago/index'; */
+
 
 
 
