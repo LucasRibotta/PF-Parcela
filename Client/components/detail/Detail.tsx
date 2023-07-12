@@ -304,7 +304,7 @@ const DetailSection = () => {
           <Link href="/login" className="mr-8 shadow-lg">
             <Button text={"Comprar Ahora"} ></Button>
           </Link>
-          }
+          
 
 
 
