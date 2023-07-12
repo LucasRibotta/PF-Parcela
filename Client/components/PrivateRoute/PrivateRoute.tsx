@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { useAppSelector } from "@/redux/hooks"
+import { useAppSession } from "@/app/hook"
 
 interface PrivateRouteProps {
   children: React.ReactNode
@@ -10,13 +12,18 @@ interface PrivateRouteProps {
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const router = useRouter()
-  const userAdmin = useAppSelector((state) => state.user.isAdmin)
+
+  const {user} = useAppSession();
 
   useEffect(() => {
-    if (!userAdmin) {
+    if (user) {
+      if (!user.isAdmin && !user.isCompany) {
+        router.push("/")
+      }
+    } else {
       router.push("/")
     }
-  }, [userAdmin, router])
+  }, [ router, user])
 
   return <>{children}</>
 }
