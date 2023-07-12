@@ -18,6 +18,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       let paymentStatus = payment.body.status;
 
       console.log([payment, paymentStatus]);
+      if (paymentStatus === "approved"){
+        //llamar a la DB y agregar los datos / Ojo el console log esta devolviendo los datos de la compra por ID
+        // el dato para Front ya esta.-
+        //hacer un merchant_order ----- bla bla si est en true se pasa el dato.
+      }
     }
   } catch (error) {
     res.send(error);
