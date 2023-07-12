@@ -4,28 +4,24 @@ import router from "./router"
 import connectDB from "./db/connect"
 import morgan from "morgan"
 import newAuthRouter from "./router/user.router"
-/* import cors from "cors" */
+/* import mercadopago from "mercadopago" */
+const mercadopago = require('mercadopago');
+const cors = require("cors")//Gonzalo MercadoPago
 
-/* const mercadopago = require("mercadopago")
-const cors = require("cors")
-const path = require("path") */
+const app = express();
+
 
 const PORT = process.env.PORT || 3001
+
 // Configuración de CORS
 const corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
-
-const app = express();
-
-/* app.use(cors(corsOptions)); */
-
 app.use(express.json());
-
+app.use(cors()); //Gonzalo MercadoPago
 app.use(morgan("dev"))
 app.use(express.urlencoded({ extended: true }))
-
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Credentials", "true")
@@ -37,31 +33,21 @@ app.use((req, res, next) => {
   res.header("X-Total-Count", "1000")
   next()
 })
-
 app.use("/api", router)
 app.use(newAuthRouter)
 
 //aca tenemos lo de mercadopago en el server
-
-/* mercadopago.configure({
-  access_token: "<ACCESS_TOKEN>",
+app.use(() => {
+  mercadopago.configure({
+    access_token: "TEST-1121991478303106-071123-211897e3813a959b6199cf6e2d046272-1412742934", // ojo esta con la cuenta prueba de vendedor
+  })
 });
 
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(express.static(path.join(__dirname, "../Client")));
-app.use(cors());
-app.get("/", function (req, res) {
-  res.status(200).sendFile("index.html");
-}); */
-
-/* app.post("/create_preference", (req, res) => {
-
+app.post("/create_preference", (req, res) => {
   let preference = {
     items: [
       {
-        title: req.body.description,
+        title: String(req.body.description),
         unit_price: Number(req.body.price),
         quantity: Number(req.body.quantity),
       }
@@ -69,28 +55,22 @@ app.get("/", function (req, res) {
     back_urls: {
       "success": "http://localhost:3000",
       "failure": "http://localhost:3000",
-      "pending": "http://localhost:3000" */  //esto es cuando pagan en efectivo y tienen que ir con el ticket a pagar a alguna caja
-/*     },
-    auto_return: "approved",
+      "pending": "" //esto es cuando pagan en efectivo y tienen que ir con el ticket a pagar a alguna caja
+    },
+    auto_return: "approved" as const,
   };
 
-  mercadopago.preferences.create(preference)
-    .then(function (response) {
+  mercadopago.preferences
+    .create(preference)
+    .then(function (response: any) {
       res.json({
         id: response.body.id
       });
-    }).catch(function (error) {
+    })
+    .catch(function (error: any) {
       console.log(error);
     });
-}); */
-// aca mercadopago toma la informacion y puede mandar el body y al dashboard del frontend
-/* app.get('/dashboard', function (req, res) {
-  res.json({
-    Payment: req.query.payment_id,
-    Status: req.query.status,
-    MerchantOrder: req.query.merchant_order_id
-  });
-}); */
+});
 // aca termina mercadopago
 
 

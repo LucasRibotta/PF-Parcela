@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div>
 
-      <script src="https://sdk.mercadopago.com/js/v2"></script>
+
       <HomeSection />
       <ServiceSection />
       <Footer />

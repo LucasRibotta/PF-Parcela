@@ -78,9 +78,9 @@ export default function Sell() {
             </ul>
           </div>
 
-          <div>
+{/*           <div>
             <MercadoPagoButton product={dataParcel} />
-          </div>
+          </div> */}
         </div>
       </div>
 

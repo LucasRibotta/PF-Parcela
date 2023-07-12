@@ -21,7 +21,7 @@ export const MercadoPagoButton = ({ product }: MercadoPagoButtonProps) => {
       setLoading(true);
 
       try {
-        const { data: preference } = await axios.post("/api/checkout",{
+        const { data: preference } = await axios.post("/checkout",{
           product
       });
 
