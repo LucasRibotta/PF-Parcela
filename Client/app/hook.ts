@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react"
 import { DefaultUser } from "next-auth"
-interface NewUser extends DefaultUser {
+export interface NewUser extends DefaultUser {
   isAdmin?: boolean
   isCompany?: boolean
 }

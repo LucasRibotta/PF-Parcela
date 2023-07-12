@@ -10,6 +10,7 @@ interface Props {
 
 export default function Providers({ children }: Props) {
   const { status } = useAppSession()
+
   if (status === "loading") {
     return <Loading />
   } else {
