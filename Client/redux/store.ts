@@ -6,11 +6,13 @@ import userReducer from "./features/userSlice"
 import { loginApi } from "./services/loginApi"
 import coordenadaReducer from "./features/coordenadaSlice"
 import parcelReducer from "./features/parcelSlice"
+import errorReducer from "./features/errorSlice"
 
 const rootReducer = combineReducers({
   user: userReducer,
   coordenada: coordenadaReducer,
   parcelas: parcelReducer,
+  error: errorReducer,
   [userApi.reducerPath]: userApi.reducer,
   [parcelApi.reducerPath]: parcelApi.reducer,
   [loginApi.reducerPath]: loginApi.reducer
