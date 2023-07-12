@@ -28,7 +28,7 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         const response = await axios.post(
-          "https://pf-parcela-production-2bf5.up.railway.app/login",
+          "https://pf-parcela-production-2bf5.up.railway.app/api/auth/login",
           credentials
         )
         const user = response.data
@@ -87,7 +87,7 @@ const handler = NextAuth({
         }
         try {
           const response = await axios.post(
-            "https://pf-parcela-production-2bf5.up.railway.app/register",
+            "https://pf-parcela-production-2bf5.up.railway.app/api/auth/register",
             userProvider
             //"https://pf-parcela-production.up.railway.app/register", userProvider
           )
