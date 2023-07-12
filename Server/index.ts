@@ -53,7 +53,7 @@ app.post("/create_preference", (req, res) => {
       }
     ],
     back_urls: {
-      "success": "http://localhost:3000",
+      "success": "http://localhost:3000/pago",
       "failure": "http://localhost:3000",
       "pending": "" //esto es cuando pagan en efectivo y tienen que ir con el ticket a pagar a alguna caja
     },

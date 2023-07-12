@@ -44,7 +44,7 @@ const pago = () => {
   };
 
   return (
-    <div className="pt-[100px] ps-[15px]">
+    <div className="pt-[100px] ps-[20px]">
       <h1>Detalle de su Compra</h1>
       <br/>
       <p>{`Nombre: ${data?.name}`}</p><hr/>
