@@ -37,11 +37,11 @@ app.use("/api", router)
 app.use(newAuthRouter)
 
 //aca tenemos lo de mercadopago en el server
-app.use(() => {
+
   mercadopago.configure({
     access_token: "TEST-1121991478303106-071123-211897e3813a959b6199cf6e2d046272-1412742934", // ojo esta con la cuenta prueba de vendedor
   })
-});
+;
 
 app.post("/create_preference", (req, res) => {
   let preference = {

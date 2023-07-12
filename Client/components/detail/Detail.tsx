@@ -278,7 +278,7 @@ const DetailSection = () => {
             <Button text={"Deshabilitar"}></Button>
           </div>
 
-          <Link href="/pago" className="mr-8 shadow-lg">
+          <Link href={`/pago/${parcela.id}`} className="mr-8 shadow-lg">
             <Button text={"Comprar Ahora"} ></Button>
           </Link>
 
