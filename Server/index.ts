@@ -53,8 +53,8 @@ app.post("/create_preference", (req, res) => {
       }
     ],
     back_urls: {
-      "success": "http://localhost:3000/pago",
-      "failure": "http://localhost:3000",
+      "success": "https://pf-parcela-front.vercel.app/pago",
+      "failure": "https://pf-parcela-front.vercel.app",
       "pending": "" //esto es cuando pagan en efectivo y tienen que ir con el ticket a pagar a alguna caja
     },
     auto_return: "approved" as const,
