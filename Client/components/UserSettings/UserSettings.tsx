@@ -13,16 +13,22 @@ import { GoHome } from "react-icons/go"
 import { signOut } from "next-auth/react"
 import { useAppDispatch } from "@/redux/hooks"
 import { setUserData } from "@/redux/features/userSlice"
+import { FormEvent } from "react"
+import { BiSolidUserCircle } from "react-icons/bi"
 
 export default function UserSettings() {
   const dispatch = useAppDispatch()
   const { user } = useAppSession()
-
+  console.log(user)
   const handleLogout = async () => {
     const closeSession = await signOut()
     if (closeSession) {
       dispatch(setUserData(null))
     }
+  }
+
+  const submitHandler = (event: FormEvent<HTMLButtonElement>) => {
+    event.preventDefault()
   }
 
   return (
@@ -32,11 +38,15 @@ export default function UserSettings() {
           <div className="px-6">
             <div className="flex flex-wrap justify-center">
               <div className="w-full px-4 flex relative justify-center">
-                <img
-                  src={user?.image ?? "default-image-url"}
-                  alt="not found"
-                  className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
-                />
+                {user?.image ? (
+                  <img
+                    src={user?.image ?? "default-image-url"}
+                    alt="not found"
+                    className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                  />
+                ) : (
+                  <BiSolidUserCircle className="shadow-xl rounded-full h-auto bg-transparent text-[#939393] w-[40%] align-middle border-none absolute -m-16 -ml-20 lg:-ml-16" />
+                )}
                 <button className="absolute top-2 right-[36%]">
                   <AiOutlineCamera className="h-7 w-7 stroke-current text-black bg-[#dbdade] rounded-full p-1" />
                 </button>

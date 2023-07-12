@@ -18,7 +18,7 @@ export default function Navbar() {
   const dispatch = useAppDispatch()
   const router = useRouter()
   const [navbarBackground, setNavbarBackground] = useState(false)
-  const { user, session, status } = useAppSession()
+  const { user, status } = useAppSession()
 
   const activeLink =
     "border-b-2  border-[#51a8a1] text-[#51a8a1] duration-200 cursor-pointer"
@@ -117,7 +117,7 @@ export default function Navbar() {
               {/* <AiOutlineSearch className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
               <AiOutlineShoppingCart className="h-9 w-9 p-1 hover:text-[#51a8a1] duration-200 text-white" />
               <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" /> */}
-              <UserMenu session={session} handleLogout={handleLogout} />
+              <UserMenu user={user} handleLogout={handleLogout} />
             </div>
           ) : (
             <div className="w-3/12 flex items-center justify-end">
@@ -137,7 +137,7 @@ export default function Navbar() {
         </>
       ) : (
         <div className="w-3/12 flex items-center justify-end gap-4">
-          <UserMenu session={session} handleLogout={handleLogout} />
+          <UserMenu user={user} handleLogout={handleLogout} />
         </div>
       )}
     </nav>

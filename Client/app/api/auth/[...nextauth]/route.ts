@@ -25,10 +25,9 @@ const handler = NextAuth({
           credentials
         )
         const user = response.data
-        console.log(user)
-
+        console.log(user.user)
         if (user) {
-          return user
+          return user.user
         } else {
           throw new Error("Invalid credentials")
         }
