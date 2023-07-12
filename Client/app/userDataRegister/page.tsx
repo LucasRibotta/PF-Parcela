@@ -1,20 +1,34 @@
-"use client"
-import { useSession } from "next-auth/react"
+import { AiOutlineCalendar, AiOutlinePhone } from "react-icons/ai"
+import { RiLockPasswordLine } from "react-icons/ri"
+import Link from "next/link"
 
-const UserDataRegister = () => {
-  const { data: session, status } = useSession()
-  if (status === "authenticated") {
-    console.log("userData", "componente de usuario registrado")
-  }
-
+export default function Settings() {
   return (
-    <div>
-      <img src={session?.user?.image ?? "default-image-url"} alt="not found" />
-
-      <p>{session?.user?.email}</p>
-      <p>{session?.user?.name}</p>
+    <div className="mt-[1rem]">
+      <h3 className="text-xl font-bold leading-normal">Mi cuenta</h3>
+      <div className="flex flex-col gap-4 mt-4 w-[60%]">
+        <Link
+          href="/userDataRegister/dateUpdate"
+          className="bg-white flex items-center gap-2 w-full mb-6 shadow-xl rounded-lg p-4 hover:bg-[#51a8a1] duration-200 hover:text-white"
+        >
+          <AiOutlineCalendar className="h-6 w-6 stroke-current" />
+          Cambiar fecha de nacimiento
+        </Link>
+        <Link
+          href="/userDataRegister/phoneUpdate"
+          className="bg-white flex items-center gap-2  w-full mb-6 shadow-xl rounded-lg p-4 hover:bg-[#51a8a1] duration-200 hover:text-white"
+        >
+          <AiOutlinePhone className="h-6 w-6 stroke-current" />
+          Cambiar telefono
+        </Link>
+        <Link
+          href="/userDataRegister/passwordUpdate"
+          className="bg-white flex items-center gap-2  w-full mb-6 shadow-xl rounded-lg p-4 hover:bg-[#51a8a1] duration-200 hover:text-white"
+        >
+          <RiLockPasswordLine className="h-6 w-6 stroke-current" />
+          Cambiar contraseña
+        </Link>
+      </div>
     </div>
   )
 }
-
-export default UserDataRegister

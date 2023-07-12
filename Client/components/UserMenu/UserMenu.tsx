@@ -1,22 +1,21 @@
 import { Menu, Transition } from "@headlessui/react"
-import { Session } from "next-auth"
 import { BiSolidUserCircle } from "react-icons/bi"
 import Link from "next/link"
-
+import { NewUser } from "@/app/hook"
 export default function UserMenu({
-  session,
+  user,
   handleLogout
 }: {
-  session: Session | null
+  user: NewUser
   handleLogout: () => void
 }) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="flex items-center">
-          {session?.user?.image ? (
+          {user?.image ? (
             <img
-              src={session?.user?.image ?? "default-image-url"}
+              src={user?.image ?? "default-image-url"}
               className="h-10 w-10 rounded-full duration-200 hover:scale-110"
               alt="no found"
             />
