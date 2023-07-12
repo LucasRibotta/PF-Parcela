@@ -1,6 +1,6 @@
 import { CreatePreferencePayload } from "mercadopago/models/preferences/create-payload.model";
 import { NextApiRequest, NextApiResponse } from "next";
-import Product, { IProduct, ProductN } from "../Mock/product";
+import Product, { IProduct, ProductN } from "../mercadopago/Mock/product";
 import mercadopago from "mercadopago";
 
 mercadopago.configure({
@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const info = convertPriceToNumber(product)
 
-    const URL = "https://pf-parcela-front.vercel.app"; //DESPUES CAMBIAR POR EL DE PRODUCCION / UTILIZAR NGROK
+    const URL = "http://localhost:3000"; //DESPUES CAMBIAR POR EL DE PRODUCCION / UTILIZAR NGROK
 
     try {
       if (typeof info.price === 'number' || typeof info.price === 'string') {
