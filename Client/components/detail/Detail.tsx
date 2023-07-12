@@ -297,13 +297,14 @@ const DetailSection = () => {
             optionEdit()
           }
 
-          <Link href="/pago" className="mr-8 shadow-lg">
-            <Button text={"Comprar Ahora"} ></Button>
-          </Link>
+          {status === 'authenticated' ?
+            <Link href={`/pago/${parcela.id}`} className="mr-8 shadow-lg">
+              <Button text={"Comprar Ahora"} ></Button>
+            </Link>
             :
-          <Link href="/login" className="mr-8 shadow-lg">
-            <Button text={"Comprar Ahora"} ></Button>
-          </Link>
+            <Link href="/login" className="mr-8 shadow-lg">
+              <Button text={"Comprar Ahora"} ></Button>
+            </Link>
           }
 
 
