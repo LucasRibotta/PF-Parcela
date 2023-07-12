@@ -51,7 +51,7 @@ export const parcelApi = createApi({
     }),
     desableParcela: builder.mutation<void, { id: string }>({
       query: ({ id }) => ({
-        url: `/desableParcela/${id}`,
+        url: `desableParcela/${id}`,
         method: "PUT"
       })
     }),
