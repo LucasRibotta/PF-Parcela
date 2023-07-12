@@ -1,25 +1,45 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
-type User = {
-  id: number
+export interface User {
+  _id: string
   name: string
+  lastname: string
+  phone: number
+  date: string
   email: string
-  username: string
+  password: string
+  provider?: string
+  accessToken?: string
+  isAdmin: boolean
+  isCompany: boolean
 }
 
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://jsonplaceholder.typicode.com/"
+    baseUrl: "http://localhost:3001/api/auth"
   }),
   endpoints: (builder) => ({
     getUsers: builder.query<User[], null>({
-      query: () => "users"
+      query: () => ({
+        url: "users",
+        method: "GET",
+      })
     }),
-    getUserById: builder.query<User, { id: string }>({
-      query: ({ id }) => `users/${id}`
-    })
+    deleteUser: builder.mutation<void, { id: string }>({
+      query: ({ id }) => ({
+        url: `/usersDelete/${id}`,
+        method: "PUT",
+      })
+    }),
+    updateUser: builder.mutation<User,{ id: string; data: Partial<User> }>({
+      query: ({ id, data }) => ({
+        url: `updateUser/${id}`,
+        method: "PUT",
+        body: data
+      })
+    }),
   })
 })
 
-export const { useGetUserByIdQuery, useGetUsersQuery } = userApi
+export const { useGetUsersQuery, useDeleteUserMutation, useUpdateUserMutation } = userApi

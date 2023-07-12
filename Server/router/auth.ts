@@ -6,12 +6,13 @@ import {
     createParcela,
     updateParcela,
     deleteParcela,
-    desableParcela
+    desableParcela,
 } from "../controllers/auth"
 
 import {
     users,
     userDelete,
+    userUpdate,
 } from '../controllers/users'
 
 const router = express.Router();
@@ -21,6 +22,8 @@ router.get("/parcelas/:id", parcela)
 router.post("/parcela", createParcela)
 
 
+router.put("/usersDelete/:id", userDelete)
+router.put("/updateUser/:id", userUpdate)
 router.get('/users', users)
 router.post("/condominio", createCondominio)
 router.put("/updateParcela/:id", updateParcela)

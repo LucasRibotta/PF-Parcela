@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 
 import User from "../models/user";
 import deleteUser from "../handlers/deleteUser";
+import updateUser from "../handlers/updateUser";
 
 
 export const users = async (req: Request, res: Response) => {
@@ -32,9 +33,11 @@ export const users = async (req: Request, res: Response) => {
 export const userDelete = async (req: Request, res: Response) => {
 
     try {
-        const { id } = req.params;
+        const { id  } = req.params;
+        console.log(id);
 
         const borrado = await deleteUser(id)
+        console.log(borrado);
         if (!borrado) {
             return res.status(404).json({ error: 'Usuario no encontrado.' });
         }
@@ -45,4 +48,28 @@ export const userDelete = async (req: Request, res: Response) => {
         return res.status(500).json({ error: 'Error al eliminar el usuario de la base de datos.' });
     }
 
+}
+
+export const userUpdate = async (req: Request, res: Response) => {
+
+    try {
+        const { id } = req.params;
+        const { name, lastname, phone, date, email, password, isAdmin, isCompany } = req.body;
+
+        console.log(name, lastname, phone, date, email, password, isAdmin, isCompany);
+
+
+        if (!id) {
+            throw new Error('El campo id es requerido.');
+        }
+        const userUpdate = await updateUser(id, name, lastname, phone, date, email, password, isAdmin, isCompany)
+        if (!userUpdate) {
+            return res.status(404).json({ error: 'El usuario no existe.' });
+        }
+
+        return res.status(200).json(userUpdate);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Error al actualizar la parcela en la base de datos.' });
+    }
 }
