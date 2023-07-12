@@ -26,7 +26,7 @@ const DetailSection = () => {
   const parcela = {
     id: params.id,
   }
-  const {session, status, user} = useAppSession();
+  const { session, status, user } = useAppSession();
   // const user = useAppSelector((state) => state.user.userData)
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -293,7 +293,7 @@ const DetailSection = () => {
           {user && user?.email === data?.user &&
             optionEdit()
           }
-          {user &&  user.isAdmin &&
+          {user && user.isAdmin &&
             optionEdit()
           }
 
@@ -306,6 +306,7 @@ const DetailSection = () => {
               <Button text={"Comprar Ahora"} ></Button>
             </Link>
           }
+
 
 
 
