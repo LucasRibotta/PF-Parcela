@@ -17,7 +17,7 @@ interface Parcela {
 export const parcelApi = createApi({
   reducerPath: "parcelApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://pf-parcela-production-2bf5.up.railway.app"
+    baseUrl: "https://pf-parcela-production-2bf5.up.railway.app/"
   }),
   endpoints: (builder) => ({
     getParcelas: builder.query<Parcela[], string>({
@@ -51,10 +51,10 @@ export const parcelApi = createApi({
     }),
     desableParcela: builder.mutation<void, { id: string }>({
       query: ({ id }) => ({
-        url: `/desableParcela/${id}`,
+        url: `desableParcela/${id}`,
         method: "PUT"
       })
-    }),
+    })
   })
 })
 // export const useGetParcelasQuery = parcelApi.endpoints.getParcelas.useQuery
@@ -64,5 +64,5 @@ export const {
   useGetParcelaByIdQuery,
   useGetParcelasQuery,
   useUpdateParcelaMutation,
-  useDesableParcelaMutation,
+  useDesableParcelaMutation
 } = parcelApi
