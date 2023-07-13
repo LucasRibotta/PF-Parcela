@@ -17,7 +17,7 @@ export interface User {
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3001/api/auth"
+    baseUrl: "https://pf-parcela-production-2bf5.up.railway.app/api/auth/"
   }),
   endpoints: (builder) => ({
     getUsers: builder.query<User[], {name: string}>({
