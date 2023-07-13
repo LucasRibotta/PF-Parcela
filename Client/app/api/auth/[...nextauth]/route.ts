@@ -1,20 +1,20 @@
 import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
-import GoogleProvider from "next-auth/providers/google"
+import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import axios from "axios"
-import "dotenv/config"
+import 'dotenv/config';
 import { User, Account, Profile } from "next-auth"
-import { AdapterUser } from "next-auth/adapters"
-import { Session } from "next-auth"
+import { AdapterUser } from "next-auth/adapters";
+import { Session } from "next-auth";
 
 interface profi extends Profile {
-  given_name?: string
-  family_name?: string
+  given_name?: string,
+  family_name?: string,
 }
 interface se extends Session {
-  email: string
-  password: string
-  isAdmin?: boolean
+  email: string,
+  password: string,
+  isAdmin?: boolean,
   isCompany?: boolean
 }
 const handler = NextAuth({
@@ -24,7 +24,7 @@ const handler = NextAuth({
 
       credentials: {
         email: { label: "email", type: "email", placeholder: "Email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
         const response = await axios.post(
@@ -34,7 +34,7 @@ const handler = NextAuth({
         const user = response.data
 
         if (user) {
-          return user.user
+          return user
         } else {
           throw new Error("Invalid credentials")
         }
@@ -64,16 +64,9 @@ const handler = NextAuth({
       session.user = token.user as se
       return session
     },
-    async signIn({
-      user,
-      account,
-      profile
-    }: {
-      user: User | AdapterUser
-      account: Account | null
-      profile?: profi | undefined
-    }): Promise<boolean> {
-      if (account?.provider === "credentials") {
+    async signIn({ user, account, profile }: { user: User | AdapterUser, account: Account | null, profile?: profi | undefined }): Promise<boolean> {
+
+      if (account?.provider === 'credentials') {
         return true
       } else {
         const userProvider = {
@@ -83,7 +76,7 @@ const handler = NextAuth({
           email: user.email,
           image: user.image,
           provider: account?.provider,
-          accessToken: account?.access_token
+          accessToken: account?.access_token,
         }
         try {
           const response = await axios.post(
@@ -93,7 +86,7 @@ const handler = NextAuth({
           )
           return true
         } catch (error) {
-          console.log(error)
+          console.log(error);
           return false
         }
       }
