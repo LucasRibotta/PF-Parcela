@@ -6,7 +6,8 @@ import { useDeleteUserMutation, useGetUsersQuery, useUpdateUserMutation } from '
 import React, { useState } from 'react'
 
 const Users = () => {
-  const [search, setSearch] = useState({name:""});
+  const [search, setSearch] = useState({ name: "" });
+  const [psw, setPsw] = useState("");
   const users = useGetUsersQuery(search);
   const { data, isLoading } = useGetUsersQuery(search);
   const { user, session } = useAppSession();
@@ -47,23 +48,53 @@ const Users = () => {
     users.refetch();
   }
 
+  const handleChangePsw = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target
+    setPsw(value);
+  }
+
+
+  const handleUpdatePsw = async (
+    id: string,
+    name: string,
+    lastname: string,
+    phone: number,
+    date: string,
+    email: string,
+    password: string,
+    isAdmin: boolean,
+    isCompany: boolean,
+  ) => {
+
+    if (psw) {
+      const data = { name, lastname, phone, date, email, password: psw, isAdmin, isCompany }
+      await updateUser({ id, data });
+    } else {
+      const data = { name, lastname, phone, date, email, password, isAdmin, isCompany }
+      await updateUser({ id, data });
+    }
+
+    setPsw("");
+    users.refetch();
+  }
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setSearch({name: value});
+    setSearch({ name: value });
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSearch({name: ""})
+    setSearch({ name: "" })
 
   }
 
 
   return (
     <>
-      <div className='w-[80%]'>
+      <div className='w-[80%] mx-auto'>
 
-        <form onSubmit={handleSubmit} className="relative h-10 w-full  mt-[1rem]">
+        <form onSubmit={handleSubmit} className="relative h-10 w-full  mt-[1rem] m-10">
           <input
             type="text"
             className="peer h-full w-[200px] rounded-[7px] border border-blue-gray-200 border-t-transparent  px-3 py-4 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-[#51a8a1] focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
@@ -72,34 +103,49 @@ const Users = () => {
             value={search.name}
           />
           <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-[200px] select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-[#51a8a1] peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-[#51a8a1] peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-[#51a8a1] peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-            Usuario
+            Buscar usuario...
           </label>
         </form>
 
-        <div className='grid grid-cols-3 w-30 gap-2'>
+        <div className='grid grid-cols-2 w-30 gap-3'>
           {
             data?.map(el => {
               return (
                 <>
-                  <div className='px-5 py-4 bg-gray-300 grid grid-cols-4 items-center rounded-lg' key={el._id}>
-                    <div className='flex flex-col col-span-3 gap-4'>
-                      <h2>Nombre: {el.name}</h2>
-                      <p>correo: {el.email}</p>
-                      <p>id: {el._id}</p>
-                      <p>Admin: {el.isAdmin ? "administrador": "no admin"}</p>
-                      <p>Corporativo: {el.isCompany ? "Corporativo": "no corporativo"}</p>
+                  <div className='px-5 py-4 bg-gray-300 rounded-lg flex flex-col items-center'>
+                    <div className=' grid grid-cols-4 items-center w-full' key={el._id}>
+                      <div className='flex flex-col col-span-3 gap-4'>
+                        <h2>Nombre: {el.name}</h2>
+                        <p>correo: {el.email}</p>
+                        <p>Admin: {el.isAdmin ? "administrador" : "no admin"}</p>
+                        <p>Corporativo: {el.isCompany ? "Corporativo" : "no corporativo"}</p>
+                      </div>
+                      <div className='flex flex-col items-end gap-4'>
+                        <div className='w-full [&>button]:w-full' onClick={() => handleDeleteUser(el._id)}>
+                          <Button text="Eliminar" />
+                        </div>
+                        <div className='w-full [&>button]:w-full' onClick={() => handleUpdateAdmin(el._id, el.name, el.lastname, el.phone, el.date, el.email, el.password, el.isAdmin, el.isCompany)}>
+                          <Button text="Admin" />
+                        </div>
+                        <div className='w-full [&>button]:w-full' onClick={() => handleUpdateCompany(el._id, el.name, el.lastname, el.phone, el.date, el.email, el.password, el.isAdmin, el.isCompany)}>
+                          <Button text="Company" />
+                        </div>
+                      </div>
                     </div>
-                    <div className='flex flex-col gap-4'>
-                      <div onClick={() => handleDeleteUser(el._id)}>
-                        <Button text="Eliminar" />
-                      </div>
-                      <div onClick={() => handleUpdateAdmin(el._id, el.name, el.lastname, el.phone, el.date, el.email, el.password, el.isAdmin, el.isCompany)}>
-                        <Button text="Admin" />
-                      </div>
-                      <div onClick={() => handleUpdateCompany(el._id, el.name, el.lastname, el.phone, el.date, el.email, el.password, el.isAdmin, el.isCompany)}>
-                        <Button text="Company" />
-                      </div>
-                    </div>
+
+                    <form className="relative flex items-center gap-3 h-10 w-full justify-between mt-[1rem]">
+                      <input
+                        type="password"
+                        className="peer h-full w-[200px] rounded-[7px] border border-blue-gray-200 border-t-transparent  px-3 py-4 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-[#51a8a1] focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                        placeholder=" "
+                        onChange={handleChangePsw}
+                      />
+                      <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-[200px] select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-[#51a8a1] peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-[#51a8a1] peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-[#51a8a1] peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                        Actualizar contraseña
+                      </label>
+                      <div onClick={() => handleUpdatePsw(el._id, el.name, el.lastname, el.phone, el.date, el.email, el.password, el.isAdmin, el.isCompany)}> <Button text={"Actualizar"}/></div>
+                    </form>
+
                   </div>
                 </>
               )
