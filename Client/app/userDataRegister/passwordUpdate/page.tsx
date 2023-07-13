@@ -2,6 +2,8 @@
 import { IoChevronBackOutline } from "react-icons/io5"
 import { FormEvent, useState } from "react"
 import Link from "next/link"
+import { useUpdateUserMutation } from "@/redux/services/userApi"
+import { useAppSession } from "@/app/hook"
 export default function PasswordUpdate() {
   const [password, setPassword] = useState("")
   const [repeatPassword, setRepeatPassword] = useState("")

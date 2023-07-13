@@ -26,7 +26,7 @@ const DetailSection = () => {
   const parcela = {
     id: params.id,
   }
-  const {session, status, user} = useAppSession();
+  const { session, status, user } = useAppSession();
   // const user = useAppSelector((state) => state.user.userData)
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -293,19 +293,20 @@ const DetailSection = () => {
           {user && user?.email === data?.user &&
             optionEdit()
           }
-          {user &&  user.isAdmin &&
+          {user && user.isAdmin &&
             optionEdit()
           }
 
           {status === 'authenticated' ?
-          <Link href="/pago" className="mr-8 shadow-lg">
-            <Button text={"Comprar Ahora"} ></Button>
-          </Link>
+            <Link href={`/pago/${parcela.id}`} className="mr-8 shadow-lg">
+              <Button text={"Comprar Ahora"} ></Button>
+            </Link>
             :
-          <Link href="/login" className="mr-8 shadow-lg">
-            <Button text={"Comprar Ahora"} ></Button>
-          </Link>
+            <Link href="/login" className="mr-8 shadow-lg">
+              <Button text={"Comprar Ahora"} ></Button>
+            </Link>
           }
+
 
 
 

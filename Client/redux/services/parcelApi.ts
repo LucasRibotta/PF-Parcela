@@ -17,7 +17,7 @@ interface Parcela {
 export const parcelApi = createApi({
   reducerPath: "parcelApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://pf-parcela-production-2bf5.up.railway.app/"
+    baseUrl: "http://localhost:3001/api/auth"
   }),
   endpoints: (builder) => ({
     getParcelas: builder.query<Parcela[], string>({
