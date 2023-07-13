@@ -6,7 +6,7 @@ import { useAppSession } from "@/app/hook";
 import React, { useState } from "react";
 export default function PasswordUpdate() {
 
-  const { data, isLoading } = useGetUsersQuery(null);
+  const { data, isLoading } = useGetUsersQuery({name: ""});
   const { user, session } = useAppSession();
   const [updateUser] = useUpdateUserMutation();
 

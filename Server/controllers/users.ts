@@ -4,10 +4,14 @@ import { Request, Response } from "express";
 import User from "../models/user";
 import deleteUser from "../handlers/deleteUser";
 import updateUser from "../handlers/updateUser";
+import user from "../models/user";
 
 
 export const users = async (req: Request, res: Response) => {
-    const { name } = req.query
+    const { name } = req.query as {name?: string}
+
+    console.log(name);
+
 
     if (!name) {
         try {
@@ -19,12 +23,14 @@ export const users = async (req: Request, res: Response) => {
         }
     } else {
         try {
-            const regex = new RegExp(name.toString(), 'i');
-            console.log("nombre procesado",regex);
+            const userData = await User.find();
+            console.log(userData);
 
-            const userData = await User.find({ name: { $regex: regex } });
-            if (userData) res.status(200).json(userData)
-            else throw new Error('No se encuentró ese usuario')
+            const info = userData.filter(el => el.name.toLowerCase().includes(name.toString().toLowerCase()))
+            console.log(info);
+
+            if (info) res.status(200).json(info)
+            else throw new Error('No se encuentra ese usuario')
         }
         catch (error) {
             res.status(500).json(error)

@@ -20,9 +20,9 @@ export const userApi = createApi({
     baseUrl: "http://localhost:3001/api/auth"
   }),
   endpoints: (builder) => ({
-    getUsers: builder.query<User[], null>({
-      query: () => ({
-        url: "users",
+    getUsers: builder.query<User[], {name: string}>({
+      query: ({name}) => ({
+        url: `users?name=${name}`,
         method: "GET",
       })
     }),
