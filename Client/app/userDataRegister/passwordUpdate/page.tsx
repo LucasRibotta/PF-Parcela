@@ -22,9 +22,9 @@ export default function PasswordUpdate() {
     event.preventDefault();
 
     if (dataUser) {
-      const { _id, name, lastname, phone, date, email, password, isAdmin, isCompany } = dataUser
+      const { _id, name, lastname, phone, date, email, password, isAdmin, isCompany, image } = dataUser
 
-      const data = { name, lastname, phone, date, email, password: psw, isAdmin, isCompany }
+      const data = { name, lastname, phone, date, email, password: psw, isAdmin, isCompany, image }
 
       updateUser({ id: _id, data })
     }
