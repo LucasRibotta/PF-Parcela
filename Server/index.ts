@@ -4,6 +4,7 @@ import router from "./router"
 import connectDB from "./db/connect"
 import morgan from "morgan"
 import newAuthRouter from "./router/user.router"
+import emailNotification from "./router/emailNotification.router"
 /* import mercadopago from "mercadopago" */
 const mercadopago = require('mercadopago');
 const cors = require("cors")//Gonzalo MercadoPago
@@ -35,6 +36,7 @@ app.use((req, res, next) => {
 })
 app.use("/api", router)
 app.use(newAuthRouter)
+app.use(emailNotification)
 
 //aca tenemos lo de mercadopago en el server
 
