@@ -11,7 +11,8 @@ const updateUser = async (
     email: string,
     password: string,
     isAdmin: boolean,
-    isCompany: boolean) => {
+    isCompany: boolean,
+    image: string) => {
 
     if (password.length !== 60) {
         const newHashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
@@ -24,6 +25,7 @@ const updateUser = async (
             password: newHashedPassword,
             isAdmin,
             isCompany,
+            image,
         }, { new: true });
         return remaster;
     } else {
@@ -36,6 +38,7 @@ const updateUser = async (
             password,
             isAdmin,
             isCompany,
+            image,
         }, { new: true });
         return remaster;
     }

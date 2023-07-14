@@ -12,6 +12,7 @@ export interface User {
   accessToken?: string
   isAdmin: boolean
   isCompany: boolean
+  image: string
 }
 
 export const userApi = createApi({

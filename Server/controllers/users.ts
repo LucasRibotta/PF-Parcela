@@ -63,15 +63,15 @@ export const userUpdate = async (req: Request, res: Response) => {
 
     try {
         const { id } = req.params;
-        const { name, lastname, phone, date, email, password, isAdmin, isCompany } = req.body;
+        const { name, lastname, phone, date, email, password, isAdmin, isCompany, image } = req.body;
 
-        console.log(name, lastname, phone, date, email, password, isAdmin, isCompany);
+        console.log(name, lastname, phone, date, email, password, isAdmin, isCompany, image);
 
 
         if (!id) {
             throw new Error('El campo id es requerido.');
         }
-        const userUpdate = await updateUser(id, name, lastname, phone, date, email, password, isAdmin, isCompany)
+        const userUpdate = await updateUser(id, name, lastname, phone, date, email, password, isAdmin, isCompany, image)
         if (!userUpdate) {
             return res.status(404).json({ error: 'El usuario no existe.' });
         }
