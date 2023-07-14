@@ -28,14 +28,14 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         const response = await axios.post(
-          "https://pf-parcela-production.up.railway.app/login",
+          "http://localhost:3001/login",
           credentials,
         );
         const user = response.data;
         //console.log(user);
 
         if (user) {
-          return user
+          return user.user
         } else {
           throw new Error("Invalid credentials")
         }
