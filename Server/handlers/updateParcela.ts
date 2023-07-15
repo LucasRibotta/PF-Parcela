@@ -9,7 +9,7 @@ const updateParcela = async (
     location: string,
     image: string,
     description: string,
-    condominio: string
+    condominio: string,
   ) => {
     const parcelaActualizado = await ParcelaModel.findByIdAndUpdate(id, {
       name,

@@ -6,6 +6,7 @@ import createCondo from "../handlers/createCondominio"
 import updateParce from "../handlers/updateParcela"
 import deletedParce from "../handlers/deleteParcela";
 import desableParc from "../handlers/desableParcela";
+import ParcelaModel from '../models/parcela'
 
 // esta ruta trae por query( el nombre del condominio) sus parcelas  y sin query trae todas las parcelas existentes
 export const parcelas = async (req: Request, res: Response) => {
@@ -18,7 +19,6 @@ export const parcelas = async (req: Request, res: Response) => {
       console.error(error);
       res.status(500).send('Error al obtener las parcelas de la base de datos.');
     }
-
   }
 
 // parcela por id
@@ -29,13 +29,47 @@ export const parcela  =async (req: Request, res: Response) => {
       throw new Error('El campo  id no existe .');
     }
     const parcela = await idParcela(id)
-    res.status(200).json(parcela)
+
+    return res.status(200).send(parcela)
+    
   } catch (error) {
     console.error(error);
     res.status(500).send('Error al obtener los parcela de la base de datos.');
   }
 
 }
+
+export const updateViews = async(req: Request, res: Response)=> {
+  const {id} = req.params
+  try {
+    const parcelaViews = await idParcela(id)
+    if(parcelaViews.views){
+      await ParcelaModel.findByIdAndUpdate(id, {
+        views: parcelaViews.views+1
+      }, { new: true });
+    return  res.status(200).send(parcelaViews)
+    }else{
+      await ParcelaModel.findByIdAndUpdate(id,{
+        views: 0
+      }, { new: true });
+      return res.status(200).send(parcelaViews)
+    }
+  } catch (error){
+    res.status(500).send('Error views update ')
+  }
+}
+
+
+/* const parcelaActualizado = await ParcelaModel.findByIdAndUpdate(id, {
+  name,
+  lote,
+  area,
+  price,
+  location,
+  image,
+  description,
+  condominio
+}, { new: true }); */
 
 // Crea parcela y guarda en el condominio el id de la parcela
 export const createParcela = async (req: Request, res: Response) => {
