@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import { IoChevronBackOutline } from "react-icons/io5"
 import Link from "next/link"
