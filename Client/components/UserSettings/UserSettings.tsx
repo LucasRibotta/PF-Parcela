@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import { PiShoppingCart } from "react-icons/pi"
 import {
@@ -15,10 +16,13 @@ import { useAppDispatch } from "@/redux/hooks"
 import { setUserData } from "@/redux/features/userSlice"
 import { FormEvent } from "react"
 import { BiSolidUserCircle } from "react-icons/bi"
+import { useGetUsersQuery } from "@/redux/services/userApi"
 
 export default function UserSettings() {
   const dispatch = useAppDispatch()
-  const { user } = useAppSession()
+  const { data: dataUser } = useGetUsersQuery({name:""});
+  const { user: info } = useAppSession()
+  const user = dataUser?.find(el => el.email === info.email)
   console.log(user)
   const handleLogout = async () => {
     const closeSession = await signOut()
@@ -42,7 +46,7 @@ export default function UserSettings() {
                   <img
                     src={user?.image ?? "default-image-url"}
                     alt="not found"
-                    className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                    className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 w-[20px]"
                   />
                 ) : (
                   <BiSolidUserCircle className="shadow-xl rounded-full h-auto bg-transparent text-[#939393] w-[40%] align-middle border-none absolute -m-16 -ml-20 lg:-ml-16" />
