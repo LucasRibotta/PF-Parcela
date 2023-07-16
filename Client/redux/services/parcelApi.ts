@@ -13,13 +13,14 @@ interface Parcela {
   parcelaData: string[]
   description: string
   user: string
+  views: number
 }
 
 export const parcelApi = createApi({
   reducerPath: "parcelApi",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_URL
-  
+
   }),
   endpoints: (builder) => ({
     getParcelas: builder.query<Parcela[], string>({
@@ -57,6 +58,12 @@ export const parcelApi = createApi({
         method: "PUT"
       })
     }),
+    updateViews: builder.mutation<void, { id: string }>({
+      query: ({ id }) => ({
+        url: `/updateViews/${id}`,
+        method: "PUT"
+      })
+    }),
   })
 })
 // export const useGetParcelasQuery = parcelApi.endpoints.getParcelas.useQuery
@@ -67,4 +74,5 @@ export const {
   useGetParcelasQuery,
   useUpdateParcelaMutation,
   useDesableParcelaMutation,
+  useUpdateViewsMutation,
 } = parcelApi

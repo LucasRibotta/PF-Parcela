@@ -33,6 +33,20 @@ export const RangeSlider = ({
       prev.minPrice === current.minPrice && prev.maxPrice === current.maxPrice
   )
 
+  const [minValue, setMinValue] = useState("");
+  const [maxValue, setMaxValue] = useState("");
+
+  const handleValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = event.target;
+    if (name === "max") {
+      setMaxValue(value);
+    }
+    if (name === "min") {
+      setMinValue(value);
+    }
+  }
+
+
   const handleMin = (e: CustomEvent) => {
     if (maxPrice - minPrice >= priceCap && maxPrice <= max) {
       if (parseInt(e.target.value) > maxPrice) {
@@ -85,6 +99,8 @@ export const RangeSlider = ({
         <div className="rounded-md">
           <span className="p-2 text-white text-sm font-medium">Min CLP $</span>
           <input
+            onChange={handleValue}
+            name="min"
             value={minPrice}
             className="w-full rounded-md  p-[6px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] text-sm font-medium pl-2"
           />
@@ -92,6 +108,8 @@ export const RangeSlider = ({
         <div className="rounded-md">
           <span className="p-2 text-white text-sm font-medium">Max CLP $</span>
           <input
+            onChange={handleValue}
+            name="max"
             value={maxPrice}
             className="w-full rounded-md  p-[6px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] text-sm font-medium pl-2"
           />

@@ -7,6 +7,7 @@ import {
     updateParcela,
     deleteParcela,
     desableParcela,
+    updateViews
 } from "../controllers/auth"
 
 import {
@@ -29,6 +30,7 @@ router.post("/condominio", createCondominio)
 router.put("/updateParcela/:id", updateParcela)
 router.put("/deleteParcela/:id", deleteParcela)
 router.put("/desableParcela/:id", desableParcela)
+router.put("/updateViews/:id", updateViews)
 
 
 

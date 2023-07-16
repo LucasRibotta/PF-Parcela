@@ -12,7 +12,7 @@ import Connection from "@/img/svgs/Connection"
 import Energy from "@/img/svgs/Energy"
 import LocationMaps from "../Maps/Maps"
 import { useParams, useRouter } from "next/navigation"
-import { useGetParcelaByIdQuery, useDeleteParcelaMutation, parcelApi, useDesableParcelaMutation } from "@/redux/services/parcelApi"
+import { useGetParcelaByIdQuery, useDeleteParcelaMutation, useUpdateViewsMutation, useDesableParcelaMutation } from "@/redux/services/parcelApi"
 import Swal from 'sweetalert2'
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
@@ -32,11 +32,14 @@ const DetailSection = () => {
   const router = useRouter();
   const [deleteParcela] = useDeleteParcelaMutation()
   const [desableParcela] = useDesableParcelaMutation();
+  const [updateViews] = useUpdateViewsMutation()
   const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
   useEffect(() => {
     if (data) {
       dispatch(setParcelaData(data));
+      updateViews(parcela)
     }
+
   }, [data])
 
 
@@ -306,9 +309,6 @@ const DetailSection = () => {
               <Button text={"Comprar Ahora"} ></Button>
             </Link>
           }
-
-
-
 
         </div>
       </div>
