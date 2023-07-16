@@ -33,9 +33,9 @@ const ContactSection = () => {
                             <label className="text-white font-semibold mr-2" htmlFor="">Asunto del mensaje:</label>
                             <select className="rounded-md" name="" id="">
                                 <option value="">Selecciona el asunto</option>
-                                <option value="">opcion 1</option>
-                                <option value="">opcion 2</option>
-                                <option value="">opcion 3</option>
+                                <option value="">Agendar una visitas</option>
+                                <option value="">Problemas con una compra</option>
+                                <option value="">Otros</option>
                             </select>
                         </div>
                         <div className="grid grid-cols-3 mb-4">

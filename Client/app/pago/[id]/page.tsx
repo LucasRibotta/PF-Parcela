@@ -5,7 +5,9 @@ import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import { useParams } from "next/navigation";
 import { useGetParcelaByIdQuery } from "@/redux/services/parcelApi";
 import Button from "@/components/Button/Button";
+import 'dotenv/config';
 
+const url = process.env.URL_MP
 
 
 
@@ -22,7 +24,7 @@ const pago = () => {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/create_preference", {
+      const response = await axios.post(`${url}`, {
         description: data?.name, //ver como traer el producto
         price: data?.price, //ver como traer valor
         quantity: 1,
