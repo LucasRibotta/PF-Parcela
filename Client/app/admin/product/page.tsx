@@ -8,10 +8,9 @@ import { useEffect } from "react"
 
 
 const Product = () => {
-
     return (
         <>
-            <ProductSection/>
+            <ProductSection />
         </>
     )
 }

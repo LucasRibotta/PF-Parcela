@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 import React, { useState } from "react";
 import axios from "axios";
@@ -5,10 +6,10 @@ import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import { useParams } from "next/navigation";
 import { useGetParcelaByIdQuery } from "@/redux/services/parcelApi";
 import Button from "@/components/Button/Button";
-import { PiPlantDuotone } from "react-icons/pi"
+import { PiPlantDuotone } from "react-icons/pi";
 
 
-const url = process.env.URL_MP
+const url = process.env.NEXT_PUBLIC_URL_MP ? process.env.NEXT_PUBLIC_URL_MP : ""
 
 
 
@@ -16,7 +17,9 @@ const pago = () => {
   const [preferenceId, setPreferenceId] = useState(null);
   const params = useParams()
   const parcela = {
-    id: params.id
+    id:
+      params.id.toString()
+
   }
   const { data } = useGetParcelaByIdQuery(parcela);
 
@@ -25,14 +28,18 @@ const pago = () => {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post(`${url}`, {
-        description: data?.name, //ver como traer el producto
-        price: data?.price, //ver como traer valor
-        quantity: 1,
-        /* currency_id: "CLP" */
-      });
+      const response = await
+        axios.post
+          (url, {
+            description: data?.name, //ver como traer el producto
+            price: data?.price, //ver como traer valor
+            quantity: 1,
+            /* currency_id: "CLP" */
+          });
 
-      const { id } = response.data;
+      const { id } =
+        response.data
+        ;
       return id;
 
     } catch (error) {

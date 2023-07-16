@@ -18,7 +18,7 @@ export interface User {
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_URL_LOCAL
+    baseUrl: process.env.NEXT_PUBLIC_URL
   }),
   endpoints: (builder) => ({
     getUsers: builder.query<User[], {name: string}>({
