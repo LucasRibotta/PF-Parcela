@@ -12,7 +12,7 @@ interface User {
 export const loginApi = createApi({
     reducerPath: "loginApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://pf-parcela-production-2bf5.up.railway.app"
+        baseUrl: "https://localhost:3001"
     }),endpoints: (builder) => ({
         getLogin: builder.mutation<User[], null>({
             query: (userLogin) =>  ({
