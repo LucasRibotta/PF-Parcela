@@ -13,7 +13,7 @@ interface User {
 export const loginApi = createApi({
     reducerPath: "loginApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: process.env.NEXT_PUBLIC_URL
+        baseUrl: process.env.NEXT_PUBLIC_URL_LOCAL
     }),endpoints: (builder) => ({
         getLogin: builder.mutation<User[], null>({
             query: (userLogin) =>  ({

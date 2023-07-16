@@ -39,7 +39,13 @@ export default function UploadImage() {
 
           const response = await Axios.post(
             `${urlUpload}`,
-            formData
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                "Access-Control-Allow-Origin": "*"
+              }
+            }
           )
           return response.data.secure_url
         } catch (error) {
