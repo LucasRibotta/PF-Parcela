@@ -15,10 +15,12 @@ interface Parcela {
   views: number
 }
 
+const url = process.env.NEXT_PUBLIC_URL
+
 export const parcelApi = createApi({
   reducerPath: "parcelApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3001/api/auth"
+    baseUrl: url
   }),
   endpoints: (builder) => ({
     getParcelas: builder.query<Parcela[], string>({

@@ -39,27 +39,6 @@ const LateralOptions = () => {
                                 <span className="ml-2 text-sm font-medium">Estadisticas</span>
                             </div>
                         </Link>
-                        <Link href={"/admin/myPurchases"}>
-                            <div
-                                className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-                            >
-                                <svg
-                                    className="w-6 h-6 stroke-current"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                                    />
-                                </svg>
-                                <span className="ml-2 text-sm font-medium">Mis compras</span>
-                            </div>
-                        </Link>
                         <Link href={"/admin/product"}>
                             <div
                                 className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
@@ -68,28 +47,7 @@ const LateralOptions = () => {
                                     <path d="M7.5 1.906v.938h1v-.938h-1zm0 1.875v.938h1V3.78h-1zm0 1.875v.938h1v-.938h-1zM1.906 8.5h.938v-1h-.938v1zm1.875 0h.938v-1H3.78v1zm1.875 0h.938v-1h-.938v1zm2.813 0v-.031H8.5V7.53h-.031V7.5H7.53v.031H7.5v.938h.031V8.5h.938zm.937 0h.938v-1h-.938v1zm1.875 0h.938v-1h-.938v1zm1.875 0h.938v-1h-.938v1zM7.5 9.406v.938h1v-.938h-1zm0 1.875v.938h1v-.938h-1zm0 1.875v.938h1v-.938h-1z" />
                                     <path d="M0 0v16h16V0H0zm1 1h14v14H1V1z" />
                                 </svg>
-                                <span className="ml-2 text-sm font-medium">Mis Productos</span>
-                            </div>
-                        </Link>
-                        <Link href={"/admin/profile"}>
-                            <div
-                                className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-                            >
-                                <svg
-                                    className="w-6 h-6 stroke-current"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                                    />
-                                </svg>
-                                <span className="ml-2 text-sm font-medium">Perfil</span>
+                                <span className="ml-2 text-sm font-medium">Productos</span>
                             </div>
                         </Link>
                         <Link href={"/admin/messages"}>
