@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
+
 interface Parcela {
   _id: string
   name: string
@@ -15,12 +16,11 @@ interface Parcela {
   views: number
 }
 
-const url = process.env.NEXT_PUBLIC_URL
-
 export const parcelApi = createApi({
   reducerPath: "parcelApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: url
+    baseUrl: process.env.NEXT_PUBLIC_URL
+
   }),
   endpoints: (builder) => ({
     getParcelas: builder.query<Parcela[], string>({

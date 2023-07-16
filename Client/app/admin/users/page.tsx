@@ -116,7 +116,7 @@ const Users = () => {
                     <div className=' grid grid-cols-4 items-center w-full' key={el._id}>
                       <div className='flex flex-col col-span-3 gap-4'>
                         <h2>Nombre: {el.name}</h2>
-                        <p>correo: {el.email}</p>
+                        <p>Correo: {el.email}</p>
                         <p>Admin: {el.isAdmin ? "administrador" : "no admin"}</p>
                         <p>Corporativo: {el.isCompany ? "Corporativo" : "no corporativo"}</p>
                       </div>
