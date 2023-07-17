@@ -1,15 +1,26 @@
 // Contact.js
-const mongoose = require('mongoose');
+import { Schema, model, Document } from "mongoose";
 
-const contact = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  email: String,
-  phone: Number,
-  reason: String,
-  message: String,
+interface Contactanos extends Document {
+  firstName: string
+  lastName: string
+  email: string
+  phone: number
+  reason: string
+  message: string
+  managed: boolean
+}
+
+const contact = new Schema<Contactanos>({
+  firstName: {type: String, required: true},
+  lastName: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: Number, required: true },
+  reason: { type: String, required: true },
+  message: { type: String, required: true },
+  managed: { type: Boolean, required: false, default: false}
 });
 
-const Contact = mongoose.model('Contact', contact);
+const Contact = model<Contactanos>("Contact", contact);
 
-module.exports = Contact;
+export default Contact;
