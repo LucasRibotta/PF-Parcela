@@ -28,14 +28,6 @@ const pago = () => {
 
   const createPreference = async () => {
     try {
-<<<<<<< HEAD
-      const response = await axios.post("https://pf-parcela-production-2bf5.up.railway.app/create_preference", {
-        description: data?.name, //ver como traer el producto
-        price: data?.price, //ver como traer valor
-        quantity: 1,
-        /* currency_id: "CLP" */
-      });
-=======
       const response = await
         axios.post
           (url, {
@@ -44,7 +36,6 @@ const pago = () => {
             quantity: 1,
             /* currency_id: "CLP" */
           });
->>>>>>> b1eccdf681d97df88658d49257ca0affc24c6d57
 
       const { id } =
         response.data

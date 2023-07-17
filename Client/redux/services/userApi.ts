@@ -13,17 +13,12 @@ export interface User {
   accessToken?: string
   isAdmin: boolean
   isCompany: boolean
-  image: string
 }
 
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-<<<<<<< HEAD
-    baseUrl: "https://pf-parcela-production-2bf5.up.railway.app/api/auth/"
-=======
     baseUrl: process.env.NEXT_PUBLIC_URL
->>>>>>> b1eccdf681d97df88658d49257ca0affc24c6d57
   }),
   endpoints: (builder) => ({
     getUsers: builder.query<User[], { name: string }>({

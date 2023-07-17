@@ -33,17 +33,8 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-<<<<<<< HEAD
-        const response = await axios.post(
-          "https://pf-parcela-production-2bf5.up.railway.app/login",
-          credentials
-        )
-        const user = response.data
-
-=======
         const response = await axios.post(login, credentials)
         const user = response.data
->>>>>>> b1eccdf681d97df88658d49257ca0affc24c6d57
         if (user) {
           return user.user
         } else {
@@ -98,11 +89,7 @@ const handler = NextAuth({
         }
         try {
           const response = await axios.post(
-<<<<<<< HEAD
-            "https://pf-parcela-production-2bf5.up.railway.app/register",
-=======
             register,
->>>>>>> b1eccdf681d97df88658d49257ca0affc24c6d57
             userProvider
             //"https://pf-parcela-production.up.railway.app/register", userProvider
           )
