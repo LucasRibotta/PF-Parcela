@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose"
+import { Schema, model, Document, Types } from "mongoose"
 
 export interface User extends Document {
   name: string
@@ -12,7 +12,7 @@ export interface User extends Document {
   accessToken?: string
   isAdmin: boolean
   isCompany: boolean
-  
+  wishes?: Types.ObjectId[]
 }
 
 const userSchema = new Schema<User>({
@@ -32,6 +32,7 @@ const userSchema = new Schema<User>({
   accessToken: { type: String, required: false },
   isAdmin: { type: Boolean, default: false },
   isCompany: { type: Boolean, default: false },
+  wishes: [{ type: Schema.Types.ObjectId, ref: "parcelas" }]
 })
 
 export default model<User>("User", userSchema, "user")

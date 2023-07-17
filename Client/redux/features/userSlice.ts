@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface UserState {
   users: any[]
@@ -10,6 +10,7 @@ interface UserState {
     image: string
     date: string
     phone: number
+    wishes: string[]
   } | null
 }
 
@@ -17,7 +18,8 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     users: [],
-    userData: null
+    userData: null,
+    wishes: [],
   } as UserState,
   reducers: {
     setUserData: (state, action) => {
@@ -25,10 +27,20 @@ const userSlice = createSlice({
     },
     setUsersData: (state, action) => {
       state.users = action.payload
-    }
+    },
+    addToWishlist: (state, action: PayloadAction<string>) => {
+      if (state.userData?.wishes && !state.userData.wishes.includes(action.payload)) {
+        state.userData.wishes.push(action.payload);
+      }
+    },
+    removeFromWishlist: (state, action: PayloadAction<string>) => {
+      if (state.userData) {
+        state.userData.wishes = state.userData.wishes.filter(id => id !== action.payload);
+      }
+    },
   }
 })
 
-export const { setUserData, setUsersData } = userSlice.actions
+export const { setUserData, setUsersData, addToWishlist, removeFromWishlist } = userSlice.actions
 
 export default userSlice.reducer

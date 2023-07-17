@@ -6,6 +6,8 @@ import { CloudinaryContext, Image } from "cloudinary-react"
 import Link from "next/link"
 import style from "./card.module.css"
 import Button from "../Button/Button"
+// import { useAppSession } from "@/app/hook"
+import WishList from "../WishList/WishList"
 
 interface CardProps {
   name: string
@@ -18,7 +20,8 @@ interface CardProps {
 
 function Card({ name, precio, superficie, image, id }: CardProps) {
   const [imageUrls, setImageUrls] = useState<string[]>([])
-  const [click, setClick] = useState(false)
+  // const [click, setClick] = useState(false)
+  // const { session, status, user } = useAppSession()
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -44,17 +47,30 @@ function Card({ name, precio, superficie, image, id }: CardProps) {
     fetchImages()
   }, [])
 
-  const onClick = () => {
-    setClick(!click)
-  }
+  // const onClick = () => {
+  //   {
+  //     status === 'authenticated' ?
+  //     //hacer una llamada al servidor para agregar a wishList el id de la parcela
+  //     setClick(!click)
+  //     :
+  //     setClick(!click)
+  //     window.location.replace("/login")
+  //     // window.location.href = "http://localhost:3000/login"
+  //   }
+  // }
+
+  // const handleWish =  async (userid, parcelaid) => {
+  //   const {response} = await wishApi(userid, parcelaid)
+  //   if (response.status === 200) {
+  //     setColor('green');
+  //   } else {
+  //     setColor
+  //   }
+  // }
 
   return (
     <div className="flex-1 h-[20rem] justify-center max-w-full text-white overflow-hidden shadow rounded-md border-solid border-5 border-black-500 transform hover:scale-[101%] transition duration-300 ease-in-out relative mb-4">
-      <div
-        className="flex-end m-auto absolute right-6 items-end"
-        onClick={onClick}
-      ></div>
-
+      <WishList parcelId={id}/>
       <div className="h-auto max-w-full rounded-lg">
         <Image
           src={image}

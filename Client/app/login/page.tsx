@@ -50,6 +50,7 @@ export default function Login() {
       password: input.password,
       redirect: false
     })
+    console.log("res", res)
 
     if (res?.error) {
       setError(res.error as string)

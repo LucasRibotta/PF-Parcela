@@ -23,6 +23,9 @@ export default function Navbar() {
   const { data: dataUser } = useGetUsersQuery({ name: "" })
   const user = dataUser?.find((el) => el.email === info?.email)
 
+  console.log("info", info)
+  console.log("user", user)
+
   const activeLink =
     "border-b-2  border-[#51a8a1] text-[#51a8a1] duration-200 cursor-pointer"
   const inactiveLink =

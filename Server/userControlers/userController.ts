@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import User from "../models/user"
+import Parcela from "@/models/parcela"
 import bcrypt from "bcrypt"
 
 export const register = async (
@@ -53,3 +54,36 @@ export const login = async (req: Request, res: Response) => {
     return res.status(200).json({ user })
   }
 }
+
+export const wishList = async (
+  req: Request,
+  res: Response
+  ) => {
+  try {
+    const { userId, parcelaId } = req.body;
+
+    if (!userId) {
+      return res.status(401).json({ error: "You must be logged in to add to wish list"})
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found"});
+    }
+
+    const parcelInWishList = user.wishes?.includes(parcelaId);
+
+    if (parcelInWishList) {
+      user.wishes = user.wishes?.filter(id => id !== parcelaId);
+    } else {
+      user.wishes?.push(parcelaId);
+    }
+
+    await user.save();
+
+    res.json({ success: true, wishList: user.wishes });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error"});
+  }
+};
