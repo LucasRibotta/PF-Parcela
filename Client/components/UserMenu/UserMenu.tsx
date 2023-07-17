@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Menu, Transition } from "@headlessui/react"
 import { BiSolidUserCircle } from "react-icons/bi"
 import Link from "next/link"
@@ -6,7 +7,7 @@ export default function UserMenu({
   user,
   handleLogout
 }: {
-  user: NewUser
+  user: NewUser | undefined
   handleLogout: () => void
 }) {
   return (

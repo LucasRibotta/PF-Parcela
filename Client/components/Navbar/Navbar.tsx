@@ -12,7 +12,7 @@ import { setUserData } from "@/redux/features/userSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useRouter } from "next/navigation"
 import { signOut } from "next-auth/react"
-import { useAppSession } from "@/app/hook"
+import { NewUser, useAppSession } from "@/app/hook"
 import { useGetUsersQuery } from "@/redux/services/userApi"
 
 export default function Navbar() {
@@ -21,7 +21,7 @@ export default function Navbar() {
   const [navbarBackground, setNavbarBackground] = useState(false)
   const { user: info } = useAppSession()
   const { data: dataUser } = useGetUsersQuery({ name: "" })
-  const user = dataUser?.find((el) => el.email === info?.email)
+  const user = dataUser?.find((el) => el.email === info?.email) as unknown as NewUser
 
   const activeLink =
     "border-b-2  border-[#51a8a1] text-[#51a8a1] duration-200 cursor-pointer"
