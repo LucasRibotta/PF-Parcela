@@ -4,7 +4,6 @@ import { Montserrat } from "next/font/google"
 import Navbar from "@/components/Navbar/Navbar"
 import ProvidersWrapper from "./ProvidersWrapper"
 import Providers from "@/redux/provider"
-import ErrorWrapper from "@/components/ErrorWrapper/ErrorWrapper"
 const inter = Montserrat({ subsets: ["latin"] })
 export const metadata = {
   title: "Create Next App",
@@ -47,10 +46,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <ProvidersWrapper>
           <Providers>
-            <ErrorWrapper>
-              <Navbar />
-              {children}
-            </ErrorWrapper>
+            <Navbar />
+            {children}
           </Providers>
         </ProvidersWrapper>
       </body>
