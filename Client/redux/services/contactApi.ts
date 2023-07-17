@@ -1,12 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 interface Contactanos {
+    _id: string
     firstName: string
     lastName: string
     email: string
     phone: number
     reason: string
     message: string
+    managed: boolean
 }
 
 
@@ -29,9 +31,9 @@ export const contactApi = createApi({
                 method:"GET",
             })
         }),
-        updateMessage: builder.mutation<Contactanos, {id: string, data: Partial<Contactanos>}>({
+        updateMessage: builder.mutation<Contactanos, { id: string, data: {managed: boolean} }>({
             query: ({id, data}) => ({
-                url: `deleteMessage/${id}`,
+                url: `Message/${id}`,
                 method: "PUT",
                 body: data,
             })

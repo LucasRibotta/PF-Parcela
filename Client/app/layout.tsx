@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 /* eslint-disable @next/next/no-head-element */
 import "./globals.css"
 import { Montserrat } from "next/font/google"
@@ -43,6 +44,8 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
+        <link href="https://chatrace.com/webchat/?p=1898889&ref=1587905477489" rel="stylesheet"/>
+
       </head>
       <body className={inter.className}>
         <ProvidersWrapper>
@@ -54,6 +57,6 @@ export default function RootLayout({
           </Providers>
         </ProvidersWrapper>
       </body>
-    </html>
+    </html >
   )
 }
