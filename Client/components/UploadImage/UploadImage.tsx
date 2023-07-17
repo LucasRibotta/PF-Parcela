@@ -5,6 +5,9 @@ import { Image, Transformation } from "cloudinary-react"
 import { useAppDispatch } from "@/redux/hooks"
 import { setImageCloud } from "@/redux/features/coordenadaSlice"
 
+
+const urlUpload = process.env.NEXT_PUBLIC_CLOUDINARY
+
 export default function UploadImage() {
   const [imagesSelected, setImagesSelected] = useState<File[]>([])
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
@@ -35,8 +38,14 @@ export default function UploadImage() {
           formData.append("public_id", "parcelas/" + image.name)
 
           const response = await Axios.post(
-            "https://api.cloudinary.com/v1_1/parcelas/image/upload",
-            formData
+            `${urlUpload}`,
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                "Access-Control-Allow-Origin": "*"
+              }
+            }
           )
           return response.data.secure_url
         } catch (error) {
@@ -92,14 +101,6 @@ export default function UploadImage() {
           )
         )}
       </div>
-
-      {/* <div className='flex flex-row w-[15%] h-[15%] ml-[3rem] mt-[2rem] '>
-        <Image cloudName="parcelas" publicId="https://res.cloudinary.com/parcelas/image/upload/v1687573942/0d66c79d-ad42-4bad-b8e1-43b1228b2e37_d3uzal.jpg" alt='Carga Imagen'>
-          <Transformation angle="-45" />
-          <Transformation effect="trim" angle="45" crop="scale" width="600" />
-          <Transformation overlay="text:Arial_100:Hello" />
-        </Image>
-      </div> */}
     </div>
   )
 }

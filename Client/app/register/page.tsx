@@ -45,13 +45,26 @@ export default function Register() {
           },
           body: JSON.stringify(data)
         }
-      )
+        )
+               
+        if (response.ok) {
 
-      if (response.ok) {
-        const responseData = await response.json()
-        Swal.fire(
-          `¡Gracias ${responseData.name}!`,
-          "Te has registrado exitosamente",
+          const responseData = await response.json()
+
+
+// ******** código base para implementar cualquier notificación en cualquier componente ***************
+          // const datos = {
+          //   "email": responseData.email,
+          //   "asunto": 'Tu cuenta personal de Parcelas',
+          //   "cuerpo": `${responseData.lastname}, ${responseData.name} bienvenido a Parcelas, la página donde podrás encontrar el lugar de tus sueños`
+          // }
+          
+          // const email = await axios.post('pf-parcela-production.up.railway.app/emailNotification', datos)
+ 
+          
+          Swal.fire(
+            `¡Gracias ${responseData.name}!`,
+            "Te has registrado exitosamente",
           "success"
         )
         return router.push("/login")

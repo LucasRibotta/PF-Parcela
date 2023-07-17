@@ -1,9 +1,10 @@
+import Message from "@/components/Message/Message";
 
 
-const Message = () => {
+const MessageRoute = () => {
     return (
-        <div>message</div>
+        <Message />
     )
 }
 
-export default Message;
+export default MessageRoute;

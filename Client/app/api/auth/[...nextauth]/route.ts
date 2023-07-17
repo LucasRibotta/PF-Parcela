@@ -1,20 +1,26 @@
 import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google"
 import axios from "axios"
-import 'dotenv/config';
 import { User, Account, Profile } from "next-auth"
-import { AdapterUser } from "next-auth/adapters";
-import { Session } from "next-auth";
+import { AdapterUser } from "next-auth/adapters"
+import { Session } from "next-auth"
+
+const login = process.env.NEXT_PUBLIC_URL_LOGIN
+  ? process.env.NEXT_PUBLIC_URL_LOGIN
+  : ""
+const register = process.env.NEXT_PUBLIC_URL_REGISTER
+  ? process.env.NEXT_PUBLIC_URL_REGISTER
+  : ""
 
 interface profi extends Profile {
-  given_name?: string,
-  family_name?: string,
+  given_name?: string
+  family_name?: string
 }
 interface se extends Session {
-  email: string,
-  password: string,
-  isAdmin?: boolean,
+  email: string
+  password: string
+  isAdmin?: boolean
   isCompany?: boolean
 }
 const handler = NextAuth({
@@ -24,17 +30,22 @@ const handler = NextAuth({
 
       credentials: {
         email: { label: "email", type: "email", placeholder: "Email" },
-        password: { label: "Password", type: "password" },
+        password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
+<<<<<<< HEAD
         const response = await axios.post(
           "https://pf-parcela-production-2bf5.up.railway.app/login",
           credentials
         )
         const user = response.data
 
+=======
+        const response = await axios.post(login, credentials)
+        const user = response.data
+>>>>>>> b1eccdf681d97df88658d49257ca0affc24c6d57
         if (user) {
-          return user
+          return user.user
         } else {
           throw new Error("Invalid credentials")
         }
@@ -64,9 +75,16 @@ const handler = NextAuth({
       session.user = token.user as se
       return session
     },
-    async signIn({ user, account, profile }: { user: User | AdapterUser, account: Account | null, profile?: profi | undefined }): Promise<boolean> {
-
-      if (account?.provider === 'credentials') {
+    async signIn({
+      user,
+      account,
+      profile
+    }: {
+      user: User | AdapterUser
+      account: Account | null
+      profile?: profi | undefined
+    }): Promise<boolean> {
+      if (account?.provider === "credentials") {
         return true
       } else {
         const userProvider = {
@@ -76,17 +94,21 @@ const handler = NextAuth({
           email: user.email,
           image: user.image,
           provider: account?.provider,
-          accessToken: account?.access_token,
+          accessToken: account?.access_token
         }
         try {
           const response = await axios.post(
+<<<<<<< HEAD
             "https://pf-parcela-production-2bf5.up.railway.app/register",
+=======
+            register,
+>>>>>>> b1eccdf681d97df88658d49257ca0affc24c6d57
             userProvider
             //"https://pf-parcela-production.up.railway.app/register", userProvider
           )
           return true
         } catch (error) {
-          console.log(error);
+          console.log(error)
           return false
         }
       }

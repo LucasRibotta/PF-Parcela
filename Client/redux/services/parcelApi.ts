@@ -12,12 +12,17 @@ interface Parcela {
   parcelaData: string[]
   description: string
   user: string
+  views: number
 }
 
 export const parcelApi = createApi({
   reducerPath: "parcelApi",
   baseQuery: fetchBaseQuery({
+<<<<<<< HEAD
     baseUrl: "https://pf-parcela-production-2bf5.up.railway.app/api/auth/"
+=======
+    baseUrl: process.env.NEXT_PUBLIC_URL
+>>>>>>> b1eccdf681d97df88658d49257ca0affc24c6d57
   }),
   endpoints: (builder) => ({
     getParcelas: builder.query<Parcela[], string>({
@@ -55,6 +60,12 @@ export const parcelApi = createApi({
         method: "PUT"
       })
     }),
+    updateViews: builder.mutation<void, { id: string }>({
+      query: ({ id }) => ({
+        url: `/updateViews/${id}`,
+        method: "PUT"
+      })
+    })
   })
 })
 // export const useGetParcelasQuery = parcelApi.endpoints.getParcelas.useQuery
@@ -65,4 +76,5 @@ export const {
   useGetParcelasQuery,
   useUpdateParcelaMutation,
   useDesableParcelaMutation,
+  useUpdateViewsMutation
 } = parcelApi
