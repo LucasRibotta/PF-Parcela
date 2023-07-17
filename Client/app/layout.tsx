@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 /* eslint-disable @next/next/no-head-element */
 import "./globals.css"
 import { Montserrat } from "next/font/google"
@@ -43,9 +44,7 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-       
-       {/* <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/40536488.js"></script> */}
-       <link href="https://chatrace.com/webchat/?p=1898889&headerTitle=ParcelBot&template=template1"/>
+        <script src='//fw-cdn.com/10614760/3458053.js' chat='true'></script>
       </head>
       <body className={inter.className}>
         <ProvidersWrapper>
@@ -57,6 +56,6 @@ export default function RootLayout({
           </Providers>
         </ProvidersWrapper>
       </body>
-    </html>
+    </html >
   )
 }

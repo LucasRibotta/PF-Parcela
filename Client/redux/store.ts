@@ -7,6 +7,7 @@ import { loginApi } from "./services/loginApi"
 import coordenadaReducer from "./features/coordenadaSlice"
 import parcelReducer from "./features/parcelSlice"
 import errorReducer from "./features/errorSlice"
+import { contactApi } from "./services/contactApi"
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   error: errorReducer,
   [userApi.reducerPath]: userApi.reducer,
   [parcelApi.reducerPath]: parcelApi.reducer,
-  [loginApi.reducerPath]: loginApi.reducer
+  [loginApi.reducerPath]: loginApi.reducer,
+  [contactApi.reducerPath]: contactApi.reducer,
   // Agrega más reducers aquí
 })
 
@@ -23,7 +25,7 @@ export const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([userApi.middleware, parcelApi.middleware])
+    getDefaultMiddleware().concat([userApi.middleware, parcelApi.middleware, contactApi.middleware])
 })
 setupListeners(store.dispatch)
 
