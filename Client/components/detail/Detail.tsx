@@ -24,7 +24,7 @@ import { useAppSession } from "@/app/hook"
 const DetailSection = () => {
   const params = useParams();
   const parcela = {
-    id: params.id,
+    id: params.id.toString(),
   }
   const { session, status, user } = useAppSession();
   // const user = useAppSelector((state) => state.user.userData)
