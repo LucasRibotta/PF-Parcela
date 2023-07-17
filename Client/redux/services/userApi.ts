@@ -7,6 +7,7 @@ export interface User {
   phone: number
   date: string
   email: string
+  image: string
   password: string
   provider?: string
   accessToken?: string
@@ -20,26 +21,30 @@ export const userApi = createApi({
     baseUrl: "http://localhost:3001/api/auth"
   }),
   endpoints: (builder) => ({
-    getUsers: builder.query<User[], {name: string}>({
-      query: ({name}) => ({
+    getUsers: builder.query<User[], { name: string }>({
+      query: ({ name }) => ({
         url: `users?name=${name}`,
-        method: "GET",
+        method: "GET"
       })
     }),
     deleteUser: builder.mutation<void, { id: string }>({
       query: ({ id }) => ({
         url: `/usersDelete/${id}`,
-        method: "PUT",
+        method: "PUT"
       })
     }),
-    updateUser: builder.mutation<User,{ id: string; data: Partial<User> }>({
+    updateUser: builder.mutation<User, { id: string; data: Partial<User> }>({
       query: ({ id, data }) => ({
         url: `updateUser/${id}`,
         method: "PUT",
         body: data
       })
-    }),
+    })
   })
 })
 
-export const { useGetUsersQuery, useDeleteUserMutation, useUpdateUserMutation } = userApi
+export const {
+  useGetUsersQuery,
+  useDeleteUserMutation,
+  useUpdateUserMutation
+} = userApi

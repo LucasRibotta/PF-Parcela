@@ -2,13 +2,14 @@
 import { IoChevronBackOutline } from "react-icons/io5"
 import Link from "next/link"
 import { useState, FormEvent } from "react"
+
 export default function PhoneUpdate() {
   const [phone, setPhone] = useState("")
   const [error, setError] = useState("")
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    if (phone.length === 0 || phone.length < 10 || phone.length > 20) {
+    if (!phone) {
       setError("Ingresa un numero valido")
     }
   }

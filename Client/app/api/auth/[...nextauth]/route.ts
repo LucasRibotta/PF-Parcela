@@ -11,6 +11,12 @@ interface profi extends Profile {
   given_name?: string
   family_name?: string
 }
+interface se extends Session {
+  email: string
+  password: string
+  isAdmin?: boolean
+  isCompany?: boolean
+}
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -22,14 +28,14 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         const response = await axios.post(
-          "https://pf-parcela-production.up.railway.app/login",
+          "http://localhost:3001/login",
           credentials
         )
         const user = response.data
-        //console.log(user);
+        const newUser = user?.user
 
         if (user) {
-          return user.user
+          return newUser
         } else {
           throw new Error("Invalid credentials")
         }
@@ -57,7 +63,7 @@ const handler = NextAuth({
       return token
     },
     session({ session, token }) {
-      session.user = token.user as any
+      session.user = token.user as se
       return session
     },
     async signIn({

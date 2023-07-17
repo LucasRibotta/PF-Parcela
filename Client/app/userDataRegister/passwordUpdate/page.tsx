@@ -1,19 +1,58 @@
 "use client"
 import { IoChevronBackOutline } from "react-icons/io5"
 import { FormEvent, useState } from "react"
+import Swal from "sweetalert2"
 import Link from "next/link"
-import { useUpdateUserMutation } from "@/redux/services/userApi"
+import {
+  useUpdateUserMutation,
+  useGetUsersQuery
+} from "@/redux/services/userApi"
 import { useAppSession } from "@/app/hook"
+
 export default function PasswordUpdate() {
-  const [password, setPassword] = useState("")
+  const [psw, setPassword] = useState("")
   const [repeatPassword, setRepeatPassword] = useState("")
   const [error, setError] = useState("")
+  const { user } = useAppSession()
+  const [updateUser] = useUpdateUserMutation()
+  const refetchUser = useGetUsersQuery({ name: "" })
+  const { data } = useGetUsersQuery({ name: "" })
+  const dataUser = data?.find((el) => el.email === user?.email)
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    if (password !== repeatPassword) {
+
+    if (psw !== repeatPassword) {
       setError("Las contraseñas no coinciden")
+    } else if (dataUser) {
+      const {
+        _id,
+        name,
+        lastname,
+        phone,
+        date,
+        email,
+        password,
+        isAdmin,
+        isCompany
+      } = dataUser
+      const data = {
+        name,
+        lastname,
+        phone,
+        date,
+        email,
+        password: psw,
+        isAdmin,
+        isCompany
+      }
+
+      updateUser({ id: _id, data })
+      Swal.fire(`¡Listo!`, "Has cambiado tu contraseña", "success")
+      setPassword("")
+      setRepeatPassword("")
     }
+    refetchUser.refetch()
   }
 
   return (
@@ -39,7 +78,7 @@ export default function PasswordUpdate() {
                     : "peer h-full w-full rounded-[7px] border  border-t-transparent bg-transparent px-3 py-4 font-sans text-sm font-normal outline outline-0 transition-all placeholder-shown:border focus:border-2 focus:border-[#51a8a1] focus:border-t-transparent focus:outline-0 disabled:border-0"
                 }
                 placeholder=" "
-                value={password}
+                value={psw}
                 onChange={(e) => setPassword(e.target.value)}
               />
 
