@@ -11,7 +11,7 @@ const cors = require("cors")//Gonzalo MercadoPago
 
 const app = express();
 
-const { URL_LOCAL, URL_PAGO } = process.env
+const { URL_LOCAL, URL_PAGO, URL_STATUS } = process.env
 
 const PORT = process.env.PORT || 3001
 
@@ -56,8 +56,8 @@ app.post("/create_preference", (req, res) => {
       }
     ],
     back_urls: {
-      "success": URL_PAGO,
-      "failure": URL_LOCAL,
+      "success": URL_STATUS,
+      "failure": URL_STATUS,
       "pending": "" //esto es cuando pagan en efectivo y tienen que ir con el ticket a pagar a alguna caja
     },
     auto_return: "approved" as const,
@@ -73,7 +73,19 @@ app.post("/create_preference", (req, res) => {
     .catch(function (error: any) {
       console.log(error);
     });
+    app.get('URL_STATUS', function (req, res) {
+      res.json({
+        Status: req.query.status,
+        Payment: req.query.payment_id,
+        Price: req.query.external_reference,
+        MerchantOrder: req.query.merchant_order_id
+      });
+    });
+    
+
+
 });
+
 // aca termina mercadopago
 
 
