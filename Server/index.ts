@@ -4,12 +4,14 @@ import router from "./router"
 import connectDB from "./db/connect"
 import morgan from "morgan"
 import newAuthRouter from "./router/user.router"
+import emailNotification from "./router/emailNotification.router"
 /* import mercadopago from "mercadopago" */
 const mercadopago = require('mercadopago');
 const cors = require("cors")//Gonzalo MercadoPago
 
 const app = express();
 
+const { URL_LOCAL, URL_PAGO } = process.env
 
 const PORT = process.env.PORT || 3001
 
@@ -35,6 +37,7 @@ app.use((req, res, next) => {
 })
 app.use("/api", router)
 app.use(newAuthRouter)
+app.use(emailNotification)
 
 //aca tenemos lo de mercadopago en el server
 
@@ -53,8 +56,8 @@ app.post("/create_preference", (req, res) => {
       }
     ],
     back_urls: {
-      "success": "http://localhost:3000/pago",
-      "failure": "http://localhost:3000",
+      "success": URL_PAGO,
+      "failure": URL_LOCAL,
       "pending": "" //esto es cuando pagan en efectivo y tienen que ir con el ticket a pagar a alguna caja
     },
     auto_return: "approved" as const,

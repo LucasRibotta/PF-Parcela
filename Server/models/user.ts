@@ -12,6 +12,7 @@ export interface User extends Document {
   accessToken?: string
   isAdmin: boolean
   isCompany: boolean
+  image: string
 }
 
 const userSchema = new Schema<User>({
@@ -30,7 +31,8 @@ const userSchema = new Schema<User>({
   provider: { type: String, required: false, default: "local" },
   accessToken: { type: String, required: false },
   isAdmin: { type: Boolean, default: false },
-  isCompany: { type: Boolean, default: false }
+  isCompany: { type: Boolean, default: false },
+  image: { type: String, required: false, default: "https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"}
 })
 
 export default model<User>("User", userSchema, "user")

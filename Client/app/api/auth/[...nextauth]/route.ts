@@ -2,10 +2,16 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import axios from "axios"
-import "dotenv/config"
 import { User, Account, Profile } from "next-auth"
 import { AdapterUser } from "next-auth/adapters"
 import { Session } from "next-auth"
+
+const login = process.env.NEXT_PUBLIC_URL_LOGIN
+  ? process.env.NEXT_PUBLIC_URL_LOGIN
+  : ""
+const register = process.env.NEXT_PUBLIC_URL_REGISTER
+  ? process.env.NEXT_PUBLIC_URL_REGISTER
+  : ""
 
 interface profi extends Profile {
   given_name?: string
@@ -27,15 +33,10 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-        const response = await axios.post(
-          "http://localhost:3001/login",
-          credentials
-        )
+        const response = await axios.post(login, credentials)
         const user = response.data
-        const newUser = user?.user
-
         if (user) {
-          return newUser
+          return user.user
         } else {
           throw new Error("Invalid credentials")
         }
@@ -89,7 +90,7 @@ const handler = NextAuth({
         }
         try {
           const response = await axios.post(
-            "http://localhost:3001/register",
+            register,
             userProvider
             //"https://pf-parcela-production.up.railway.app/register", userProvider
           )

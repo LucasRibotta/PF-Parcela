@@ -92,14 +92,14 @@ export default function Navbar() {
             Nosotros
           </Link>
         </li> */}
-        {/* <li className="px-[22px] py-[20px]">
+        <li className="px-[22px] py-[20px]">
           <Link
             className={pathName === "/contact" ? activeLink : inactiveLink}
             href="/contact"
           >
             Contacto
           </Link>
-        </li> */}
+        </li> 
         {user?.isAdmin || user?.isCompany ? (
           <li className="px-[22px] py-[20px]">
             <Link

@@ -13,12 +13,13 @@ export interface User {
   accessToken?: string
   isAdmin: boolean
   isCompany: boolean
+  image: string
 }
 
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3001/api/auth"
+    baseUrl: process.env.NEXT_PUBLIC_URL
   }),
   endpoints: (builder) => ({
     getUsers: builder.query<User[], { name: string }>({

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import { PiShoppingCart } from "react-icons/pi"
 import {
@@ -11,8 +12,6 @@ import { IoLogOutOutline } from "react-icons/io5"
 import Link from "next/link"
 import { GoHome } from "react-icons/go"
 import { signOut } from "next-auth/react"
-import { BiSolidUserCircle } from "react-icons/bi"
-import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useAppSession } from "@/app/hook"
 import { useGetUsersQuery } from "@/redux/services/userApi"
