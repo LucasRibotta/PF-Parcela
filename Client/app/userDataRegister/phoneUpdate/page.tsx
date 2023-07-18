@@ -2,38 +2,61 @@
 "use client"
 import { IoChevronBackOutline } from "react-icons/io5"
 import Link from "next/link"
-import { useGetUsersQuery, useUpdateUserMutation } from "@/redux/services/userApi";
-import { useAppSession } from "@/app/hook";
-import React, { useEffect, useState } from "react";
+import {
+  useGetUsersQuery,
+  useUpdateUserMutation
+} from "@/redux/services/userApi"
+import { useAppSession } from "@/app/hook"
+import React, { useEffect, useState } from "react"
 export default function PhoneUpdate() {
-
-  const [cel, setCel] = useState<number>(0);
-  const usersInfo = useGetUsersQuery({ name: "" });
-  const { data } = useGetUsersQuery({ name: "" });
-  const { user } = useAppSession();
-  const [updateUser] = useUpdateUserMutation();
-  const dataUser = data?.find(el => el.email === user.email)
+  const [cel, setCel] = useState<number>(0)
+  const usersInfo = useGetUsersQuery({ name: "" })
+  const { data } = useGetUsersQuery({ name: "" })
+  const { user } = useAppSession()
+  const [updateUser] = useUpdateUserMutation()
+  const dataUser = data?.find((el) => el.email === user.email)
 
   useEffect(() => {
     setCel(Number(dataUser?.phone))
   }, [data])
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
     if (dataUser) {
-      const { _id, name, lastname, phone, date, email, password, isAdmin, isCompany, image } = dataUser
+      const {
+        _id,
+        name,
+        lastname,
+        phone,
+        date,
+        email,
+        password,
+        isAdmin,
+        isCompany,
+        image
+      } = dataUser
 
-      const data = { name, lastname, phone: cel, date, email, password, isAdmin, isCompany, image }
+      const data = {
+        name,
+        lastname,
+        phone: cel,
+        date,
+        email,
+        password,
+        isAdmin,
+        isCompany,
+        image
+      }
 
       updateUser({ id: _id, data })
     }
     setTimeout(() => {
-      usersInfo.refetch();
+      usersInfo.refetch()
     }, 1000)
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+    const { value } = event.target
     setCel(Number(value))
   }
 
@@ -63,9 +86,6 @@ export default function PhoneUpdate() {
             </label>
           </div>
         </div>
-        <button className="w-full bg-[#51a8a1] py-3 text-white rounded-md">
-          Guardar cambios
-        </button>
       </div>
     </form>
   )

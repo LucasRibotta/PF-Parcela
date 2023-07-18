@@ -8,25 +8,20 @@ import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai"
 import UserMenu from "../UserMenu/UserMenu"
 import React, { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
-import { setUserAdmin, setUserData } from "@/redux/features/userSlice"
-import { useAppSelector, useAppDispatch } from "@/redux/hooks"
+import { setUserData } from "@/redux/features/userSlice"
+import { useAppDispatch } from "@/redux/hooks"
 import { useRouter } from "next/navigation"
 import { signOut } from "next-auth/react"
-import { useAppSession } from "@/app/hook"
+import { NewUser, useAppSession } from "@/app/hook"
+import { useGetUsersQuery } from "@/redux/services/userApi"
 
 export default function Navbar() {
   const dispatch = useAppDispatch()
   const router = useRouter()
   const [navbarBackground, setNavbarBackground] = useState(false)
-  const { user, status } = useAppSession()
-
-  useEffect(() => {
-    if (user?.isCompany === true || user?.isAdmin === true) {
-      dispatch(setUserAdmin(true))
-    } else {
-      dispatch(setUserAdmin(false))
-    }
-  }, [user])
+  const { user: info } = useAppSession()
+  const { data: dataUser } = useGetUsersQuery({ name: "" })
+  const user = dataUser?.find((el) => el.email === info?.email) as unknown as NewUser
 
   const activeLink =
     "border-b-2  border-[#51a8a1] text-[#51a8a1] duration-200 cursor-pointer"

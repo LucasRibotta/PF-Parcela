@@ -8,8 +8,8 @@ import { FormEvent, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Swal from "sweetalert2"
 import { signIn } from "next-auth/react"
-import { useSession } from "next-auth/react"
-import { setUserData, setUserLoggedIn } from "@/redux/features/userSlice"
+import { useAppSession } from "../hook"
+import { setUserData } from "@/redux/features/userSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import Loading from "@/components/Loading/Loading"
 
@@ -20,8 +20,8 @@ type CustomEvent = {
 export default function Login() {
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.user.userData)
-  const { data: session, status } = useSession()
+  const { user, status } = useAppSession()
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [input, setInput] = useState({
     email: "",
@@ -72,9 +72,25 @@ export default function Login() {
     }
   }, [error])
 
-  if (status === "loading") {
+  useEffect(() => {
+    const handleLogin = async () => {
+      if (user) {
+        setIsLoading(true)
+        dispatch(setUserData(user))
+        Swal.fire(
+          `Bienvenido/a ${user?.name}`,
+          "Has iniciado sesión",
+          "success"
+        )
+        router.push("/")
+      }
+    }
+    handleLogin()
+  }, [user, dispatch, user, router])
+
+  if (status === "loading" || isLoading) {
     return <Loading />
-  } else if (!session) {
+  } else if (!user) {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="flex w-[768px] h-[496px] mt-[5rem] ">
@@ -142,16 +158,12 @@ export default function Login() {
             <Image
               src={logo}
               alt="Imagen"
+              priority={true}
               className="h-full w-full object-cover rounded-r-xl shadow-[0_35px_35px_rgba(0,0,0,0.25)]"
             />
           </div>
         </div>
       </div>
     )
-  } else {
-    dispatch(setUserData(session.user))
-    Swal.fire(`Bienvenido/a ${user?.email}`, "Has iniciado sesión", "success")
-    router.push("/")
-    return <Loading />
   }
 }

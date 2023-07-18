@@ -1,14 +1,12 @@
 "use client"
 import UserSettings from "@/components/UserSettings/UserSettings"
 import { useAppSession } from "../hook"
-import { useAppDispatch } from "@/redux/hooks"
-import { setError } from "@/redux/features/errorSlice"
+import Home from "../page"
 
 const UserDataRegister = ({ children }: { children: React.ReactNode }) => {
-  const dispatch = useAppDispatch()
   const { status } = useAppSession()
   if (status === "unauthenticated") {
-    dispatch(setError(true))
+    return <Home />
   }
   return (
     <div className="flex pt-[7rem]">
