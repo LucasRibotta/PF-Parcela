@@ -8,6 +8,8 @@ export interface User extends Document {
   email: string
   password: string
   provider?: string
+  code?:string
+  veristatus?:string
   accessToken?: string
   isAdmin: boolean
   isCompany: boolean
@@ -22,6 +24,8 @@ const userSchema = new Schema<User>({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   provider: {type: String, required: false, default: "local"},
+  code:{type: String, required:true} ,
+  veristatus:{type: String, required:true} ,
   accessToken: { type: String, required: false},
   isAdmin: { type: Boolean, default: false },
   isCompany: { type: Boolean, default: false },
