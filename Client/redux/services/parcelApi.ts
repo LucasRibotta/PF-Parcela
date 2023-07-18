@@ -20,7 +20,6 @@ export const parcelApi = createApi({
   reducerPath: "parcelApi",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_URL
-
   }),
   endpoints: (builder) => ({
     getParcelas: builder.query<Parcela[], string>({
@@ -54,7 +53,7 @@ export const parcelApi = createApi({
     }),
     desableParcela: builder.mutation<void, { id: string }>({
       query: ({ id }) => ({
-        url: `/desableParcela/${id}`,
+        url: `desableParcela/${id}`,
         method: "PUT"
       })
     }),
@@ -63,7 +62,7 @@ export const parcelApi = createApi({
         url: `/updateViews/${id}`,
         method: "PUT"
       })
-    }),
+    })
   })
 })
 // export const useGetParcelasQuery = parcelApi.endpoints.getParcelas.useQuery
@@ -74,5 +73,5 @@ export const {
   useGetParcelasQuery,
   useUpdateParcelaMutation,
   useDesableParcelaMutation,
-  useUpdateViewsMutation,
+  useUpdateViewsMutation
 } = parcelApi

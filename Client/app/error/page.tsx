@@ -32,7 +32,7 @@ export default function Error() {
         </div>
       </div>
       <div>
-        <Image src={error} alt="#" />
+        <Image src={error} priority={true} alt="#" />
       </div>
     </div>
   )

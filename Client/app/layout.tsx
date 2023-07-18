@@ -1,10 +1,10 @@
+/* eslint-disable @next/next/no-sync-scripts */
 /* eslint-disable @next/next/no-head-element */
 import "./globals.css"
 import { Montserrat } from "next/font/google"
 import Navbar from "@/components/Navbar/Navbar"
 import ProvidersWrapper from "./ProvidersWrapper"
 import Providers from "@/redux/provider"
-import ErrorWrapper from "@/components/ErrorWrapper/ErrorWrapper"
 const inter = Montserrat({ subsets: ["latin"] })
 export const metadata = {
   title: "Create Next App",
@@ -43,17 +43,16 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
+        <script src='//fw-cdn.com/10614760/3458053.js' chat='true'></script>
       </head>
       <body className={inter.className}>
         <ProvidersWrapper>
           <Providers>
-            <ErrorWrapper>
-              <Navbar />
-              {children}
-            </ErrorWrapper>
+            <Navbar />
+            {children}
           </Providers>
         </ProvidersWrapper>
       </body>
-    </html>
+    </html >
   )
 }
