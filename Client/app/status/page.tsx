@@ -29,5 +29,4 @@ const status = async (req: NextApiRequest, res: NextApiResponse) => {
     res.send(error);
   }
 };
-
 export default status;
