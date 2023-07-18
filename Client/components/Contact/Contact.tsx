@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import Button from "../Button/Button";
-import { useCreateMessageMutation } from "@/redux/services/contactApi";
+import { useCreateMessageMutation, useGetMessageQuery } from "@/redux/services/contactApi";
 
 interface Contactanos {
     firstName: string
@@ -16,6 +16,7 @@ interface Contactanos {
 const ContactSection = () => {
 
     const [createMessage] = useCreateMessageMutation();
+    const refresh = useGetMessageQuery("");
 
     const [info, setInfo] = useState<Contactanos>({
         firstName: "",
@@ -36,6 +37,21 @@ const ContactSection = () => {
         event.preventDefault();
 
         createMessage(info);
+
+        setInfo({
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: 0,
+            reason: "",
+            message: "",
+        });
+
+        setTimeout(() => {
+            refresh.refetch();
+        },2000)
+
+
     }
 
 
@@ -51,23 +67,23 @@ const ContactSection = () => {
                         <div className="grid grid-cols-3 mb-4" >
                             <label className="text-white font-semibold mr-2" htmlFor="">Tu nombre:</label>
                             <div className="flex col-span-2 w-[100%] justify-between [&>input]:rounded-md">
-                                <input className="w-[45%] placeholder:text-center" type="text"  placeholder="Nombre" onChange={handleChange} name="firstName" />
-                                <input className="w-[45%] placeholder:text-center" type="text"  placeholder="Apellido" onChange={handleChange} name="lastName" />
+                                <input className="w-[45%] placeholder:text-center" type="text"  placeholder="Nombre" onChange={handleChange} name="firstName"  value={info.firstName}/>
+                                <input className="w-[45%] placeholder:text-center" type="text"  placeholder="Apellido" onChange={handleChange} name="lastName" value={info.lastName} />
                             </div>
                         </div>
                         <div className="grid grid-cols-3 mb-4 [&>input]:rounded-md">
                             <label className="text-white font-semibold mr-2" htmlFor="">Correo Electrónico:</label>
-                            <input className="col-span-2 w-[100%] placeholder:text-center " placeholder="correo@ejemplo.com" type="text" onChange={handleChange} name="email" />
+                            <input className="col-span-2 w-[100%] placeholder:text-center " placeholder="correo@ejemplo.com" type="text" onChange={handleChange} name="email" value={info.email} />
                         </div>
                         <div className="grid  grid-cols-3 mb-4">
                             <label className="text-white font-semibold mr-2" htmlFor="">Teléfono:</label>
                             <div className="col-span-2 flex justify-between [&>input]:rounded-md">
-                                <input className="w-[30%] placeholder:text-center" placeholder="Telefono" type="text" onChange={handleChange} name="phone"/>
+                                <input className="w-[30%] placeholder:text-center" placeholder="Telefono" type="text" onChange={handleChange} name="phone" value={info.phone} />
                             </div>
                         </div>
                         <div className="grid grid-cols-3 mb-4">
                             <label className="text-white font-semibold mr-2" htmlFor="">Asunto del mensaje:</label>
-                            <select className="rounded-md" id="" onChange={handleChange} name="reason">
+                            <select className="rounded-md" id="" onChange={handleChange} name="reason" value={info.reason}>
                                 <option value="">Selecciona el asunto</option>
                                 <option value="Problemas con una compra">Problemas con una compra</option>
                                 <option value="Otros">Otros</option>
@@ -75,7 +91,7 @@ const ContactSection = () => {
                         </div>
                         <div className="grid grid-cols-3 mb-4">
                             <label className="text-white font-semibold mr-2" htmlFor="">Mensaje:</label>
-                            <textarea className="col-span-2 rounded-md placeholder:text-center" placeholder="escribenos en que podemos ayudarte" onChange={handleChange} name="message" id="" cols={30} rows={5}></textarea>
+                            <textarea className="col-span-2 rounded-md placeholder:text-center" placeholder="escribenos en que podemos ayudarte" onChange={handleChange} name="message" value={info.message} id="" cols={30} rows={5}></textarea>
                         </div>
                         <div className="" onClick={handleSubmit}>
                             <Button text="Enviar" />

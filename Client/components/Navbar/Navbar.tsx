@@ -102,9 +102,9 @@ export default function Navbar() {
             className={pathName === "/contact" ? activeLink : inactiveLink}
             href="/contact"
           >
-            Contacto
+            Contactanos
           </Link>
-        </li> 
+        </li>
         {user?.isAdmin || user?.isCompany ? (
           <li className="px-[22px] py-[20px]">
             <Link
