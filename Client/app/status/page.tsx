@@ -19,7 +19,7 @@ const status = async (req: NextApiRequest, res: NextApiResponse) => {
 
       console.log([payment, paymentStatus]);
       if (paymentStatus === "approved"){
-        req.query.status; //Estado: aprovado, desaprobado
+        req.query.status; //Estado: aprobado, desaprobado
         req.query.payment_id; // ID de mercadopago en caso de Pagado
         req.query.external_reference; // lo que pago en $$
         req.query.merchant_order_id; // Identificador de la orden de pago
