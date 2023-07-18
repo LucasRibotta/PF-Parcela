@@ -36,16 +36,33 @@ export default function Register() {
     }
 
     try {
+
+      //const verify = await axios.post("http://localhost:3001/emailRegister", data)
+
       const response = await fetch(
-        "https://pf-parcela-production.up.railway.app/register",
+        "http://localhost:3001/emailRegister",
         {
-          method: "POST",
+          method: 'POST',
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify(data)
         }
-        )
+      )
+
+      // console.log(verify, 'verificadon que viene -------------');
+      
+
+      // const response = await fetch(
+      //   "https://pf-parcela-production.up.railway.app/register",
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json"
+      //     },
+      //     body: JSON.stringify(data)
+      //   }
+      //   )
                
         if (response.ok) {
 
@@ -53,6 +70,7 @@ export default function Register() {
 
 
 // ******** código base para implementar cualquier notificación en cualquier componente ***************
+
           // const datos = {
           //   "email": responseData.email,
           //   "asunto": 'Tu cuenta personal de Parcelas',
@@ -63,8 +81,9 @@ export default function Register() {
  
           
           Swal.fire(
-            `¡Gracias ${responseData.name}!`,
-            "Te has registrado exitosamente",
+            `¡Gracias ${responseData.name}! Te has registrado exitosamente`,
+           
+            "Revisa tu correo para confirmar el mail y completar el registro",
           "success"
         )
         return router.push("/login")

@@ -63,11 +63,11 @@ const handler = NextAuth({
       return token
     },
     session({ session, token }) {
-      session.user = token.user as se
+      session.user = token.user as any
+      
       return session
     },
     async signIn({ user, account, profile }: { user: User | AdapterUser, account: Account | null, profile?: profi | undefined }): Promise<boolean> {
-
       if (account?.provider === 'credentials') {
         return true
       } else {
@@ -90,7 +90,7 @@ const handler = NextAuth({
           console.log(error);
           return false
         }
-      }
+     }
     }
   },
   pages: {

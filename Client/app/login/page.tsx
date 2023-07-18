@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react"
 import { setUserData, setUserLoggedIn } from "@/redux/features/userSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import Loading from "@/components/Loading/Loading"
+import axios from "axios"
 
 type CustomEvent = {
   target: HTMLInputElement
@@ -45,20 +46,39 @@ export default function Login() {
   }
 
   const handleSubmit = async (event: FormEvent<HTMLButtonElement>) => {
-    const res = await signIn("credentials", {
-      email: input.email,
-      password: input.password,
-      redirect: false
-    })
 
-    if (res?.error) {
-      setError(res.error as string)
-    } else if (res?.ok && res.url) {
-      Swal.fire(`¡Bienvenido!`, "Has iniciado sesión", "success")
-      return router.push("/")
-    } else {
-      setError("Error de autenticación")
+    try {
+      const veri = await axios.post("http://localhost:3001/userVeri", {email: input.email})
+      console.log(input.email, input.password);
+      
+      if(veri.data.status === 'VERIFIED') {
+        const res = await signIn("credentials", {
+          email: input.email,
+          password: input.password,
+          redirect: false
+        })
+       console.log(res?.ok)
+        if (res?.error) {
+          setError(res.error as string)
+        } else if (res?.ok && res.url) {
+          Swal.fire(`¡Bienvenido!`, "Has iniciado sesión", "success")
+          return router.push("/")
+        } else {
+          setError("Error de autenticación")
+        }
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "No se ha completado el registro",
+          text: "Ve a tu correo y confirma tus datos por medio del correo que te enviamos",
+        })
+      }
+
+    } catch (error) {
+      setError(error as string)
+      console.log(error);
     }
+
   }
 
   useEffect(() => {
