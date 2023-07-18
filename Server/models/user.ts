@@ -12,6 +12,8 @@ export interface User extends Document {
   isAdmin: boolean
   isCompany: boolean
   image: string
+  code?: string
+  status: string
 }
 
 const userSchema = new Schema<User>({
@@ -25,7 +27,9 @@ const userSchema = new Schema<User>({
   accessToken: { type: String, required: false},
   isAdmin: { type: Boolean, default: false },
   isCompany: { type: Boolean, default: false },
-  image: { type: String, required: false, default: "https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"}
+  image: { type: String, required: false, default: "https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"},
+  code: {type: String, required: true},
+  status: {type: String, require:true, default: 'UNIVERIFIED'},
 })
 
 export default model<User>("User", userSchema, "user")

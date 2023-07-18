@@ -34,6 +34,8 @@ app.use((req, res, next) => {
   res.header("X-Total-Count", "1000")
   next()
 })
+
+app.use(express.static("./public"))
 app.use("/api", router)
 app.use(newAuthRouter)
 app.use(emailNotification)

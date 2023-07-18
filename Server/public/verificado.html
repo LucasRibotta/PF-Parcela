@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        .custom-button {
+            width: 400px;
+            height: 100px;
+            padding: 5px;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #34D399;
+            color: white;
+            font-size: 35px;
+            text-decoration: none;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+        function cerrar() {
+            window.open('','_parent', '');
+            window.close()
+            window.location.replace = "http://localhost:3000"
+        }
+    </script>
+</head>
+<body class="flex items-center justify-center h-screen">
+    <a href="javascript:cerrar();" class="">
+        <span class="custom-button">
+            Usuario verificado
+        </span>      
+    </a>
+</body>
+</html>
