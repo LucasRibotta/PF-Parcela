@@ -73,6 +73,9 @@ app.post("/create_preference", (req, res) => {
     .catch(function (error: any) {
       console.log(error);
     });
+
+    // Aca es la captura cuando vuelve la compra y te devuelve el status.-
+    
     app.get('URL_STATUS', function (req, res) {
       res.json({
         Status: req.query.status,
