@@ -20,14 +20,10 @@ export const venta = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log([payment, paymentStatus]);
 
       if (paymentStatus === "approved") {
-        const {
-          status,
-          payment_id,
-          external_reference,
-          merchant_order_id
-        }
-        = req.query;
-
+        
+      const {status, payment_id, external_reference,merchant_order_id} = req.query;
+        
+      res.json({status, payment_id, external_reference,merchant_order_id})
         //aca va lo de Ismael
 
       }

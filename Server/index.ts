@@ -11,7 +11,7 @@ const cors = require("cors")//Gonzalo MercadoPago
 
 const app = express();
 
-const { URL_LOCAL, URL_PAGO, URL_STATUS } = process.env
+const { URL_LOCAL, URL_PAGO, URL_STATUS, URL_FAILURE } = process.env
 
 const PORT = process.env.PORT || 3001
 
@@ -57,7 +57,7 @@ app.post("/create_preference", (req, res) => {
     ],
     back_urls: {
       "success": URL_STATUS,
-      "failure": URL_STATUS,
+      "failure": URL_FAILURE,
       "pending": "" //esto es cuando pagan en efectivo y tienen que ir con el ticket a pagar a alguna caja
     },
     auto_return: "approved" as const,
