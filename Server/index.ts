@@ -5,12 +5,13 @@ import connectDB from "./db/connect"
 import morgan from "morgan"
 import newAuthRouter from "./router/user.router"
 import emailNotification from "./router/emailNotification.router"
+import bodyParser from "body-parser"
 /* import mercadopago from "mercadopago" */
 const mercadopago = require('mercadopago');
 const cors = require("cors")//Gonzalo MercadoPago
 
 const app = express();
-
+app.use(bodyParser.json());
 const { URL_LOCAL, URL_PAGO } = process.env
 
 const PORT = process.env.PORT || 3001
