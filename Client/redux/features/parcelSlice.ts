@@ -12,6 +12,7 @@ interface Parcela {
   parcelaData?: string[]
   description: string
   user: string
+  status: string
 }
 interface ParcelasState {
   allParcelas: Parcela[]
@@ -36,7 +37,8 @@ const initialState: ParcelasState = {
     name: "",
     price: 0,
     description: "",
-    image: []
+    image: [],
+    status: ""
   }
 }
 

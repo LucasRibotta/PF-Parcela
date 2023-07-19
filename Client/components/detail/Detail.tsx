@@ -127,6 +127,7 @@ const DetailSection = () => {
       }, 5000);
     }, []);
   }
+console.log(data?.status);
 
   return (
     <>
@@ -300,10 +301,15 @@ const DetailSection = () => {
             optionEdit()
           }
 
-          {status === 'authenticated' ?
+          {
+          
+          // data?.status === 'Disponible' ?
+          status === 'authenticated' ?
+            data?.status === 'Disponible' ? 
             <Link href={`/pago/${parcela.id}`} className="mr-8 shadow-lg">
               <Button text={"Comprar Ahora"} ></Button>
             </Link>
+            : ""
             :
             <Link href="/login" className="mr-8 shadow-lg">
               <Button text={"Comprar Ahora"} ></Button>
