@@ -302,8 +302,6 @@ console.log(data?.status);
           }
 
           {
-          
-          // data?.status === 'Disponible' ?
           status === 'authenticated' ?
             data?.status === 'Disponible' ? 
             <Link href={`/pago/${parcela.id}`} className="mr-8 shadow-lg">
