@@ -3,7 +3,7 @@ import Button from "@/components/Button/Button";
 import { PiPlantDuotone } from "react-icons/pi";
 
 
-const status: React.FC = () => {
+const failure: React.FC = () => {
   return (
     <div className='flex justify-center items-center h-screen'>
       <div className="w-1/2 bg-gray-100 p-10 rounded-lg shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
@@ -12,13 +12,13 @@ const status: React.FC = () => {
         <main>
           <section>
             <br />
-            <h2 className="text-lg">Status:  <strong className="text-lime-500 ">Aprobado</strong> </h2>
+            <h2 className="text-lg">Status:  <strong className="text-red-500 ">Hubo un Problema</strong> </h2>
             <br />
             <p className='text-justify'>
-              Muchas gracias por confiar sus sueños y realizar su compra con nosotros, se esta preparando la Documentación Digital y se enviarán los detalles a nuestro Notario / Escribano para el contrato de Compraventa.
+              Hubo un problema al procesar su pago.
             </p>
             <p className='text-left'>
-              Estamos muy Emocionados por su Proyecto!
+              Por favor, reintente en unos minutos o consulte con su emisor el contratiempo. Gracias!
             </p>
             <br />
             <hr />
@@ -28,7 +28,8 @@ const status: React.FC = () => {
               Teléfono: +56 9 5665 9732<br />
               Email: parcela@casolutions.cl<br />
               En nuestras Oficinas:<br />
-              Calle Los Radales, Parcela 374<br /> Club de Campo Residencial | Puerto Varas<br />
+              Calle Los Radales, Parcela 374<br />
+              Club de Campo Residencial | Puerto Varas<br />
               Región de los Lagos | Chile<br />
               </p>
             </p>
@@ -49,4 +50,4 @@ const status: React.FC = () => {
   );
 };
 
-export default status;
+export default failure;
