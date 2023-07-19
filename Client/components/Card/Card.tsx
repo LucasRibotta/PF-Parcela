@@ -14,9 +14,10 @@ interface CardProps {
   image: string[] | string
   id: string
   description: string
+  status: string
 }
 
-function Card({ name, precio, superficie, image, id }: CardProps) {
+function Card({ name, precio, superficie, image, id, status }: CardProps) {
   const [imageUrls, setImageUrls] = useState<string[]>([])
   const [click, setClick] = useState(false)
 
@@ -89,6 +90,9 @@ function Card({ name, precio, superficie, image, id }: CardProps) {
           <h5 className={`${style.textShadow} font-bold opacity-100 `}>
             Superficie: {superficie?.toLocaleString()}
           </h5>
+          <h6 className={`${style.textShadow} font-bold opacity-100 `}>
+            Estado: {status?.toLocaleString()}
+          </h6>
         </div>
 
         <Link href={`/detail/${id}`} className=" [&>button]:my-5 ">
