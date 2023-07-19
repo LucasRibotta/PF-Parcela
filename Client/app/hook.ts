@@ -1,5 +1,6 @@
 import { useSession } from "next-auth/react"
 import { DefaultUser } from "next-auth"
+import { Parcela } from "@/redux/services/parcelApi"
 export interface NewUser extends DefaultUser {
   isAdmin?: boolean
   isCompany?: boolean
@@ -7,6 +8,8 @@ export interface NewUser extends DefaultUser {
   phone?: number
   date?: string
   password?: string
+  wishes?: Parcela[]
+  _id: string
 }
 const useAppSession = () => {
   const { data: session, status } = useSession()

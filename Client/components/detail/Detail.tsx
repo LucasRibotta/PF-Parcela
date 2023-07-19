@@ -12,7 +12,8 @@ import Connection from "@/img/svgs/Connection"
 import Energy from "@/img/svgs/Energy"
 import LocationMaps from "../Maps/Maps"
 import { useParams, useRouter } from "next/navigation"
-import { useGetParcelaByIdQuery, useDeleteParcelaMutation, useUpdateViewsMutation, useDesableParcelaMutation } from "@/redux/services/parcelApi"
+import { useGetParcelaByIdQuery, useDeleteParcelaMutation, useUpdateViewsMutation, useDesableParcelaMutation, Parcela } from "@/redux/services/parcelApi"
+import { useAddToWishlistMutation, useGetUsersQuery, useRemoveFromWishlistMutation } from "@/redux/services/userApi"
 import Swal from 'sweetalert2'
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
@@ -27,6 +28,9 @@ const DetailSection = () => {
     id: params.id.toString(),
   }
   const { session, status, user } = useAppSession();
+  const { data : users } = useGetUsersQuery({ name: "" });
+  const userWish = users?.find(el => el._id === user._id)
+  
   // const user = useAppSelector((state) => state.user.userData)
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -34,6 +38,11 @@ const DetailSection = () => {
   const [desableParcela] = useDesableParcelaMutation();
   const [updateViews] = useUpdateViewsMutation()
   const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
+  const [addToWishlist] = useAddToWishlistMutation();
+  const [removeFromWishlist] = useRemoveFromWishlistMutation();
+  const wishes = userWish?.wishes || []
+
+
   useEffect(() => {
     if (data) {
       dispatch(setParcelaData(data));
@@ -92,6 +101,20 @@ const DetailSection = () => {
     type: "approved" | "failure" | null;
     content: string;
   }
+
+  const handleAddToWishlist = async (
+    id: string,
+    data: Parcela ) => {
+      await addToWishlist({ id, data : data });
+  };
+
+  const handleRemoveFromWishlist = async (
+    id: string) => {
+      if(data){
+        console.log("data", data._id)
+        await removeFromWishlist({ id, idParcel: data._id })
+      }
+  };
 
   const Home = () => {
     const [notification, setNotification] = useState<NotificationType>({
@@ -307,6 +330,21 @@ const DetailSection = () => {
             :
             <Link href="/login" className="mr-8 shadow-lg">
               <Button text={"Comprar Ahora"} ></Button>
+            </Link>
+          }
+
+          {status === 'authenticated' ?
+            (wishes.filter(el => el._id === data?._id).length > 0 ?
+              <div onClick={() => data && handleRemoveFromWishlist(user?._id)}>
+                <Button text={"Quitar de Lista de Deseos"} ></Button>
+              </div>
+              :
+              <div onClick={() => data && handleAddToWishlist(user?._id, data)}>
+                <Button text={"Agregar a Lista de Deseos"} ></Button>
+              </div>)
+            :
+            <Link href="/login" className="mr-20 shadow-lg ">
+              <Button text={"Agregar a Lista de Deseos"} ></Button>
             </Link>
           }
 

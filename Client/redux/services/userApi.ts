@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { Parcela } from "./parcelApi"
 
 export interface User {
   _id: string
@@ -13,6 +14,7 @@ export interface User {
   accessToken?: string
   isAdmin: boolean
   isCompany: boolean
+  wishes?: Parcela[]
 }
 
 export const userApi = createApi({
@@ -39,12 +41,28 @@ export const userApi = createApi({
         method: "PUT",
         body: data
       })
-    })
+    }),
+    addToWishlist: builder.mutation<Parcela, { id: string; data: Partial<Parcela> }>({
+      query: ({ id, data }) => ({
+        url:`wishlist/${id}`,
+        method: "PUT",
+        body: data,
+      })
+    }),
+    removeFromWishlist: builder.mutation<void, { id: string; data: string }>({
+      query: ({ id, data }) => ({
+        url: `thewishlist/${id}`,
+        method: "PUT",
+        body: data,
+      })
+    }),
   })
 })
 
 export const {
   useGetUsersQuery,
   useDeleteUserMutation,
-  useUpdateUserMutation
+  useUpdateUserMutation,
+  useAddToWishlistMutation,
+  useRemoveFromWishlistMutation
 } = userApi

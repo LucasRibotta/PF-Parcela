@@ -4,6 +4,8 @@ import User from "../models/user"
 import deleteUser from "../handlers/deleteUser"
 import updateUser from "../handlers/updateUser"
 import user from "../models/user"
+import createWishlist from "../handlers/createWishlist"
+import wishDeleted from "../handlers/wishDeleted"
 
 export const users = async (req: Request, res: Response) => {
   const { name } = req.query as { name?: string }
@@ -110,3 +112,55 @@ export const userUpdate = async (req: Request, res: Response) => {
       .json({ error: "Error al actualizar la parcela en la base de datos." })
   }
 }
+
+export const postWishList = async (
+  req: Request,
+  res: Response
+  ) => {
+  try {
+    const  data  = req.body;
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(401).json({ error: "You must be logged in to add to wish list"})
+    }
+
+    const user = await createWishlist(data, id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found"});
+    }
+
+    res.status(200).json("Added a Wish List successfully");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error"});
+  }
+};
+
+export const deleteWishList = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { id } = req.params;
+    const { idParcel } = req.body;
+    const data = req.body;
+
+    console.log("id", id)
+    console.log("idparcel", idParcel);
+    console.log("data", data)
+    
+    
+    if(!id || !idParcel) {
+      throw new Error("Id is required.");
+    }
+
+    const deleted = await wishDeleted(id, idParcel)
+
+    return res.status(200).json(deleted);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Error deleting wish from database"});
+  }
+
+};
