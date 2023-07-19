@@ -73,18 +73,6 @@ export const userUpdate = async (req: Request, res: Response) => {
       image
     } = req.body
 
-    console.log(
-      name,
-      lastname,
-      phone,
-      date,
-      email,
-      password,
-      isAdmin,
-      isCompany,
-      image
-    )
-
     if (!id) {
       throw new Error("El campo id es requerido.")
     }
@@ -116,24 +104,24 @@ export const userUpdate = async (req: Request, res: Response) => {
 export const postWishList = async (
   req: Request,
   res: Response
-  ) => {
+) => {
   try {
-    const  data  = req.body;
+    const {data} = req.body;
     const { id } = req.params;
 
     if (!id) {
-      return res.status(401).json({ error: "You must be logged in to add to wish list"})
+      return res.status(401).json({ error: "You must be logged in to add to wish list" })
     }
 
     const user = await createWishlist(data, id);
     if (!user) {
-      return res.status(404).json({ error: "User not found"});
+      return res.status(404).json({ error: "User not found" });
     }
 
     res.status(200).json("Added a Wish List successfully");
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Server error"});
+    res.status(500).json({ error: "Server error" });
   }
 };
 
@@ -141,26 +129,20 @@ export const deleteWishList = async (
   req: Request,
   res: Response
 ) => {
+  const { id } = req.params;
+  const { data } = req.body;
   try {
-    const { id } = req.params;
-    const { idParcel } = req.body;
-    const data = req.body;
 
-    console.log("id", id)
-    console.log("idparcel", idParcel);
-    console.log("data", data)
-    
-    
-    if(!id || !idParcel) {
+    if (!id || !data) {
       throw new Error("Id is required.");
     }
 
-    const deleted = await wishDeleted(id, idParcel)
+    const deleted = await wishDeleted(id, data)
 
     return res.status(200).json(deleted);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Error deleting wish from database"});
+    return res.status(500).json({ error: "Error deleting wish from database" });
   }
 
 };

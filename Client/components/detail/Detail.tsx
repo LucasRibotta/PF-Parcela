@@ -28,9 +28,10 @@ const DetailSection = () => {
     id: params.id.toString(),
   }
   const { session, status, user } = useAppSession();
+  const refetchUser = useGetUsersQuery({ name: "" });
   const { data : users } = useGetUsersQuery({ name: "" });
   const userWish = users?.find(el => el._id === user._id)
-  
+
   // const user = useAppSelector((state) => state.user.userData)
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -102,18 +103,18 @@ const DetailSection = () => {
     content: string;
   }
 
-  const handleAddToWishlist = async (
-    id: string,
-    data: Parcela ) => {
-      await addToWishlist({ id, data : data });
+  const handleAddToWishlist = async (id: string, data: Parcela ) => {
+    await addToWishlist({ id, data: data });
+
+    refetchUser.refetch()
   };
 
-  const handleRemoveFromWishlist = async (
-    id: string) => {
+  const handleRemoveFromWishlist = async (id: string) => {
       if(data){
         console.log("data", data._id)
-        await removeFromWishlist({ id, idParcel: data._id })
+        await removeFromWishlist({ id, data: data._id })
       }
+    refetchUser.refetch()
   };
 
   const Home = () => {
@@ -339,7 +340,7 @@ const DetailSection = () => {
                 <Button text={"Quitar de Lista de Deseos"} ></Button>
               </div>
               :
-              <div onClick={() => data && handleAddToWishlist(user?._id, data)}>
+              <div onClick={() => data && user && handleAddToWishlist(user?._id, data)}>
                 <Button text={"Agregar a Lista de Deseos"} ></Button>
               </div>)
             :

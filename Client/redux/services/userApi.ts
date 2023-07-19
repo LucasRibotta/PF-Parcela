@@ -46,14 +46,14 @@ export const userApi = createApi({
       query: ({ id, data }) => ({
         url:`wishlist/${id}`,
         method: "PUT",
-        body: data,
+        body: {data},
       })
     }),
     removeFromWishlist: builder.mutation<void, { id: string; data: string }>({
       query: ({ id, data }) => ({
         url: `thewishlist/${id}`,
         method: "PUT",
-        body: data,
+        body: {data},
       })
     }),
   })
