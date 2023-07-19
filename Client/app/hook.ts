@@ -1,12 +1,18 @@
 import { useSession } from "next-auth/react"
-import { DefaultUser } from "next-auth"
-export interface NewUser extends DefaultUser {
-  isAdmin?: boolean
-  isCompany?: boolean
-  lastname?: string
-  phone?: number
-  date?: string
-  password?: string
+import { User } from "next-auth"
+export interface NewUser extends User {
+  _id: string
+  name: string
+  lastname: string
+  phone: number
+  date: string
+  email: string
+  image: string
+  password: string
+  provider?: string
+  accessToken?: string
+  isAdmin: boolean
+  isCompany: boolean
 }
 const useAppSession = () => {
   const { data: session, status } = useSession()

@@ -1,4 +1,3 @@
-import { useAppSelector } from "@/redux/hooks"
 import { sortParcelas } from "@/redux/features/parcelSlice"
 import { useAppDispatch } from "@/redux/hooks"
 export default function Order() {
@@ -11,11 +10,11 @@ export default function Order() {
 
   return (
     <select
-      className="block w-full p-[6px] text-sm font-medium rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1]"
+      className=" text-gray-600 hover:text-gray-400 duration-200 text-[0.80rem] font-semibold focus:outline-none focus:ring-none focus:ring-none"
       onChange={handleSortChange}
     >
-      <option value="asc">Menor precio</option>
-      <option value="desc">Mayor precio</option>
+      <option value="asc">MENOR PRECIO</option>
+      <option value="desc">MAYOR PRECIO</option>
     </select>
   )
 }

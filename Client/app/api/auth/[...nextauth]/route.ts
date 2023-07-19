@@ -33,10 +33,15 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-        const response = await axios.post(login, credentials)
+        const response = await axios.post(
+          "http://localhost:3001/login",
+          credentials
+        )
         const user = response.data
+        const newUser = user?.user
+        console.log(newUser)
         if (user) {
-          return user.user
+          return newUser
         } else {
           throw new Error("Invalid credentials")
         }

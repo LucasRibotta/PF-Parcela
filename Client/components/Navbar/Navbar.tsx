@@ -14,24 +14,25 @@ import { useRouter } from "next/navigation"
 import { signOut } from "next-auth/react"
 import { useAppSession } from "@/app/hook"
 import { useGetUsersQuery } from "@/redux/services/userApi"
+import { NewUser } from "@/app/hook"
 
 export default function Navbar() {
   const dispatch = useAppDispatch()
   const router = useRouter()
   const [navbarBackground, setNavbarBackground] = useState(false)
-  const { user: info } = useAppSession()
+  const { user: info, status } = useAppSession()
   const { data: dataUser } = useGetUsersQuery({ name: "" })
-  const user = dataUser?.find((el) => el.email === info?.email)
+  const user = dataUser?.find((el) => el.email === info?.email) as NewUser
 
   const activeLink =
-    "border-b-2  border-[#51a8a1] text-[#51a8a1] duration-200 cursor-pointer"
+    "border-b-2  border-[#039D60] text-[#039D60] duration-200 cursor-pointer font-semibold"
   const inactiveLink =
-    "border-b-2  border-[#51a8a1] border-opacity-0 hover:border-opacity-100 hover:text-[#51a8a1] duration-200 cursor-pointer"
+    "border-b-2  border-[#039D60] font-semibold border-opacity-0 hover:border-opacity-100 hover:text-[#039D60] duration-200 cursor-pointer"
   const pathName = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
-      const isTop = window.scrollY < 300
+      const isTop = window.scrollY < 2
       if (isTop !== navbarBackground) {
         setNavbarBackground(isTop)
       }
@@ -58,33 +59,32 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`flex fixed  items-center justify-between p-[0.50rem] px-[3rem] z-[1] w-full shadow-md ${
+      className={`flex fixed  items-center justify-between p-[0.50rem] px-[3rem] z-[50] w-full shadow-md ${
         navbarBackground
-          ? "bg-[#222222b0]"
-          : "bg-[#222222e7] ease-in-out duration-300"
+          ? "bg-transparent"
+          : "bg-white ease-in-out duration-300"
       }`}
     >
-      <div className="w-3/12">
-        <Image src={logo} alt="#" className="w-[6rem] " />
-      </div>
-      <ul className="flex justify-end gap-[2rem] items-center text-white">
-        <li className=" px-[22px] py-[20px]">
-          <Link
-            href="/"
-            className={pathName === "/" ? activeLink : inactiveLink}
-          >
-            Inicio
-          </Link>
-        </li>
-        <li className="px-[22px] py-[20px]">
-          <Link
-            className={pathName === "/parcelas" ? activeLink : inactiveLink}
-            href="/parcelas"
-          >
-            Parcelas
-          </Link>
-        </li>
-        {/* <li className="px-[22px] py-[20px]">
+      <div className="flex items-center gap-[3rem]">
+        <Image src={logo} alt="#" className="w-[6rem] h-[3rem]" />
+        <ul className="flex justify-end gap-[2rem] items-center">
+          <li className=" pr-[22px] py-[20px]">
+            <Link
+              href="/"
+              className={pathName === "/" ? activeLink : inactiveLink}
+            >
+              Inicio
+            </Link>
+          </li>
+          <li className="px-[22px] py-[20px]">
+            <Link
+              className={pathName === "/parcelas" ? activeLink : inactiveLink}
+              href="/parcelas"
+            >
+              Parcelas
+            </Link>
+          </li>
+          {/* <li className="px-[22px] py-[20px]">
           <Link
             className={pathName === "/about" ? activeLink : inactiveLink}
             href="/about"
@@ -92,25 +92,26 @@ export default function Navbar() {
             Nosotros
           </Link>
         </li> */}
-        <li className="px-[22px] py-[20px]">
-          <Link
-            className={pathName === "/contact" ? activeLink : inactiveLink}
-            href="/contact"
-          >
-            Contacto
-          </Link>
-        </li> 
-        {user?.isAdmin || user?.isCompany ? (
           <li className="px-[22px] py-[20px]">
             <Link
-              className={pathName === "/admin" ? activeLink : inactiveLink}
-              href="/admin"
+              className={pathName === "/contact" ? activeLink : inactiveLink}
+              href="/contact"
             >
-              Administrador
+              Contacto
             </Link>
           </li>
-        ) : null}
-      </ul>
+          {user?.isAdmin || user?.isCompany ? (
+            <li className="px-[22px] py-[20px]">
+              <Link
+                className={pathName === "/admin" ? activeLink : inactiveLink}
+                href="/admin"
+              >
+                Administrador
+              </Link>
+            </li>
+          ) : null}
+        </ul>
+      </div>
 
       {!user ? (
         <>
@@ -123,10 +124,12 @@ export default function Navbar() {
               <UserMenu user={user} handleLogout={handleLogout} />
             </div>
           ) : (
-            <div className="w-3/12 flex items-center justify-end">
+            <div className="w-3/12 flex gap-2 items-center justify-end">
               <Link href={"/login"}>
-                <button className="text-white  font-semibold hover:text-[#51a8a1]  ease-in-out duration-300 px-4 py-[6px]">
-                  Iniciar sesión
+                <button className="bg-gradient-to-r from-[#ACD453] to-[#039D60] p-[1px] hover:from-[#8cad43] hover:to-[#006F43]  duration-200  rounded-md">
+                  <div className="bg-white h-full w-full px-3 py-[5px]  rounded-md">
+                    Iniciar sesión
+                  </div>
                 </button>
               </Link>
 

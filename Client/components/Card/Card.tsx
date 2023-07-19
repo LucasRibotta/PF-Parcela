@@ -92,7 +92,9 @@ function Card({ name, precio, superficie, image, id }: CardProps) {
         </div>
 
         <Link href={`/detail/${id}`} className=" [&>button]:my-5 ">
-          <Button text={"Ver más..."} />
+          <button className="bg-[#039D60]  text-white duration-200 px-4 py-[5px] rounded-md">
+            Ver mas
+          </button>
         </Link>
       </div>
     </div>
