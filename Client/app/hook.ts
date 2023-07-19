@@ -11,19 +11,22 @@ export interface NewUser extends DefaultUser {
   password?: string
 }
 const useAppSession = () => {
-  useEffect(() => {
-    // Verificar si estamos en el lado del cliente
-    if (typeof window !== 'undefined') {
-      // Acceder a los contextos de React aquí
-    }
-  }, []);
   const { data: session, status } = useSession()
   const user = session?.user as NewUser
+  useEffect(() => {
+    // Verificar si estamos en el lado del cliente
+    if (typeof window !== 'undefined') 
+    {
+
+  // Acceder a los contextos de React aquí
+    }
+  }, []);
   return {
     user,
     session,
     status
   }
+
 }
 
 export { useAppSession }

@@ -91,6 +91,32 @@ app.post("/create_preference", (req, res) => {
 
 // aca termina mercadopago
 
+/* const status = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { query } = req;
+  const topic = query?.topic || query?.type;
+
+  console.log({ query, topic });
+  try {
+    if (topic === "payment") {
+      const paymentId = query.id || query["data.id"];
+      let payment = await mercadopago.payment.findById(Number(paymentId));
+      let paymentStatus = payment.body.status;
+
+      console.log([payment, paymentStatus]);
+      if (paymentStatus === "approved" || paymentStatus==="failure") {
+        // Acciones en caso de pago aprobado
+        const status = req.query.status; // Estado: aprobado, desaprobado
+        const paymentId = req.query.payment_id; // ID de mercadopago en caso de Pagado
+        const externalReference = req.query.external_reference; // lo que pagó en $$
+        const merchantOrderId = req.query.merchant_order_id; // Identificador de la orden de pago
+
+        // Realizar acciones con los datos obtenidos
+      }
+    }
+  } catch (error) {
+    res.send(error);
+  } */
+
 
 
 app.listen(PORT, () => {

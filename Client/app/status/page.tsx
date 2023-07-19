@@ -1,69 +1,57 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import mercadopago from "mercadopago";
-import { useAppSession } from "@/app/hook"
-import axios from "axios";
-import Swal from "sweetalert2"
-import { useRouter } from "next/navigation"
-import { useUpdateParcelaMutation } from "@/redux/services/parcelApi"
+"use client"
+import axios from 'axios';
 
-mercadopago.configure({
-  access_token: "TEST-1121991478303106-071123-211897e3813a959b6199cf6e2d046272-1412742934",
-});
+import { useEffect } from 'react';
+import { PiPlantDuotone } from "react-icons/pi";
+import "dotenv/config";
+/* import { venta } from '../api/status/status'; */
 
-const status = async (req: NextApiRequest, res: NextApiResponse) => {
+export const Recibido = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/status', {
+          params: {
+            status: '',
+            payment_id:'',
+            external_reference: '',
+            merchant_order_id: '',
+          },
+        });
 
-  const { user, session, status } = useAppSession();
-  const router = useRouter();
-  const [updateParcela] = useUpdateParcelaMutation()
-
-
-  const { query } = req;
-
-  const topic = query.topic || query.type;
-
-  console.log({ query, topic });
-  try {
-    if (topic === "payment") {
-      const paymentId = query.id || query["data.id"];
-      let payment = await mercadopago.payment.findById(Number(paymentId));
-      let paymentStatus = payment.body.status;
-
-      console.log([payment, paymentStatus]);
-      if (paymentStatus === "approved") {
-        req.query.status; //Estado: aprobado, desaprobado
-        req.query.payment_id; // ID de mercadopago en caso de Pagado
-        req.query.external_reference; // lo que pago en $$
-        req.query.merchant_order_id; // Identificador de la orden de pago
-
-        //******** código base para implementar cualquier notificación en cualquier componente ***************
-        const datos = {
-          "email": user.email,
-          "asunto": 'transacción en Mercado Pago',
-          "cuerpo": `${user.lastname}, ${user.name}, su estado de pago es ${req.query.status}, el pago que fue realizado es de ${req.query.external_reference}, y el id de pago es: ${req.query.merchant_order_id}`
-        }
-        const email = await axios.post('pf-parcela-production.up.railway.app/emailNotification', datos)
-        Swal.fire(
-          `¡Gracias por su compra ${user.name}!`,
-          "El pago se a realizado correctamente, a su email se ha mandado los datos de pago",
-          "success"
-        )
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Se ha producido un error en el pago!",
-        })
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
       }
-    }
-  } catch (error) {
-    res.send(error);
-  }
-  //   const update = {
-  //     id: parcela.id,
-  //     data: info,
-  //   }//updateParcela(update)
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <div className='flex justify-center items-center h-screen'>
+      <div className="w-1/3 bg-gray-100 p-10 rounded-lg shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
+        <div className="flex justify-between">
+          <h1 className="text-4xl">Detalles de su Compra</h1>
+          <PiPlantDuotone className="h-[4rem] w-[4rem] text-[#51a8a1]" />
+        </div>
+        <br />
+        <div className="text-lg">
+          <p>{`Status: ${status }`}</p>
+          <hr />
+          <p>{`ID de Pago de MercadoPago: ${payment_id}`}</p>
+          <hr />
+          <p>{`Referencia Externa: CLP $ ${external_reference}.-`}</p>
+          <hr />
+          <p>{`ID Orden de Pago: CLP $ ${merchant_order_id}.-`}</p>
+          <br />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 
   // ejemplo de lo que devuelve
   // http://localhost:3000/status?collection_id=1316639083&collection_status=approved&payment_id=1316639083&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=10516119653&preference_id=1412742934-c4fb2583-9365-4483-8faa-749cf7ba47d5&site_id=MLC&processing_mode=aggregator&merchant_account_id=null
-};
-export default status;
+
