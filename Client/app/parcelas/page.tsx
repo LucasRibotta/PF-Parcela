@@ -56,6 +56,7 @@ export default function Parcelas() {
                       description={el.description}
                       image={el.image[0]}
                       id={el._id}
+                      status={el.status}
                     />
                   )
                 }

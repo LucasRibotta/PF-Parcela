@@ -14,6 +14,7 @@ interface Parcela {
   description: string
   user: string
   views: number
+  status: string
 }
 
 export const parcelApi = createApi({

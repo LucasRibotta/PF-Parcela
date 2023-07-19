@@ -126,12 +126,12 @@ export const createCondominio = async (req: Request, res: Response) => {
 export const updateParcela = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { name, lote, area, price, location, image, condominio, description } = req.body;
+    const { name, lote, area, price, location, image, condominio, description, status } = req.body;
 
     if (!id) {
       throw new Error('El campo id es requerido.');
     }
-    const parcelaActualizado = await updateParce(id, name, lote, area, price, location, image, condominio, description)
+    const parcelaActualizado = await updateParce(id, name, lote, area, price, location, image, condominio, description, status)
     if (!parcelaActualizado) {
       return res.status(404).json({ error: 'El documento no existe.' });
     }
