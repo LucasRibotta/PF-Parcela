@@ -26,8 +26,8 @@ export default function UserSettings() {
   const { user: info } = useAppSession()
   const [updateUser] = useUpdateUserMutation()
   const { data: dataUser } = useGetUsersQuery({ name: "" })
-  const refetchUser = useGetUsersQuery({ name: "" })
   const user = dataUser?.find((el) => el.email === info?.email)
+  const refetchUser = useGetUsersQuery({ name: "" })
   const router = useRouter()
   const [imagesSelected, setImagesSelected] = useState<File[]>([])
   const [uploadedImages, setUploadedImages] = useState<string>("")
@@ -90,7 +90,7 @@ export default function UserSettings() {
           isAdmin,
           isCompany
         }
-        updateUser({ id: _id, data })
+        await updateUser({ id: _id, data })
         refetchUser.refetch()
         Swal.fire(`¡Listo!`, "Has cambiado tu foto", "success")
       }
@@ -126,6 +126,7 @@ export default function UserSettings() {
       router.push("/")
     }
   }
+  console.log(user)
 
   return (
     <section>
@@ -153,7 +154,7 @@ export default function UserSettings() {
               <h3 className="text-xl font-semibold leading-normal mb-2 flex justify-center items-center gap-2">
                 {user?.name} {user?.lastname}
                 <Link rel="stylesheet" href="/userDataRegister/nameUpdate">
-                  <BsPencil className="h-4 w-4 hover:text-[#51a8a1] duration-200" />
+                  <BsPencil className="h-4 w-4 hover:text-[#039D60] duration-200" />
                 </Link>
               </h3>
               <div className="text-sm leading-normal  mt-0 mb-2  ">
@@ -163,31 +164,31 @@ export default function UserSettings() {
             <div className="mt-8 py-4 border-t text-center">
               <div className="w-full px-2">
                 <Link rel="stylesheet" href="/">
-                  <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#51a8a1] hover:text-white ">
+                  <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#00ad68be] hover:text-white ">
                     <GoHome className="h-6 w-6 stroke-current" />
                     <span className="ml-2 text-sm font-medium">Inicio</span>
                   </div>
                 </Link>
                 <Link rel="stylesheet" href="/userDataRegister/purchases">
-                  <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#51a8a1] hover:text-white">
+                  <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#00ad68be] hover:text-white">
                     <PiShoppingCart className="h-6 w-6 stroke-current" />
                     <span className="ml-2 text-sm font-medium">Compras</span>
                   </div>
                 </Link>
                 <Link rel="stylesheet" href="/userDataRegister/wishes">
-                  <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#51a8a1] hover:text-white">
+                  <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#00ad68be] hover:text-white">
                     <AiOutlineHeart className="h-6 w-6 stroke-current" />
                     <span className="ml-2 text-sm font-medium">Deseos</span>
                   </div>
                 </Link>
                 <Link rel="stylesheet" href="/userDataRegister">
-                  <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#51a8a1] hover:text-white">
+                  <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#00ad68be] hover:text-white">
                     <AiOutlineSetting className="h-6 w-6 stroke-current" />
                     <span className="ml-2 text-sm font-medium">Ajustes</span>
                   </div>
                 </Link>
                 <button
-                  className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#51a8a1] hover:text-white"
+                  className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#00ad68be] hover:text-white"
                   onClick={handleLogout}
                 >
                   <IoLogOutOutline className="h-6 w-6 stroke-current" />

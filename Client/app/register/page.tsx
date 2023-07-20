@@ -45,26 +45,23 @@ export default function Register() {
           },
           body: JSON.stringify(data)
         }
-        )
-               
-        if (response.ok) {
+      )
 
-          const responseData = await response.json()
+      if (response.ok) {
+        const responseData = await response.json()
 
+        // ******** código base para implementar cualquier notificación en cualquier componente ***************
+        // const datos = {
+        //   "email": responseData.email,
+        //   "asunto": 'Tu cuenta personal de Parcelas',
+        //   "cuerpo": `${responseData.lastname}, ${responseData.name} bienvenido a Parcelas, la página donde podrás encontrar el lugar de tus sueños`
+        // }
 
-// ******** código base para implementar cualquier notificación en cualquier componente ***************
-          // const datos = {
-          //   "email": responseData.email,
-          //   "asunto": 'Tu cuenta personal de Parcelas',
-          //   "cuerpo": `${responseData.lastname}, ${responseData.name} bienvenido a Parcelas, la página donde podrás encontrar el lugar de tus sueños`
-          // }
-          
-          // const email = await axios.post('pf-parcela-production.up.railway.app/emailNotification', datos)
- 
-          
-          Swal.fire(
-            `¡Gracias ${responseData.name}!`,
-            "Te has registrado exitosamente",
+        // const email = await axios.post('pf-parcela-production.up.railway.app/emailNotification', datos)
+
+        Swal.fire(
+          `¡Gracias ${responseData.name}!`,
+          "Te has registrado exitosamente",
           "success"
         )
         return router.push("/login")
@@ -88,7 +85,7 @@ export default function Register() {
       <div className="flex w-[768px] h-[496px] mt-[5rem] ">
         <div className="w-1/2 relative">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white w-[90%] z-10">
-            <h1 className="text-3xl font-black">Bienvenido!</h1>
+            <h1 className="text-3xl font-black">Bienvenido/a</h1>
             <p className="leading-[20px] tracking-[0.5px] text-[14px] my-[20px]">
               Ingresa tus datos personales y comienza tu viaje con nosotros
             </p>
@@ -99,13 +96,13 @@ export default function Register() {
             className="h-full w-full object-cover rounded-l-xl shadow-[0_35px_35px_rgba(0,0,0,0.25)] brightness-75"
           />
         </div>
-        <div className="w-1/2 bg-gray-100 p-8 flex flex-col justify-center items-center rounded-r-xl shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
+        <div className="w-1/2 bg-gray-100 p-8 flex flex-col text-center justify-center items-center rounded-r-xl shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
           <h2 className="text-3xl font-black mb-6 ">Crea tu cuenta</h2>
           <div className="gap-2 flex">
             <div>
               <div>
                 <input
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#51a8a1]"
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#00ad68be]"
                   id="name"
                   type="name"
                   placeholder="Nombre"
@@ -115,7 +112,7 @@ export default function Register() {
               </div>
               <div className="mt-4">
                 <input
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#51a8a1]"
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#00ad68be]"
                   id="lastname"
                   type="lastname"
                   placeholder="Apellido"
@@ -125,7 +122,7 @@ export default function Register() {
               </div>
               <div className="mt-4">
                 <input
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#51a8a1]"
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#00ad68be]"
                   id="phone"
                   type="phone"
                   placeholder="Telefono"
@@ -137,7 +134,7 @@ export default function Register() {
             <div>
               <div>
                 <input
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#51a8a1]"
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#00ad68be]"
                   id="email"
                   type="email"
                   placeholder="Email"
@@ -147,7 +144,7 @@ export default function Register() {
               </div>
               <div className="mt-4">
                 <input
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#51a8a1]"
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#00ad68be]"
                   id="password"
                   type="password"
                   placeholder="Contraseña"
@@ -157,7 +154,7 @@ export default function Register() {
               </div>
               <div className="mt-4">
                 <input
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#51a8a1]"
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#00ad68be]"
                   id="password"
                   type="password"
                   placeholder="Repetir Contraseña"
@@ -169,21 +166,23 @@ export default function Register() {
           </div>
           <div className="my-4">
             <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#51a8a1]"
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#00ad68be]"
               id="date"
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
             />
           </div>
-          <div className="space-y-4">
-            <button
-              className="bg-[#51a8a1]  hover:bg-[#126e67] ease-in-out min-w-[9rem] max-w-[9rem] duration-300 text-white font-bold py-2 px-4 rounded-[20px]  focus:outline-none focus:shadow-outline"
-              type="button"
-              onClick={handleRegister}
-            >
-              Registrarse
-            </button>
+          <div className="space-y-4 flex flex-col justify-center text-center">
+            <div>
+              <button
+                className="bg-gradient-to-r from-[#ACD453] to-[#039D60] text-white hover:from-[#8cad43] hover:to-[#006F43]   min-w-[9rem] max-w-[9rem] duration-200  font-bold py-2 px-4 rounded-[20px] focus:outline-none focus:shadow-outline"
+                type="button"
+                onClick={handleRegister}
+              >
+                Registrarse
+              </button>
+            </div>
 
             <div className="mt-4 text-[#333] leading-[20px] tracking-[0.5px] text-[14px]">
               ¿Ya posees una cuenta?
@@ -191,11 +190,10 @@ export default function Register() {
 
             <div>
               <Link href={"/login"}>
-                <button
-                  className="bg-[#51a8a1] hover:bg-[#126e67] min-w-[9rem] max-w-[9rem]  ease-in-out duration-300 text-white font-bold py-2 px-4 rounded-[20px]  focus:outline-none focus:shadow-outline"
-                  type="button"
-                >
-                  Iniciar sesión
+                <button className="min-w-[9rem] max-w-[9rem] bg-gradient-to-r from-[#ACD453] to-[#039D60] p-[1px] hover:from-[#8cad43] hover:to-[#006F43]  duration-200  rounded-[20px]">
+                  <div className="bg-white hover:bg-slate-100 duration-200 font-semibold h-full w-full px-4 py-2  rounded-[20px]">
+                    Iniciar sesión
+                  </div>
                 </button>
               </Link>
             </div>

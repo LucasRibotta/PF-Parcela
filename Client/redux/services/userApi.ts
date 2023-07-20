@@ -20,7 +20,7 @@ export interface User {
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_URL
+    baseUrl: "http://localhost:3001/api/auth"
   }),
   endpoints: (builder) => ({
     getUsers: builder.query<User[], { name: string }>({
@@ -42,20 +42,23 @@ export const userApi = createApi({
         body: data
       })
     }),
-    addToWishlist: builder.mutation<Parcela, { id: string; data: Partial<Parcela> }>({
+    addToWishlist: builder.mutation<
+      Parcela,
+      { id: string; data: Partial<Parcela> }
+    >({
       query: ({ id, data }) => ({
-        url:`wishlist/${id}`,
+        url: `wishlist/${id}`,
         method: "PUT",
-        body: {data},
+        body: { data }
       })
     }),
     removeFromWishlist: builder.mutation<void, { id: string; data: string }>({
       query: ({ id, data }) => ({
         url: `thewishlist/${id}`,
         method: "PUT",
-        body: {data},
+        body: { data }
       })
-    }),
+    })
   })
 })
 

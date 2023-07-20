@@ -1,70 +1,85 @@
-import "tailwindcss/tailwind.css"
 import Order from "@/components/Filters/Order"
 import SearchBar from "@/components/SearchBar/SearchBar"
 import { RangeSlider } from "../RangeSlider/RangeSlider"
 import { filterParcelas } from "@/redux/features/parcelSlice"
 import { useAppDispatch } from "@/redux/hooks"
-import { useState, useEffect, useRef } from "react"
+import AllButton from "../AllButton/AllButton"
+import { Menu, Transition } from "@headlessui/react"
 
 export default function Filter() {
-  const [filterBackground, setFilterBackground] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const sidebarRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch()
+
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const filterBy = event.target.value
     dispatch(filterParcelas(filterBy))
   }
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  }
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    }
-
-    document.addEventListener('click', handleClickOutside)
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside)
-    }
-  }, [])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const isTop = window.scrollY < 300
-      if (isTop !== filterBackground) {
-        setFilterBackground(isTop)
-      }
-    }
-
-    document.addEventListener("scroll", handleScroll)
-    return () => {
-      document.removeEventListener("scroll", handleScroll)
-    }
-  }, [filterBackground])
 
   return (
     <>
-      <div ref={sidebarRef}
-        className={`fixed w-[15rem] p-4 flex z-[500] justify-center overflow-hidden  shadow-lg left-0 ${filterBackground
-          ? "bg-[#222222b0]"
-          : "bg-[#222222e7] ease-in-out duration-300"
-          } ${isOpen ? "h-full" : "h-4 rounded-ee-3xl"}`}
-      >
-        <div className="flex relative flex-col  items-center pb-[6rem] pt-5">
-          <div className="fixed top-0 left-0 mt-[85px] ms-4" onClick={() => toggleSidebar()} >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" className="bi bi-list" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-            </svg>
+      <div className="flex justify-between fixed items-center bg-white w-full lg:px-[4rem] xl:px-[12rem] pt-8 pb-1 z-[40] overflow-hidden">
+        <div className="flex gap-4">
+          <AllButton />
+          <select
+            className=" text-gray-600 hover:text-gray-400 duration-200 text-[0.80rem] font-semibold focus:outline-none focus:ring-none focus:ring-none"
+            onChange={handleFilterChange}
+          >
+            <option value="">SUPERFICIE EN M²</option>
+            <option value="5000">5.000M²</option>
+            <option value="5500">5.000M² a 5.500M²</option>
+            <option value="10000">5.500M² a 10.000M²</option>
+            <option value="10000+">10.000M²</option>
+          </select>
+          <Order />
+          <div className="fixed right-[42%] xl:right-[54%] top-[99px]">
+            <Menu as="div" className="relative inline-block text-left">
+              <div>
+                <Menu.Button className=" text-gray-600 hover:text-gray-400 duration-200 text-[0.80rem] font-semibold focus:outline-none focus:ring-none focus:ring-none">
+                  PRECIO
+                </Menu.Button>
+              </div>
+              <Transition
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="absolute mt-2 w-[15rem] px-[1rem] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className="px-1 py-1 ">
+                    <Menu.Item>
+                      <RangeSlider
+                        initialMin={0}
+                        initialMax={60000000}
+                        min={0}
+                        max={60000000}
+                        step={100}
+                        priceCap={1000}
+                      />
+                    </Menu.Item>
+                  </div>
+                </Menu.Items>
+              </Transition>
+            </Menu>
           </div>
-          <h2 className="text-white">Filtros</h2>
+        </div>
+        <div>
+          <SearchBar />
+        </div>
+        {/* <RangeSlider
+              initialMin={0}
+              initialMax={60000000}
+              min={0}
+              max={60000000}
+              step={100}
+              priceCap={1000}
+            /> */}
+
+        {/* <div className="flex relative items-center ">
+          <h2 className="font-bold text-lg">Filtros</h2>
           <SearchBar />
           <div className="mb-4">
-            <select className="block text-sm font-medium w-full p-[6px] rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] ">
+            <select className="block text-sm font-medium w-full p-[6px] rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00ad68be]">
               <option value="">Ubicación</option>
               <option value="Camino a Ensenada">Camino a Ensenada</option>
               <option value="Camino a Nueva Braunau">
@@ -77,28 +92,8 @@ export default function Filter() {
               <option value="Puerto Varas">Puerto Varas</option>
             </select>
           </div>
-          <div className="mb-4">
-            <select
-              className="block w-full text-sm font-medium p-[6px] rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1]"
-              onChange={handleFilterChange}
-            >
-              <option value="">Superficie</option>
-              <option value="5000">5.000 m² totales o menos</option>
-              <option value="5500">5.000 a 5.500 m² totales</option>
-              <option value="10000">5.500 a 10.000 m² totales</option>
-              <option value="10000+">10.000 m² totales o más</option>
-            </select>
-          </div>
-          <RangeSlider
-            initialMin={0}
-            initialMax={60000000}
-            min={0}
-            max={60000000}
-            step={100}
-            priceCap={1000}
-          />
-          <Order />
-        </div>
+s     
+        </div> */}
       </div>
     </>
   )
