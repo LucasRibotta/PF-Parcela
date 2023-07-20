@@ -16,8 +16,14 @@ import {
   useGetParcelaByIdQuery,
   useDeleteParcelaMutation,
   useUpdateViewsMutation,
-  useDesableParcelaMutation
+  useDesableParcelaMutation,
+  Parcela
 } from "@/redux/services/parcelApi"
+import {
+  useAddToWishlistMutation,
+  useGetUsersQuery,
+  useRemoveFromWishlistMutation
+} from "@/redux/services/userApi"
 import Swal from "sweetalert2"
 import { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
@@ -28,9 +34,13 @@ import { useAppSession } from "@/app/hook"
 const DetailSection = () => {
   const params = useParams()
   const parcela = {
-    id: params.id
+    id: params.id.toString()
   }
   const { session, status, user } = useAppSession()
+  const refetchUser = useGetUsersQuery({ name: "" })
+  const { data: users } = useGetUsersQuery({ name: "" })
+  const userWish = users?.find((el) => el._id === user._id)
+
   // const user = useAppSelector((state) => state.user.userData)
   const dispatch = useAppDispatch()
   const router = useRouter()
@@ -38,6 +48,10 @@ const DetailSection = () => {
   const [desableParcela] = useDesableParcelaMutation()
   const [updateViews] = useUpdateViewsMutation()
   const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela)
+  const [addToWishlist] = useAddToWishlistMutation()
+  const [removeFromWishlist] = useRemoveFromWishlistMutation()
+  const wishes = userWish?.wishes || []
+
   useEffect(() => {
     if (data) {
       dispatch(setParcelaData(data))
@@ -91,6 +105,20 @@ const DetailSection = () => {
     content: string
   }
 
+  const handleAddToWishlist = async (id: string, data: Parcela) => {
+    await addToWishlist({ id, data: data })
+
+    refetchUser.refetch()
+  }
+
+  const handleRemoveFromWishlist = async (id: string) => {
+    if (data) {
+      console.log("data", data._id)
+      await removeFromWishlist({ id, data: data._id })
+    }
+    refetchUser.refetch()
+  }
+
   const Home = () => {
     const [notification, setNotification] = useState<NotificationType>({
       isOpen: false,
@@ -125,6 +153,7 @@ const DetailSection = () => {
       }, 5000)
     }, [])
   }
+  console.log(data?.status)
 
   return (
     <>
@@ -308,13 +337,40 @@ const DetailSection = () => {
           {user && user?.email === data?.user && optionEdit()}
           {user && user.isAdmin && optionEdit()}
 
+          {user && user?.email === data?.user && optionEdit()}
+          {user && user?.email !== data?.user && user.isAdmin && optionEdit()}
+
           {status === "authenticated" ? (
-            <Link href={`/pago/${parcela.id}`} className="mr-8 shadow-lg">
-              <Button text={"Comprar Ahora"}></Button>
-            </Link>
+            data?.status === "Disponible" ? (
+              <Link href={`/pago/${parcela.id}`} className="mr-8 shadow-lg">
+                <Button text={"Comprar Ahora"}></Button>
+              </Link>
+            ) : (
+              ""
+            )
           ) : (
             <Link href="/login" className="mr-8 shadow-lg">
               <Button text={"Comprar Ahora"}></Button>
+            </Link>
+          )}
+
+          {status === "authenticated" ? (
+            wishes.filter((el) => el._id === data?._id).length > 0 ? (
+              <div onClick={() => data && handleRemoveFromWishlist(user?._id)}>
+                <Button text={"Quitar de Lista de Deseos"}></Button>
+              </div>
+            ) : (
+              <div
+                onClick={() =>
+                  data && user && handleAddToWishlist(user?._id, data)
+                }
+              >
+                <Button text={"Agregar a Lista de Deseos"}></Button>
+              </div>
+            )
+          ) : (
+            <Link href="/login" className="mr-20 shadow-lg ">
+              <Button text={"Agregar a Lista de Deseos"}></Button>
             </Link>
           )}
         </div>

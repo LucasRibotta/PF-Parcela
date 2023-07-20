@@ -12,9 +12,8 @@ import { setUserData } from "@/redux/features/userSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useRouter } from "next/navigation"
 import { signOut } from "next-auth/react"
-import { useAppSession } from "@/app/hook"
+import { NewUser, useAppSession } from "@/app/hook"
 import { useGetUsersQuery } from "@/redux/services/userApi"
-import { NewUser } from "@/app/hook"
 
 export default function Navbar() {
   const dispatch = useAppDispatch()

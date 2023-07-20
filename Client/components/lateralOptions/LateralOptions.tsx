@@ -1,9 +1,13 @@
+"use client"
+import { useAppSession } from "@/app/hook"
 import Link from "next/link"
 import { HiOutlineChartBarSquare } from "react-icons/hi2"
 import { LiaClipboardListSolid } from "react-icons/lia"
 import { TbMessage2 } from "react-icons/tb"
 import { PiUsers } from "react-icons/pi"
 const LateralOptions = () => {
+  const { status, user } = useAppSession()
+
   return (
     <>
       <div className="flex flex-col items-center h-[calc(100vh_80px)] overflow-hidden text-gray-400 bg-white shadow-lg py-4 pr-4">
@@ -20,32 +24,38 @@ const LateralOptions = () => {
               </svg>
               <span className="ml-2 text-sm font-bold">Parcels</span>
             </div>
-            <Link href={"/admin/stadistic"}>
-              <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:text-[#00ad68be]">
-                <HiOutlineChartBarSquare className="w-6 h-6 stroke-current" />
-                <span className="ml-2 text-sm font-medium">Estadisticas</span>
-              </div>
-            </Link>
+            {status === "authenticated" && user.isAdmin === true && (
+              <Link href={"/admin/stadistic"}>
+                <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:text-[#00ad68be]">
+                  <HiOutlineChartBarSquare className="w-6 h-6 stroke-current" />
+                  <span className="ml-2 text-sm font-medium">Estadisticas</span>
+                </div>
+              </Link>
+            )}
             <Link href={"/admin/product"}>
               <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:text-[#00ad68be]">
                 <LiaClipboardListSolid className="w-6 h-6 stroke-current" />
                 <span className="ml-2 text-sm font-medium">Productos</span>
               </div>
             </Link>
-            <Link href={"/admin/messages"}>
-              <div className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:text-[#00ad68be]">
-                <TbMessage2 className="w-6 h-6 stroke-current" />
-                <span className="ml-2 text-sm font-medium">Mensajes</span>
-                <span className="absolute top-0 left-0 w-2 h-2 mt-3 ml-3 bg-green-500 rounded-full"></span>
-              </div>
-            </Link>
-            <Link href={"/admin/users"}>
-              <div className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:text-[#00ad68be]">
-                <PiUsers className="w-6 h-6 stroke-current" />
+            {status === "authenticated" && user.isAdmin === true && (
+              <Link href={"/admin/messages"}>
+                <div className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:text-[#00ad68be]">
+                  <TbMessage2 className="w-6 h-6 stroke-current" />
+                  <span className="ml-2 text-sm font-medium">Mensajes</span>
+                  <span className="absolute top-0 left-0 w-2 h-2 mt-3 ml-3 bg-green-500 rounded-full"></span>
+                </div>
+              </Link>
+            )}
+            {status === "authenticated" && user.isAdmin === true && (
+              <Link href={"/admin/users"}>
+                <div className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:text-[#00ad68be]">
+                  <PiUsers className="w-6 h-6 stroke-current" />
 
-                <span className="ml-2 text-sm font-medium">Usuarios</span>
-              </div>
-            </Link>
+                  <span className="ml-2 text-sm font-medium">Usuarios</span>
+                </div>
+              </Link>
+            )}
           </div>
         </div>
       </div>

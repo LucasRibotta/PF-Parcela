@@ -167,7 +167,7 @@ export default function FormSection() {
             Descríbenos tu parcela{" "}
           </h2>
           <input
-            className="appearance-none border rounded mb-3 text-gray-600 py-[4px] px-2 font-normal leading-tight focus:outline-none focus:border-[#00ad68be]"
+            className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
             type="text"
             placeholder="Nombre"
             name="name"
@@ -176,8 +176,8 @@ export default function FormSection() {
             value={info.name}
           />
           <input
-            className="appearance-none border rounded mb-3 text-gray-600 py-[4px] px-2 font-normal leading-tight focus:outline-none focus:border-[#00ad68be]"
-            type="text"
+            className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
+            type="Number"
             placeholder="Lote"
             id="lote"
             name="lote"
@@ -185,7 +185,7 @@ export default function FormSection() {
             value={info.lote ?? ""}
           />
           <input
-            className="appearance-none border rounded mb-3 text-gray-600 py-[4px] px-2 font-normal leading-tight focus:outline-none focus:border-[#00ad68be]"
+            className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
             type="Number"
             placeholder="Área"
             name="area"
@@ -193,7 +193,7 @@ export default function FormSection() {
             value={info.area ?? ""}
           />
           <input
-            className="appearance-none border rounded mb-3 text-gray-600 py-[4px] px-2 font-normal leading-tight focus:outline-none focus:border-[#00ad68be]"
+            className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
             type="Number"
             placeholder="Precio"
             name="price"
@@ -201,7 +201,7 @@ export default function FormSection() {
             value={info.price ?? ""}
           />
           <textarea
-            className="rounded-md h-[100px] py-[4px] px-2  border-[1px] font-normal leading-tight focus:outline-none focus:border-[#00ad68be]"
+            className="rounded-md h-[100px] placeholder:text-center border-[1px] border-gray-200"
             placeholder="Descríbenos la parcela que creaste"
             name="description"
             id="description"

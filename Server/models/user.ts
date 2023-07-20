@@ -1,4 +1,5 @@
 import { Schema, model, Document } from "mongoose"
+import { IParcela } from "./parcela"
 
 export interface User extends Document {
   name: string
@@ -12,6 +13,7 @@ export interface User extends Document {
   accessToken?: string
   isAdmin: boolean
   isCompany: boolean
+  wishes?: IParcela[]
 }
 
 const userSchema = new Schema<User>({
@@ -30,7 +32,8 @@ const userSchema = new Schema<User>({
   provider: { type: String, required: false, default: "local" },
   accessToken: { type: String, required: false },
   isAdmin: { type: Boolean, default: false },
-  isCompany: { type: Boolean, default: false }
+  isCompany: { type: Boolean, default: false },
+  wishes: { type: Array, default: [] }
 })
 
 export default model<User>("User", userSchema, "user")
