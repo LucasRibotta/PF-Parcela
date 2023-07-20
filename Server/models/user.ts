@@ -33,7 +33,7 @@ const userSchema = new Schema<User>({
   accessToken: { type: String, required: false },
   isAdmin: { type: Boolean, default: false },
   isCompany: { type: Boolean, default: false },
-  wishes: { type: Array, default: [] },
+  wishes: { type: Array, default: [] }
 })
 
 export default model<User>("User", userSchema, "user")

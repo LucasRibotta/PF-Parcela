@@ -17,11 +17,11 @@ export default function UserMenu({
           {user?.image ? (
             <img
               src={user?.image ?? "default-image-url"}
-              className="h-10 w-10 rounded-full duration-200 hover:scale-110"
+              className="h-[3rem] w-[3rem] rounded-full duration-200 hover:scale-110"
               alt="no found"
             />
           ) : (
-            <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-white" />
+            <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#039D60] duration-200 text-white" />
           )}
         </Menu.Button>
       </div>
@@ -40,7 +40,7 @@ export default function UserMenu({
                 <Link href="/userDataRegister">
                   <button
                     className={`${
-                      active ? "bg-[#51a8a1] text-white" : "text-gray-900"
+                      active ? "bg-[#00ad68be] text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     Editar perfil
@@ -53,7 +53,7 @@ export default function UserMenu({
                 <button
                   onClick={handleLogout}
                   className={`${
-                    active ? "bg-[#51a8a1] text-white" : "text-gray-900"
+                    active ? "bg-[#00ad68be] text-white" : "text-gray-900"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                 >
                   Cerrar sesion

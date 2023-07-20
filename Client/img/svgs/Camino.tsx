@@ -1,17 +1,24 @@
-
-
 const Camino = () => {
-    return (
-        <>
-            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                width="40px" height="40px" viewBox="0 0 1280.000000 640.000000"
-                preserveAspectRatio="xMidYMid meet">
-                <metadata>
-                    Created by potrace 1.15, written by Peter Selinger 2001-2017
-                </metadata>
-                <g transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)"
-                    fill="#00b39c" stroke="none">
-                    <path d="M6155 5419 c-27 -5 -133 -20 -235 -34 -1050 -146 -1701 -312 -1870
+  return (
+    <>
+      <svg
+        version="1.0"
+        xmlns="http://www.w3.org/2000/svg"
+        width="40px"
+        height="40px"
+        viewBox="0 0 1280.000000 640.000000"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <metadata>
+          Created by potrace 1.15, written by Peter Selinger 2001-2017
+        </metadata>
+        <g
+          transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)"
+          fill="#00b34b"
+          stroke="none"
+        >
+          <path
+            d="M6155 5419 c-27 -5 -133 -20 -235 -34 -1050 -146 -1701 -312 -1870
 -476 -22 -22 -40 -47 -40 -57 0 -65 157 -125 650 -252 334 -86 496 -142 556
 -194 35 -31 38 -35 27 -59 -34 -75 -288 -139 -1253 -317 -112 -21 -248 -45
 -450 -80 -69 -12 -172 -30 -230 -40 -58 -10 -159 -28 -225 -39 -1182 -205
@@ -29,12 +36,12 @@ const Camino = () => {
 217 66 330 100 113 34 255 77 315 97 61 19 164 52 230 73 626 199 688 222 741
 275 16 16 24 36 24 58 0 116 -340 242 -1095 406 -743 161 -867 193 -934 240
 -163 117 180 240 1069 385 141 23 618 97 670 104 l45 6 -40 7 c-49 10 -86 9
--150 -2z"/>
-                </g>
-            </svg>
-        </>
-    )
+-150 -2z"
+          />
+        </g>
+      </svg>
+    </>
+  )
 }
 
-
-export default Camino;
+export default Camino

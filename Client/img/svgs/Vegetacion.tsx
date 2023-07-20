@@ -1,17 +1,24 @@
-
-
 const vegetation = () => {
-    return (
-        <>
-            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                width="40px" height="40px" viewBox="0 0 1131.000000 1280.000000"
-                preserveAspectRatio="xMidYMid meet">
-                <metadata>
-                    Created by potrace 1.15, written by Peter Selinger 2001-2017
-                </metadata>
-                <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
-                    fill="#fb5252" stroke="none">
-                    <path d="M5276 12784 c-176 -42 -341 -187 -402 -352 -10 -26 -19 -49 -20 -51
+  return (
+    <>
+      <svg
+        version="1.0"
+        xmlns="http://www.w3.org/2000/svg"
+        width="40px"
+        height="40px"
+        viewBox="0 0 1131.000000 1280.000000"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <metadata>
+          Created by potrace 1.15, written by Peter Selinger 2001-2017
+        </metadata>
+        <g
+          transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
+          fill="#00b34b"
+          stroke="none"
+        >
+          <path
+            d="M5276 12784 c-176 -42 -341 -187 -402 -352 -10 -26 -19 -49 -20 -51
 -2 -1 -27 5 -56 15 -70 24 -186 24 -256 0 -29 -10 -76 -34 -105 -53 -28 -19
 -53 -30 -55 -24 -9 28 -88 112 -134 145 -194 133 -447 109 -613 -58 -68 -68
 -109 -142 -127 -227 l-12 -58 -80 6 c-281 19 -519 -183 -551 -467 -6 -49 2
@@ -69,11 +76,12 @@ l-12 -45 -76 -4 c-51 -3 -91 -12 -117 -26 -41 -21 -125 -103 -125 -122 0 -11
 19 32 25 32 17 0 -27 54 -91 97 -117 27 -16 65 -27 104 -30 70 -7 71 5 -12
 -141 -292 -511 -678 -923 -1114 -1190 -115 -70 -332 -178 -341 -169 -3 3 15
 182 41 399 105 893 144 1267 165 1593 7 99 16 192 22 207 9 24 12 25 39 16 16
--5 52 -8 81 -5z"/>
-                </g>
-            </svg>
-        </>
-    )
+-5 52 -8 81 -5z"
+          />
+        </g>
+      </svg>
+    </>
+  )
 }
 
-export default vegetation;
+export default vegetation
