@@ -22,7 +22,6 @@ export default function UserMenu({
             />
           ) : (
             <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#51a8a1] duration-200 text-gray-500" />
-            <BiSolidUserCircle className="h-12 w-12 p-1 hover:text-[#039D60] duration-200 text-white" />
           )}
         </Menu.Button>
       </div>
