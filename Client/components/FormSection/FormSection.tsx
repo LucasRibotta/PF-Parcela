@@ -172,7 +172,7 @@ export default function FormSection() {
             />
             <input
               className="mb-4 rounded-md placeholder:text-center border-[1px] border-gray-200"
-              type="text"
+              type="Number"
               placeholder="Lote"
               id="lote"
               name="lote"
