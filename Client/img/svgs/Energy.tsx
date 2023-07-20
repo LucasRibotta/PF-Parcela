@@ -1,15 +1,23 @@
-
 const Energy = () => {
-    return (
-        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-            width="40" height="40" viewBox="0 0 1280.000000 772.000000"
-            preserveAspectRatio="xMidYMid meet">
-            <metadata>
-                Created by potrace 1.15, written by Peter Selinger 2001-2017
-            </metadata>
-            <g transform="translate(0.000000,772.000000) scale(0.100000,-0.100000)"
-                fill="#00143f" stroke="none">
-                <path d="M11210 7700 c-61 -29 -97 -64 -129 -130 -16 -30 -126 -275 -246 -545
+  return (
+    <svg
+      version="1.0"
+      xmlns="http://www.w3.org/2000/svg"
+      width="40"
+      height="40"
+      viewBox="0 0 1280.000000 772.000000"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <metadata>
+        Created by potrace 1.15, written by Peter Selinger 2001-2017
+      </metadata>
+      <g
+        transform="translate(0.000000,772.000000) scale(0.100000,-0.100000)"
+        fill="#00b34b"
+        stroke="none"
+      >
+        <path
+          d="M11210 7700 c-61 -29 -97 -64 -129 -130 -16 -30 -126 -275 -246 -545
 -120 -269 -221 -493 -224 -497 -3 -4 -71 24 -150 62 -87 41 -170 73 -208 80
 -201 38 -402 -75 -556 -315 -79 -124 -120 -220 -347 -805 -122 -316 -239 -620
 -261 -675 -79 -206 -104 -364 -96 -615 6 -187 20 -269 68 -415 64 -192 161
@@ -32,10 +40,11 @@ const Energy = () => {
 52 -128 40 -239 83 -367 144 -101 47 -185 91 -188 96 -2 6 96 233 218 505 292
 653 272 603 266 675 -5 70 -22 108 -68 153 -70 68 -177 90 -259 52z m-245
 -2771 c134 -67 208 -219 175 -361 -30 -130 -124 -221 -257 -248 -130 -27 -272
-50 -332 179 -82 179 7 387 192 447 61 20 163 12 222 -17z"/>
-            </g>
-        </svg>
-    );
+50 -332 179 -82 179 7 387 192 447 61 20 163 12 222 -17z"
+        />
+      </g>
+    </svg>
+  )
 }
 
-export default Energy;
+export default Energy

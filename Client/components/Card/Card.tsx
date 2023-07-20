@@ -49,7 +49,7 @@ function Card({ name, precio, superficie, image, id }: CardProps) {
   }
 
   return (
-    <div className="flex-1 h-[20rem] justify-center max-w-full text-white overflow-hidden shadow rounded-md border-solid border-5 border-black-500 transform hover:scale-[101%] transition duration-300 ease-in-out relative mb-4">
+    <div className="flex-1 h-[20rem] justify-center max-w-full text-white overflow-hidden shadow rounded-md border-solid border-5 border-black-500 transform hover:scale-[101%] transition duration-300 ease-in-out relative mb-4 ">
       <div
         className="flex-end m-auto absolute right-6 items-end"
         onClick={onClick}
@@ -92,7 +92,7 @@ function Card({ name, precio, superficie, image, id }: CardProps) {
         </div>
 
         <Link href={`/detail/${id}`} className=" [&>button]:my-5 ">
-          <button className="bg-[#039D60]  text-white duration-200 px-4 py-[5px] rounded-md">
+          <button className="bg-[#039D60]  text-white duration-200 px-4 py-[5px] rounded-md ">
             Ver mas
           </button>
         </Link>

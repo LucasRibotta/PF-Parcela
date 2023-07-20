@@ -5,7 +5,6 @@ import { Image, Transformation } from "cloudinary-react"
 import { useAppDispatch } from "@/redux/hooks"
 import { setImageCloud } from "@/redux/features/coordenadaSlice"
 
-
 const urlUpload = process.env.NEXT_PUBLIC_CLOUDINARY
 
 export default function UploadImage() {
@@ -15,13 +14,10 @@ export default function UploadImage() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(setImageCloud(uploadedImages));
+    dispatch(setImageCloud(uploadedImages))
   }, [uploadedImages])
 
-
-
   // console.log(uploadedImages);
-
 
   const uploadImg = async () => {
     if (imagesSelected.length === 0) {
@@ -37,10 +33,7 @@ export default function UploadImage() {
           formData.append("upload_preset", "parcelas")
           formData.append("public_id", "parcelas/" + image.name)
 
-          const response = await Axios.post(
-            `${urlUpload}`,
-            formData
-          )
+          const response = await Axios.post(`${urlUpload}`, formData)
           return response.data.secure_url
         } catch (error) {
           console.log("Error uploading image to Cloudinary", error)
@@ -74,19 +67,22 @@ export default function UploadImage() {
   }
 
   useEffect(() => {
-    uploadImg();
+    uploadImg()
   }, [imagesSelected])
 
   return (
     <div className="flex flex-col justify-center items-start text-black">
       <div className=" flex flex-col items-center justify-center rounded-lg cursor-pointer w-[100%] mb-[1rem] ">
         <button
-          className="py-2 px-4 bg-[#51a8a1] m-2 rounded-md text-white transition-all duration-300 hover:bg-[#126e67] hover:font-semibold"
+          className=" bg-gradient-to-r from-[#ACD453] to-[#039D60] p-[1px] hover:from-[#8cad43] hover:to-[#006F43]  duration-200  rounded-lg"
           type="button"
           onClick={handleButtonClick}
         >
-          Añadir Imagen
+          <div className="bg-white hover:bg-slate-100 duration-200 font-semibold h-full w-full px-3 py-1 rounded-lg">
+            Añadir imagen
+          </div>
         </button>
+
         {uploadSuccess ? (
           <p className="text-green-500">Subida correctamente</p>
         ) : (

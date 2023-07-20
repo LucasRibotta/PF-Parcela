@@ -6,12 +6,12 @@ import morgan from "morgan"
 import newAuthRouter from "./router/user.router"
 import emailNotification from "./router/emailNotification.router"
 /* import mercadopago from "mercadopago" */
-const mercadopago = require('mercadopago');
-const cors = require("cors")//Gonzalo MercadoPago
+const mercadopago = require("mercadopago")
+const cors = require("cors") //Gonzalo MercadoPago
 
-const app = express();
+const app = express()
 
-const { URL_LOCAL, URL_PAGO } = process.env
+const { URL_LOCAL, URL_STATUS, URL_FAILURE } = process.env
 
 const PORT = process.env.PORT || 3001
 
@@ -20,8 +20,8 @@ const corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
-app.use(express.json());
-app.use(cors()); //Gonzalo MercadoPago
+app.use(express.json())
+app.use(cors()) //Gonzalo MercadoPago
 app.use(morgan("dev"))
 app.use(express.urlencoded({ extended: true }))
 app.use((req, res, next) => {
@@ -41,10 +41,10 @@ app.use(emailNotification)
 
 //aca tenemos lo de mercadopago en el server
 
-  mercadopago.configure({
-    access_token: "TEST-1121991478303106-071123-211897e3813a959b6199cf6e2d046272-1412742934", // ojo esta con la cuenta prueba de vendedor
-  })
-;
+mercadopago.configure({
+  access_token:
+    "TEST-1121991478303106-071123-211897e3813a959b6199cf6e2d046272-1412742934" // ojo esta con la cuenta prueba de vendedor
+})
 
 app.post("/create_preference", (req, res) => {
   let preference = {
@@ -52,31 +52,29 @@ app.post("/create_preference", (req, res) => {
       {
         title: String(req.body.description),
         unit_price: Number(req.body.price),
-        quantity: Number(req.body.quantity),
+        quantity: Number(req.body.quantity)
       }
     ],
     back_urls: {
-      "success": URL_PAGO,
-      "failure": URL_LOCAL,
-      "pending": "" //esto es cuando pagan en efectivo y tienen que ir con el ticket a pagar a alguna caja
+      success: URL_STATUS,
+      failure: URL_FAILURE,
+      pending: "" //esto es cuando pagan en efectivo y tienen que ir con el ticket a pagar a alguna caja
     },
-    auto_return: "approved" as const,
-  };
+    auto_return: "approved" as const
+  }
 
   mercadopago.preferences
     .create(preference)
     .then(function (response: any) {
       res.json({
         id: response.body.id
-      });
+      })
     })
     .catch(function (error: any) {
-      console.log(error);
-    });
-});
+      console.log(error)
+    })
+})
 // aca termina mercadopago
-
-
 
 app.listen(PORT, () => {
   connectDB()
