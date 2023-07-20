@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
-<<<<<<< HEAD
 import React, { useState } from "react"
 import axios from "axios"
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react"
@@ -8,43 +9,17 @@ import { useParams } from "next/navigation"
 import { useGetParcelaByIdQuery } from "@/redux/services/parcelApi"
 import Button from "@/components/Button/Button"
 import { PiPlantDuotone } from "react-icons/pi"
-=======
-import React, { useState } from "react";
-import axios from "axios";
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
-import { useParams } from "next/navigation";
-import { useGetParcelaByIdQuery, useUpdateParcelaMutation } from "@/redux/services/parcelApi";
-import Button from "@/components/Button/Button";
-import { PiPlantDuotone } from "react-icons/pi";
-
->>>>>>> 6e12620a4d27acd4851abd40ca700fb1b66dc4e8
 
 const url = process.env.NEXT_PUBLIC_URL_MP ? process.env.NEXT_PUBLIC_URL_MP : ""
 
 const pago = () => {
-<<<<<<< HEAD
   const [preferenceId, setPreferenceId] = useState(null)
-=======
-
-  const [updateParcela] = useUpdateParcelaMutation()
-
-  const [preferenceId, setPreferenceId] = useState(null);
->>>>>>> 6e12620a4d27acd4851abd40ca700fb1b66dc4e8
   const params = useParams()
   const parcela = {
     id: params.id.toString()
   }
-<<<<<<< HEAD
   const { data } = useGetParcelaByIdQuery(parcela)
   const image = data?.image[0]
-=======
-
-  const numberParcela = {
-    id: Array.isArray(params.id) ? params.id[0] : params.id,
-  }
-
-  const { data } = useGetParcelaByIdQuery(parcela);
->>>>>>> 6e12620a4d27acd4851abd40ca700fb1b66dc4e8
 
   initMercadoPago("TEST-c42d3844-a294-4c79-a1b0-f286391dfabb") //ojo esta con public key de prueba vendedor
 
@@ -64,28 +39,11 @@ const pago = () => {
     }
   }
   const handleBuy = async () => {
-<<<<<<< HEAD
     const id = await createPreference()
     if (id) {
       setPreferenceId(id)
     }
   }
-=======
-    
-        const vendida: any = {...data, status: 'Vendida'}
-        const update = {
-          id: numberParcela.id,
-          data: vendida,
-        }
-        console.log(vendida)
-        updateParcela(update)
-    const id = await createPreference();
-    if (id) {
-     setPreferenceId(id);
-     }
- 
-  };
->>>>>>> 6e12620a4d27acd4851abd40ca700fb1b66dc4e8
 
   return (
     <div className="flex justify-center items-center h-screen">
