@@ -32,7 +32,8 @@ const pago = () => {
         axios.post
           (url, {
             description: data?.name, //ver como traer el producto
-            price: data?.price, //ver como traer valor
+            price: data?.price,
+             //ver como traer valor
             quantity: 1,
             /* currency_id: "CLP" */
           });
