@@ -14,6 +14,8 @@ import {
     users,
     userDelete,
     userUpdate,
+    postWishList,
+    deleteWishList,
 } from '../controllers/users'
 import {
     createMessage,
@@ -41,5 +43,7 @@ router.get("/message", getMessages)
 router.put("/message/:id", updateMessage)
 router.put("/deleteMessage/:id", deleteMessage)
 
+router.put("/wishlist/:id", postWishList)
+router.put("/thewishlist/:id", deleteWishList)
 
 export default router;

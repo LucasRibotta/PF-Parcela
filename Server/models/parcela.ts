@@ -1,6 +1,6 @@
 import { Schema, model, Document } from "mongoose";
 
-interface IParcela extends Document {
+export interface IParcela extends Document {
   name: string;
   lote: number;
   area: number;

@@ -5,7 +5,7 @@ interface Contactanos {
     firstName: string
     lastName: string
     email: string
-    phone: number
+    phone: number | string
     reason: string
     message: string
     managed: boolean

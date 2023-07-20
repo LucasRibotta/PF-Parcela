@@ -13,7 +13,7 @@ interface CardProps {
   superficie?: number | null
   image: string[] | string
   id: string
-  description: string
+  description?: string
   status: string
 }
 
