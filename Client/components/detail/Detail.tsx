@@ -30,7 +30,7 @@ const DetailSection = () => {
   const { session, status, user } = useAppSession();
   const refetchUser = useGetUsersQuery({ name: "" });
   const { data : users } = useGetUsersQuery({ name: "" });
-  const userWish = users?.find(el => el._id === user._id)
+  const userWish = user && users?.find(el => el._id === user._id)
 
   // const user = useAppSelector((state) => state.user.userData)
   const dispatch = useAppDispatch();
