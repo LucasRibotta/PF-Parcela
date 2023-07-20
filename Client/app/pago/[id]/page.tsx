@@ -63,10 +63,10 @@ const pago = () => {
         }
         console.log(vendida)
         updateParcela(update)
-    // const id = await createPreference();
-    // if (id) {
-    //   setPreferenceId(id);
-    // }
+    const id = await createPreference();
+    if (id) {
+     setPreferenceId(id);
+     }
  
   };
 
