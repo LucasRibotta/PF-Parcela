@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 
-interface Parcela {
+export interface Parcela {
   _id: string
   name: string
   price: number | string | null
