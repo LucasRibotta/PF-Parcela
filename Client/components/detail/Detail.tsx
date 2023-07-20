@@ -321,13 +321,13 @@ console.log(data?.status);
           {user && user?.email === data?.user &&
             optionEdit()
           }
-          {user && user.isAdmin &&
+          {user && user?.email !== data?.user && user.isAdmin &&
             optionEdit()
           }
 
           {
           status === 'authenticated' ?
-            data?.status === 'Disponible' ? 
+            data?.status === 'Disponible' ?
             <Link href={`/pago/${parcela.id}`} className="mr-8 shadow-lg">
               <Button text={"Comprar Ahora"} ></Button>
             </Link>
