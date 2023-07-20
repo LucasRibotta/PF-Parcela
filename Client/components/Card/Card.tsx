@@ -14,7 +14,7 @@ interface CardProps {
   image: string[] | string
   id: string
   description?: string
-  status: string
+  status?: string
 }
 
 function Card({ name, precio, superficie, image, id, status }: CardProps) {
