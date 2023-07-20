@@ -80,31 +80,6 @@ const pago = () => {
         </div>
       </div>
     </div>
-
-    // <div className="flex justify-center items-center h-screen">
-    //   <div className="w-1/3 bg-gray-100 p-10 rounded-lg shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
-    //     <div className="flex justify-between">
-    //       <h1 className="text-4xl">Detalles de su Compra</h1>
-    //       <PiPlantDuotone className="h-[4rem] w-[4rem] text-[#51a8a1]" />
-    //     </div>
-    //     <br />
-    //     <div className="text-lg">
-    //       <p>{`Nombre: ${data?.name}`}</p>
-    //       <hr />
-    //       <p>
-    //         {`Área: ${data?.area?.toLocaleString()}`} m<sup>2</sup>
-    //       </p>
-    //       <hr />
-    //       <p>{`Precio: CLP $ ${data?.price?.toLocaleString()}.-`}</p>
-    //       <hr />
-    //       <br />
-    //       <div onClick={handleBuy} className="flex justify-center items-center">
-    //         <Button text={"Comprar"}></Button>
-    //       </div>
-    //       {preferenceId && <Wallet initialization={{ preferenceId }} />}
-    //     </div>
-    //   </div>
-    // </div>
   )
 }
 export default pago
