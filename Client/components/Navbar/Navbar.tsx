@@ -19,7 +19,7 @@ export default function Navbar() {
   const dispatch = useAppDispatch()
   const router = useRouter()
   const [navbarBackground, setNavbarBackground] = useState(false)
-  const { user: info , status } = useAppSession()
+  const { user: info, status } = useAppSession()
   const { data: dataUser } = useGetUsersQuery({ name: "" })
   const user = dataUser?.find((el) => el.email === info?.email) as unknown as NewUser
 
@@ -97,9 +97,9 @@ export default function Navbar() {
             className={pathName === "/contact" ? activeLink : inactiveLink}
             href="/contact"
           >
-            Contacto
+            Contactanos
           </Link>
-        </li> 
+        </li>
         {user?.isAdmin || user?.isCompany ? (
           <li className="px-[22px] py-[20px]">
             <Link

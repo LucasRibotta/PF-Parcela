@@ -1,6 +1,11 @@
+"use client"
+import { useAppSession } from "@/app/hook"
 import Link from "next/link"
 
 const LateralOptions = () => {
+
+  const { status, user } = useAppSession();
+
   return (
     <>
       <div className="flex flex-col items-center h-full overflow-hidden text-gray-400 bg-gray-900 rounded py-2">
@@ -17,7 +22,7 @@ const LateralOptions = () => {
         </div>
         <div className="w-full px-2">
           <div className="flex flex-col items-start w-full mt-2 border-gray-700">
-            <Link href={"/admin/stadistic"}>
+            {status === 'authenticated' && user.isAdmin === true && <Link href={"/admin/stadistic"}>
               <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                 <svg
                   className="w-6 h-6 stroke-current"
@@ -35,7 +40,7 @@ const LateralOptions = () => {
                 </svg>
                 <span className="ml-2 text-sm font-medium">Estadisticas</span>
               </div>
-            </Link>
+            </Link>}
             <Link href={"/admin/product"}>
               <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                 <svg
@@ -52,7 +57,7 @@ const LateralOptions = () => {
                 <span className="ml-2 text-sm font-medium">Productos</span>
               </div>
             </Link>
-            <Link href={"/admin/messages"}>
+            {status === 'authenticated' && user.isAdmin === true && <Link href={"/admin/messages"}>
               <div className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                 <svg
                   className="w-6 h-6 stroke-current"
@@ -71,8 +76,8 @@ const LateralOptions = () => {
                 <span className="ml-2 text-sm font-medium">Mensajes</span>
                 <span className="absolute top-0 left-0 w-2 h-2 mt-2 ml-2 bg-indigo-500 rounded-full"></span>
               </div>
-            </Link>
-            <Link href={"/admin/users"}>
+            </Link>}
+            {status === 'authenticated' && user.isAdmin === true && <Link href={"/admin/users"}>
               <div className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +91,7 @@ const LateralOptions = () => {
                 </svg>
                 <span className="ml-2 text-sm font-medium">Usuarios</span>
               </div>
-            </Link>
+            </Link>}
           </div>
         </div>
       </div>
