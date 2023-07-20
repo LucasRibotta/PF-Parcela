@@ -1,4 +1,4 @@
-import AdminDash from "@/components/Admin/Admin";
+import AdminDash from "@/components/Admin/Admin"
 
 export default function Admin() {
   return (

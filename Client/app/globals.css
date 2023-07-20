@@ -76,7 +76,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 16px;
   border-radius: 50%;
   -webkit-appearance: none;
-  @apply bg-[#51a8a1];
+  @apply bg-[#039D60];
 }
 input[type="range"]::-moz-range-thumb {
   pointer-events: auto;

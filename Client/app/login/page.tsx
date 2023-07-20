@@ -88,6 +88,8 @@ export default function Login() {
     handleLogin()
   }, [user, dispatch, user, router])
 
+  console.log(user)
+
   if (status === "loading" || isLoading) {
     return <Loading />
   } else if (!user) {
@@ -103,7 +105,7 @@ export default function Login() {
             </div>
             <div className="mb-4">
               <input
-                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#51a8a1]"
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#00ad68be]"
                 id="email"
                 name="name"
                 value={input.email}
@@ -114,7 +116,7 @@ export default function Login() {
             </div>
             <div className="mb-4">
               <input
-                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#51a8a1]"
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-[#00ad68be]"
                 id="password"
                 type="password"
                 name="password"
@@ -125,20 +127,22 @@ export default function Login() {
             </div>
             <div className="space-y-4 flex flex-col justify-center items-center">
               <div className="mt-4 text-[#333] leading-[20px] tracking-[0.5px] text-[14px]">
-                Olvidate tu constraseña?
+                ¿Olvidaste tu constraseña?
               </div>
               <button
-                className="bg-[#51a8a1] hover:bg-[#126e67] ease-in-out min-w-[9rem] max-w-[9rem] duration-300 text-white font-bold py-2 px-4 rounded-[20px]  focus:outline-none focus:shadow-outline"
+                className="min-w-[9rem] max-w-[9rem] bg-gradient-to-r from-[#ACD453] to-[#039D60] p-[1px] hover:from-[#8cad43] hover:to-[#006F43]  duration-200  rounded-[20px]"
                 type="button"
                 onClick={handleSubmit}
               >
-                Iniciar sesión
+                <div className="bg-white hover:bg-slate-100 duration-200 font-semibold h-full w-full px-4 py-2  rounded-[20px]">
+                  Iniciar sesión
+                </div>
               </button>
 
               <div>
                 <Link href={"/register"}>
                   <button
-                    className="bg-[#51a8a1] hover:bg-[#126e67] min-w-[9rem] max-w-[9rem]  ease-in-out duration-300 text-white font-bold py-2 px-4 rounded-[20px]  focus:outline-none focus:shadow-outline"
+                    className="bg-gradient-to-r from-[#ACD453] to-[#039D60] text-white hover:from-[#8cad43] hover:to-[#006F43]   min-w-[9rem] max-w-[9rem] duration-200  font-bold py-2 px-4 rounded-[20px] focus:outline-none focus:shadow-outline"
                     type="button"
                   >
                     Registrarse

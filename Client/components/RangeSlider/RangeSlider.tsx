@@ -33,19 +33,18 @@ export const RangeSlider = ({
       prev.minPrice === current.minPrice && prev.maxPrice === current.maxPrice
   )
 
-  const [minValue, setMinValue] = useState("");
-  const [maxValue, setMaxValue] = useState("");
+  const [minValue, setMinValue] = useState("")
+  const [maxValue, setMaxValue] = useState("")
 
   const handleValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target;
+    const { value, name } = event.target
     if (name === "max") {
-      setMaxValue(value);
+      setMaxValue(value)
     }
     if (name === "min") {
-      setMinValue(value);
+      setMinValue(value)
     }
   }
-
 
   const handleMin = (e: CustomEvent) => {
     if (maxPrice - minPrice >= priceCap && maxPrice <= max) {
@@ -97,21 +96,21 @@ export const RangeSlider = ({
     <div className="flex flex-col " onChange={handleFilterPrice}>
       <div className="flex justify-between items-center mb-6 mt-2 gap-2">
         <div className="rounded-md">
-          <span className="p-2 text-white text-sm font-medium">Min CLP $</span>
+          <span className="p-2  text-sm font-medium">Min CLP $</span>
           <input
             onChange={handleValue}
             name="min"
             value={minPrice}
-            className="w-full rounded-md  p-[6px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] text-sm font-medium pl-2"
+            className="w-full rounded-md  p-[6px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#039D60] text-sm font-medium pl-2"
           />
         </div>
         <div className="rounded-md">
-          <span className="p-2 text-white text-sm font-medium">Max CLP $</span>
+          <span className="p-2 text-sm font-medium">Max CLP $</span>
           <input
             onChange={handleValue}
             name="max"
             value={maxPrice}
-            className="w-full rounded-md  p-[6px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#51a8a1] text-sm font-medium pl-2"
+            className="w-full rounded-md  p-[6px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#039D60] text-sm font-medium pl-2"
           />
         </div>
       </div>
@@ -119,7 +118,7 @@ export const RangeSlider = ({
       <div className="mb-4">
         <div className="slider relative h-1 rounded-md bg-gray-300">
           <div
-            className="progress absolute h-1 bg-[#49968f] rounded"
+            className="progress absolute h-1 bg-[#039D60] rounded"
             ref={progressRef}
           ></div>
         </div>

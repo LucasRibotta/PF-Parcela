@@ -1,5 +1,5 @@
-import Graphics from '@/components/graphics/Graphics'
-import React from 'react'
+import Graphics from "@/components/graphics/Graphics"
+import React from "react"
 
 const Stadistic = () => {
   return (
@@ -10,4 +10,3 @@ const Stadistic = () => {
 }
 
 export default Stadistic
-

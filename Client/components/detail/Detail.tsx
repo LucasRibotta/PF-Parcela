@@ -12,146 +12,148 @@ import Connection from "@/img/svgs/Connection"
 import Energy from "@/img/svgs/Energy"
 import LocationMaps from "../Maps/Maps"
 import { useParams, useRouter } from "next/navigation"
-import { useGetParcelaByIdQuery, useDeleteParcelaMutation, useUpdateViewsMutation, useDesableParcelaMutation, Parcela } from "@/redux/services/parcelApi"
-import { useAddToWishlistMutation, useGetUsersQuery, useRemoveFromWishlistMutation } from "@/redux/services/userApi"
-import Swal from 'sweetalert2'
-import { useEffect, useState } from "react";
+import {
+  useGetParcelaByIdQuery,
+  useDeleteParcelaMutation,
+  useUpdateViewsMutation,
+  useDesableParcelaMutation,
+  Parcela
+} from "@/redux/services/parcelApi"
+import {
+  useAddToWishlistMutation,
+  useGetUsersQuery,
+  useRemoveFromWishlistMutation
+} from "@/redux/services/userApi"
+import Swal from "sweetalert2"
+import { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { setParcelaData } from "@/redux/features/parcelSlice"
 import { useSession } from "next-auth/react"
 import { useAppSession } from "@/app/hook"
 
-
 const DetailSection = () => {
-  const params = useParams();
+  const params = useParams()
   const parcela = {
-    id: params.id.toString(),
+    id: params.id.toString()
   }
-  const { session, status, user } = useAppSession();
-  const refetchUser = useGetUsersQuery({ name: "" });
-  const { data : users } = useGetUsersQuery({ name: "" });
-  const userWish = users?.find(el => el._id === user._id)
+  const { session, status, user } = useAppSession()
+  const refetchUser = useGetUsersQuery({ name: "" })
+  const { data: users } = useGetUsersQuery({ name: "" })
+  const userWish = users?.find((el) => el._id === user._id)
 
   // const user = useAppSelector((state) => state.user.userData)
-  const dispatch = useAppDispatch();
-  const router = useRouter();
+  const dispatch = useAppDispatch()
+  const router = useRouter()
   const [deleteParcela] = useDeleteParcelaMutation()
-  const [desableParcela] = useDesableParcelaMutation();
+  const [desableParcela] = useDesableParcelaMutation()
   const [updateViews] = useUpdateViewsMutation()
-  const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela);
-  const [addToWishlist] = useAddToWishlistMutation();
-  const [removeFromWishlist] = useRemoveFromWishlistMutation();
+  const { data, error, isLoading, isFetching } = useGetParcelaByIdQuery(parcela)
+  const [addToWishlist] = useAddToWishlistMutation()
+  const [removeFromWishlist] = useRemoveFromWishlistMutation()
   const wishes = userWish?.wishes || []
-
 
   useEffect(() => {
     if (data) {
-      dispatch(setParcelaData(data));
+      dispatch(setParcelaData(data))
       updateViews(parcela)
     }
-
   }, [data])
 
-
-
   if (isLoading || isFetching) return <p>Loading</p>
-  if (error) return <p>Some error</p>;
+  if (error) return <p>Some error</p>
 
   const optionEdit = () => {
     return (
-      <>
+      <div className="flex gap-2 mr-2">
         <Link href={`/form/${parcela.id}`}>
           <Button text={"Editar"}></Button>
         </Link>
         <div onClick={deleteParcel}>
           <Button text={"Deshabilitar"}></Button>
         </div>
-      </>
+      </div>
     )
   }
 
-
-
   const deleteParcel = () => {
     Swal.fire({
-      title: '¿Deseas deshabilitar esta parcela?',
+      title: "¿Deseas deshabilitar esta parcela?",
       text: "Si aceptas se inhabilitará el producto",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, deshabilita',
-      cancelButtonText: 'Cancelar'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, deshabilita",
+      cancelButtonText: "Cancelar"
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire(
-          'Inhabilitado con éxito',
-          'Tu parcela ha sido desactivada',
-          'success'
+          "Inhabilitado con éxito",
+          "Tu parcela ha sido desactivada",
+          "success"
         )
-        desableParcela(parcela);
+        desableParcela(parcela)
         setTimeout(() => {
-          router.push('/parcelas');
+          router.push("/parcelas")
         }, 3000)
-
       }
     })
   }
   interface NotificationType {
-    isOpen: boolean;
-    type: "approved" | "failure" | null;
-    content: string;
+    isOpen: boolean
+    type: "approved" | "failure" | null
+    content: string
   }
 
-  const handleAddToWishlist = async (id: string, data: Parcela ) => {
-    await addToWishlist({ id, data: data });
+  const handleAddToWishlist = async (id: string, data: Parcela) => {
+    await addToWishlist({ id, data: data })
 
     refetchUser.refetch()
-  };
+  }
 
   const handleRemoveFromWishlist = async (id: string) => {
-      if(data){
-        console.log("data", data._id)
-        await removeFromWishlist({ id, data: data._id })
-      }
+    if (data) {
+      console.log("data", data._id)
+      await removeFromWishlist({ id, data: data._id })
+    }
     refetchUser.refetch()
-  };
+  }
 
   const Home = () => {
     const [notification, setNotification] = useState<NotificationType>({
       isOpen: false,
       type: null,
-      content: "",
-    });
+      content: ""
+    })
 
     useEffect(() => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const status = urlParams.get("status");
+      const urlParams = new URLSearchParams(window.location.search)
+      const status = urlParams.get("status")
 
       if (status === "approved") {
         setNotification({
           content: "¡Pago aprobado!",
           isOpen: true,
-          type: "approved",
-        });
+          type: "approved"
+        })
       } else if (status === "failure") {
         setNotification({
           content: "¡Pago fallido!",
           isOpen: true,
-          type: "failure",
-        });
+          type: "failure"
+        })
       }
 
       setTimeout(() => {
         setNotification({
           isOpen: false,
           type: null,
-          content: "",
-        });
-      }, 5000);
-    }, []);
+          content: ""
+        })
+      }, 5000)
+    }, [])
   }
-console.log(data?.status);
+  console.log(data?.status)
 
   return (
     <>
@@ -160,18 +162,18 @@ console.log(data?.status);
         alt="parcela"
         className="absolute object-cover top-0 left-0 w-full h-screen  -z-10 animate-aparition "
       />
-      <div className=" rounded-3xl border-solid border-spacing-0 w-[100%] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px] m-auto  relative overflow-hidden bg-white bg-opacity-30 border-transparent">
+      <div className=" rounded-3xl border-solid border-spacing-0 w-[100%] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px] m-auto  relative overflow-hidden">
         <div className="flex flex-col justify-center m-auto w-full h-screen relative">
-          <h1 className={`absolute left-[6%] bottom-[50%] lg:bottom-[6%] text-lg md:text-3xl font-semibold text-white text-[25px] ${style.shadowText}`}>
+          <h1
+            className={`absolute left-[6%] bottom-[50%] lg:bottom-[6%] text-lg md:text-3xl font-semibold text-white text-[25px] ${style.shadowText}`}
+          >
             {data?.name}
           </h1>
 
-          <div className="absolute bottom-0 sm:right-[50%] sm:translate-x-[50%] translate-y-[50%] lg:right-[6%] lg:translate-x-0 p-4 w-[100%] sm:w-[100%] lg:w-[45%] bg-[#f8f8f8] lg:p-8 mt-3 rounded-2xl text-black ">
+          <div className="absolute bottom-0 sm:right-[50%] sm:translate-x-[50%] translate-y-[50%] lg:right-[6%] lg:translate-x-0 p-4 w-[100%] sm:w-[100%] lg:w-[45%] bg-[#f8f8f8] lg:p-8 mt-3 rounded-2xl text-black shadow-lg">
             <h3 className="font-bold my-10">Lote No. {data?.lote}</h3>
-            <span className="my-10 font-bold"></span>  {/* dato posible */}
-            <p className="my-10 text-justify">
-              {data?.description}
-            </p>
+            <span className="my-10 font-bold"></span> {/* dato posible */}
+            <p className="my-10 text-justify">{data?.description}</p>
             <div className="grid grid-cols-2 mx-auto justify-center my-10">
               <div className="text-center p-5 flex items-center justify-center ">
                 <svg
@@ -187,7 +189,9 @@ console.log(data?.status);
                     d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"
                   />
                 </svg>
-                <h3>{data?.area?.toLocaleString()} m<sup>2</sup></h3>
+                <h3>
+                  {data?.area?.toLocaleString()} m<sup>2</sup>
+                </h3>
               </div>
               {/* <div className="text-center p-5 flex items-center justify-center ">
                 <svg
@@ -233,60 +237,71 @@ console.log(data?.status);
           </div>
         </div>
 
-
-
         <div className="w-[100%] sm:w-[100%] lg:w-[45%] p-8  rounded-br-2xl text-white mb-20 mt-[350px] lg:mt-0">
           <h3 className="font-bold text-black mb-8">Características:</h3>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 [&>div]:w-[98%] text-gray-950 ">
-
-            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#fff4dd] text-[#ffb41c] rounded-2xl ">
+            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f3e2] text-[#00b34b] rounded-2xl ">
               <div className="flex items-center mb-4">
                 <Paisaje />
                 <h2 className="pl-2 font-bold">Proyecto Diverso</h2>
               </div>
-              <p className="text-justify font-medium">Perfecto para invertir, segunda vivienda o residencia principal.</p>
+              <p className="text-justify font-medium">
+                Perfecto para invertir, segunda vivienda o residencia principal.
+              </p>
             </div>
-            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#ffe7dc] text-[#ff5f10] rounded-2xl ">
+            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f3e2] text-[#00b34b] rounded-2xl ">
               <div className="flex items-center mb-4">
                 <Pago />
                 <h2 className=" pl-2 font-bold">Facilidades de Pago</h2>
               </div>
-              <p className="text-justify font-medium">Crédito directo, pago en cuotas y descuentos en efectivo.</p>
+              <p className="text-justify font-medium">
+                Crédito directo, pago en cuotas y descuentos en efectivo.
+              </p>
             </div>
 
-            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f3ec] text-[#00b39c] rounded-2xl ">
+            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f3e2] text-[#00b34b] rounded-2xl ">
               <div className="flex items-center mb-4">
                 <Camino />
                 <h2 className=" pl-2 font-bold">Acceso óptimo</h2>
               </div>
-              <p className="text-justify font-medium">Camino de acceso apto para cualquier vehículo.</p>
+              <p className="text-justify font-medium">
+                Camino de acceso apto para cualquier vehículo.
+              </p>
             </div>
-            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#fed3d3] text-[#fb5252] rounded-2xl ">
+            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f3e2] text-[#00b34b] rounded-2xl ">
               <div className="flex items-center mb-4">
                 <Vegetation />
-                <h2 className=" pl-2 font-bold">Superficie y Vegetación Mixta</h2>
+                <h2 className=" pl-2 font-bold">
+                  Superficie y Vegetación Mixta
+                </h2>
               </div>
-              <p className="text-justify font-medium">Planicies, pendientes, estero, árboles frutales y vegetación variada.</p>
+              <p className="text-justify font-medium">
+                Planicies, pendientes, estero, árboles frutales y vegetación
+                variada.
+              </p>
             </div>
 
-            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f7f7] text-[#1fcfcd] rounded-2xl ">
+            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f3e2] text-[#00b34b] rounded-2xl ">
               <div className="flex items-center mb-4 ">
                 <Connection />
                 <h2 className=" mb-2 pl-2 font-bold">Conectividad digital</h2>
               </div>
-              <p className="text-justify font-medium">Excelente señal telefónica y conectividad 4G en el sector.</p>
+              <p className="text-justify font-medium">
+                Excelente señal telefónica y conectividad 4G en el sector.
+              </p>
             </div>
-            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#dbe4f8] text-[#00143f] rounded-2xl ">
+            <div className="m-1 p-[20px] grid grid-cols-1  bg-[#d9f3e2] text-[#00b34b] rounded-2xl ">
               <div className="flex items-center mb-4">
                 <Energy />
-                <h2 className=" pl-2 font-bold">Factibilidad de Energía Eléctrica.</h2>
+                <h2 className=" pl-2 font-bold">
+                  Factibilidad de Energía Eléctrica.
+                </h2>
               </div>
-              <p className="text-justify font-medium">Tendido eléctrico de fácil desarrollo comunitario.</p>
+              <p className="text-justify font-medium">
+                Tendido eléctrico de fácil desarrollo comunitario.
+              </p>
             </div>
-
-
-
           </div>
         </div>
 
@@ -296,11 +311,18 @@ console.log(data?.status);
           </h2>
           <div className="w-full rounded-3xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
             {data ? (
-              Array.isArray(data.image) && data.image.map((el: string, index: number) => (
-                <img key={index} src={el} alt={el} className="w-[95%] bg-slate-300 h-[400px] m-2 box-border object-cover rounded-3xl" />
+              Array.isArray(data.image) &&
+              data.image.map((el: string, index: number) => (
+                <div className="shadow-xl rounded-3xl m-2">
+                  <img
+                    key={index}
+                    src={el}
+                    alt={el}
+                    className="w-full bg-slate-300 h-[300px]  object-cover rounded-3xl"
+                  />
+                </div>
               ))
             ) : (
-
               <div>No se encontraron datos</div>
             )}
           </div>
@@ -310,49 +332,47 @@ console.log(data?.status);
           <LocationMaps location={data?.location ?? ""} />
         </div>
 
-        <div className="">
-          seccion de movilidad
-        </div>
-
         {/* <Button text={"Agregar a carro"}></Button> */}
         <div className="fixed flex justify-end bottom-6 w-[300px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px]">
+          {user && user?.email === data?.user && optionEdit()}
+          {user && user.isAdmin && optionEdit()}
 
+          {user && user?.email === data?.user && optionEdit()}
+          {user && user?.email !== data?.user && user.isAdmin && optionEdit()}
 
-          {user && user?.email === data?.user &&
-            optionEdit()
-          }
-          {user && user?.email !== data?.user && user.isAdmin &&
-            optionEdit()
-          }
-
-          {
-          status === 'authenticated' ?
-            data?.status === 'Disponible' ?
-            <Link href={`/pago/${parcela.id}`} className="mr-8 shadow-lg">
-              <Button text={"Comprar Ahora"} ></Button>
-            </Link>
-            : ""
-            :
+          {status === "authenticated" ? (
+            data?.status === "Disponible" ? (
+              <Link href={`/pago/${parcela.id}`} className="mr-8 shadow-lg">
+                <Button text={"Comprar Ahora"}></Button>
+              </Link>
+            ) : (
+              ""
+            )
+          ) : (
             <Link href="/login" className="mr-8 shadow-lg">
-              <Button text={"Comprar Ahora"} ></Button>
+              <Button text={"Comprar Ahora"}></Button>
             </Link>
-          }
+          )}
 
-          {status === 'authenticated' ?
-            (wishes.filter(el => el._id === data?._id).length > 0 ?
+          {status === "authenticated" ? (
+            wishes.filter((el) => el._id === data?._id).length > 0 ? (
               <div onClick={() => data && handleRemoveFromWishlist(user?._id)}>
-                <Button text={"Quitar de Lista de Deseos"} ></Button>
+                <Button text={"Quitar de Lista de Deseos"}></Button>
               </div>
-              :
-              <div onClick={() => data && user && handleAddToWishlist(user?._id, data)}>
-                <Button text={"Agregar a Lista de Deseos"} ></Button>
-              </div>)
-            :
+            ) : (
+              <div
+                onClick={() =>
+                  data && user && handleAddToWishlist(user?._id, data)
+                }
+              >
+                <Button text={"Agregar a Lista de Deseos"}></Button>
+              </div>
+            )
+          ) : (
             <Link href="/login" className="mr-20 shadow-lg ">
-              <Button text={"Agregar a Lista de Deseos"} ></Button>
+              <Button text={"Agregar a Lista de Deseos"}></Button>
             </Link>
-          }
-
+          )}
         </div>
       </div>
     </>

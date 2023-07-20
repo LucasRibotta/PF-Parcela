@@ -27,9 +27,9 @@ const ServiceSection = () => {
 
   return (
     <section className="flex flex-col items-center w-[300px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px] mx-auto ">
-      <div className="flex items-center flex-col lg:flex-row gap-[4rem] px-4 animate-aparition mt-9">
-        <div className="mt-16 w-[50%] h-[500px] ">
-          <div className="max-w-[100%] h-[100%] bg-orange-200  rounded-3xl text-center overflow-hidden shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
+      <div className="flex flex-col h-screen lg:flex-row items-center justify-center animate-aparition w-full">
+        <div className="w-[50%] h-[400px] ">
+          <div className="max-w-[100%] h-[100%] rounded-3xl text-center overflow-hidden shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
             <iframe
               title="Imagen 360"
               width="100%"
@@ -39,76 +39,33 @@ const ServiceSection = () => {
             ></iframe>
           </div>
         </div>
-        <div className="mt-16 w-[40%] flex flex-col items-start space-y-4 p-4 text-justify">
-          <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-            <div className="flex items-center justify-center w-10 my-2 h-10 rounded-full bg-[#b7fcf6] ">
-              <PiPlantDuotone className="h-[2rem] w-[2rem] text-[#51a8a1]" />
+        <div className="w-[40%] flex flex-col items-start space-y-4 py-4 px-8 text-justify">
+          <div className="max-w-xl mb-4 md:mx-auto lg:max-w-2xl ">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full ">
+              <PiPlantDuotone className="h-[2rem] w-[2rem] text-[#039D60]" />
             </div>
             <h2 className="max-w-lg  text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
               Buscamos evidenciar{" "}
-              <span className="text-[#51a8a1]">el mejor vivir</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ACD453] to-[#039D60]">
+                el mejor vivir
+              </span>
             </h2>
           </div>
-          <p>
-            Somos una E-Commerce encargada de la ventas de parcelas. Tenemos más
-            de 10 condominios en funcionamiento y disponibles para que
-            encuentres el lugar que tanto estás buscando y revises todas las
-            opciones perfectas que tenemos para ti, tus gustos y necesidades.
-            Entregándote paz, tranquilidad y sobre todo una mejor calidad de
-            vida. Conoce todo sobre nuestra propuesta y la familia Parcelas de
-            Chile.
-          </p>
+          <div className="text-start">
+            <p>
+              ¡Oportunidad única! Parcelas amplias rodeadas de naturaleza y
+              tranquilidad.
+            </p>
+            <hr className="border-t-4 border-green-600 my-4 w-[50%]" />
+            <p>
+              Invierte en tu futuro y disfruta de la vida excepcional que te
+              ofrecen estas parcelas.
+            </p>
+          </div>
         </div>
       </div>
 
       <div className="mt-16 mb-16 px-4">
-        {/* <h2 className="font-bold mb-5 text-center text-[2rem] ">Servicios</h2>
-
-        <div className="flex p-4 rounded-lg transition-transform animate-aparition">
-          <div className="flex flex-col mx-1 items-center [&>p]:text-justify [&>p]:m-4 [&>img]:rounded-xl border-2 border-teal-400 p-3 rounded-lg">
-            <img
-              src="https://i.pinimg.com/564x/de/de/20/dede20ff2553c7e8927ceefddc2c77ab.jpg"
-              alt="motorgrader-fencing service"
-              className="w-screen h-48 object-cover"
-            />
-            <h3 className="text-[1.5rem] font-bold mt-3">
-              Motoniveladora y Cercado
-            </h3>
-            <p>
-              Brindamos soluciones profesionales de nivelación de terrenos y
-              construcción de cercas, asegurando resultados precisos y
-              duraderos.
-            </p>
-          </div>
-
-          <div className="flex flex-col mx-1 items-center [&>p]:text-justify [&>p]:m-4 [&>img]:rounded-xl border-2 border-teal-400 p-3 rounded-lg">
-            <img
-              src="https://i.pinimg.com/564x/08/e7/29/08e72918350dad7595c7495ea4411ebf.jpg"
-              alt="legal service"
-              className="w-screen h-48 object-cover"
-            />
-            <h3 className="text-[1.5rem] font-bold mt-3">Legales</h3>
-            <p>
-              Ofrecemos asesoramiento experto en notarías y registros de bienes
-              raíces para garantizar transacciones seguras y cumplimiento legal.
-            </p>
-          </div>
-
-          <div className="flex flex-col mx-1 items-center [&>p]:text-justify [&>p]:m-4 [&>img]:rounded-xl border-2 border-teal-400 p-3 rounded-lg">
-            <img
-              src="https://i.pinimg.com/564x/72/e0/bc/72e0bc52a1ee76e5ef07e75cc5775b10.jpg"
-              alt="gardening-landscaping service"
-              className="w-screen h-48 object-cover"
-            />
-            <h3 className="text-[1.5rem] font-bold mt-3">
-              Jardinería y paisajismo
-            </h3>
-            <p>
-              Transformamos espacios exteriores, creando diseños personalizados
-              y manteniendo áreas verdes hermosas y saludables.
-            </p>
-          </div>
-        </div> */}
         <Other />
       </div>
     </section>
