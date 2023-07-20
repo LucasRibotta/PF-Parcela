@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 "use client"
@@ -313,7 +314,7 @@ const DetailSection = () => {
             {data ? (
               Array.isArray(data.image) &&
               data.image.map((el: string, index: number) => (
-                <div key={index} className="shadow-xl rounded-3xl m-2">
+                <div className="shadow-xl rounded-3xl m-2">
                   <img
                     key={index}
                     src={el}
