@@ -5,6 +5,7 @@ import connectDB from "./db/connect"
 import morgan from "morgan"
 import newAuthRouter from "./router/user.router"
 import emailNotification from "./router/emailNotification.router"
+import bodyParser from "body-parser"
 /* import mercadopago from "mercadopago" */
 const mercadopago = require('mercadopago');
 const cors = require("cors")//Gonzalo MercadoPago
@@ -75,7 +76,7 @@ app.post("/create_preference", (req, res) => {
     });
 
     // Aca es la captura cuando vuelve la compra y te devuelve el status.-
-    
+
     app.get('URL_STATUS', function (req, res) {
       res.json({
         Status: req.query.status,
@@ -84,7 +85,7 @@ app.post("/create_preference", (req, res) => {
         MerchantOrder: req.query.merchant_order_id
       });
     });
-    
+
 
 
 });
