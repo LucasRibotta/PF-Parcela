@@ -10,7 +10,7 @@ import { Fragment, useState } from "react"
 export default function Filter() {
   const dispatch = useAppDispatch()
 
-  let [isOpen, setIsOpen] = useState(true)
+  let [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
     setIsOpen(false)
