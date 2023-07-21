@@ -50,10 +50,10 @@ export default function Filter() {
                     <Menu.Item>
                       <RangeSlider
                         initialMin={0}
-                        initialMax={30000}
+                        initialMax={50000}
                         min={0}
-                        max={30000}
-                        step={100}
+                        max={50000}
+                        step={1000}
                         priceCap={1000}
                       />
                     </Menu.Item>
