@@ -24,7 +24,7 @@ const Message = () => {
 
     return (
         <>
-            <div className='flex flex-col w-full bg-slate-100'>
+            <div className='flex flex-col w-full bg-grey-400'>
 
                 <div className='w-full bg-slate-400 grid grid-cols-1 gap-4'>
                     <h2>Pendientes</h2>

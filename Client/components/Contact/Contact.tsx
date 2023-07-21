@@ -111,6 +111,9 @@ const ContactSection = () => {
               <option value="Problemas con una compra">
                 Problemas con una compra
               </option>
+              <option value="Ofrecer una parcela">
+                Ofrecer una parcela
+              </option>
               <option value="Otros">Otros</option>
             </select>
           </div>
