@@ -26,10 +26,10 @@ const Message = () => {
         <>
             <div className='flex flex-col w-full bg-grey-400'>
 
-                <div className='w-full bg-slate-700 grid grid-cols-1 gap-4'>
+                <div className='w-full bg-slate-300 grid grid-cols-1 gap-4'>
                     <h2>Pendientes</h2>
                     {
-                        data?.map(el => el.managed === false && <div className='bg-slate-500 text-white p-10 ' key={el._id}>
+                        data?.map(el => el.managed === false && <div className='bg-white text-black p-10 ' key={el._id}>
                             <h3>Nombre y apellido: {el.firstName} {el.lastName}</h3>
                             <h3>Correo electronico: {el.email}</h3>
                             <h3>Numero telefonico: {el.phone}</h3>
@@ -45,10 +45,10 @@ const Message = () => {
                         </div>)
                     }
                 </div>
-                <div className='w-full bg-slate-400 grid grid-cols-1 gap-4'>
+                <div className='w-full bg-slate-300 grid grid-cols-1 gap-4'>
                     <h2>Gestionados:</h2>
                     {
-                        data?.map(el => el.managed === true && <div className='bg-slate-800 text-white p-10 ' key={el._id}>
+                        data?.map(el => el.managed === true && <div className='bg-white text-black p-10 ' key={el._id}>
                             <h3>Nombre y apellido: {el.firstName} {el.lastName}</h3>
                             <h3>Correo electronico: {el.email}</h3>
                             <h3>Numero telefonico: {el.phone}</h3>
