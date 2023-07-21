@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @next/next/no-img-element */
+
 "use client"
 import React, { useState, ChangeEvent, useEffect } from "react"
 import swal from "sweetalert"
@@ -33,7 +32,7 @@ export default function FormSectionUpdate() {
   const [updateParcela] = useUpdateParcelaMutation()
   const params = useParams()
   const parcela = {
-    id: params.id,
+    id: params.id.toString(),
   }
   const { data, error, isLoading } = useGetParcelaByIdQuery(parcela);
   const imageCloud = useAppSelector(state => state.coordenada.image)
