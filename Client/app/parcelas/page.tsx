@@ -15,7 +15,7 @@ export default function Parcelas() {
   const dispatch = useAppDispatch()
   const parcels = useAppSelector((state) => state.parcelas.parcelas)
   const [page, setPage] = useState(1)
-  const [porPage, setPorPage] = useState(5)
+  const [porPage, setPorPage] = useState(6)
   const [inputPage, setInputPage] = useState(1)
   const currentParcels = parcels.slice(
     (page - 1) * porPage,
