@@ -17,12 +17,21 @@ export default function Parcelas() {
   const [page, setPage] = useState(1)
   const [porPage, setPorPage] = useState(6)
   const [inputPage, setInputPage] = useState(1)
-  const currentParcels = parcels.slice(
-    (page - 1) * porPage,
-    (page - 1) * porPage + porPage
-  )
-  const max = Math.ceil(parcels.length / porPage)
+  
+  const ultimaParcelaenlapagina =  page * porPage
+  const primeraParcelaenlapagina = ultimaParcelaenlapagina - porPage
 
+  const currentParcels = parcels.slice(
+    primeraParcelaenlapagina, ultimaParcelaenlapagina
+    // (page - 1) * porPage,
+    // (page - 1) * porPage + porPage
+  )
+useEffect(() => {
+  setPage(1)
+  setInputPage(1)
+},[parcels])
+
+  const max = Math.ceil(parcels.length / porPage)
   useEffect(() => {
     if (data && Array.isArray(data)) {
       dispatch(setParcelas(data))
