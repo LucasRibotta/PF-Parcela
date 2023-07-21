@@ -29,11 +29,11 @@ type information = {
 
 export default function FormSectionUpdate() {
   const router = useRouter();
-  const dispatch = useAppDispatch();
+  
   const [updateParcela] = useUpdateParcelaMutation()
   const params = useParams()
   const parcela = {
-    id: Array.isArray(params.id) ? params.id[0] : params.id,
+    id: params.id.toString(),
   }
   const { data, error, isLoading } = useGetParcelaByIdQuery(parcela);
   const imageCloud = useAppSelector(state => state.coordenada.image)

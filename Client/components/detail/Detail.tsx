@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 "use client"
@@ -36,10 +37,10 @@ const DetailSection = () => {
   const parcela = {
     id: params.id.toString()
   }
-  const { session, status, user } = useAppSession()
-  const refetchUser = useGetUsersQuery({ name: "" })
-  const { data: users } = useGetUsersQuery({ name: "" })
-  const userWish = users?.find((el) => el._id === user._id)
+  const { session, status, user } = useAppSession();
+  const refetchUser = useGetUsersQuery({ name: "" });
+  const { data : users } = useGetUsersQuery({ name: "" });
+  const userWish = user && users?.find(el => el._id === user._id)
 
   // const user = useAppSelector((state) => state.user.userData)
   const dispatch = useAppDispatch()
@@ -113,7 +114,7 @@ const DetailSection = () => {
 
   const handleRemoveFromWishlist = async (id: string) => {
     if (data) {
-      console.log("data", data._id)
+      
       await removeFromWishlist({ id, data: data._id })
     }
     refetchUser.refetch()
@@ -153,7 +154,6 @@ const DetailSection = () => {
       }, 5000)
     }, [])
   }
-  console.log(data?.status)
 
   return (
     <>

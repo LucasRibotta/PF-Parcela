@@ -88,7 +88,6 @@ export default function Login() {
     handleLogin()
   }, [user, dispatch, user, router])
 
-  console.log(user)
 
   if (status === "loading" || isLoading) {
     return <Loading />

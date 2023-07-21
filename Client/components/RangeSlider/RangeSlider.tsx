@@ -99,6 +99,7 @@ export const RangeSlider = ({
           <span className="p-2  text-sm font-medium">Min CLP $</span>
           <input
             onChange={handleValue}
+            type="text"
             name="min"
             value={minPrice}
             className="w-full rounded-md  p-[6px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#039D60] text-sm font-medium pl-2"
@@ -109,6 +110,7 @@ export const RangeSlider = ({
           <input
             onChange={handleValue}
             name="max"
+            type="text"
             value={maxPrice}
             className="w-full rounded-md  p-[6px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#039D60] text-sm font-medium pl-2"
           />

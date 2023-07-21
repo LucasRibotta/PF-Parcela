@@ -83,7 +83,7 @@ const ContactSection = () => {
       }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-          console.log("I was closed by the timer")
+          
         }
       })
     }
@@ -99,6 +99,24 @@ const ContactSection = () => {
           <h1 className="text-xl font-semibold mb-6">Contáctanos</h1>
         </div>
         <form className="w-full px-6" onSubmit={handleSubmit}>
+        <div className="flex flex-col justify-center mt-8">
+            <select
+              className="block w-full text-gray-600 p-[6px] rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-400"
+              onChange={handleChange}
+              name="reason"
+              value={info.reason}
+            >
+              <option value="">Selecciona el asunto</option>
+
+              <option value="Problemas con una compra">
+                Problemas con una compra
+              </option>
+              <option value="Ofrecer una parcela">
+                Ofrecer una parcela
+              </option>
+              <option value="Otros">Otros</option>
+            </select>
+          </div>
           <div className="flex flex-col mb-4 justify-center">
             <div className="flex gap-[1.5rem] w-[100%] justify-between">
               <input
@@ -145,21 +163,7 @@ const ContactSection = () => {
               value={info.phone}
             />
           </div>
-          <div className="flex flex-col justify-center mt-8">
-            <select
-              className="block w-full text-gray-600 p-[6px] rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-400"
-              onChange={handleChange}
-              name="reason"
-              value={info.reason}
-            >
-              <option value="">Selecciona el asunto</option>
 
-              <option value="Problemas con una compra">
-                Problemas con una compra
-              </option>
-              <option value="Otros">Otros</option>
-            </select>
-          </div>
           <div className="flex flex-col justify-center mt-8">
             <textarea
               className="block w-full text-gray-600 p-[6px] rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-400"

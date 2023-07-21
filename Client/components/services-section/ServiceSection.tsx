@@ -17,7 +17,7 @@ const ServiceSection = () => {
         const imageUrl = response.url
         fn(imageUrl)
       } catch (error) {
-        console.log("Error al obtener imagen", error)
+        
       }
     }
     fetchImage(setImage1)

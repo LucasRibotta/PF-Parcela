@@ -1,20 +1,31 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 import React, { useState } from "react"
 import axios from "axios"
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react"
 import { useParams } from "next/navigation"
-import { useGetParcelaByIdQuery } from "@/redux/services/parcelApi"
+import { useGetParcelaByIdQuery, useUpdateParcelaMutation } from "@/redux/services/parcelApi";
 import Button from "@/components/Button/Button"
 import { PiPlantDuotone } from "react-icons/pi"
 
 const url = process.env.NEXT_PUBLIC_URL_MP ? process.env.NEXT_PUBLIC_URL_MP : ""
 
 const pago = () => {
+
+  const [updateParcela] = useUpdateParcelaMutation()
+
   const [preferenceId, setPreferenceId] = useState(null)
   const params = useParams()
   const parcela = {
     id: params.id.toString()
   }
+
+  const numberParcela = {
+    id: Array.isArray(params.id) ? params.id[0] : params.id,
+  }
+
   const { data } = useGetParcelaByIdQuery(parcela)
   const image = data?.image[0]
 
@@ -36,6 +47,13 @@ const pago = () => {
     }
   }
   const handleBuy = async () => {
+    
+    const vendida: any = {...data, status: 'Vendida'}
+    const update = {
+      id: numberParcela.id,
+      data: vendida,
+    }
+    updateParcela(update)
     const id = await createPreference()
     if (id) {
       setPreferenceId(id)

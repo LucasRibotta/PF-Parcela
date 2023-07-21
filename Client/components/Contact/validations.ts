@@ -12,10 +12,10 @@ const validations = (info: Contactanos) => {
 
 
     if (info.firstName === "") {
-        error.firstName = "debes escribir tu nombre..."
+        error.firstName = "Debes escribir tu nombre..."
     }
     if (info.lastName === "") {
-        error.lastName = "debes escribir tu apellido..."
+        error.lastName = "Debes escribir tu apellido..."
     }
 
     if (!info.email) {
@@ -27,14 +27,14 @@ const validations = (info: Contactanos) => {
     if (!info.phone) {
         info.phone = ""
         if (!regexPhone.test(info.phone)) {
-            error.phone = "debes escribir tu nombre..."
+            error.phone = "debes escribir tu número de teléfono..."
         }
     }
     if (info.reason === "") {
-        error.reason = "debes seleccionar una opcion..."
+        error.reason = "Debes seleccionar una opcion..."
     }
     if (info.message === "") {
-        error.message = "escribe el mensaje que nos deseas comunicar..."
+        error.message = "Escribe el mensaje que nos deseas comunicar..."
     }
 
     return error

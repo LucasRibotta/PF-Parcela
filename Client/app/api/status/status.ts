@@ -9,7 +9,7 @@ export const venta = async (req: NextApiRequest, res: NextApiResponse) => {
   const { query } = req;
   const topic = query.topic || query.type;
 
-  console.log({ query, topic });
+  
 
   try {
     if (topic === "payment") {
@@ -17,8 +17,7 @@ export const venta = async (req: NextApiRequest, res: NextApiResponse) => {
       const payment = await mercadopago.payment.findById(Number(paymentId));
       const paymentStatus = payment.body.status;
 
-      console.log([payment, paymentStatus]);
-
+     
       if (paymentStatus === "approved") {
         
       const {status, payment_id, external_reference,merchant_order_id} = req.query;
