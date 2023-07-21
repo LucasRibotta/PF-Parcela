@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { HiOutlineRefresh } from "react-icons/hi"
 
 export default function SearchBar() {
+
   const [keyword, setKeyword] = useState("")
   const dispatch = useAppDispatch()
 
@@ -16,7 +17,8 @@ export default function SearchBar() {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   }
 
-  const handleSubmit = () => {
+  const filter = (keyword: string) => {
+
     if (keyword) {
       const filtered = data?.filter((e) => {
         const accentsData = removeAccents(e.name)
@@ -27,7 +29,14 @@ export default function SearchBar() {
       if (filtered !== undefined) {
         dispatch(setParcelas(filtered))
       }
-    }
+    }else if(!keyword) {
+      
+      data && dispatch(setParcelas(data))}
+  }
+
+  const handleSubmit = () => {
+    filter(keyword)
+ 
   }
 
   const handleKeyDown = (e: any) => {
@@ -36,9 +45,9 @@ export default function SearchBar() {
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement> ) => {
     setKeyword(e.target.value)
-    handleSubmit()
+    filter(e.target.value)
   }
 
   return (
