@@ -33,7 +33,7 @@ export default function FormSectionUpdate() {
   const [updateParcela] = useUpdateParcelaMutation()
   const params = useParams()
   const parcela = {
-    id: params.id.toString(),
+    id: params.id,
   }
   const { data, error, isLoading } = useGetParcelaByIdQuery(parcela);
   const imageCloud = useAppSelector(state => state.coordenada.image)
