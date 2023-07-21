@@ -13,6 +13,7 @@ import { ZodError } from "zod"
 import { useAppSelector } from "@/redux/hooks"
 import { useRouter } from "next/navigation"
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
+import { useAppSession } from "@/app/hook"
 
 type information = {
   _id?: string
@@ -30,7 +31,7 @@ type information = {
 
 export default function FormSection() {
   const router = useRouter()
-  const user = useAppSelector((state) => state.user.userData)
+  const { user } = useAppSession();
 
   const [location, setLocation] = useState("")
   const [confirmation, setConfirmation] = useState(false)
@@ -79,7 +80,7 @@ export default function FormSection() {
           typeof info.price === "number"
             ? info.price
             : parseInt(info.price || "0"),
-        user: user?.email
+        // user: user?.email
       }
       const validData: information = validate.parse(convertedInfo)
 
@@ -92,7 +93,7 @@ export default function FormSection() {
       // }, 2000)
 
       setConfirmation(true)
-      createParcela({ ...validData, location: validData.location })
+      createParcela({ ...validData, location: validData.location, user: user?.email })
 
       setTimeout(() => {
         setConfirmation(false)

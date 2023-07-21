@@ -43,15 +43,17 @@ export const updateViews = async (req: Request, res: Response) => {
   const { id } = req.params
   try {
     const parcelaViews = await idParcela(id)
-    if (parcelaViews.views) {
+    if (parcelaViews.views !== undefined) {
       await ParcelaModel.findByIdAndUpdate(id, {
         views: parcelaViews.views + 1
       }, { new: true });
+      console.log(parcelaViews,"existe")
       return res.status(200).send(parcelaViews)
     } else {
       await ParcelaModel.findByIdAndUpdate(id, {
         views: 0
       }, { new: true });
+      console.log(parcelaViews, "no existe")
       return res.status(200).send(parcelaViews)
     }
   } catch (error) {
@@ -126,12 +128,14 @@ export const createCondominio = async (req: Request, res: Response) => {
 export const updateParcela = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { name, lote, area, price, location, image, condominio, description, status } = req.body;
+    const { name, lote, area, price, location, image, condominio, description, status, user } = req.body;
+    console.log(req.body);
+
 
     if (!id) {
       throw new Error('El campo id es requerido.');
     }
-    const parcelaActualizado = await updateParce(id, name, lote, area, price, location, image, condominio, description, status)
+    const parcelaActualizado = await updateParce(id, name, lote, area, price, location, image, description, status, user)
     if (!parcelaActualizado) {
       return res.status(404).json({ error: 'El documento no existe.' });
     }
