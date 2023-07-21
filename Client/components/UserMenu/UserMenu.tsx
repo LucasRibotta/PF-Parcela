@@ -43,7 +43,7 @@ export default function UserMenu({
                       active ? "bg-[#00ad68be] text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
-                    Editar perfil
+                    Mi Perfil
                   </button>
                 </Link>
               )}
