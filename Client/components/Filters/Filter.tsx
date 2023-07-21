@@ -76,9 +76,9 @@ export default function Filter() {
                     <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                       <RangeSlider
                         initialMin={0}
-                        initialMax={60000000}
+                        initialMax={100000}
                         min={0}
-                        max={60000000}
+                        max={100000}
                         step={100}
                         priceCap={1000}
                       />
