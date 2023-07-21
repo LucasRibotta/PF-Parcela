@@ -10,14 +10,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const topic = query.topic || query.type;
 
-  console.log({ query, topic });
+ 
   try {
     if (topic === "payment") {
       const paymentId = query.id || query["data.id"];
       let payment = await mercadopago.payment.findById(Number(paymentId));
       let paymentStatus = payment.body.status;
 
-      console.log([payment, paymentStatus]);
+     
       if (paymentStatus === "approved"){
         //llamar a la DB y agregar los datos / Ojo el console log esta devolviendo los datos de la compra por ID
         // el dato para Front ya esta.-

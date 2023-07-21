@@ -114,7 +114,7 @@ const DetailSection = () => {
 
   const handleRemoveFromWishlist = async (id: string) => {
     if (data) {
-      console.log("data", data._id)
+      
       await removeFromWishlist({ id, data: data._id })
     }
     refetchUser.refetch()

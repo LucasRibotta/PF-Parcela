@@ -126,7 +126,7 @@ export default function UserSettings() {
       router.push("/")
     }
   }
-  console.log(user)
+  
 
   return (
     <section>

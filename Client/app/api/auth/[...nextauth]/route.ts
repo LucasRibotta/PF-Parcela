@@ -36,7 +36,7 @@ const handler = NextAuth({
         const response = await axios.post(login, credentials)
         const user = response.data
         const newUser = user?.user
-        console.log(newUser)
+        
         if (user) {
           return newUser
         } else {
@@ -97,7 +97,7 @@ const handler = NextAuth({
           )
           return true
         } catch (error) {
-          console.log(error)
+          
           return false
         }
       }
