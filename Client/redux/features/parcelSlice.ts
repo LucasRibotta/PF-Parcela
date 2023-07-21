@@ -29,7 +29,7 @@ const initialState: ParcelasState = {
   parcelas: [],
   priceRange: {
     minPrice: 0,
-    maxPrice: 100000,
+    maxPrice: 50000,
   },
   parcelaData: {
     _id : "",
