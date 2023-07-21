@@ -16,7 +16,7 @@ export default function AllButton() {
 
   return (
     <button
-      className=" text-gray-600 hover:text-gray-400 duration-200 text-[0.80rem] font-semibold"
+      className=" text-green-600 hover:text-gray-400 duration-200 text-[0.80rem] font-semibold"
       onClick={reset}
     >
       TODAS
