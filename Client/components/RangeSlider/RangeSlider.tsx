@@ -97,23 +97,16 @@ export const RangeSlider = ({
       <div className="flex justify-between items-center mb-6 mt-2 gap-2">
         <div className="rounded-md">
           <span className="p-2  text-sm font-medium">Min CLP $</span>
-          <input
-            onChange={handleValue}
-            type="text"
-            name="min"
-            value={minPrice}
+          <h3
             className="w-full rounded-md  p-[6px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#039D60] text-sm font-medium pl-2"
-          />
+          >{ minPrice.toLocaleString()}</h3>
         </div>
         <div className="rounded-md">
           <span className="p-2 text-sm font-medium">Max CLP $</span>
-          <input
-            onChange={handleValue}
-            name="max"
-            type="text"
-            value={maxPrice}
+          <h3
             className="w-full rounded-md  p-[6px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#039D60] text-sm font-medium pl-2"
-          />
+          >{ maxPrice.toLocaleString()}</h3>
+
         </div>
       </div>
 

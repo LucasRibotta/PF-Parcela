@@ -13,6 +13,7 @@ import style from "./formSectionUpdate.module.css"
 import ConfirmationUpdate from "../confirmation/ConfirmationUpdate"
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
 import { setParcelas } from "@/redux/features/parcelSlice"
+import { useAppSession } from "@/app/hook"
 
 type information = {
   _id?: string
@@ -25,15 +26,16 @@ type information = {
   deleted?: boolean
   parcelaData?: string[]
   description: string
+  user: string | undefined
 }
 
 export default function FormSectionUpdate() {
   const router = useRouter();
-  
+  const { user } = useAppSession();
   const [updateParcela] = useUpdateParcelaMutation()
   const params = useParams()
   const parcela = {
-    id: params.id,
+    id: params.id.toString(),
   }
   const { data, error, isLoading } = useGetParcelaByIdQuery(parcela);
   const imageCloud = useAppSelector(state => state.coordenada.image)
@@ -52,7 +54,8 @@ export default function FormSectionUpdate() {
     price: data?.price ?? null,
     location: data?.location ?? "",
     description: data?.description ?? "",
-    image: data?.image ?? []
+    image: data?.image ?? [],
+    user: data?.user
   });
 
   useEffect(() => {
@@ -85,7 +88,8 @@ export default function FormSectionUpdate() {
       price: data?.price ?? null,
       location: data?.location ?? "",
       description: data?.description ?? "",
-      image: data?.image ?? []
+      image: data?.image ?? [],
+      user: data?.user
     })
     setLocation(data?.location ?? "")
   }, [data, isLoading])
@@ -99,7 +103,7 @@ export default function FormSectionUpdate() {
   const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target
 
-    setInfo({ ...info, [name]: value })
+    setInfo({ ...info, [name]: value, user: data?.user })
   }
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
@@ -119,7 +123,8 @@ export default function FormSectionUpdate() {
         price: null,
         location: "",
         description: "",
-        image: []
+        image: [],
+        user: data?.user
       })
       setLocation("")
     }
@@ -227,7 +232,7 @@ export default function FormSectionUpdate() {
 
             <div className="grid grid-cols-3 w-full mx-auto">
               {images?.map((el, index) =>
-                <>
+                <div key={index}>
                   <div className={`relative ${style.close} `}>
                     <img className="w-[100px] h-[70px] mx-auto my-2 rounded-md" key={index} src={el} alt={el} />
                     <div className="absolute top-0 right-0 opacity-0" onClick={() => handlerDelete(el)}>
@@ -237,7 +242,7 @@ export default function FormSectionUpdate() {
                       </svg>
                     </div>
                   </div>
-                </>
+                </div>
               )}
             </div>
 

@@ -24,8 +24,8 @@ const parcelaSchema = new Schema<IParcela>({
   deleted: { type: Boolean, default: false },
   description: { type: String, required: true },
   user: { type: String, required: true},
-  views:{type:Number, required:true, default:0},
-  status: { type: String, required:true, default:'Disponible'}
+  views:{type:Number, required:false, default:0},
+  status: { type: String, required:false, default:'Disponible'}
  // condominio: { type: Schema.Types.String, ref: "Condominio", required: true }
 });
 
