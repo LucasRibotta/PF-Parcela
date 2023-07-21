@@ -49,10 +49,10 @@ useEffect(() => {
 
   return (
     <div className="flex flex-col relative w-full pt-[4rem] ">
-      <div className="flex justify-center">
-        <Filter />
-        <div className="flex flex-col justify-center items-center pt-[4.2rem]">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center">
+      <div className="">
+        <div className="flex flex-col justify-center items-center pt-[1rem] px-[11rem]">
+          <Filter />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center w-full ">
             {currentParcels.length ? (
               currentParcels.map((el, index) => {
                 if (el.deleted === false) {

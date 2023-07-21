@@ -50,13 +50,13 @@ function Card({ name, precio, superficie, image, id, status }: CardProps) {
   }
 
   return (
-    <div className="flex-1 h-[20rem] justify-center max-w-full text-white overflow-hidden shadow rounded-md border-solid border-5 border-black-500 transform hover:scale-[101%] transition duration-300 ease-in-out relative mb-4 ">
+    <div className="flex-1 h-[20rem] justify-center min-w-full text-white overflow-hidden shadow rounded-md border-solid border-5 border-black-500 transform hover:scale-[101%] transition duration-300 ease-in-out relative mb-4 ">
       <div
         className="flex-end m-auto absolute right-6 items-end"
         onClick={onClick}
       ></div>
 
-      <div className="h-auto max-w-full rounded-lg">
+      <div className="h-auto min-w-full rounded-lg">
         <Image
           src={image}
           alt=""
