@@ -47,25 +47,36 @@ const Message = () => {
                 >
                   <div className="flex gap-2 items-center">
                     <AiOutlineUser className="h-5 w-5 text-green-600" />
-                    <h3 className="text-md font-semibold">
-                      Nombre y Apellido: {el.firstName} {el.lastName}
-                    </h3>
+
+                    <p className="text-gray-800 ">
+                      <span className="text-gray-600 font-medium">
+                        Nombre y Apellido:{" "}
+                      </span>
+                      {el.firstName} {el.lastName}
+                    </p>
                   </div>
                   <div className="flex gap-2 items-center">
                     <AiOutlineMail className="h-5 w-5 text-green-600" />
-                    <h3 className="text-md font-semibold">
-                      Correo Electrónico: {el.email}
-                    </h3>
+
+                    <p className="text-gray-800 ">
+                      <span className="text-gray-600 font-medium">
+                        Correo Electrónico:{" "}
+                      </span>
+                      {el.email}
+                    </p>
                   </div>
                   <div className="flex gap-2 items-center">
                     <AiOutlinePhone className="h-5 w-5 text-green-600" />
-                    <h3 className="text-md font-semibold">
-                      Número Telefónico: {el.phone}
-                    </h3>
+                    <p className="text-gray-800 ">
+                      <span className="text-gray-600 font-medium">
+                        Número Telefónico:{" "}
+                      </span>
+                      {el.phone}
+                    </p>
                   </div>
                   <div className="flex gap-2 items-center">
                     <BiSelectMultiple className="h-5 w-5 text-green-600" />
-                    <p className="text-gray-600 ">
+                    <p className="text-gray-800 ">
                       <span className="text-gray-600 font-medium">
                         Asunto:{" "}
                       </span>
@@ -74,7 +85,7 @@ const Message = () => {
                   </div>
                   <div>
                     <p className="text-gray-800">
-                      <div className=" flex gap-2">
+                      <div className="flex gap-2">
                         <AiOutlineMessage className="h-5 w-5 text-green-600" />
                         <div>
                           <span className="text-gray-600 font-medium">
