@@ -126,7 +126,6 @@ export default function UserSettings() {
       router.push("/")
     }
   }
-  
 
   return (
     <section>
@@ -134,7 +133,7 @@ export default function UserSettings() {
         <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
           <div className="px-6">
             <div className="flex flex-wrap justify-center">
-              <div className="w-full px-4 flex justify-center">
+              <div className="w-full px-4 flex justify-center animate-fade animate-once animate-delay-50 animate-ease-linear">
                 <div className="rounded-full absolute overflow-hidden w-[7rem] h-[7rem] top-[-18%]">
                   <img
                     src={user?.image ?? "default-image-url"}
@@ -169,7 +168,7 @@ export default function UserSettings() {
                     <span className="ml-2 text-sm font-medium">Inicio</span>
                   </div>
                 </Link>
- 
+
                 <Link rel="stylesheet" href="/userDataRegister/wishes">
                   <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#00ad68be] hover:text-white">
                     <AiOutlineHeart className="h-6 w-6 stroke-current" />

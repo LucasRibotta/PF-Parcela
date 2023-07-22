@@ -92,8 +92,8 @@ const ContactSection = () => {
     }, 2000)
   }
   return (
-    <div className="pt-[8rem] flex justify-center relative">
-      <div className="bg-white shadow-xl rounded-lg w-[50%] flex flex-col justify-center items-center relative text-center">
+    <div className="pt-[8rem] flex justify-center relative animate-fade animate-once animate-delay-50 animate-ease-linear">
+      <div className="bg-white shadow-xl rounded-lg w-[50%] flex flex-col justify-center items-center relative text-center ">
         <div className="w-[100%] mb-6 ">
           <h1 className="text-xl font-semibold mb-6">Contáctanos</h1>
         </div>
@@ -206,14 +206,14 @@ const ContactSection = () => {
             </button>
           </div>
         </form>
-        <div className="w-[8rem] h-[8rem] rounded-full bg-white border-[#039D60] border-[1rem] absolute -top-12 -right-12"></div>
-        <div className="w-20 h-20 rounded-full bg-white border-[#039D60] border-[0.8rem] absolute top-[1rem] right-[-8rem] z-[-5]">
-          <div className="w-10 h-10 rounded-full bg-white border-[#b6d752] border-[0.5rem] absolute bottom-[6rem] left-[1%]"></div>
+        <div className="w-[8rem] h-[8rem] rounded-full bg-white border-[#039D60] border-[1rem] absolute -top-12 -right-12 animate-fade animate-once animate-delay-200 animate-ease-linear"></div>
+        <div className="w-20 h-20 rounded-full bg-white border-[#039D60] border-[0.8rem] absolute top-[1rem] right-[-8rem] z-[-5] animate-fade animate-once animate-delay-300 animate-ease-linear">
+          <div className="w-10 h-10 rounded-full bg-white border-[#b6d752] border-[0.5rem] absolute bottom-[6rem] left-[1%] animate-fade animate-once animate-delay-500 animate-ease-linear"></div>
         </div>
-        <div className="absolute w-[350px] h-[350px] z-[-5] right-[-13.8rem] bottom-[-8rem]">
+        <div className="absolute w-[350px] h-[350px] z-[-5] right-[-13.8rem] bottom-[-8rem]  animate-fade-right animate-once animate-duration-700 animate-delay-100 animate-ease-in">
           <Image src={hojasUno} alt="" />
         </div>
-        <div className="absolute w-[300px] h-[300px] z-[-5] left-[-12rem] bottom-[-5rem]">
+        <div className="absolute w-[300px] h-[300px] z-[-5] left-[-12rem] bottom-[-5rem] animate-fade-left animate-once animate-duration-700 animate-delay-100 animate-ease-in">
           <Image src={hojasCinco} alt="" />
         </div>
         {/* <div className="absolute w-[300px] h-[300px] z-[-5] left-[-6rem] -top-12">

@@ -6,14 +6,16 @@ import React, { useState } from "react"
 import axios from "axios"
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react"
 import { useParams } from "next/navigation"
-import { useGetParcelaByIdQuery, useUpdateParcelaMutation } from "@/redux/services/parcelApi";
+import {
+  useGetParcelaByIdQuery,
+  useUpdateParcelaMutation
+} from "@/redux/services/parcelApi"
 import Button from "@/components/Button/Button"
 import { PiPlantDuotone } from "react-icons/pi"
 
 const url = process.env.NEXT_PUBLIC_URL_MP ? process.env.NEXT_PUBLIC_URL_MP : ""
 
 const pago = () => {
-
   const [updateParcela] = useUpdateParcelaMutation()
 
   const [preferenceId, setPreferenceId] = useState(null)
@@ -23,7 +25,7 @@ const pago = () => {
   }
 
   const numberParcela = {
-    id: Array.isArray(params.id) ? params.id[0] : params.id,
+    id: Array.isArray(params.id) ? params.id[0] : params.id
   }
 
   const { data } = useGetParcelaByIdQuery(parcela)
@@ -47,11 +49,10 @@ const pago = () => {
     }
   }
   const handleBuy = async () => {
-    
-    const vendida: any = {...data, status: 'Vendida'}
+    const vendida: any = { ...data, status: "Vendida" }
     const update = {
       id: numberParcela.id,
-      data: vendida,
+      data: vendida
     }
     updateParcela(update)
     const id = await createPreference()
@@ -62,7 +63,7 @@ const pago = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="relative flex justify-center w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100  shadow-lg">
+      <div className="relative mt-[2rem] flex justify-center w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100  shadow-lg animate-fade animate-once animate-delay-50 animate-ease-linear">
         <div className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl">
           <img className="object-cover w-full" src={image} />
         </div>
