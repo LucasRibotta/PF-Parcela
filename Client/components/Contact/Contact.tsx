@@ -168,7 +168,7 @@ const ContactSection = () => {
           <div className="flex flex-col justify-center mt-8">
             <textarea
               className="block w-full text-gray-600 p-[6px] rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-400"
-              placeholder={infoError.message === " " ? "Escribenos aca lo que nos quieres comunicar..." : infoError.message}
+              placeholder={infoError.message === " " ? "Escríbenos tu mensaje..." : infoError.message}
               onChange={handleChange}
               name="message"
               value={info.message}
