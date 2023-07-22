@@ -8,7 +8,7 @@ export default function HomeSection() {
       <div>
         <HomeTitle />
       </div>
-      <div className="w-[700px]">
+      <div className="w-[700px] animate-fade animate-delay-300">
         <Image src={homeLogo} alt="#" />
       </div>
     </div>

@@ -28,7 +28,7 @@ export default function Filter() {
   return (
     <>
       <div className="flex justify-between items-center bg-white w-full pt-8 pb-1 ">
-        <div className="flex gap-4">
+        <div className="flex gap-4 animate-fade animate-once animate-delay-100 animate-ease-linear">
           <AllButton />
           <select
             className=" text-gray-600 hover:text-gray-400 duration-200 text-[0.80rem] font-semibold focus:outline-none focus:ring-none focus:ring-none"
@@ -89,7 +89,7 @@ export default function Filter() {
             </Dialog>
           </Transition>
         </div>
-        <div>
+        <div className="animate-fade animate-once animate-delay-100 animate-ease-linear">
           <SearchBar />
         </div>
       </div>

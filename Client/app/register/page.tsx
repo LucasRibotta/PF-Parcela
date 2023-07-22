@@ -82,7 +82,7 @@ export default function Register() {
   }
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="flex w-[768px] h-[496px] mt-[5rem] ">
+      <div className="flex w-[768px] h-[496px] mt-[5rem] animate-fade animate-once animate-duration-700 animate-delay-100 animate-ease-linear">
         <div className="w-1/2 relative">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white w-[90%] z-10">
             <h1 className="text-3xl font-black">Bienvenido/a</h1>

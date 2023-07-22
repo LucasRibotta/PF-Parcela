@@ -17,19 +17,20 @@ export default function Parcelas() {
   const [page, setPage] = useState(1)
   const [porPage, setPorPage] = useState(6)
   const [inputPage, setInputPage] = useState(1)
-  
-  const ultimaParcelaenlapagina =  page * porPage
+
+  const ultimaParcelaenlapagina = page * porPage
   const primeraParcelaenlapagina = ultimaParcelaenlapagina - porPage
 
   const currentParcels = parcels.slice(
-    primeraParcelaenlapagina, ultimaParcelaenlapagina
+    primeraParcelaenlapagina,
+    ultimaParcelaenlapagina
     // (page - 1) * porPage,
     // (page - 1) * porPage + porPage
   )
-useEffect(() => {
-  setPage(1)
-  setInputPage(1)
-},[parcels])
+  useEffect(() => {
+    setPage(1)
+    setInputPage(1)
+  }, [parcels])
 
   const max = Math.ceil(parcels.length / porPage)
   useEffect(() => {
@@ -52,7 +53,7 @@ useEffect(() => {
       <div className="">
         <div className="flex flex-col justify-center items-center pt-[1rem] px-[11rem]">
           <Filter />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center w-full ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center w-full animate-fade animate-once animate-delay-100 animate-ease-linear">
             {currentParcels.length ? (
               currentParcels.map((el, index) => {
                 if (el.deleted === false) {

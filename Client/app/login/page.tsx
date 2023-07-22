@@ -88,14 +88,13 @@ export default function Login() {
     handleLogin()
   }, [user, dispatch, user, router])
 
-
   if (status === "loading" || isLoading) {
     return <Loading />
   } else if (!user) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="flex w-[768px] h-[496px] mt-[5rem] ">
-          <div className="w-1/2 bg-gray-100 p-10 flex flex-col justify-center items-center rounded-l-xl shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
+        <div className="flex w-[768px] h-[496px] mt-[5rem] animate-fade animate-once animate-duration-700 animate-delay-100 animate-ease-linear">
+          <div className="w-1/2 bg-gray-100 p-10 flex flex-col justify-center items-center rounded-l-xl shadow-[0_35px_35px_rgba(0,0,0,0.25)] ">
             <h2 className="text-3xl font-black mb-6 ">Iniciar sesión</h2>
             <div className="flex pb-4">
               <div className="border-none text[#ddd] rounded-[50%] inline-flex justify-center items-center mx-[5px] h-[40px] w-[40px]">
