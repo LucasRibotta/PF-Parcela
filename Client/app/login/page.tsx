@@ -109,7 +109,7 @@ export default function Login() {
                 name="name"
                 value={input.email}
                 type="email"
-                placeholder="Email"
+                placeholder="Correo"
                 onChange={handleInputChange}
               />
             </div>
@@ -121,7 +121,7 @@ export default function Login() {
                 name="password"
                 value={input.password}
                 onChange={handleInputChange}
-                placeholder="Password"
+                placeholder="Contraseña"
               />
             </div>
             <div className="space-y-4 flex flex-col justify-center items-center">
