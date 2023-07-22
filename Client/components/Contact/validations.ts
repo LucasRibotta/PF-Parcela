@@ -30,6 +30,12 @@ const validations = (info: Contactanos) => {
             error.phone = "debes escribir tu número de teléfono..."
         }
     }
+    if (info.phone == "0") {
+        info.phone = ""
+        if (!regexPhone.test(info.phone)) {
+            error.phone = "debes escribir tu número de teléfono..."
+        }
+    }
     if (info.reason === "") {
         error.reason = "Debes seleccionar una opcion..."
     }
