@@ -125,7 +125,7 @@ const ContactSection = () => {
           </div>
           <div className="flex gap-[1.5rem] w-[100%] justify-between">
             <input
-              placeholder={infoError.email === " " ? "Email..." : infoError.email}
+              placeholder={infoError.email === " " ? "Correo..." : infoError.email}
               type="email"
               onChange={handleChange}
               name="email"
@@ -138,7 +138,7 @@ const ContactSection = () => {
               className="w-full py-2 border-b-2 border-gray-400 duration-200 focus:border-green-400
                  text-gray-600 placeholder-gray-400
                  outline-none"
-              placeholder={infoError.phone?.toString() === " " ? "Telefono" : infoError.phone?.toString()}
+              placeholder={infoError.phone?.toString() === " " ? "Teléfono..." : infoError.phone?.toString()}
               type="text"
               onChange={handleChange}
               name="phone"
