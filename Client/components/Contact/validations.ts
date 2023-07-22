@@ -33,6 +33,38 @@ const validations = (info: Contactanos) => {
     error.message = "Escribe el mensaje que nos deseas comunicar..."
   }
 
+  if (info.firstName === "") {
+    error.firstName = "Debes escribir tu nombre..."
+  }
+  if (info.lastName === "") {
+    error.lastName = "Debes escribir tu apellido..."
+  }
+
+  if (!info.email) {
+    info.email = ""
+    if (!regexEmail.test(info.email)) {
+      error.email = "Debe ser un correo electronico valido..."
+    }
+  }
+  if (!info.phone) {
+    info.phone = ""
+    if (!regexPhone.test(info.phone)) {
+      error.phone = "debes escribir tu número de teléfono..."
+    }
+  }
+  if (info.phone == "0") {
+    info.phone = ""
+    if (!regexPhone.test(info.phone)) {
+      error.phone = "debes escribir tu número de teléfono..."
+    }
+  }
+  if (info.reason === "") {
+    error.reason = "Debes seleccionar una opcion..."
+  }
+  if (info.message === "") {
+    error.message = "Escribe el mensaje que nos deseas comunicar..."
+  }
+
   return error
 }
 

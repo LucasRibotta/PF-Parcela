@@ -169,12 +169,7 @@ export default function UserSettings() {
                     <span className="ml-2 text-sm font-medium">Inicio</span>
                   </div>
                 </Link>
-                <Link rel="stylesheet" href="/userDataRegister/purchases">
-                  <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#00ad68be] hover:text-white">
-                    <PiShoppingCart className="h-6 w-6 stroke-current" />
-                    <span className="ml-2 text-sm font-medium">Compras</span>
-                  </div>
-                </Link>
+ 
                 <Link rel="stylesheet" href="/userDataRegister/wishes">
                   <div className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-[#00ad68be] hover:text-white">
                     <AiOutlineHeart className="h-6 w-6 stroke-current" />
