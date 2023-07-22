@@ -83,7 +83,6 @@ const ContactSection = () => {
       }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-
         }
       })
     }
@@ -103,7 +102,11 @@ const ContactSection = () => {
             <div className="flex gap-[1.5rem] w-[100%] justify-between">
               <input
                 type="text"
-                placeholder={infoError.firstName === " " ? "Nombre..." : infoError.firstName}
+                placeholder={
+                  infoError.firstName === " "
+                    ? "Nombre..."
+                    : infoError.firstName
+                }
                 onChange={handleChange}
                 name="firstName"
                 value={info.firstName}
@@ -116,7 +119,11 @@ const ContactSection = () => {
                  text-gray-600 placeholder-gray-400
                  outline-none"
                 type="text"
-                placeholder={infoError.lastName === " " ? "Apellido... " : infoError.lastName}
+                placeholder={
+                  infoError.lastName === " "
+                    ? "Apellido... "
+                    : infoError.lastName
+                }
                 onChange={handleChange}
                 name="lastName"
                 value={info.lastName}
@@ -125,7 +132,9 @@ const ContactSection = () => {
           </div>
           <div className="flex gap-[1.5rem] w-[100%] justify-between">
             <input
-              placeholder={infoError.email === " " ? "Correo..." : infoError.email}
+              placeholder={
+                infoError.email === " " ? "Correo..." : infoError.email
+              }
               type="email"
               onChange={handleChange}
               name="email"
@@ -138,11 +147,15 @@ const ContactSection = () => {
               className="w-full py-2 border-b-2 border-gray-400 duration-200 focus:border-green-400
                  text-gray-600 placeholder-gray-400
                  outline-none"
-              placeholder={infoError.phone?.toString() === " " ? "Teléfono..." : infoError.phone?.toString()}
+              placeholder={
+                infoError.phone?.toString() === " "
+                  ? "Teléfono..."
+                  : infoError.phone?.toString()
+              }
               type="text"
               onChange={handleChange}
               name="phone"
-              value={info.phone === 0 ? "" : info.phone }
+              value={info.phone === 0 ? "" : info.phone}
             />
           </div>
 
@@ -158,9 +171,7 @@ const ContactSection = () => {
               <option value="Problemas con una compra">
                 Problemas con una compra
               </option>
-              <option value="Ofrecer una parcela">
-                Ofrecer una parcela
-              </option>
+              <option value="Ofrecer una parcela">Ofrecer una parcela</option>
               <option value="Otros">Otros</option>
             </select>
           </div>
@@ -168,7 +179,11 @@ const ContactSection = () => {
           <div className="flex flex-col justify-center mt-8">
             <textarea
               className="block w-full text-gray-600 p-[6px] rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-400"
-              placeholder={infoError.message === " " ? "Escríbenos tu mensaje..." : infoError.message}
+              placeholder={
+                infoError.message === " "
+                  ? "Escríbenos tu mensaje..."
+                  : infoError.message
+              }
               onChange={handleChange}
               name="message"
               value={info.message}
