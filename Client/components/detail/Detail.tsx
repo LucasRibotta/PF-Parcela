@@ -335,42 +335,43 @@ const DetailSection = () => {
         {/* <Button text={"Agregar a carro"}></Button> */}
         <div className="fixed flex justify-end bottom-6 w-[300px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px]">
           {user && user?.email === data?.user && optionEdit()}
-          {user && user.isAdmin && optionEdit()}
-
-          {user && user?.email === data?.user && optionEdit()}
           {user && user?.email !== data?.user && user.isAdmin && optionEdit()}
 
           {status === "authenticated" ? (
             data?.status === "Disponible" ? (
-              <Link href={`/pago/${parcela.id}`} className="mr-8 shadow-lg">
+              <Link href={`/pago/${parcela.id}`} className="mr-2 shadow-lg">
                 <Button text={"Comprar Ahora"}></Button>
               </Link>
             ) : (
               ""
             )
           ) : (
-            <Link href="/login" className="mr-8 shadow-lg">
+            <Link href="/login" className="mr-2 shadow-lg">
               <Button text={"Comprar Ahora"}></Button>
             </Link>
           )}
 
           {status === "authenticated" ? (
             wishes.filter((el) => el._id === data?._id).length > 0 ? (
-              <div onClick={() => data && handleRemoveFromWishlist(user?._id)}>
-                <Button text={"Quitar de Lista de Deseos"}></Button>
+              <div
+                className="mr-12 shadow-lg"
+                onClick={() => data && handleRemoveFromWishlist(user?._id)}
+              >
+                <Button text={"Quitar Deseo"}></Button>
               </div>
             ) : (
               <div
+                className="mr-12 shadow-lg"
                 onClick={() =>
                   data && user && handleAddToWishlist(user?._id, data)
                 }
               >
-                <Button text={"Agregar a Lista de Deseos"}></Button>
+                <Button text={"Agregar Deseo"}></Button>
               </div>
             )
           ) : (
-            <Link href="/login" className="mr-20 shadow-lg ">
-              <Button text={"Agregar a Lista de Deseos"}></Button>
+            <Link href="/login" className="mr-12 shadow-lg">
+              <Button text={"Agregar Deseo"}></Button>
             </Link>
           )}
         </div>
