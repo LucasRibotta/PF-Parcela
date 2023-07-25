@@ -93,7 +93,7 @@ const handler = NextAuth({
           const response = await axios.post(
             register,
             userProvider
-            //"https://pf-parcela-production.up.railway.app/register", userProvider
+           
           )
           return true
         } catch (error) {
