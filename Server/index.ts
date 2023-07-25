@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3001
 
 // Configuración de CORS
 const corsOptions = {
-  origin: "https://parcelas.vercel.app",
+  origin: "*",
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(express.json())
