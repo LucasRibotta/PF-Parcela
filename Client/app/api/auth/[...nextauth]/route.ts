@@ -109,4 +109,4 @@ const handler = NextAuth({
   }
 })
 
-export default corsMiddleware(handler);
+export { handler as GET, handler as POST }

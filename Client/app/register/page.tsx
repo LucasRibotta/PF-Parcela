@@ -41,7 +41,8 @@ export default function Register() {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Origin": "https://parcelas.vercel.app"
           },
           body: JSON.stringify(data)
         }
