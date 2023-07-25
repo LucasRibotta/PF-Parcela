@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import axios from "axios"
+import cors from 'cors';
 import { User, Account, Profile } from "next-auth"
 import { AdapterUser } from "next-auth/adapters"
 import { Session } from "next-auth"
@@ -23,6 +24,16 @@ interface se extends Session {
   isAdmin?: boolean
   isCompany?: boolean
 }
+
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: 'Content-Type, Authorization',
+  credentials: true,
+};
+
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -108,4 +119,13 @@ const handler = NextAuth({
   }
 })
 
-export { handler as GET, handler as POST }
+const corsHandler = (req, res) => {
+  cors(corsOptions)(req, res, () => {
+    handler(req, res);
+  });
+};
+
+
+
+
+export { handler as GET, handler as POST, corsHandler }
