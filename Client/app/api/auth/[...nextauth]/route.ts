@@ -5,6 +5,7 @@ import axios from "axios"
 import { User, Account, Profile } from "next-auth"
 import { AdapterUser } from "next-auth/adapters"
 import { Session } from "next-auth"
+import cors from "cors"; 
 
 const login = process.env.NEXT_PUBLIC_URL_LOGIN
   ? process.env.NEXT_PUBLIC_URL_LOGIN
@@ -108,4 +109,6 @@ const handler = NextAuth({
   }
 })
 
-export { handler as GET, handler as POST }
+const corsMiddleware = cors();;
+
+export default corsMiddleware(handler);
