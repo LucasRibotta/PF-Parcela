@@ -1,6 +1,6 @@
 # Project - Parcels
 
-Nuestro proyecto consiste en una plataforma de e-commerce especializada en la venta de parcelas, brindando a nuestros usuarios la oportunidad de encontrar el terreno perfecto para sus proyectos o inversiones.
+Es un proyecto que consiste en una plataforma de e-commerce especializada en la venta de parcelas, brindando a nuestros usuarios la oportunidad de encontrar el terreno perfecto para sus proyectos o inversiones.
 
 <br/>  
 
